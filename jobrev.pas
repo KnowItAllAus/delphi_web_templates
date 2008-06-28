@@ -31,6 +31,7 @@ type
     EditJobBtn: TIWButton;
     NoteEdit: TIWEdit;
     NoteLabel: TIWLabel;
+    templatelbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -173,6 +174,7 @@ begin
        StatEdit.Text:='- - - - -';
      end;
      DescEdit.Caption:=FieldByName ('Description').AsString;
+     templatelbl.visible:=FieldByName ('Template').AsString='1';
      Transaction.Commit;
    end;
 end;

@@ -146,6 +146,7 @@ begin
      ParamByName('ID').AsInteger:=GroupId;
      ParamByName('COMPANY').AsString:=UserSession.Company;
      ExecSQL;
+     transaction.commit;
   end;
   EditGroup (IntToStr(GroupID),nil);
 end;

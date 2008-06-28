@@ -51,7 +51,7 @@ const
 implementation
 
 {$R *.dfm}
-uses Servercontroller, datamod, IBQuery, db, storeform, roleform;
+uses Servercontroller, datamod, AdminDM, IBQuery, db, storeform, roleform;
 
 
 procedure TFormSys.rendercell(ACell: TIWGridCell; const ARow,
@@ -82,12 +82,12 @@ var
 begin
    query:=nil;
    case storecombo.itemindex of
-      0 : query:=RcDataModule.storeoffquery;
-      1 : query:=RcDataModule.storeonquery;
-      2 : query:=RcDataModule.storeenabledquery;
-      3 : query:=RcDataModule.storeallquery;
-      4 : query:=RcDataModule.storePendingQuery;
-      5 : query:=RcDataModule.storeDbgQuery;
+      0 : query:=RcAdminData.storeoffquery;
+      1 : query:=RcAdminData.storeonquery;
+      2 : query:=RcAdminData.storeenabledquery;
+      3 : query:=RcAdminData.storeallquery;
+      4 : query:=RcAdminData.storePendingQuery;
+      5 : query:=RcAdminData.storeDbgQuery;
    end;
    if query<>nil then with query do begin
       try
@@ -142,12 +142,12 @@ var
 begin
    query:=nil;
    case slavecombo.itemindex of
-      0 : query:=RcDataModule.slaveoffquery;
-      1 : query:=RcDataModule.slavependingquery;
-      2 : query:=RcDataModule.slaveallenquery;
-      3 : query:=RcDataModule.slaveallquery;
-      4 : query:=RcDataModule.slavedbgquery;
-      5 : query:=RcDataModule.slavebypassquery;
+      0 : query:=RcAdminData.slaveoffquery;
+      1 : query:=RcAdminData.slavependingquery;
+      2 : query:=RcAdminData.slaveallenquery;
+      3 : query:=RcAdminData.slaveallquery;
+      4 : query:=RcAdminData.slavedbgquery;
+      5 : query:=RcAdminData.slavebypassquery;
    end;
    if query<>nil then with query do begin
       try

@@ -147,7 +147,6 @@ end;
 
 function job_exists (id : string) : boolean;
 begin
-   result:=false;
    with RcDataModule do begin
        CurrentJobQuery.Transaction.Active:=false;
        CurrentJobQuery.Transaction.Active:=true;
@@ -163,7 +162,6 @@ end;
 
 function rev_exists (id : string) : boolean;
 begin
-   result:=false;
    with RcDataModule do begin
        CurrentJobRevQuery.Transaction.Active:=false;
        CurrentJobRevQuery.Transaction.Active:=true;

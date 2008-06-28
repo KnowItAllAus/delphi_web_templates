@@ -18,8 +18,8 @@ object FormVoucherEdit: TFormVoucherEdit
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   UpdateMode = umPartial
-  DesignLeft = 90
-  DesignTop = 213
+  DesignLeft = 120
+  DesignTop = 76
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0

@@ -9,8 +9,7 @@ uses
   QGraphics, QControls, QForms, QDialogs, QStdCtrls,
 {$ENDIF}
   SysUtils, Classes, IBCustomDataSet, IBQuery, IBDatabase,
-  Db, IBTable, IBUpdateSQL, IWMain, siComp, IWSiLink;
-
+  Db, IBTable, IBUpdateSQL, IWMain, siComp, IWSiLink, IBSQL;
 
 type
   TStringObj = class
@@ -64,23 +63,6 @@ type
     TranQuery: TIBQuery;
     TranItemQuery: TIBQuery;
     RequestUpdate: TIBQuery;
-    VendorInsertQuery: TIBQuery;
-    VendorUpdateQuery: TIBQuery;
-    VendorDeleteQuery: TIBQuery;
-    CurrentVendorQuery: TIBQuery;
-    VendorQuery: TIBQuery;
-    ProductInsertQuery: TIBQuery;
-    ProductUpdateQuery: TIBQuery;
-    ProductDeleteQuery: TIBQuery;
-    CurrentProductQuery: TIBQuery;
-    ProductQuery: TIBQuery;
-    StockQuery: TIBQuery;
-    LoyaltyInsertQuery: TIBQuery;
-    LoyaltyUpdateQuery: TIBQuery;
-    LoyaltyDeleteQuery: TIBQuery;
-    CurrentLoyaltyQuery: TIBQuery;
-    LoyaltyQuery: TIBQuery;
-    DelAllStockQuery: TIBQuery;
     DelAllJnlItemQuery: TIBQuery;
     ItemMoveQuery: TIBQuery;
     IntegerField10: TIntegerField;
@@ -99,11 +81,10 @@ type
     NewVendorCodeQuery: TIBQuery;
     DepTrigDelQuery: TIBQuery;
     StoreConfigQuery: TIBQuery;
-    FindPOSQuery: TIBQuery;
     ConfigInsertQuery: TIBQuery;
     GroupQuery: TIBQuery;
     GroupInsertQuery: TIBQuery;
-    GroupUpdateQuery: TIBQuery;
+    GroupUpdateTestQuery: TIBQuery;
     GroupDeleteQuery: TIBQuery;
     CurrentGroupQuery: TIBQuery;
     GrpAllocQuery: TIBQuery;
@@ -120,19 +101,10 @@ type
     suUserDeleteQuery: TIBQuery;
     vchcopyquery: TIBQuery;
     imgcopyquery: TIBQuery;
-    StoreOffQuery: TIBQuery;
-    SlaveOffQuery: TIBQuery;
     PrnTran: TIBTransaction;
     CurrentPrinterCfgQuery: TIBQuery;
     PrnNameQuery: TIBQuery;
     PrnDataDelQuery: TIBQuery;
-    StoreOnQuery: TIBQuery;
-    StoreEnabledQuery: TIBQuery;
-    StoreAllQuery: TIBQuery;
-    SlavePendingQuery: TIBQuery;
-    SlaveAllEnQuery: TIBQuery;
-    SlaveAllQuery: TIBQuery;
-    StorePendingQuery: TIBQuery;
     CurrentStoreCfgQuery: TIBQuery;
     siLang1: TsiLang;
     siLangDispatcher1: TsiLangDispatcher;
@@ -153,16 +125,8 @@ type
     UpdateTestQuery: TIBQuery;
     UpdateProdQuery: TIBQuery;
     ImageHdrDeleteQuery: TIBQuery;
-    EntityQuery: TIBQuery;
-    EntityInsertQuery: TIBQuery;
-    EntityDelQuery: TIBQuery;
-    EntityUpdateQuery: TIBQuery;
-    CurrentEntityQuery: TIBQuery;
     ImageJobQuery: TIBQuery;
     ImageVoucherQuery: TIBQuery;
-    StoreDbgQuery: TIBQuery;
-    SlaveDbgQuery: TIBQuery;
-    SlaveBypassQuery: TIBQuery;
     coaliasquery: TIBQuery;
     RequestTestUpdqry: TIBQuery;
     TranExptQry: TIBQuery;
@@ -187,6 +151,14 @@ type
     AllocItemDelQry: TIBQuery;
     OverQuery: TIBQuery;
     OverJobQuery: TIBQuery;
+    UpdateOverQuery: TIBQuery;
+    SQLEx: TIBSQL;
+    GroupTmplInsertQuery: TIBQuery;
+    GroupUpdateNameQuery: TIBQuery;
+    GrpTmplInsertQuery: TIBQuery;
+    GrpTmplUsageQuery: TIBQuery;
+    GrpTmplQuery: TIBQuery;
+    TmplQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -203,6 +175,7 @@ type
     procedure NotifyJobChanges (JobID : integer; retain : boolean);
     procedure SaveValue (name : string; value : string);
     function GetValue (name : string; default : string) : string;
+    function make_guid : string;
   end;
 
 function RcDatamodule : TRcDataMod;
@@ -270,6 +243,15 @@ begin
      end;
 end;
 
+function TRcDataMod.make_guid : string;
+var
+  s : string;
+begin
+  s:=UserSession.Company+FormatDateTime('hhmmssddmmyy',now);
+  while (length(s)<20) do s:=s+char(random(10)+48);
+  result:=s;
+end;
+
 procedure TRcDataMod.Log (s : string);
 begin
    FormIWMain.Log (FormatDateTime (ShortDateFormat+' hh:mm:ss',now)+' - '+s);
@@ -277,6 +259,7 @@ end;
 
 procedure TRcDataMod.DataModuleCreate(Sender: TObject);
 begin
+   randomize;
    if GetDBName<>'' then
       RecastDb.DatabaseName:=GetDBName;
    TranDb.DatabaseName:=GetTransDBName;
@@ -284,7 +267,6 @@ begin
       TranDb.DatabaseName:=GetDBName;
    RecastDb.Connected:=true;
    TranDb.Connected:=true;
-   FindPOSQuery.prepared:=true;
    SiLangDispatcher1.LoadAllFromFile ('main.sil');
    values:=tstringlist.create;
 end;

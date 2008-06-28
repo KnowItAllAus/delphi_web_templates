@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, baretitle,
-  IWCompListbox, IWCompRadioButton;
+  IWCompListbox, IWCompRadioButton, IWCompCheckbox;
 
 type
   TFormJobDtl = class(TIWAppForm)
@@ -32,6 +32,7 @@ type
     ActiveBtn: TIWRadioButton;
     ArchiveBtn: TIWRadioButton;
     DelJobRevBtn: TIWButton;
+    TemplateBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure userfooter1Extra2Click(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
@@ -45,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, jobrev, servercontroller, jobs;
+uses datamod, jobrev, servercontroller, jobs, IBQuery, dialogs;
 
 
 procedure TFormJobDtl.IWAppFormCreate(Sender: TObject);
@@ -68,15 +69,18 @@ begin
     except
     end;
     NameEdit.Text:=FieldByName ('Name').AsString;
+    TemplateBox.Checked:=FieldByName ('Template').AsString='1';
   end;
 end;
 
 procedure TFormJobDtl.userfooter1Extra2Click(Sender: TObject);
 var
   Grps : TStringlist;
+  tq : tibquery;
 begin
   try
-    With RcDataModule.UpdateJobQuery do begin
+    tq:=RcDataModule.UpdateJobQuery;
+    With tq do begin
         if EditBtn.Checked then  new_status:=0;
         if TestBtn.Checked then  new_status:=1;
         if ReadyBtn.Checked then  new_status:=2;
@@ -88,6 +92,7 @@ begin
         ParamByName ('LastChanged').AsDateTime:=Now;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsInteger:=RcDataModule.CurrentJobQuery.FieldByName ('ID').AsInteger;
+        ParamByName ('TEMPLATE').AsInteger:=Ord (TemplateBox.Checked);
         ExecSQL;
         RcDataModule.CurrentJobQuery.Close;
         RcDataModule.CurrentJobQuery.Open;

@@ -28,11 +28,13 @@ type
     IWLabel4: TIWLabel;
     NewDescEdit: TIWEdit;
     siLangLinked1: TsiLangLinked;
+    TemplateBox: TIWCheckBox;
     procedure userfooter1Extra1Click(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
   public
+    procedure setTemplate(istemplate : boolean);
   end;
 
 implementation
@@ -51,6 +53,7 @@ begin
         ParamByName('Id').AsString:=NewIDEdit.Text;
         ParamByName('Tag').AsString:=NewTagEdit.Text;
         ParamByName('Suppress').AsInteger:=Ord (SuppressBox.Checked);
+        ParamByName('Template').AsInteger:=Ord (TemplateBox.Checked);
         ExecSQL;
         Transaction.Commit;
      end;
@@ -75,7 +78,14 @@ begin
       NewNameEdit.Text:=FieldByName ('Name').AsString;
       NewDescEdit.Text:=FieldByName ('Description').AsString;
       SuppressBox.Checked:=FieldByName ('Suppress').AsString='1';
+      TemplateBox.Checked:=(FieldByName ('Template').AsString='1');
    end;
+end;
+
+procedure TformImgHdr.setTemplate(istemplate : boolean);
+begin
+   TemplateBox.visible:=istemplate;
+   if not istemplate then TemplateBox.checked:=false;
 end;
 
 procedure TFormImgHdr.userfooter1CancelClick(Sender: TObject);

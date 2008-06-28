@@ -16,8 +16,8 @@ object FormImgHdr: TFormImgHdr
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 244
-  DesignTop = 352
+  DesignLeft = 141
+  DesignTop = 141
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -437,6 +437,29 @@ object FormImgHdr: TFormImgHdr
         TabOrder = 5
         PasswordPrompt = False
         Text = 'NewDescEdit'
+      end
+      object TemplateBox: TIWCheckBox
+        Left = 96
+        Top = 188
+        Width = 137
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        Caption = 'Template Object'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 8
+        Checked = False
+        FriendlyName = 'TemplateBox'
       end
     end
   end

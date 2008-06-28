@@ -33,9 +33,13 @@ type
     AddStoreBtn: TIWButton;
     AddJobBtn: TIWButton;
     PromoCombo: TIWComboBox;
+    TemplateGrid: TIWGrid;
+    IWLabel3: TIWLabel;
+    NewTmplRevBtn: TIWButton;
+    IWLabel4: TIWLabel;
+    EditBtn: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
-    procedure DelBtnClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -47,6 +51,11 @@ type
     procedure VoucherGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure TestBoxChange(Sender: TObject);
+    procedure NewTmplRevBtnClick(Sender: TObject);
+    procedure DelBtnClick(Sender: TObject);
+    procedure EditBtnClick(Sender: TObject);
+    procedure TemplateGridCellClick(ASender: TObject; const ARow,
+      AColumn: Integer);
   private
     StoreIdList : TStringlist;
     PromoIdList : TStringlist;
@@ -61,9 +70,13 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, grpForm, graphics, cfgtypes, dialogs;
+uses datamod, db, servercontroller, IWInit, grpForm, graphics, cfgtypes, dialogs, groupnameform, grptmplform;
 
 {$R *.dfm}
+
+type tag_obj = class
+  s : string;
+end;
 
 procedure GoReferer (referedby : referer_class);
 begin
@@ -80,10 +93,15 @@ procedure TFormGrpDtl.DrawGrids;
 var
   can_delete : boolean;
   storedel : boolean;
+  r, c : integer;
+  celltag : tag_obj;
 begin
+  for r:=0 to Templategrid.RowCount-1 do
+    for c:=0 to Templategrid.ColumnCount-1 do
+      Templategrid.Cell[r,c].Tag.Free;
   has_live_stores:=false;
   StoreGrid.ColumnCount:=2;
-  VoucherGrid.ColumnCount:=2;
+  VoucherGrid.ColumnCount:=3;
   With StoreGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
@@ -93,6 +111,13 @@ begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
       Cell[0, 1].Text:='';
+      Cell[0, 2].Text:='';
+  end;
+  With TemplateGrid do begin
+      RowCount:=1;
+      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Date');
+      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Note');
+      Cell[0, 2].Text:='';
   end;
   sList.Clear;
   pList.Clear;
@@ -101,8 +126,7 @@ begin
     GrpUseQuery.Close;
     GrpUseQuery.ParamByName('COMPANY').AsString:=
        UserSession.Company;
-    GrpUseQuery.ParamByName('GROUPID').AsString:=
-       CurrentGroupQuery.FieldByName('ID').AsString;
+    GrpUseQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
     GrpUseQuery.Open;
     while not GrpUseQuery.Eof do begin
         if GrpUseQuery.FieldByName('ITEMKIND').AsInteger=1 then begin
@@ -128,11 +152,17 @@ begin
             with VoucherGrid.Cell[VoucherGrid.RowCount-1, 0] do begin
               Text := GrpUseQuery.FieldByName('JOBNAME').AsString;
             end;
-            pList.Add (GrpUseQuery.FieldByName('ITEMID').AsString);
+            pList.Add (GrpUseQuery.FieldByName('ID').AsString);
             if testbox.Checked then begin
               can_delete:=(UserSession.privilege and PRIV_EDIT)<>0;
             end else begin
               can_delete:=(UserSession.privilege and PRIV_LIVE)<>0;
+            end;
+            if GrpUseQuery.FieldByName('TEMPLATE').AsString='1' then begin
+              VoucherGrid.Cell[VoucherGrid.RowCount-1,2].text:='Params';
+              VoucherGrid.Cell[VoucherGrid.RowCount-1,2].Clickable:=true;
+            end else begin
+              VoucherGrid.Cell[VoucherGrid.RowCount-1,2].text:='';
             end;
             if can_delete then begin
               VoucherGrid.Cell[VoucherGrid.RowCount-1,1].text:=SiLangLinked1.GetTextOrDefault('Grid.Delete');
@@ -143,6 +173,34 @@ begin
         GrpUseQuery.Next;
     end;
     GrpUseQuery.Close;
+    GrpUseQuery.Transaction.Active:=false;
+  end;
+  with RcDataModule do begin
+    GrpTmplQuery.Close;
+    GrpTmplQuery.ParamByName('COMPANY').AsString:=
+       UserSession.Company;
+    GrpTmplQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+    GrpTmplQuery.Open;
+    while not GrpTmplQuery.Eof do begin
+        TemplateGrid.RowCount:=TemplateGrid.RowCount+1;
+        with TemplateGrid.Cell[TemplateGrid.RowCount-1, 0] do begin
+          Text := GrpTmplQuery.FieldByName('REVDATE').AsString;
+          if GrpTmplQuery.FieldByName('PARAMVER').AsString<>'' then begin
+             Font.Style:=[fsItalic];
+          end;
+        end;
+        TemplateGrid.Cell[TemplateGrid.RowCount-1,1].text:=GrpTmplQuery.FieldByName('NOTE').AsString;
+        with TemplateGrid.Cell[TemplateGrid.RowCount-1,2] do begin
+          text:=SiLangLinked1.GetTextOrDefault('Grid.Edit');
+          Clickable:=true;
+          celltag:=tag_obj.create;
+          celltag.s:=GrpTmplQuery.FieldByName('ID').AsString;
+          tag:=celltag;
+        end;
+        GrpTmplQuery.Next;
+    end;
+    GrpTmplQuery.Close;
+    GrpTmplQuery.Transaction.Active:=false;
   end;
   if not testbox.checked and ((UserSession.privilege and PRIV_LIVE)=0) then Vouchergrid.columncount:=1;
   if not storedel then storegrid.columncount:=1;
@@ -161,8 +219,7 @@ begin
     GrpStoreQuery.Close;
     GrpStoreQuery.ParamByName('COMPANY').AsString:=
        UserSession.Company;
-    GrpStoreQuery.ParamByName('GROUPID').AsString:=
-       RcDataModule.GetValue ('editgroup','');
+    GrpStoreQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
     GrpStoreQuery.Open;
     StoreCombo.Items.Clear;
     storeIdList.Clear;
@@ -180,17 +237,19 @@ begin
     GrpPromoQuery.Close;
     GrpPromoQuery.ParamByName('COMPANY').AsString:=
        UserSession.Company;
-    GrpPromoQuery.ParamByName('GROUPID').AsString:=
-       CurrentGroupQuery.FieldByName('ID').AsString;
+    GrpPromoQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
     GrpPromoQuery.Open;
     PromoCombo.Items.Clear;
     promoIdList.Clear;
     while not GrpPromoQuery.Eof do begin
-       PromoCombo.Items.Add(GrpPromoQuery.FieldByName('NAME').AsString);
-       promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
+       if (GrpPromoQuery.FieldByName('Template').AsString<>'1') then begin
+          PromoCombo.Items.Add(GrpPromoQuery.FieldByName('NAME').AsString);
+          promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
+       end;
        GrpPromoQuery.next;
     end;
     GrpPromoQuery.Close;
+    GrpPromoQuery.Transaction.Active:=false;
   end;
   if not testbox.Checked then begin
     addjobbtn.Visible:=(promocombo.Items.Count>0) and ((UserSession.privilege and PRIV_LIVE)<>0);
@@ -239,7 +298,7 @@ end;
 
 procedure TFormGrpDtl.PostButtonClick(Sender: TObject);
 begin
-  with RcDataModule do begin
+(*  with RcDataModule do begin
       GroupUpdateQuery.ParamByName('ID').AsString:=RcDataModule.GetValue('editgroup','');
       GroupUpdateQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
       GroupUpdateQuery.ParamByName('NAME').AsString:=NameEdit.Text;
@@ -249,24 +308,11 @@ begin
       GroupUpdateQuery.Transaction.Commit;
   end;
   GoReferer (referedby);
-end;
-
-procedure TFormGrpDtl.DelBtnClick(Sender: TObject);
-begin
-  with RcDataModule.GroupDeleteQuery do begin
-      ParamByName('ID').AsString:=
-        RcDataModule.CurrentGroupQuery.FieldByName('ID').AsString;
-      ParamByName('COMPANY').AsString:=
-        RcDataModule.CurrentGroupQuery.FieldByName('COMPANY').AsString;
-      ExecSQL;
-      Transaction.Commit;
-  end;
-  GoReferer (referedby);
+*)
 end;
 
 procedure TFormGrpDtl.CancelBtnClick(Sender: TObject);
 begin
-   RcDataModule.Trans.Rollback;
    GoReferer (referedby);
 end;
 
@@ -291,11 +337,16 @@ begin
 end;
 
 procedure TFormGrpDtl.IWAppFormDestroy(Sender: TObject);
+var
+  r,c : integer;
 begin
    StoreIdList.Free;
    PromoIdList.Free;
    SList.Free;
    PList.Free;
+   for r:=0 to Templategrid.RowCount-1 do
+     for c:=0 to Templategrid.ColumnCount-1 do
+       Templategrid.Cell[r,c].Tag.Free;
 end;
 
 procedure TFormGrpDtl.AddStoreBtnClick(Sender: TObject);
@@ -307,11 +358,12 @@ begin
    try
      with RcDataModule.GrpAllocInsertQuery do begin
        ParamByName ('ID').AsInteger:=RcDataModule.NextId;
-       ParamByName ('GROUPID').AsString:=RcDataModule.CurrentGroupQuery.FieldByName ('ID').AsString;
+       ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
        ParamByName ('ITEMID').AsString:=StoreIDList.Strings[storecombo.ItemIndex];
        ParamByName ('COMPANY').AsString:=UserSession.Company;
        ParamByName ('ITEMKIND').AsInteger:=1;
        ExecSQL;
+       Transaction.Commit;
      end;
    except
    end;
@@ -334,11 +386,12 @@ begin
    try
      with RcDataModule.GrpAllocInsertQuery do begin
        ParamByName ('ID').AsInteger:=RcDataModule.NextId;
-       ParamByName ('GROUPID').AsString:=RcDataModule.CurrentGroupQuery.FieldByName ('ID').AsString;
+       ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
        ParamByName ('ITEMID').AsString:=PromoIDList.Strings[promocombo.ItemIndex];
        ParamByName ('COMPANY').AsString:=UserSession.Company;
        ParamByName ('ITEMKIND').AsInteger:=2;
        ExecSQL;
+       Transaction.Commit;
      end;
    except
    end;
@@ -346,8 +399,8 @@ begin
    promoidlist.Delete(index);
    promocombo.itemindex:=-1;
    if promocombo.Items.Count=0 then begin
-      promocombo.visible:=false;
-      addjobbtn.Visible:=false;
+       promocombo.visible:=false;
+       addjobbtn.Visible:=false;
    end;
    DrawGrids;
 end;
@@ -355,11 +408,12 @@ end;
 procedure TFormGrpDtl.StoreGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 begin
-  with RcDataModule do begin
-    AllocItemDelQry.ParamByName ('ITEMID').AsString:=sList[ARow-1];
-    AllocItemDelQry.ParamByName ('ITEMKIND').AsString:='1';
-    AllocItemDelQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
-    AllocItemDelQry.ExecSQL;
+  with RcDataModule.AllocItemDelQry do begin
+    ParamByName ('ITEMID').AsString:=sList[ARow-1];
+    ParamByName ('ITEMKIND').AsString:='1';
+    ParamByName ('COMPANY').AsString:=UserSession.Company;
+    ExecSQL;
+    Transaction.commit;
   end;
   DrawGrids;
   InitCombos;
@@ -368,11 +422,17 @@ end;
 procedure TFormGrpDtl.VoucherGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 begin
-  with RcDataModule do begin
-    AllocItemDelQry.ParamByName ('ITEMID').AsString:=pList[ARow-1];
-    AllocItemDelQry.ParamByName ('ITEMKIND').AsString:='2';
-    AllocItemDelQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
-    AllocItemDelQry.ExecSQL;
+  try
+    with RcDataModule do begin
+      SQLEx.Transaction.Active:=false;
+      SQLEx.SQL.Clear;
+      SQLEx.SQL.Add('delete from GROUPALLOC where ID=:ID and ITEMKIND=2 and COMPANY=:COMPANY');
+      SQLEx.ParamByName ('ID').AsString:=PList[ARow-1];
+      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLEx.ExecQuery;
+      SQLEx.Transaction.Commit;
+    end;
+  except
   end;
   DrawGrids;
   InitCombos;
@@ -382,6 +442,60 @@ procedure TFormGrpDtl.TestBoxChange(Sender: TObject);
 begin
   DrawGrids;
   InitCombos;
+  with RcDataModule.GroupUpdateTestQuery do begin
+    ParamByName('ID').AsString:=RcDataModule.GetValue('editgroup','');
+    ParamByName('COMPANY').AsString:=UserSession.Company;
+    if Testbox.Checked then ParamByName('TESTGROUP').AsString:='Y'
+       else ParamByName('TESTGROUP').AsString:='N';
+    ExecSQL;
+    Transaction.Commit;
+  end;  
+end;
+
+procedure TFormGrpDtl.NewTmplRevBtnClick(Sender: TObject);
+begin
+   try
+     with RcDataModule.GroupTmplInsertQuery do begin
+       ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+       ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       ParamByName ('REVDATE').AsDateTime:=now;
+       ExecSQL;
+       Transaction.Commit;
+     end;
+   except
+   end;
+   DrawGrids;
+end;
+
+procedure TFormGrpDtl.DelBtnClick(Sender: TObject);
+begin
+  with RcDataModule.GroupDeleteQuery do begin
+      ParamByName('ID').AsString:=RcDataModule.GetValue ('editgroup','');
+      ParamByName('COMPANY').AsString:=UserSession.Company;
+      ExecSQL;
+      Transaction.Commit;
+  end;
+  GoReferer (referedby);
+end;
+
+procedure TFormGrpDtl.EditBtnClick(Sender: TObject);
+var
+   TFGNE : TFormGroupNameEdit;
+begin
+   TIWAppForm(WebApplication.ActiveForm).Release;
+//   if referedby=nil then
+   TFGNE:=TFormGroupNameEdit.Create(WebApplication);
+   TFGNE.NameEdit.Text:=NameEdit.Text;
+   TFGNE.show;
+end;
+
+procedure TFormGrpDtl.TemplateGridCellClick(ASender: TObject; const ARow,
+  AColumn: Integer);
+begin
+   TIWAppForm(WebApplication.ActiveForm).Release;
+   RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,acolumn].tag).s);
+   TFormGrpTmpl.create(WebApplication).show
 end;
 
 end.

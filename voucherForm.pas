@@ -35,6 +35,7 @@ type
     ProdBox: TIWCheckBox;
     TestBox: TIWCheckBox;
     FormatBox: TIWCheckBox;
+    templatelbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure VoucherGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -56,9 +57,11 @@ type
     IList : TStringList;
     GList : TStringList;
     enableclicks : boolean;
+    istemplate : boolean;
     procedure EditHdr (ID : String);
     procedure DrawImageGrid;
     procedure EditImage (ID : String);
+    procedure EditParams (ID : String);
     procedure RefreshPage;
   public
     { Public declarations }
@@ -70,7 +73,7 @@ var
 implementation
 
 uses datamod, db, servercontroller, IWInit, voucherEditForm, voucherEditForm2, jobrev, jobrevdtlForm,
-     imghdrform, cfgtypes, imagerevform;
+     imghdrform, cfgtypes, imagerevform, paramform;
 
 {$R *.DFM}
 
@@ -94,6 +97,7 @@ procedure TFormVoucher.DrawImageGrid;
 var
   i : integer;
   s : string;
+  templateobj : boolean;
 begin
   RcDataModule.ImageJobQuery.Close;
   RcDataModule.ImageJobQuery.ParamByName('COMPANY').AsString:=
@@ -112,9 +116,12 @@ begin
     while not Eof do begin
       RowCount:=RowCount+1;
       GList.Add(FieldByName('ID').AsString);
+      templateobj:=FieldByName('Template').AsString='1';
       with Cell[i, 0] do begin
         Clickable := True;
-        if (FieldByName('PROD_ID').AsString='') or (FieldByName('PROD_ID').AsString='0') then begin
+        if templateobj then
+           Font.color:=clWhite
+        else if (FieldByName('PROD_ID').AsString='') or (FieldByName('PROD_ID').AsString='0') then begin
            Font.Color:=clRed;
         end;
         s := FieldByName('Name').AsString;
@@ -129,7 +136,9 @@ begin
       end;
       with Cell[i, 2] do begin
         try
-           if FieldByName('Datamode').IsNull then
+           if templateobj then
+              Text:='TMPL'
+           else if FieldByName('Datamode').IsNull then
                Text:='- -'
            else
                Text:=DataModeNamesAbbr [datamodes(FieldByName('Datamode').AsInteger)];
@@ -138,7 +147,8 @@ begin
         end;
       end;
       with Cell[i, 3] do begin
-        Text := FieldByName('GUID').AsString;
+        if templateobj then Text:=''
+           else Text := FieldByName('GUID').AsString;
       end;
       with Cell[i, 4] do begin
         Text := SiLangLinked1.GetTextOrDefault('Grid.Properties');
@@ -165,7 +175,8 @@ begin
     Open;
     ProdBox.Checked:=FieldByName('PROD_VER').AsString=IntToStr(UserSession.JobRevID);
     TestBox.Checked:=FieldByName('TEST_VER').AsString=IntToStr(UserSession.JobRevID);
-    Close;
+    istemplate:=FieldByName('TEMPLATE').AsString='1';
+    TemplateLbl.visible:=istemplate;
     RcDataModule.Trans.Rollback;
   except
     ProdBox.Checked:=false;
@@ -199,8 +210,11 @@ begin
 
   with VoucherGrid do begin
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Tag');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Trigger');
+    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Trigger');
+    if istemplate then begin
+       VoucherGrid.ColumnCount:=3;
+       Cell[0, 2].Text := '';
+    end;
     i:=1;
     RowCount:=1;
     while not RcDataModule.VoucherQuery.Eof do begin
@@ -216,10 +230,11 @@ begin
            text:=s;
       end;
       with Cell[i, 1] do begin
-        Text := RcDataModule.VoucherQuery.FieldByName('Tag').AsString;
-      end;
-      with Cell[i, 2] do begin
         Text := RcDataModule.VoucherQuery.FieldByName('Trig').AsString;
+      end;
+      if istemplate then with Cell[i, 2] do begin
+        Text := SiLangLinked1.GetTextOrDefault('Grid.Params');
+        clickable:=true;
       end;
       inc (i);
       RcDataModule.VoucherQuery.Next;
@@ -241,6 +256,18 @@ begin
   IList:=TStringList.Create;
   GList:=TStringList.Create;
   formatbox.checked:=usersession.NewLayout;
+  with RcDataModule.CurrentJobQuery do try
+    Transaction.Active:=true;
+    Open;
+    ProdBox.Checked:=FieldByName('PROD_VER').AsString=IntToStr(UserSession.JobRevID);
+    TestBox.Checked:=FieldByName('TEST_VER').AsString=IntToStr(UserSession.JobRevID);
+    istemplate:=FieldByName('TEMPLATE').AsString='1';
+    TemplateLbl.visible:=istemplate;
+    RcDataModule.Trans.Rollback;
+  except
+    ProdBox.Checked:=false;
+    TestBox.Checked:=false;
+  end;
   RefreshPage;
 end;
 
@@ -258,6 +285,8 @@ begin
       // Alternate Row Colors
       if Font.Color=clRed then begin
         BGColor:=clRed;
+      end else if Font.Color=clWhite then begin
+        BGColor:=clWhite;
       end else if Odd(ARow) then begin
         BGColor := clLtGray;
       end else begin
@@ -284,10 +313,25 @@ begin
   end;
 end;
 
+procedure TFormVoucher.EditParams (ID : String);
+begin
+  with RcDataModule.CurrentVoucherQuery do begin
+    Close;
+    ParamByName ('COMPANY').AsString:=TUserSession(WebApplication.Data).Company;
+    ParamByName ('ID').AsString:=ID;
+    Open;
+    TIWAppForm(WebApplication.ActiveForm).Release;
+    TParamForm.Create (WebApplication).show;
+  end;
+end;
+
 procedure TFormVoucher.VoucherGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
 begin
   inherited;
-  EditVoucher (IList.Strings[ARow-1]);
+  case AColumn of
+    0 : EditVoucher (IList.Strings[ARow-1]);
+    2 : EditParams (IList.Strings[ARow-1]);
+  end;
 end;
 
 procedure TFormVoucher.InsertBtnClick(Sender: TObject);
@@ -334,6 +378,8 @@ begin
 end;
 
 procedure TformVoucher.EditHdr (ID : String);
+var
+  TFIH : TFormImgHdr;
 begin
   with RcDataModule.CurrentImagehdrQuery do begin
     Close;
@@ -341,7 +387,9 @@ begin
     ParamByName ('ID').AsString:=ID;
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TFormImgHdr.Create (WebApplication).show;
+  TFIH:=TFormImgHdr.Create (WebApplication);
+  TFIH.setTemplate(istemplate);
+  TFIH.show;
 end;
 
 procedure TFormVoucher.ImageBtnClick(Sender: TObject);
@@ -358,10 +406,7 @@ begin
     UserSession.JobRevID;
   RcDataModule.ImageHdrInsertQuery.ParamByName('COMPANY').AsString:=
     UserSession.Company;
-  s:=UserSession.Company+FormatDateTime('hhmmssddmmyy',now);
-  randomize;
-  while (length(s)<20) do s:=s+char(random(10)+48);
-  RcDataModule.ImageHdrInsertQuery.ParamByName('GUID').AsString:=s;
+  RcDataModule.ImageHdrInsertQuery.ParamByName('GUID').AsString:=RcDataModule.make_guid;
   RcDataModule.ImageHdrInsertQuery.ExecSQL;
   EditHdr (IntToStr(ImageID));
 end;

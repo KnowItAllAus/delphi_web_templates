@@ -5,7 +5,7 @@ interface
 
 uses
   Classes,
-  DataMod,
+  DataMod, AdminDM,
   IWServerControllerBase, IWAppForm, IWBaseForm, IWApplication,
   IWModuleController,IWProducer,HTTPApp,SysUtils, GpTimezone;
 
@@ -47,6 +47,7 @@ type
   TUserSession = class(TComponent)
   public
     RcDataMod: TRcDataMod;
+    AdminData: TAdminData;
     Company: string;
     User: string;
     pwd : string;
@@ -70,6 +71,7 @@ type
     strict : boolean;
     //
     constructor Create(AOwner: TComponent); override;
+    destructor Destroy(AOwner: TComponent);
     procedure SetPriv (priv : integer);
     procedure mru_add (id : string; name : string; rev : string; note : string);
     procedure mru_delete (id : string; rev : string);
@@ -136,9 +138,13 @@ end;
 constructor TUserSession.Create(AOwner: TComponent);
 begin
   RcDataMod := TRcDatamod.Create(AOwner);
+  AdminData := TAdminData.Create(AOwner);
   RcDataMod.LangEditControl1.Basedir:=getTransBase;
   TimeZones:=TGpRegistryTimeZones.Create;
+end;
 
+destructor TUserSession.Destroy(AOwner: TComponent);
+begin
 end;
 
 procedure TUserSession.SetPriv (priv : integer);

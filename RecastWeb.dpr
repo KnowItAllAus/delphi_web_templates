@@ -8,9 +8,9 @@ uses
   ServerController in 'ServerController.pas' {RcWebController: TDataModule},
   login in 'login.pas' {form_login: TIWForm1},
   datamod in 'datamod.pas' {RcDataMod: TDataModule},
-  imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm},
+  imageupFormTmpl in 'imageupFormTmpl.pas' {FormImageUpTmpl: TIWAppForm},
   voucherForm in 'voucherForm.pas' {FormVoucher: TIWAppForm},
-  storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
+  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
   printerForm in 'printerForm.pas' {formPrinter: TIWAppForm},
   sendForm in 'sendForm.pas' {formSend: TIWAppForm},
   passwdForm in 'passwdForm.pas' {FormPasswd: TIWAppForm},
@@ -52,7 +52,12 @@ uses
   jobrev in 'jobrev.pas' {FormJobRev: TIWAppForm},
   jobrevdtlform in 'jobrevdtlform.pas' {FormJobRevDtl: TIWAppForm},
   voucherEditForm in 'voucherEditForm.pas' {FormVoucherEdit: TIWAppForm},
-  storeForm in 'storeForm.pas' {formStore: TIWAppForm};
+  storeForm in 'storeForm.pas' {formStore: TIWAppForm},
+  AdminDM in 'AdminDM.pas' {AdminData: TDataModule},
+  paramForm in 'paramform.pas' {IWForm2: TIWAppForm},
+  groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
+  storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
+  imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm};
 
 {$R *.res}
 
