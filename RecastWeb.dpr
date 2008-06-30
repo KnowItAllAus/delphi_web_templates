@@ -43,7 +43,7 @@ uses
   jobdtl in 'jobdtl.pas' {FormJobDtl: TIWAppForm},
   CfgTypes in '..\common\CfgTypes.pas',
   distribdtlForm in 'distribdtlForm.pas' {formdistribdtl: TIWAppForm},
-  imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm},
+  imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
   imghdrform in 'imghdrform.pas' {FormImgHdr: TIWAppForm},
   overviewform in 'overviewform.pas' {FormOverview: TIWAppForm},
   distribstatusform in 'distribstatusform.pas' {formDistribStatus: TIWAppForm},
@@ -55,9 +55,12 @@ uses
   storeForm in 'storeForm.pas' {formStore: TIWAppForm},
   AdminDM in 'AdminDM.pas' {AdminData: TDataModule},
   paramForm in 'paramform.pas' {IWForm2: TIWAppForm},
-  groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
+  tmplnameform in 'tmplnameform.pas' {FormTmplnameEdit: TIWAppForm},
   storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
-  imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm};
+  imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm},
+  groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
+  paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
+  imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm};
 
 {$R *.res}
 

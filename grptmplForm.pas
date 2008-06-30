@@ -45,7 +45,8 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, overviewform, grpdtlform;
+uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, overviewform,
+     grpdtlform, tmplnameform, paramnameform, imagerevformTmpl;
 
 {$R *.DFM}
 
@@ -140,10 +141,10 @@ begin
             with Cell[i, 0] do begin
               Text := GrpTmplUsageQuery.FieldByName('TEMPLATENAME').AsString;
             end;
-            Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Delete');
-            Cell[i, 1].clickable:=true;
-            Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.AddParam');
+            Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
             Cell[i, 2].clickable:=true;
+            Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.AddParam');
+            Cell[i, 1].clickable:=true;
             celltag:=tag_obj.create;
             celltag.param:=false;
             celltag.s:=GrpTmplUsageQuery.FieldByName('ID').AsString;
@@ -155,14 +156,14 @@ begin
             with Cell[i, 0] do begin
               Text := GrpTmplUsageQuery.FieldByName('NAME').AsString;
             end;
-//            Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Param');
-//            Cell[i, 1].clickable:=true;
-//            Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.AddParam');
-//            Cell[i, 2].clickable:=true;
-//            celltag:=tag_obj.create;
-//            celltag.param:=false;
-//            celltag.s:=GrpTmplUsageQuery.FieldByName('ID').AsString;
-//            Cell[i, 0].Tag:=celltag;
+            Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
+            Cell[i, 2].clickable:=true;
+            Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
+            Cell[i, 1].clickable:=true;
+            celltag:=tag_obj.create;
+            celltag.param:=true;
+            celltag.s:=GrpTmplUsageQuery.FieldByName('OBJID').AsString;
+            Cell[i, 0].Tag:=celltag;
             inc (i);
         end;
         lasttmpl:=GrpTmplUsageQuery.FieldByName('ID').AsString;
@@ -177,26 +178,30 @@ procedure TformGrpTmpl.TmplGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 var
   t : tag_obj;
+  FPNE : TFormParamNameEdit;
+  FTNE : TFormTmplNameEdit;
 begin
   t:=tag_obj(TmplGrid.Cell[ARow,0].tag);
   if assigned(t) then begin
     if t.param then begin
-    end else begin
+      RcDataModule.SaveValue ('editparam',t.s);
       if AColumn=1 then begin
-        try
-          with RcDataModule do begin
-            SQLEx.Transaction.Active:=false;
-            SQLEx.Transaction.Active:=true;
-            SQLEx.SQL.Clear;
-            SQLEx.SQL.Add('delete from GROUPPARAMTMPL where ID=:ID and COMPANY=:COMPANY');
-            SQLEx.ParamByName ('ID').AsString:=t.s;
-            SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-            SQLEx.ExecQuery;
-            SQLEx.Transaction.Commit;
-          end;
-        except
-        end;
+          TIWAppForm(WebApplication.ActiveForm).Release;
+          TformImageVersionsTmpl.create(WebApplication).show;
       end else if AColumn=2 then begin
+          FPNE:=TFormParamNameEdit.create(WebApplication);
+          FPNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
+          TIWAppForm(WebApplication.ActiveForm).Release;
+          FPNE.show;
+      end;
+    end else begin
+      if AColumn=2 then begin
+        RcDataModule.SaveValue ('edittmplinstance',t.s);
+        FTNE:=TFormTmplNameEdit.create(WebApplication);
+        FTNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
+        TIWAppForm(WebApplication.ActiveForm).Release;
+        FTNE.show;
+      end else if AColumn=1 then begin
         try
           with RcDataModule do begin
             SQLEx.Transaction.Active:=false;
@@ -238,10 +243,10 @@ begin
       Font.Color := clWhite;
     end else begin
       // Alternate Row Colors
-      if Odd(ARow) then begin
+      if tag_obj(TmplGrid.Cell[ARow,0].Tag).param then begin
         BGColor := clLtGray;
       end else begin
-        BGColor := clNone;
+        BGColor := clWhite;
       end;
     end;
   end;

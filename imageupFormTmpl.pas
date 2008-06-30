@@ -83,7 +83,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevform;
+uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevformtmpl;
 
 {$R *.DFM}
 
@@ -180,17 +180,7 @@ end;
 procedure TFormImageUpTmpl.GoImages;
 begin
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TFormImageVersions.Create (WebApplication).show;
-(*
-   if referredby<>nil then begin
-     TIWAppForm(WebApplication.ActiveForm).Release;
-     referredby.Create(WebApplication).Show;
-   end else begin
-     RcDataModule.Trans.Active:=False;
-     RcDataModule.Trans.StartTransaction;
-     TIWAppForm(WebApplication.ActiveForm).Release;
-     TFormImages.Create(WebApplication).Show;
-   end;*)
+  TformImageVersionsTmpl.Create (WebApplication).show;
 end;
 
 procedure TFormImageUpTmpl.CancelBtnClick(Sender: TObject);
@@ -207,7 +197,7 @@ begin
   original:=TBitmap.create;
   IWSilink1.InitForm;
   Contentstats.Caption := '-- -- -- --';
-  with RcDataModule.CurrentImageQuery do begin
+  with RcDataModule.CurrentImageQueryTmpl do begin
       NewIDEdit.Text := FieldByName('ID').AsString;
       try
         ModeCombo.ItemIndex := FieldByName('DATAMODE').AsInteger;
@@ -333,7 +323,7 @@ var
   ms: tmemorystream;
 begin
   ms := TMemoryStream.Create;
-  TBlobField(RcDataModule.CurrentImageQuery.FieldByName('IMAGE')).savetostream(ms);
+  TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('IMAGE')).savetostream(ms);
   ms.position := 0;
   showImage(ms);
   ms.free;
@@ -344,7 +334,7 @@ var
   ms: tmemorystream;
 begin
   ms := TMemoryStream.Create;
-  TBlobField(RcDataModule.CurrentImageQuery.FieldByName('TEXT')).savetostream(ms);
+  TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('TEXT')).savetostream(ms);
   ms.position := 0;
   showText(ms);
   ms.free;
@@ -453,7 +443,7 @@ var
    i : integer;
 begin
   RcDataModule.ImageUpdateQuery.ParamByName('ID').AsString :=
-    RcDataModule.CurrentImageQuery.FieldByName('ID').AsString;
+    RcDataModule.CurrentImageQueryTmpl.FieldByName('ID').AsString;
   StrIntParam(RcDataModule.ImageUpdateQuery.ParamByName('ID'),NewIDEdit.Text);
   RcDataModule.ImageUpdateQuery.ParamByName('VENDOR').Clear;
   RcDataModule.ImageUpdateQuery.ParamByName('PRODUCT').Clear;
@@ -466,7 +456,7 @@ begin
   RcDataModule.ImageUpdateQuery.ParamByName('COLOUR').AsInteger :=
     ColCombo.ItemIndex;
   RcDataModule.ImageUpdateQuery.ParamByName('OLD_COMPANY').AsString :=
-    RcDataModule.CurrentImageQuery.FieldByName('COMPANY').AsString;
+    RcDataModule.CurrentImageQueryTmpl.FieldByName('COMPANY').AsString;
   RcDataModule.ImageUpdateQuery.ParamByName('NAME').AsString := copy (filename,1,40);
   if workimg <> nil then begin
     ms := TMemoryStream.Create;
@@ -565,11 +555,11 @@ end;
 
 procedure TFormImageUpTmpl.DelBtnClick(Sender: TObject);
 begin
-  if RcDataModule.CurrentImageQuery.Active then begin
+  if RcDataModule.CurrentImageQueryTmpl.Active then begin
     RcDataModule.ImageDeleteQuery.ParamByName('ID').AsString :=
-      RcDataModule.CurrentImageQuery.FieldByName('ID').AsString;
+      RcDataModule.CurrentImageQueryTmpl.FieldByName('ID').AsString;
     RcDataModule.ImageDeleteQuery.ParamByName('COMPANY').AsString :=
-      RcDataModule.CurrentImageQuery.FieldByName('COMPANY').AsString;
+      RcDataModule.CurrentImageQueryTmpl.FieldByName('COMPANY').AsString;
     RcDataModule.ImageDeleteQuery.ExecSQL;
     if (referedby=nil) then RcDataModule.ImageDeleteQuery.Transaction.Commit;
   end;

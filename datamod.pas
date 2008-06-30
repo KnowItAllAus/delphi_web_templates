@@ -159,6 +159,9 @@ type
     GrpTmplUsageQuery: TIBQuery;
     GrpTmplQuery: TIBQuery;
     TmplQuery: TIBQuery;
+    ImageVerQueryTmpl: TIBQuery;
+    CurrentImageHdrQueryTmpl: TIBQuery;
+    CurrentImageQueryTmpl: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
