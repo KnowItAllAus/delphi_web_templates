@@ -512,7 +512,7 @@ object FormJobRev: TFormJobRev
         Left = 611
       end
       inherited Smalltitle: TIWLabel
-        Left = 960
+        Left = 915
         Top = 100
       end
       inherited HideBox: TIWImageFile

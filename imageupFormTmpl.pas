@@ -83,7 +83,8 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevformtmpl;
+uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevformtmpl, IBCustomDataSet, IBQuery, IBDatabase,
+  IBTable, IBUpdateSQL;
 
 {$R *.DFM}
 
@@ -186,7 +187,7 @@ end;
 procedure TFormImageUpTmpl.CancelBtnClick(Sender: TObject);
 begin
   if referedby=nil then begin
-    RcDataModule.ImageUpdateQuery.Transaction.Active := False;
+    RcDataModule.ImageUpdateQueryTmpl.Transaction.Active := False;
     GoImages;
   end else DelBtnClick (Sender);
 end;
@@ -441,34 +442,31 @@ procedure TFormImageUpTmpl.PostButtonClick(Sender: TObject);
 var
    ms : TMemoryStream;
    i : integer;
+   uq : TIBQuery;
 begin
-  RcDataModule.ImageUpdateQuery.ParamByName('ID').AsString :=
-    RcDataModule.CurrentImageQueryTmpl.FieldByName('ID').AsString;
-  StrIntParam(RcDataModule.ImageUpdateQuery.ParamByName('ID'),NewIDEdit.Text);
-  RcDataModule.ImageUpdateQuery.ParamByName('VENDOR').Clear;
-  RcDataModule.ImageUpdateQuery.ParamByName('PRODUCT').Clear;
-  RcDataModule.ImageUpdateQuery.ParamByName('DATAMODE').AsInteger :=
+  uq:=RcDataModule.ImageUpdateQueryTmpl;
+  uq.ParamByName('ID').AsString :=
+    RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
+  uq.ParamByName('DATAMODE').AsInteger :=
     ModeCombo.ItemIndex;
-  RcDataModule.ImageUpdateQuery.ParamByName('FORMAT').AsInteger :=
+  uq.ParamByName('FORMAT').AsInteger :=
     FormatCombo.ItemIndex;
-  RcDataModule.ImageUpdateQuery.ParamByName('RESIDENT').AsInteger :=
+  uq.ParamByName('RESIDENT').AsInteger :=
     Ord(MemBox.Checked);
-  RcDataModule.ImageUpdateQuery.ParamByName('COLOUR').AsInteger :=
+  uq.ParamByName('COLOUR').AsInteger :=
     ColCombo.ItemIndex;
-  RcDataModule.ImageUpdateQuery.ParamByName('OLD_COMPANY').AsString :=
-    RcDataModule.CurrentImageQueryTmpl.FieldByName('COMPANY').AsString;
-  RcDataModule.ImageUpdateQuery.ParamByName('NAME').AsString := copy (filename,1,40);
+  uq.ParamByName('COMPANY').AsString := UserSession.Company;
   if workimg <> nil then begin
     ms := TMemoryStream.Create;
     try
       workimg.SaveToStream(ms);
       ms.position := 0;
-      RcDataModule.ImageUpdateQuery.ParamByName('IMAGE').loadfromStream(ms,ftBlob);
+      uq.ParamByName('IMAGE').loadfromStream(ms,ftBlob);
     finally
       ms.free;
     end;
   end else begin
-    RcDataModule.ImageUpdateQuery.ParamByName('IMAGE').AsString := '';
+    uq.ParamByName('IMAGE').AsString := '';
   end;
   ms := TMemoryStream.Create;
   try
@@ -479,15 +477,15 @@ begin
     end;
     Memo.Lines.SaveToStream(ms);
     ms.position := 0;
-    RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms,ftBlob);
+    uq.ParamByName('TEXT').loadfromStream(ms,ftBlob);
   finally
     ms.free;
   end;
-  RcDataModule.ImageUpdateQuery.ExecSQL;
-  if referedby=nil then RcDataModule.ImageUpdateQuery.Transaction.Commit;
+  uq.ExecSQL;
+  uq.Transaction.Commit;
 
-  // Update prod if it isn't a library object.
-  if (userSession.JobRevID<>0) then with RcDataModule.UpdateProdQuery do begin
+  (* Update prod if it isn't a library object.
+  with RcDataModule.UpdateProdQuery do begin
      Transaction.StartTransaction;
      ParamByName('ID').AsString:=RcDataModule.CurrentImageHdrQuery.ParamByName ('ID').AsString;
      ParamByName('Company').AsString:=UserSession.Company;
@@ -502,7 +500,7 @@ begin
       ParamByName('TEST_ID').AsString:=NewIDEdit.Text;
       ExecSQL;
       Transaction.Commit;
-  end;
+  end;*)
   GoImages;
 end;
 

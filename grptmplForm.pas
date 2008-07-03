@@ -26,6 +26,7 @@ type
     IWRectangle1: TIWRectangle;
     IWRectangle2: TIWRectangle;
     FrameBareTitle1: TFrameBareTitle;
+    CurrentBox: TIWCheckBox;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure AddGrpBtnClick(Sender: TObject);
@@ -35,6 +36,7 @@ type
     procedure TmplGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormDestroy(Sender: TObject);
+    procedure CurrentBoxClick(Sender: TObject);
   private
     referedby : referer_class;
     procedure drawTmplGrid;
@@ -46,12 +48,13 @@ type
 implementation
 
 uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, overviewform,
-     grpdtlform, tmplnameform, paramnameform, imagerevformTmpl;
+     grpdtlform, tmplnameform, paramnameform, imagerevformTmpl, newparamform, fieldRevFormTmpl;
 
 {$R *.DFM}
 
 type tag_obj = class
   param : boolean;
+  paramtype : string;
   s : string;
 end;
 
@@ -129,10 +132,12 @@ begin
     GrpTmplUsageQuery.Open;
 
     with TmplGrid do begin
-      ColumnCount:=3;
+      ColumnCount:=5;
       RowCount:=1;
       Cell[0, 1].Text := '';
       Cell[0, 2].Text := '';
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Type');
+      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Guid');
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
       i:=1;
       while not GrpTmplUsageQuery.Eof do begin
@@ -145,6 +150,8 @@ begin
             Cell[i, 2].clickable:=true;
             Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.AddParam');
             Cell[i, 1].clickable:=true;
+            Cell[i, 3].text:='';
+            Cell[i, 4].text:='';
             celltag:=tag_obj.create;
             celltag.param:=false;
             celltag.s:=GrpTmplUsageQuery.FieldByName('ID').AsString;
@@ -160,8 +167,14 @@ begin
             Cell[i, 2].clickable:=true;
             Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
             Cell[i, 1].clickable:=true;
+            Cell[i, 4].text:=GrpTmplUsageQuery.FieldByName('GUID').AsString;
+            if GrpTmplUsageQuery.FieldByName('PARAMTYPE').AsString='F' then
+               Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')
+               else
+               Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Object');
             celltag:=tag_obj.create;
             celltag.param:=true;
+            celltag.paramtype:=GrpTmplUsageQuery.FieldByName('PARAMTYPE').AsString;
             celltag.s:=GrpTmplUsageQuery.FieldByName('OBJID').AsString;
             Cell[i, 0].Tag:=celltag;
             inc (i);
@@ -187,7 +200,11 @@ begin
       RcDataModule.SaveValue ('editparam',t.s);
       if AColumn=1 then begin
           TIWAppForm(WebApplication.ActiveForm).Release;
-          TformImageVersionsTmpl.create(WebApplication).show;
+          if t.paramtype='F' then begin
+             TformFieldVersionsTmpl.create(WebApplication).show;
+          end else begin
+             TformImageVersionsTmpl.create(WebApplication).show;
+          end;
       end else if AColumn=2 then begin
           FPNE:=TFormParamNameEdit.create(WebApplication);
           FPNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
@@ -195,34 +212,17 @@ begin
           FPNE.show;
       end;
     end else begin
+      RcDataModule.SaveValue ('edittmplinstance',t.s);
       if AColumn=2 then begin
-        RcDataModule.SaveValue ('edittmplinstance',t.s);
         FTNE:=TFormTmplNameEdit.create(WebApplication);
         FTNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
         TIWAppForm(WebApplication.ActiveForm).Release;
         FTNE.show;
       end else if AColumn=1 then begin
-        try
-          with RcDataModule do begin
-            SQLEx.Transaction.Active:=false;
-            SQLEx.Transaction.Active:=true;
-            SQLEx.SQL.Clear;
-            SQLEx.SQL.Add('insert into GROUPOBJHDR (ID,COMPANY,NAME,GUID,GROUPPARAMTMPLID) VALUES (:ID,:COMPANY,:NAME,:GUID,:HDR)');
-            SQLEx.ParamByName ('ID').AsString:=inttostr(rcdatamodule.nextID);
-            SQLEx.ParamByName ('HDR').AsString:=t.s;
-            SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-            SQLEx.ParamByName ('NAME').AsString:=SiLangLinked1.GetTextOrDefault ('Grid.NewParameter');
-            SQLEx.ParamByName ('GUID').AsString:=RcDataModule.make_guid;
-            SQLEx.ExecQuery;
-            SQLEx.Transaction.Commit;
-          end;
-        except
-          WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
-        end;
-        DrawTmplGrid;
+        TIWAppForm(WebApplication.ActiveForm).Release;
+        TFormParamCreate.create(WebApplication).show;
       end;
     end;
-    DrawTmplGrid;
   end;
 end;
 
@@ -259,6 +259,25 @@ begin
   for r:=0 to Tmplgrid.RowCount-1 do
     for c:=0 to Tmplgrid.ColumnCount-1 do
       Tmplgrid.Cell[r,c].Tag.Free;
+end;
+
+procedure TformGrpTmpl.CurrentBoxClick(Sender: TObject);
+begin
+  try
+    with RcDataModule do begin
+      SQLEx.Transaction.Active:=false;
+      SQLEx.Transaction.Active:=true;
+      SQLEx.SQL.Clear;
+      SQLEx.SQL.Add('update GROUPATTR set PARAMVER=:VER where COMPANY=:COMPANY and ID=:ID');
+      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editgroup','');;
+      if CurrentBox.Checked then SQLEx.ParamByName ('VER').AsString:=RcDataModule.GetValue ('edittmpl','')
+        else SQLEx.ParamByName ('VER').AsString:='';
+      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLEx.ExecQuery;
+      SQLEx.Transaction.Commit;
+    end;
+  except
+  end;
 end;
 
 end.

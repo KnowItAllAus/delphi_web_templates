@@ -14,10 +14,9 @@ object FormGrpDtl: TFormGrpDtl
   LockUntilLoaded = True
   LockOnSubmit = True
   ShowHint = True
-  OnDefaultAction = PostButtonClick
   XPTheme = True
-  DesignLeft = 108
-  DesignTop = 173
+  DesignLeft = 119
+  DesignTop = 188
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -30,7 +29,6 @@ object FormGrpDtl: TFormGrpDtl
     inherited IWFrameRegion: TIWRegion
       Width = 1084
       Height = 118
-      TabOrder = 10
       inherited IWRectangle1: TIWRectangle
         Top = 93
         Width = 1084
@@ -81,9 +79,9 @@ object FormGrpDtl: TFormGrpDtl
       582)
     object IWRegion2: TIWRegion
       Left = 144
-      Top = 32
+      Top = 15
       Width = 751
-      Height = 535
+      Height = 552
       Cursor = crAuto
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
@@ -97,7 +95,7 @@ object FormGrpDtl: TFormGrpDtl
       Splitter = False
       DesignSize = (
         751
-        535)
+        552)
       object GrpLabel: TIWLabel
         Left = 14
         Top = 10
@@ -170,7 +168,7 @@ object FormGrpDtl: TFormGrpDtl
         ReadOnly = True
         Required = False
         ScriptEvents = <>
-        TabOrder = 0
+        TabOrder = 1
         Enabled = False
         PasswordPrompt = False
         Text = 'NameEdit'
@@ -202,7 +200,7 @@ object FormGrpDtl: TFormGrpDtl
         Left = 54
         Top = 92
         Width = 287
-        Height = 276
+        Height = 293
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -238,7 +236,7 @@ object FormGrpDtl: TFormGrpDtl
         Left = 407
         Top = 92
         Width = 299
-        Height = 276
+        Height = 293
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -313,7 +311,7 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'DelBtn'
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 2
         OnClick = DelBtnClick
       end
       object IWSiLink1: TIWSiLink
@@ -335,7 +333,7 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 2
+        TabOrder = 3
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'Grpdtl.sil'
@@ -345,7 +343,7 @@ object FormGrpDtl: TFormGrpDtl
         Left = 0
         Top = 3
         Width = 3
-        Height = 532
+        Height = 549
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -404,7 +402,7 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
-        TabOrder = 4
+        TabOrder = 5
         OnClick = TestBoxChange
         OnChange = TestBoxChange
         Checked = False
@@ -412,7 +410,7 @@ object FormGrpDtl: TFormGrpDtl
       end
       object StoreCombo: TIWComboBox
         Left = 118
-        Top = 377
+        Top = 394
         Width = 223
         Height = 21
         Cursor = crAuto
@@ -439,37 +437,14 @@ object FormGrpDtl: TFormGrpDtl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 5
+        TabOrder = 6
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
       end
       object AddStoreBtn: TIWButton
         Left = 52
-        Top = 377
-        Width = 61
-        Height = 25
-        Cursor = crAuto
-        Anchors = [akLeft, akBottom]
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        Caption = 'Add'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clWebBLUE
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'IWButton2'
-        ScriptEvents = <>
-        TabOrder = 6
-        OnClick = AddStoreBtnClick
-      end
-      object AddJobBtn: TIWButton
-        Left = 407
-        Top = 376
+        Top = 394
         Width = 61
         Height = 25
         Cursor = crAuto
@@ -488,11 +463,34 @@ object FormGrpDtl: TFormGrpDtl
         FriendlyName = 'IWButton2'
         ScriptEvents = <>
         TabOrder = 7
+        OnClick = AddStoreBtnClick
+      end
+      object AddJobBtn: TIWButton
+        Left = 407
+        Top = 393
+        Width = 61
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = 'Add'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton2'
+        ScriptEvents = <>
+        TabOrder = 8
         OnClick = AddJobBtnClick
       end
       object PromoCombo: TIWComboBox
         Left = 480
-        Top = 377
+        Top = 394
         Width = 226
         Height = 21
         Cursor = crAuto
@@ -519,16 +517,16 @@ object FormGrpDtl: TFormGrpDtl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 8
+        TabOrder = 9
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
       end
       object TemplateGrid: TIWGrid
         Left = 135
-        Top = 421
+        Top = 427
         Width = 566
-        Height = 96
+        Height = 107
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
         IW50Hint = False
@@ -553,7 +551,7 @@ object FormGrpDtl: TFormGrpDtl
         UseFrame = True
         UseSize = True
         FriendlyName = 'PrinterGrid'
-        ColumnCount = 3
+        ColumnCount = 4
         OnCellClick = TemplateGridCellClick
         RowCount = 1
         TabOrder = -1
@@ -562,7 +560,7 @@ object FormGrpDtl: TFormGrpDtl
       end
       object IWLabel3: TIWLabel
         Left = 54
-        Top = 424
+        Top = 426
         Width = 72
         Height = 16
         Cursor = crAuto
@@ -586,7 +584,7 @@ object FormGrpDtl: TFormGrpDtl
       end
       object NewTmplRevBtn: TIWButton
         Left = 57
-        Top = 492
+        Top = 509
         Width = 61
         Height = 25
         Cursor = crAuto
@@ -604,12 +602,12 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'IWButton2'
         ScriptEvents = <>
-        TabOrder = 9
+        TabOrder = 10
         OnClick = NewTmplRevBtnClick
       end
       object IWLabel4: TIWLabel
         Left = 54
-        Top = 439
+        Top = 441
         Width = 72
         Height = 16
         Cursor = crAuto
@@ -666,7 +664,7 @@ object FormGrpDtl: TFormGrpDtl
     inherited IWRegion1: TIWRegion
       Width = 1084
       Height = 29
-      TabOrder = 3
+      TabOrder = 4
       inherited IWRectangle1: TIWRectangle
         Left = 708
       end
@@ -683,7 +681,6 @@ object FormGrpDtl: TFormGrpDtl
       end
       inherited Extra1: TIWButton
         Left = 911
-        OnClick = PostButtonClick
       end
       inherited Extra2: TIWButton
         Left = 825
@@ -755,32 +752,33 @@ object FormGrpDtl: TFormGrpDtl
       6E67730D0A44656C6574655265630144656C6574652074686973207265636F72
       643F010D0A477269642E4E616D65014E616D65010D0A477269642E44656C6574
       650144656C657465010D0A477269642E4E6F7465014E6F7465010D0A47726964
-      2E446174650144617465010D0A477269642E456469740145646974010D0A7374
-      4F74686572537472696E67730D0A54466F726D47727044746C2E48656C704B65
-      79776F726401010D0A4672616D65426172655469746C65312E48656C704B6579
-      776F726401010D0A4957526567696F6E312E48656C704B6579776F726401010D
-      0A4957526567696F6E322E48656C704B6579776F726401010D0A4772704C6162
-      656C2E48656C704B6579776F726401010D0A49574C6162656C322E48656C704B
-      6579776F726401010D0A4E616D65456469742E48656C704B6579776F72640101
-      0D0A49574C6162656C312E48656C704B6579776F726401010D0A53746F726547
-      7269642E48656C704B6579776F726401010D0A566F7563686572477269642E48
-      656C704B6579776F726401010D0A49574C6162656C362E48656C704B6579776F
-      726401010D0A44656C42746E2E48656C704B6579776F726401010D0A49575369
-      4C696E6B312E48656C704B6579776F726401010D0A495752656374616E676C65
-      312E48656C704B6579776F726401010D0A495752656374616E676C65322E4865
-      6C704B6579776F726401010D0A75736572666F6F746572312E48656C704B6579
-      776F726401010D0A54657374426F782E48656C704B6579776F726401010D0A53
-      746F7265436F6D626F2E48656C704B6579776F726401010D0A53746F7265436F
-      6D626F2E4E6F53656C656374696F6E54657874012D2D204E6F2053656C656374
-      696F6E202D2D010D0A41646453746F726542746E2E48656C704B6579776F7264
-      01010D0A4164644A6F6242746E2E48656C704B6579776F726401010D0A50726F
-      6D6F436F6D626F2E48656C704B6579776F726401010D0A50726F6D6F436F6D62
-      6F2E4E6F53656C656374696F6E54657874012D2D204E6F2053656C656374696F
-      6E202D2D010D0A54656D706C617465477269642E48656C704B6579776F726401
-      010D0A49574C6162656C332E48656C704B6579776F726401010D0A4E6577546D
-      706C52657642746E2E48656C704B6579776F726401010D0A49574C6162656C34
-      2E48656C704B6579776F726401010D0A4564697442746E2E48656C704B657977
-      6F726401010D0A7374436F6C6C656374696F6E730D0A73744368617253657473
-      0D0A}
+      2E446174650144617465010D0A477269642E456469740145646974010D0A4772
+      69642E43757272656E740143757272656E74010D0A477269642E53656C656374
+      65640153656C6563746564010D0A73744F74686572537472696E67730D0A5446
+      6F726D47727044746C2E48656C704B6579776F726401010D0A4672616D654261
+      72655469746C65312E48656C704B6579776F726401010D0A4957526567696F6E
+      312E48656C704B6579776F726401010D0A4957526567696F6E322E48656C704B
+      6579776F726401010D0A4772704C6162656C2E48656C704B6579776F72640101
+      0D0A49574C6162656C322E48656C704B6579776F726401010D0A4E616D654564
+      69742E48656C704B6579776F726401010D0A49574C6162656C312E48656C704B
+      6579776F726401010D0A53746F7265477269642E48656C704B6579776F726401
+      010D0A566F7563686572477269642E48656C704B6579776F726401010D0A4957
+      4C6162656C362E48656C704B6579776F726401010D0A44656C42746E2E48656C
+      704B6579776F726401010D0A495753694C696E6B312E48656C704B6579776F72
+      6401010D0A495752656374616E676C65312E48656C704B6579776F726401010D
+      0A495752656374616E676C65322E48656C704B6579776F726401010D0A757365
+      72666F6F746572312E48656C704B6579776F726401010D0A54657374426F782E
+      48656C704B6579776F726401010D0A53746F7265436F6D626F2E48656C704B65
+      79776F726401010D0A53746F7265436F6D626F2E4E6F53656C656374696F6E54
+      657874012D2D204E6F2053656C656374696F6E202D2D010D0A41646453746F72
+      6542746E2E48656C704B6579776F726401010D0A4164644A6F6242746E2E4865
+      6C704B6579776F726401010D0A50726F6D6F436F6D626F2E48656C704B657977
+      6F726401010D0A50726F6D6F436F6D626F2E4E6F53656C656374696F6E546578
+      74012D2D204E6F2053656C656374696F6E202D2D010D0A54656D706C61746547
+      7269642E48656C704B6579776F726401010D0A49574C6162656C332E48656C70
+      4B6579776F726401010D0A4E6577546D706C52657642746E2E48656C704B6579
+      776F726401010D0A49574C6162656C342E48656C704B6579776F726401010D0A
+      4564697442746E2E48656C704B6579776F726401010D0A7374436F6C6C656374
+      696F6E730D0A737443686172536574730D0A}
   end
 end

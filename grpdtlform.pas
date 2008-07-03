@@ -39,7 +39,6 @@ type
     IWLabel4: TIWLabel;
     EditBtn: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
-    procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -62,6 +61,7 @@ type
     sList : TStringlist;
     pList : TStringList;
     has_live_stores : boolean;
+    currenttemplate : string;
     procedure InitCombos;
     procedure DrawGrids;
   public
@@ -117,7 +117,8 @@ begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Date');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Note');
-      Cell[0, 2].Text:='';
+      Cell[0, 2].Text := '';
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('Grid.Selected');
   end;
   sList.Clear;
   pList.Clear;
@@ -185,8 +186,9 @@ begin
         TemplateGrid.RowCount:=TemplateGrid.RowCount+1;
         with TemplateGrid.Cell[TemplateGrid.RowCount-1, 0] do begin
           Text := GrpTmplQuery.FieldByName('REVDATE').AsString;
+          TemplateGrid.Cell[TemplateGrid.RowCount-1, 3].text:='';
           if GrpTmplQuery.FieldByName('PARAMVER').AsString<>'' then begin
-             Font.Style:=[fsItalic];
+             TemplateGrid.Cell[TemplateGrid.RowCount-1, 3].text:=SiLangLinked1.GetTextOrDefault('Grid.Current');;
           end;
         end;
         TemplateGrid.Cell[TemplateGrid.RowCount-1,1].text:=GrpTmplQuery.FieldByName('NOTE').AsString;
@@ -278,9 +280,11 @@ begin
      Open;
      NameEdit.Text:=FieldByName('NAME').AsString;
      TestBox.Checked:=FieldByName('TESTGROUP').AsString='Y';
+     CurrentTemplate:=FieldByName('PARAMVER').AsString;
+     DrawGrids;
+     InitCombos;
+     Transaction.Active:=false;
    end;
-   DrawGrids;
-   InitCombos;
    if (UserSession.privilege and PRIV_EDIT)=0 then begin  // No edit privilege
       testbox.Enabled:=false;
       DelBtn.visible:=false;
@@ -294,21 +298,6 @@ begin
          nameedit.BGColor:=clbtnhighlight;
       end;
    end;
-end;
-
-procedure TFormGrpDtl.PostButtonClick(Sender: TObject);
-begin
-(*  with RcDataModule do begin
-      GroupUpdateQuery.ParamByName('ID').AsString:=RcDataModule.GetValue('editgroup','');
-      GroupUpdateQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
-      GroupUpdateQuery.ParamByName('NAME').AsString:=NameEdit.Text;
-      if Testbox.Checked then GroupUpdateQuery.ParamByName('TESTGROUP').AsString:='Y'
-         else GroupUpdateQuery.ParamByName('TESTGROUP').AsString:='N';
-      GroupUpdateQuery.ExecSQL;
-      GroupUpdateQuery.Transaction.Commit;
-  end;
-  GoReferer (referedby);
-*)
 end;
 
 procedure TFormGrpDtl.CancelBtnClick(Sender: TObject);
@@ -425,6 +414,7 @@ begin
   try
     with RcDataModule do begin
       SQLEx.Transaction.Active:=false;
+      SQLEx.Transaction.Active:=true;
       SQLEx.SQL.Clear;
       SQLEx.SQL.Add('delete from GROUPALLOC where ID=:ID and ITEMKIND=2 and COMPANY=:COMPANY');
       SQLEx.ParamByName ('ID').AsString:=PList[ARow-1];
@@ -492,10 +482,14 @@ end;
 
 procedure TFormGrpDtl.TemplateGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
+var
+   FGT : TFormGrpTmpl;
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
    RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,acolumn].tag).s);
-   TFormGrpTmpl.create(WebApplication).show
+   FGT:=TFormGrpTmpl.create(WebApplication);
+   FGT.CurrentBox.Checked:=CurrentTemplate=tag_obj(templategrid.Cell[arow,acolumn].tag).s;
+   FGT.show;
 end;
 
 end.

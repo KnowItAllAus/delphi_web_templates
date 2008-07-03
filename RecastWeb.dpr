@@ -43,7 +43,7 @@ uses
   jobdtl in 'jobdtl.pas' {FormJobDtl: TIWAppForm},
   CfgTypes in '..\common\CfgTypes.pas',
   distribdtlForm in 'distribdtlForm.pas' {formdistribdtl: TIWAppForm},
-  imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
+  fieldrevformTmpl in 'fieldrevformTmpl.pas' {formFieldVersionsTmpl: TIWAppForm},
   imghdrform in 'imghdrform.pas' {FormImgHdr: TIWAppForm},
   overviewform in 'overviewform.pas' {FormOverview: TIWAppForm},
   distribstatusform in 'distribstatusform.pas' {formDistribStatus: TIWAppForm},
@@ -58,9 +58,11 @@ uses
   tmplnameform in 'tmplnameform.pas' {FormTmplnameEdit: TIWAppForm},
   storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
   imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm},
-  groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
+  newparamform in 'C:\Program Files\Borland\Delphi7\Lib\newparamform.pas' {FormParamCreate: TIWAppForm},
   paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
-  imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm};
+  imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm},
+  groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
+  imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm};
 
 {$R *.res}
 

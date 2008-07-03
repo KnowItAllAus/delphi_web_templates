@@ -25,10 +25,6 @@ type
     Image: TIWImage;
     IWSiLink1: TIWSiLink;
     siLangLinked1: TsiLangLinked;
-    NewVendEdit: TIWEdit;
-    VLabel: TIWLabel;
-    PLabel: TIWLabel;
-    NewProdEdit: TIWEdit;
     IDEdit: TIWEdit;
     IDLabel: TIWLabel;
     NameEdit: TIWEdit;
@@ -38,8 +34,6 @@ type
     ModeLbl: TIWLabel;
     ModeName: TIWEdit;
     CpyBtn: TIWButton;
-    NameLbl: TIWLabel;
-    RevFileNameEdit: TIWEdit;
     ColourEdit: TIWEdit;
     Limitlabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
@@ -48,7 +42,6 @@ type
     procedure ImageGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure userfooter1CancelClick(Sender: TObject);
-    procedure TestBtnClick(Sender: TObject);
     procedure ProdBtnClick(Sender: TObject);
     procedure NewBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
@@ -72,7 +65,12 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, graphics, serverController, jpeg, db, imagesform, imageupformtmpl, grptmplform;
+uses datamod, graphics, serverController, jpeg, db, imagesform, imageupformtmpl, grptmplform,
+IBCustomDataSet, IBQuery, IBDatabase,
+  IBTable, IBUpdateSQL, dialogs;
+
+var
+  t : TIBTransaction;
 
 procedure TformImageVersionsTmpl.RefreshGrid;
 var
@@ -107,7 +105,7 @@ begin
         text:=s;
         Cell [i,2].text:='';
         if s=prod then begin
-           Cell[i,2].text:='['+SiLangLinked1.GetTextOrDefault('Grid.Current');
+           Cell[i,2].text:='['+SiLangLinked1.GetTextOrDefault('Grid.Current')+']';
         end;
       end;
       with Cell[i, 1] do begin
@@ -128,11 +126,6 @@ procedure TformImageVersionsTmpl.HideImageData;
 begin
   Image.Visible := False;
   Memo.Visible:=False;
-  NewVendEdit.Visible:=False;
-  NewProdEdit.Visible:=False;
-  VLabel.Visible:=False;
-  PLabel.Visible:=False;
-  revfilenameedit.text:='';
   ModeName.Caption:='- - - - - -';
   IDEdit.Text:='- - - - - -';
   DelBtn.Visible:=false;
@@ -142,6 +135,7 @@ end;
 
 procedure TformImageVersionsTmpl.IWAppFormCreate(Sender: TObject);
 begin
+  t:=RcDataModule.Trans;
   IWSiLink1.InitForm;
   RefreshGrid;
   HideImageData;
@@ -231,11 +225,11 @@ var
   ms: tmemorystream;
 begin
   ms := TMemoryStream.Create;
-  with RcDataModule.CurrentImageQuery.FieldByName('IMAGE') do begin
-     if not isnull then TBlobField(RcDataModule.CurrentImageQuery.FieldByName('IMAGE')).savetostream(ms);
+  with RcDataModule.CurrentImageQueryTmpl.FieldByName('IMAGE') do begin
+     if not isnull then TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('IMAGE')).savetostream(ms);
   end;
   try
-    format:=formats(RcDataModule.CurrentImageQuery.FieldByName('FORMAT').AsInteger);
+    format:=formats(RcDataModule.CurrentImageQueryTmpl.FieldByName('FORMAT').AsInteger);
   except
     format:=fcHiRes;
   end;
@@ -249,8 +243,8 @@ var
   ms: tmemorystream;
 begin
   ms := TMemoryStream.Create;
-  if not TBlobField(RcDataModule.CurrentImageQuery.FieldByName('TEXT')).IsNull then
-     TBlobField(RcDataModule.CurrentImageQuery.FieldByName('TEXT')).savetostream(ms);
+  if not TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('TEXT')).IsNull then
+     TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('TEXT')).savetostream(ms);
   ms.position := 0;
   showText(ms);
   ms.free;
@@ -258,15 +252,10 @@ end;
 
 procedure TformImageVersionsTmpl.RefreshPreview;
 begin
-  NewVendEdit.Visible:=False;
-  NewProdEdit.Visible:=False;
-  VLabel.Visible:=False;
-  PLabel.Visible:=False;
   ColourEdit.Visible:=False;
-  IDEdit.Text:=RcDataModule.CurrentImageQuery.FieldByName('ID').AsString;
+  IDEdit.Text:=RcDataModule.CurrentImageQueryTmpl.FieldByName('ID').AsString;
   DelBtn.Visible:=true;
-  datamode:=datamodes(RcDataModule.CurrentImageQuery.FieldByName('DATAMODE').AsInteger);
-  RevFileNameEdit.Text:=RcDataModule.CurrentImageQuery.FieldByName('NAME').AsString;
+  datamode:=datamodes(RcDataModule.CurrentImageQueryTmpl.FieldByName('DATAMODE').AsInteger);
   ModeName.Text:=SiLangLinked1.GetTextOrDefault('Mode.'+DataModeNames[datamodes(datamode)]);
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
@@ -278,8 +267,8 @@ begin
           ImageRegion.HorzScrollBar.Visible:=true;
           ImageRegion.VertScrollBar.Visible:=true;
           ColourEdit.Visible:=true;
-          ColourEdit.Text:=SiLangLinked1.GetTextOrDefault('Colour.'+RcDataModule.CurrentImageQuery.FieldByName('COLOUR').AsString);
-          ImgColour:=RcDataModule.CurrentImageQuery.FieldByName('COLOUR').AsInteger;
+          ColourEdit.Text:=SiLangLinked1.GetTextOrDefault('Colour.'+RcDataModule.CurrentImageQueryTmpl.FieldByName('COLOUR').AsString);
+          ImgColour:=RcDataModule.CurrentImageQueryTmpl.FieldByName('COLOUR').AsInteger;
         except
           ColourEdit.Visible:=false;
         end;
@@ -305,10 +294,6 @@ begin
         Memo.Visible := True;
         ImageRegion.Visible := True;
         gettextfromdb;
-        NewVendEdit.Visible:=True;
-        NewProdEdit.Visible:=True;
-        VLabel.Visible:=True;
-        PLabel.Visible:=True;
       end;
     dmCust,
     dmRandom:
@@ -320,10 +305,6 @@ begin
       begin
         Image.Visible := False;
         Memo.Visible:=False;
-        NewVendEdit.Visible:=True;
-        NewProdEdit.Visible:=True;
-        VLabel.Visible:=True;
-        PLabel.Visible:=True;
       end;
   end;
 end;
@@ -331,14 +312,12 @@ end;
 procedure TformImageVersionsTmpl.ImageGridCellClick(ASender: TObject;
   const ARow, AColumn: Integer);
 begin
-  with RcDataModule.CurrentImageQuery do begin
+  with RcDataModule.CurrentImageQueryTmpl do begin
      Transaction.StartTransaction;
      ParamByName('ID').AsString:=ImageGrid.Cell[ARow,0].Text;
      ParamByName('COMPANY').AsString:=UserSession.Company;
      Open;
      IDEdit.Text := FieldByName('ID').AsString;
-     NewVendEdit.Text := FieldByName('VENDOR').AsString;
-     NewProdEdit.Text := FieldByName('PRODUCT').AsString;
      RefreshPreview;
      ProdBtn.Visible:=ImageGrid.Cell[ARow,0].Text<>Prod;
      Close;
@@ -352,32 +331,22 @@ begin
     TformGrpTmpl.Create (WebApplication).show;
 end;
 
-procedure TformImageVersionsTmpl.TestBtnClick(Sender: TObject);
-begin
-   with RcDataModule.UpdateTestQuery do begin
-      Transaction.StartTransaction;
-      ParamByName('ID').AsString:=RcDataModule.CurrentImageHdrQuery.ParamByName ('ID').AsString;
-      ParamByName('Company').AsString:=UserSession.Company;
-      ParamByName('TEST_ID').AsString:=IDEdit.Text;
-      ExecSQL;
-      Transaction.Commit;
-      RefreshGrid;
-   end;
-end;
-
 procedure TformImageVersionsTmpl.ProdBtnClick(Sender: TObject);
 begin
-   with RcDataModule.UpdateProdQuery do begin
-      Transaction.StartTransaction;
-      ParamByName('ID').AsString:=RcDataModule.CurrentImageHdrQuery.ParamByName ('ID').AsString;
-      ParamByName('Company').AsString:=UserSession.Company;
-      ParamByName('PROD_ID').AsString:=IDEdit.Text;
-      ExecSQL;
-      Transaction.Commit;
-      RefreshGrid;
-      ProdBtn.Visible:=False;
-   end;
-   if (userSession.JobRevID<>0) then testbtnclick (sender);
+  with RcDataModule do try
+    SQLEx.Transaction.Active:=false;
+    SQLEx.Transaction.Active:=true;
+    SQLEx.SQL.Clear;
+    SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+    SQLEx.ParamByName ('CURRENT').AsString:=IDEdit.text;
+    SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+    SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    SQLEx.ExecQuery;
+    SQLEx.Transaction.Commit;
+  except
+  end;
+  RefreshGrid;
+  ProdBtn.Visible:=False;
 end;
 
 procedure TformImageVersionsTmpl.NewBtnClick(Sender: TObject);
@@ -394,7 +363,7 @@ begin
         SQLEx.Transaction.Active:=true;
         SQLEx.SQL.Clear;
         SQLEx.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME)');
-        SQLEx.ParamByName ('ID').AsString:=inttostr(rcdatamodule.nextID);
+        SQLEx.ParamByName ('ID').AsString:=inttostr(ImageID);
         SQLEx.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
         SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
         SQLEx.ParamByName ('CREATEDBY').AsString:=UserSession.User;
@@ -420,17 +389,24 @@ end;
 
 procedure TformImageVersionsTmpl.DelBtnClick(Sender: TObject);
 begin
-  with RcDataModule do begin
-    Trans.Active:=true;
-    ImageDeleteQuery.Transaction.Active:=True;
-    ImageDeleteQuery.ParamByName('ID').AsString:=IDEdit.text;
-    ImageDeleteQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
-    ImageDeleteQuery.ExecSQL;
-    Trans.Commit;
+    try
+      with RcDataModule do begin
+        SQLEx.Transaction.Active:=false;
+        SQLEx.Transaction.Active:=true;
+        SQLEx.SQL.Clear;
+        SQLEx.SQL.Add('delete from GROUPPARAMOBJ where ID=:ID and COMPANY=:COMPANY');
+        SQLEx.ParamByName ('ID').AsString:=IDEdit.text;
+        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLEx.ExecQuery;
+        SQLEx.Transaction.Commit;
+      end;
+    except
+      WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
+    end;
+
     RefreshGrid;
     HideImageData;
     if ImageGrid.RowCount>1 then ImageGridCellClick(Sender, ImageGrid.RowCount-1, 0)
-  end;
 end;
 
 procedure TformImageVersionsTmpl.CpyBtnClick(Sender: TObject);
@@ -441,19 +417,15 @@ begin
   with RcDataModule do begin
     Trans.Active:=true;
     ImageId:=nextID;
-    ImageInsertQuery.Transaction.Active:=True;
-    ImageInsertQuery.ParamByName('NAME').AsString:=SiLangLinked1.GetTextOrDefault('');
-    ImageInsertQuery.ParamByName('ID').AsInteger:=ImageId;
-    ImageInsertQuery.ParamByName('HDRID').AsInteger:=CurrentImageHdrQuery.ParamByName ('ID').AsInteger;
-    ImageInsertQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
-    ImageInsertQuery.ParamByName('CREATEDBY').AsString:=UserSession.User;
-    ImageInsertQuery.ParamByName('CREATEDTIME').AsDateTime :=now;
-    //imagestream.position:=0;
-    //TBlobField(RcDataModule.ImageInsertQuery.FieldByName('IMAGE')).savetostream(imagestream);
-    //ImageInsertQuery.ParamByName('').AsDateTime :=now;
-    ImageInsertQuery.ExecSQL;
+    ImageInsertQueryTmpl.Transaction.Active:=True;
+    ImageInsertQueryTmpl.ParamByName('ID').AsInteger:=ImageId;
+    ImageInsertQueryTmpl.ParamByName('PARAMOBJID').AsString:=RcDataModule.GetValue ('editparam','');
+    ImageInsertQueryTmpl.ParamByName('COMPANY').AsString:=UserSession.Company;
+    ImageInsertQueryTmpl.ParamByName('CREATEDBY').AsString:=UserSession.User;
+    ImageInsertQueryTmpl.ParamByName('CREATEDTIME').AsDateTime :=now;
+    ImageInsertQueryTmpl.ExecSQL;
 
-    with RcDataModule.CurrentImageQuery do begin
+    with RcDataModule.CurrentImageQueryTmpl do begin
       Close;
       ParamByName ('COMPANY').AsString:=UserSession.Company;
       ParamByName ('ID').AsInteger:=ImageID;
@@ -463,7 +435,6 @@ begin
     UpFrm.Memo.Lines.Assign(self.Memo.lines);
     UpFrm.ModeCombo.ItemIndex:=ord(datamode);
     UpFrm.FormatCombo.ItemIndex:=ord(format);
-    UpFrm.filename:=revfilenameedit.text;
     if datamode=dmImage then begin
       UpFrm.original.Assign(self.Image.Picture.Bitmap);
       UpFrm.workimg:=TBitmap.create;
