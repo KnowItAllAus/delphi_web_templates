@@ -18,7 +18,7 @@ type
     IWRegion2: TIWRegion;
     TmplLabel: TIWLabel;
     TmplGrid: TIWGrid;
-    GroupCombo: TIWComboBox;
+    TemplateCombo: TIWComboBox;
     IWLabel3: TIWLabel;
     AddGrpBtn: TIWButton;
     IWSiLink1: TIWSiLink;
@@ -39,6 +39,7 @@ type
     procedure CurrentBoxClick(Sender: TObject);
   private
     referedby : referer_class;
+    TemplateIDList : TStringList;
     procedure drawTmplGrid;
     { Private declarations }
   public
@@ -76,26 +77,64 @@ end;
 procedure TformGrpTmpl.IWAppFormCreate(Sender: TObject);
 begin
   IWSilink1.InitForm;
+  TemplateIDList:=TStringList.Create;
   DrawTmplGrid;
 end;
 
 procedure TformGrpTmpl.AddGrpBtnClick(Sender: TObject);
+var
+  newinstanceid :  integer;
 begin
-  if GroupCombo.ItemIndex=-1 then exit;
+  if TemplateCombo.ItemIndex=-1 then exit;
   try
     with RcDataModule.GrpTmplInsertQuery do begin
-      ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+      newinstanceid:=RcDataModule.NextId;
+      ParamByName ('ID').AsInteger:=newinstanceid;
       ParamByName ('COMPANY').AsString:=UserSession.Company;
       ParamByName ('GROUPPARAMHDRID').AsString:=RcDataModule.GetValue ('edittmpl','');
-      ParamByName ('TEMPLATENAME').AsString:=GroupCombo.Items[GroupCombo.ItemIndex];
+      ParamByName ('TEMPLATENAME').AsString:=TemplateCombo.Items[TemplateCombo.ItemIndex];
       ExecSQL;
       Transaction.Commit;
     end;
   except
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
+
+  // Automatically add template parameters
+  try
+    with RcDataModule do begin
+      SQLQry.SQL.Clear;
+      SQLQry.Transaction.Active:=false;
+      SQLQry.Transaction.Active:=true;
+      SQLQry.SQL.Add('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID');
+      SQLQry.ParamByName ('JOBID').AsString:=TemplateIDList.Strings[TemplateCombo.ItemIndex];
+      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLQry.Open;
+
+      while not SQLQry.EOF do begin
+        SQLEx.SQL.Clear;
+        SQLEx.SQL.Add('insert into GROUPOBJHDR (ID,COMPANY,NAME,GUID,GROUPPARAMTMPLID,PARAMTYPE) VALUES (:ID,:COMPANY,:NAME,:GUID,:HDR,:PARAMTYPE)');
+        SQLEx.ParamByName ('ID').AsString:=inttostr(rcdatamodule.nextID);
+        SQLEx.ParamByName ('HDR').AsInteger:=newinstanceid;
+        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLEx.ParamByName ('NAME').AsString:=SQLQry.FieldByName('PARAMNAME').AsString;
+        if SQLQry.FieldByName ('PARAMTYPE').AsString='Object' then
+           SQLEx.ParamByName ('PARAMTYPE').AsString:='O'
+        else
+           SQLEx.ParamByName ('PARAMTYPE').AsString:='F';
+        SQLEx.ParamByName ('GUID').AsString:=RcDataModule.make_guid;
+        SQLEx.ExecQuery;
+        SQLQry.Next;
+      end;
+      SQLEx.Transaction.Commit;
+      SQLQry.Transaction.Active:=false;
+    end;
+  except
+    WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
+  end;
+
   DrawTmplGrid;
-  GroupCombo.ItemIndex:=-1;
+  TemplateCombo.ItemIndex:=-1;
 end;
 
 procedure TformGrpTmpl.DrawTmplGrid;
@@ -113,12 +152,14 @@ begin
      Close;
      ParamByName('COMPANY').AsString:=UserSession.Company;
      Open;
-     GroupCombo.Items.Clear;
+     TemplateCombo.Items.Clear;
+     TemplateIDList.Clear;
      while not Eof do begin
-        GroupCombo.Items.Add (FieldByName('Name').AsString);
+        TemplateCombo.Items.Add (FieldByName('Name').AsString);
+        TemplateIDList.Add (FieldByName('ID').AsString);
         Next;
      end;
-     GroupCombo.ItemIndex:=-1;
+     TemplateCombo.ItemIndex:=-1;
      Close;
   end;
 
@@ -259,6 +300,7 @@ begin
   for r:=0 to Tmplgrid.RowCount-1 do
     for c:=0 to Tmplgrid.ColumnCount-1 do
       Tmplgrid.Cell[r,c].Tag.Free;
+  TemplateIDList.Free;
 end;
 
 procedure TformGrpTmpl.CurrentBoxClick(Sender: TObject);

@@ -395,7 +395,6 @@ end;
 procedure TFormVoucher.ImageBtnClick(Sender: TObject);
 var
   ImageId : integer;
-  s : string;
 begin
   ImageId:=RcDataModule.nextID;
   RcDataModule.ImageHdrInsertQuery.Transaction.Active:=True;

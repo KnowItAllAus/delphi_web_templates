@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, promotitle,
-  IWCompCheckbox, IWCompMemo, IWCompEdit;
+  IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox;
 
 type
   TFormJobRev = class(TIWAppForm)
@@ -32,6 +32,12 @@ type
     NoteEdit: TIWEdit;
     NoteLabel: TIWLabel;
     templatelbl: TIWLabel;
+    ParamGrid: TIWGrid;
+    NameLbl: TIWLabel;
+    NameEdit: TIWEdit;
+    AddParamBtn: TIWButton;
+    TypeCombo: TIWComboBox;
+    TypeLbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -40,6 +46,12 @@ type
     procedure EditJobBtnClick(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure CreateBtnClick(Sender: TObject);
+    procedure AddParamBtnClick(Sender: TObject);
+    procedure ParamGridRenderCell(ACell: TIWGridCell; const ARow,
+      AColumn: Integer);
+    procedure ParamGridCellClick(ASender: TObject; const ARow,
+      AColumn: Integer);
+    procedure IWAppFormDestroy(Sender: TObject);
   public
     procedure RefreshGrid;
   end;
@@ -52,6 +64,11 @@ implementation
 
 uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit;
 
+const paramtypes : array [1..4] of string = ('Object','Text','Date','Integer');
+
+type tag_obj = class
+  s : string;
+end;
 
 procedure TFormJobRev.JobGridRenderCell(ACell: TIWGridCell; const ARow,
   AColumn: Integer);
@@ -82,7 +99,12 @@ procedure TFormJobRev.RefreshGrid;
 var
   i : integer;
   prod,test : string;
+  r : integer;
+  t : tag_obj;
 begin
+  for r:=1 to Paramgrid.RowCount-1 do
+    Paramgrid.Cell[r,0].Tag.Free;
+
   with RcDataModule.CurrentJobQuery do begin
     Transaction.Active:=False;
     Open;
@@ -157,6 +179,47 @@ begin
     Close;
     Transaction.Active:=False;
   end;
+
+  with RcDataModule.SQLQry do begin
+    Transaction.Active:=False;
+    Transaction.Active:=True;
+    Close;
+    SQL.Clear;
+    SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID');
+    ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+    Open;
+    with ParamGrid do begin
+      RowCount:=1;
+      Cell[0, 0].Text := SiLink.GetTextOrDefault('Grid.Parameter');
+      Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Type');
+      Cell[0, 2].Text := '';
+      i:=1;
+      while not Eof do begin
+        RowCount:=RowCount+1;
+        with Cell[i, 0] do begin
+          Text := FieldByName('PARAMNAME').AsString;
+          t:=tag_obj.create;
+          t.s:=FieldByName('ID').AsString;
+          tag:=t;
+        end;
+        with Cell[i, 1] do begin
+          try
+            Text := FieldByName('PARAMTYPE').AsString;
+          except
+          end;
+        end;
+        with Cell[i, 2] do begin
+          Text := SiLink.GetTextOrDefault('Grid.Delete');
+          Clickable:=true;
+        end;
+        inc (i);
+        Next;
+      end;
+    end;
+    Close;
+    Transaction.Active:=False;
+  end;
 end;
 
 procedure TFormJobRev.IWAppFormCreate(Sender: TObject);
@@ -174,7 +237,15 @@ begin
        StatEdit.Text:='- - - - -';
      end;
      DescEdit.Caption:=FieldByName ('Description').AsString;
-     templatelbl.visible:=FieldByName ('Template').AsString='1';
+     if FieldByName ('Template').AsString='1' then begin
+        templatelbl.visible:=true;
+        ParamGrid.Visible:=true;
+        AddParamBtn.Visible:=true;
+        TypeLbl.Visible:=true;
+        NameLbl.Visible:=true;
+        NameEdit.Visible:=true;
+        TypeCombo.Visible:=true;
+     end;
      Transaction.Commit;
    end;
 end;
@@ -235,6 +306,81 @@ begin
     RcDataModule.Trans.Commit;
     RefreshGrid;
   end;
+end;
+
+procedure TFormJobRev.AddParamBtnClick(Sender: TObject);
+begin
+  try
+    with RcDataModule.SQLQry do begin
+      Transaction.Active:=False;
+      Transaction.Active:=True;
+      Close;
+      SQL.Clear;
+      SQL.Add ('insert into JOBPARAMS (COMPANY,JOBID,ID,PARAMNAME,PARAMTYPE) Values (:COMPANY,:JOBID,:ID,:NAME,:TYPE)');
+      ParamByName('COMPANY').AsString:=UserSession.Company;
+      ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+      ParamByName('ID').AsInteger:=RcDataModule.NextId;
+      ParamByName('NAME').AsString:=NameEdit.Text;
+      ParamByName('TYPE').AsString:=ParamTypes[TypeCombo.ItemIndex+1];
+      ExecSQL;
+      Transaction.Commit;
+    end;
+  except
+  end;
+  NameEdit.Text:='';
+  RefreshGrid;
+end;
+
+procedure TFormJobRev.ParamGridRenderCell(ACell: TIWGridCell; const ARow,
+  AColumn: Integer);
+begin
+  with ACell do begin
+    // Title Row
+    if ARow = 0 then begin
+      Alignment := taCenter;
+      BGColor := clBlue;
+      Font.Style := [fsBold];
+      Font.Color := clWhite;
+    end else begin
+      // Alternate Row Colors
+      if Odd(ARow) then begin
+        BGColor := clLtGray;
+      end else begin
+        BGColor := clNone;
+      end;
+    end;
+  end;
+end;
+
+procedure TFormJobRev.ParamGridCellClick(ASender: TObject; const ARow,
+  AColumn: Integer);
+var
+  t : tag_obj;
+begin
+  t:=tag_obj(ParamGrid.Cell[ARow,0].tag);
+  try
+    with RcDataModule.SQLQry do begin
+      Transaction.Active:=False;
+      Transaction.Active:=True;
+      Close;
+      SQL.Clear;
+      SQL.Add ('delete from JOBPARAMS where COMPANY=:COMPANY and ID=:ID');
+      ParamByName('COMPANY').AsString:=UserSession.Company;
+      ParamByName('ID').AsString:=t.s;
+      ExecSQL;
+      Transaction.Commit;
+    end;
+  except
+  end;
+  RefreshGrid;
+end;
+
+procedure TFormJobRev.IWAppFormDestroy(Sender: TObject);
+var
+  r : integer;
+begin
+  for r:=1 to Paramgrid.RowCount-1 do
+    Paramgrid.Cell[r,0].Tag.Free;
 end;
 
 end.

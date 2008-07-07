@@ -108,14 +108,11 @@ begin
   t:=RcDataModule.Trans;
   IWSiLink1.InitForm;
   RefreshGrid;
-  if ImageGrid.RowCount>1 then ImageGridCellClick(Sender, ImageGrid.RowCount-1, 0);
-  //DelBtn.Confirmation:=UserFooter1.silink_footer.GetTextOrDefault('DeletePrompt');
   if UserSession.ReadOnly then begin
      newbtn.enabled:=false;
      ValueEdit.enabled:=false;
   end;
   ValueEdit.Text:='';
-
 end;
 
 procedure TformFieldVersionsTmpl.ImageGridRenderCell(ACell: TIWGridCell;
@@ -146,18 +143,21 @@ end;
 procedure TformFieldVersionsTmpl.ImageGridCellClick(ASender: TObject;
   const ARow, AColumn: Integer);
 begin
-(*  with RcDataModule.CurrentImageQueryTmpl do begin
-     Transaction.StartTransaction;
-     ParamByName('ID').AsString:=ImageGrid.Cell[ARow,0].Text;
-     ParamByName('COMPANY').AsString:=UserSession.Company;
-     Open;
-     IDEdit.Text := FieldByName('ID').AsString;
-     RefreshPreview;
-     ProdBtn.Visible:=ImageGrid.Cell[ARow,0].Text<>Prod;
-     Close;
-     Transaction.Active:=false;
-  end;
-*)
+    try
+      with RcDataModule do begin
+        SQLEx.Transaction.Active:=false;
+        SQLEx.Transaction.Active:=true;
+        SQLEx.SQL.Clear;
+        SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+        SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+        SQLEx.ParamByName ('CURRENT').AsString:=ImageGrid.Cell[ARow,0].Text;
+        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLEx.ExecQuery;
+        SQLEx.Transaction.Commit;
+        RefreshGrid;
+      end;
+    except
+    end;
 end;
 
 procedure TformFieldVersionsTmpl.userfooter1CancelClick(Sender: TObject);

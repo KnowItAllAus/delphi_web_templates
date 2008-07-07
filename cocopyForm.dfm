@@ -15,8 +15,8 @@ object Copyform: TCopyform
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 310
-  DesignTop = 328
+  DesignLeft = 110
+  DesignTop = 232
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -29,7 +29,6 @@ object Copyform: TCopyform
     inherited IWFrameRegion: TIWRegion
       Width = 1024
       Height = 115
-      TabOrder = 3
       inherited titleimage: TIWImageFile
         Width = 453
         ImageFile.Filename = 'E:\delphi\delphi_web\files\admin.GIF'
@@ -40,7 +39,6 @@ object Copyform: TCopyform
       end
       inherited IWRectangle3: TIWRectangle
         Top = 95
-        Width = 1024
       end
       inherited IWImageFile3: TIWImageFile
         Left = 689
@@ -340,6 +338,7 @@ object Copyform: TCopyform
     inherited IWRegion1: TIWRegion
       Width = 1024
       Height = 37
+      TabOrder = 3
       inherited navcombo: TIWComboBox
         Visible = False
       end

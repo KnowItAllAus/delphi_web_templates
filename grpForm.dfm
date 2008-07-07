@@ -15,8 +15,8 @@ object formGrp: TformGrp
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 194
-  DesignTop = 236
+  DesignLeft = 200
+  DesignTop = 298
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0

@@ -164,6 +164,7 @@ type
     CurrentImageQueryTmpl: TIBQuery;
     ImageUpdateQueryTmpl: TIBQuery;
     ImageInsertQueryTmpl: TIBQuery;
+    SQLQry: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
