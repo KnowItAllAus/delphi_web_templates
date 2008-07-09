@@ -1,4 +1,4 @@
-unit tmplnameform;
+unit TmplRevPropform;
 
 interface
 
@@ -10,21 +10,19 @@ uses
   IWContainer, IWHTMLContainer, IWRegion, IWCompButton;
 
 type
-  TFormTmplnameEdit = class(TIWAppForm)
+  TFormTmplRevProp = class(TIWAppForm)
     IWRegion1: TIWRegion;
     IWSiLink1: TIWSiLink;
     BodyRegion: TIWRegion;
     IWRectangle2: TIWRectangle;
     IWRectangle1: TIWRectangle;
-    TmplLabel: TIWLabel;
-    NameEdit: TIWEdit;
+    JobLabel: TIWLabel;
+    NoteEdit: TIWEdit;
     IWLabel3: TIWLabel;
     silanglinked1: TsiLangLinked;
     FrameBareTitle1: TFrameBareTitle;
     userfooter1: Tuserfooter;
     DelBtn: TIWButton;
-    IWLabel1: TIWLabel;
-    NoteEdit: TIWEdit;
     procedure userfooter1Extra2Click(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
@@ -36,19 +34,18 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, voucherform, ServerController, jobrev, grptmplform;
+uses datamod, voucherform, ServerController, jobrev, grpdtlform;
 
-procedure TFormTmplnameEdit.userfooter1Extra2Click(Sender: TObject);
+procedure TFormTmplRevProp.userfooter1Extra2Click(Sender: TObject);
 begin
   try
     with RcDataModule do begin
       SQLEx.Transaction.Active:=false;
       SQLEx.Transaction.Active:=true;
       SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('update GROUPPARAMTMPL set TEMPLATENAME=:NAME, NOTE=:NOTE where ID=:ID and COMPANY=:COMPANY');
-      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('edittmplinstance','');
+      SQLEx.SQL.Add('update GROUPPARAMHDR set NOTE=:NOTE where ID=:ID and COMPANY=:COMPANY');
+      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('edittmpl','');
       SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-      SQLEx.ParamByName ('NAME').AsString:=NameEdit.Text;
       SQLEx.ParamByName ('NOTE').AsString:=NoteEdit.Text;
       SQLEx.ExecQuery;
       SQLEx.Transaction.Commit;
@@ -58,29 +55,29 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TformGrpTmpl.Create(WebApplication).Show;
+  TFormGrpDtl.Create(WebApplication).Show;
 end;
 
-procedure TFormTmplnameEdit.userfooter1CancelClick(Sender: TObject);
+procedure TFormTmplRevProp.userfooter1CancelClick(Sender: TObject);
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
-   TformGrpTmpl.Create(WebApplication).Show;
+   TFormGrpDtl.Create(WebApplication).Show;
 end;
 
-procedure TFormTmplnameEdit.IWAppFormCreate(Sender: TObject);
+procedure TFormTmplRevProp.IWAppFormCreate(Sender: TObject);
 begin
    DelBtn.Confirmation:=SiLangLinked1.GetTextOrDefault('Delete');
 end;
 
-procedure TFormTmplnameEdit.DelBtnClick(Sender: TObject);
+procedure TFormTmplRevProp.DelBtnClick(Sender: TObject);
 begin
   try
     with RcDataModule do begin
       SQLEx.Transaction.Active:=false;
       SQLEx.Transaction.Active:=true;
       SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('delete from GROUPPARAMTMPL where ID=:ID and COMPANY=:COMPANY');
-      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('edittmplinstance','');
+      SQLEx.SQL.Add('delete from GROUPPARAMHDR where ID=:ID and COMPANY=:COMPANY');
+      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('edittmpl','');
       SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
       SQLEx.ExecQuery;
       SQLEx.Transaction.Commit;
@@ -90,7 +87,7 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TformGrpTmpl.Create(WebApplication).Show;
+  TFormGrpDtl.Create(WebApplication).Show;
 end;
 
 end.

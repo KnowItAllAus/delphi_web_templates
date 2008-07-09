@@ -484,23 +484,18 @@ begin
   uq.ExecSQL;
   uq.Transaction.Commit;
 
-  (* Update prod if it isn't a library object.
-  with RcDataModule.UpdateProdQuery do begin
-     Transaction.StartTransaction;
-     ParamByName('ID').AsString:=RcDataModule.CurrentImageHdrQuery.ParamByName ('ID').AsString;
-     ParamByName('Company').AsString:=UserSession.Company;
-     ParamByName('PROD_ID').AsString:=NewIDEdit.Text;
-     ExecSQL;
-     Transaction.Commit;
+  with RcDataModule do try
+    SQLEx.Transaction.Active:=false;
+    SQLEx.Transaction.Active:=true;
+    SQLEx.SQL.Clear;
+    SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+    SQLEx.ParamByName ('CURRENT').AsString:=RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
+    SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+    SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    SQLEx.ExecQuery;
+    SQLEx.Transaction.Commit;
+  except
   end;
-  with RcDataModule.UpdateTestQuery do begin  // Always assume test is updated
-      Transaction.StartTransaction;
-      ParamByName('ID').AsString:=RcDataModule.CurrentImageHdrQuery.ParamByName ('ID').AsString;
-      ParamByName('Company').AsString:=UserSession.Company;
-      ParamByName('TEST_ID').AsString:=NewIDEdit.Text;
-      ExecSQL;
-      Transaction.Commit;
-  end;*)
   GoImages;
 end;
 

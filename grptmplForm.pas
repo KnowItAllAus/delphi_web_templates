@@ -78,6 +78,16 @@ procedure TformGrpTmpl.IWAppFormCreate(Sender: TObject);
 begin
   IWSilink1.InitForm;
   TemplateIDList:=TStringList.Create;
+  with RcDataModule.SQLQry do begin
+     Active:=false;
+     SQL.clear;
+     SQL.Add ('select * from GROUPATTR where ID=:ID and COMPANY=:COMPANY');
+     ParamByName('COMPANY').AsString:=UserSession.Company;
+     ParamByName('ID').AsString:=RcDataModule.GetValue ('editgroup','');
+     Open;
+     CurrentBox.Checked:=FieldByName ('PARAMVER').AsString=RcDataModule.GetValue ('edittmpl','');
+     Close;
+  end;
   DrawTmplGrid;
 end;
 
@@ -93,6 +103,7 @@ begin
       ParamByName ('COMPANY').AsString:=UserSession.Company;
       ParamByName ('GROUPPARAMHDRID').AsString:=RcDataModule.GetValue ('edittmpl','');
       ParamByName ('TEMPLATENAME').AsString:=TemplateCombo.Items[TemplateCombo.ItemIndex];
+      ParamByName ('NOTE').AsString:=datetimetostr (now);
       ExecSQL;
       Transaction.Commit;
     end;
@@ -173,13 +184,14 @@ begin
     GrpTmplUsageQuery.Open;
 
     with TmplGrid do begin
-      ColumnCount:=5;
+      ColumnCount:=6;
       RowCount:=1;
       Cell[0, 1].Text := '';
       Cell[0, 2].Text := '';
       Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Type');
       Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Guid');
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+      Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Note');
       i:=1;
       while not GrpTmplUsageQuery.Eof do begin
         if lasttmpl<>GrpTmplUsageQuery.FieldByName('ID').AsString then begin
@@ -193,6 +205,7 @@ begin
             Cell[i, 1].clickable:=true;
             Cell[i, 3].text:='';
             Cell[i, 4].text:='';
+            Cell[i, 5].text:=GrpTmplUsageQuery.FieldByName('NOTE').AsString;
             celltag:=tag_obj.create;
             celltag.param:=false;
             celltag.s:=GrpTmplUsageQuery.FieldByName('ID').AsString;
@@ -208,6 +221,7 @@ begin
             Cell[i, 2].clickable:=true;
             Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
             Cell[i, 1].clickable:=true;
+            Cell[i, 5].text:='';
             Cell[i, 4].text:=GrpTmplUsageQuery.FieldByName('GUID').AsString;
             if GrpTmplUsageQuery.FieldByName('PARAMTYPE').AsString='F' then
                Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')
@@ -257,6 +271,7 @@ begin
       if AColumn=2 then begin
         FTNE:=TFormTmplNameEdit.create(WebApplication);
         FTNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
+        FTNE.NoteEdit.Text:=TmplGrid.Cell[ARow,5].Text;
         TIWAppForm(WebApplication.ActiveForm).Release;
         FTNE.show;
       end else if AColumn=1 then begin

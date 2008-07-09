@@ -1,4 +1,4 @@
-object FormTmplnameEdit: TFormTmplnameEdit
+object FormTmplRevProp: TFormTmplRevProp
   Left = 0
   Top = 0
   Width = 1016
@@ -57,7 +57,7 @@ object FormTmplnameEdit: TFormTmplnameEdit
       TabOrder = 0
       RawText = False
       SiLangLinked = silanglinked1
-      LangFile = 'tmplnameedit.sil'
+      LangFile = 'paramnameedit.sil'
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
@@ -123,10 +123,10 @@ object FormTmplnameEdit: TFormTmplnameEdit
         Alignment = taLeftJustify
         VAlign = vaMiddle
       end
-      object TmplLabel: TIWLabel
+      object JobLabel: TIWLabel
         Left = 48
         Top = 12
-        Width = 133
+        Width = 228
         Height = 19
         Cursor = crAuto
         IW50Hint = False
@@ -144,10 +144,10 @@ object FormTmplnameEdit: TFormTmplnameEdit
         ConvertSpaces = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
-        Caption = 'Template Name'
+        Caption = 'Template Revision Note'
         RawText = False
       end
-      object NameEdit: TIWEdit
+      object NoteEdit: TIWEdit
         Left = 128
         Top = 72
         Width = 401
@@ -174,12 +174,12 @@ object FormTmplnameEdit: TFormTmplnameEdit
         ScriptEvents = <>
         TabOrder = 1
         PasswordPrompt = False
-        Text = 'NameEdit'
+        Text = 'NoteEdit'
       end
       object IWLabel3: TIWLabel
         Left = 48
         Top = 73
-        Width = 40
+        Width = 31
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -195,7 +195,7 @@ object FormTmplnameEdit: TFormTmplnameEdit
         NoWrap = False
         ConvertSpaces = False
         FriendlyName = 'IWLabel1'
-        Caption = 'Name'
+        Caption = 'Note'
         RawText = False
       end
       object DelBtn: TIWButton
@@ -220,57 +220,6 @@ object FormTmplnameEdit: TFormTmplnameEdit
         ScriptEvents = <>
         TabOrder = 4
         OnClick = DelBtnClick
-      end
-      object IWLabel1: TIWLabel
-        Left = 48
-        Top = 113
-        Width = 31
-        Height = 16
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = False
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        NoWrap = False
-        ConvertSpaces = False
-        FriendlyName = 'IWLabel1'
-        Caption = 'Note'
-        RawText = False
-      end
-      object NoteEdit: TIWEdit
-        Left = 128
-        Top = 112
-        Width = 401
-        Height = 21
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        FocusColor = clNone
-        DoSubmitValidation = True
-        Editable = True
-        NonEditableAsLabel = True
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'StatEdit'
-        MaxLength = 0
-        ReadOnly = False
-        Required = False
-        ScriptEvents = <>
-        TabOrder = 5
-        PasswordPrompt = False
-        Text = 'NoteEdit'
       end
     end
   end
@@ -365,26 +314,26 @@ object FormTmplnameEdit: TFormTmplnameEdit
       'HotKey')
     Top = 136
     TranslationData = {
-      737443617074696F6E730D0A546D706C4C6162656C01506172616D6574657220
-      4E616D65010D0A49574C6162656C33014E616D65010D0A737448696E74730D0A
-      7374446973706C61794C6162656C730D0A7374466F6E74730D0A547573657266
-      6F6F746572014D532053616E73205365726966010D0A73744D756C74694C696E
-      65730D0A4957526567696F6E312E4578747261546167506172616D7301010D0A
-      495753694C696E6B312E4578747261546167506172616D7301010D0A426F6479
-      526567696F6E2E4578747261546167506172616D7301010D0A49575265637461
-      6E676C65322E4578747261546167506172616D7301010D0A495752656374616E
-      676C65312E4578747261546167506172616D7301010D0A546D706C4C6162656C
-      2E4578747261546167506172616D7301010D0A4E616D65456469742E45787472
-      61546167506172616D7301010D0A49574C6162656C332E457874726154616750
-      6172616D7301010D0A44656C42746E2E4578747261546167506172616D730101
-      0D0A7374537472696E67730D0A44656C6574650144656C657465207468697320
-      7265636F72643F010D0A73744F74686572537472696E67730D0A495753694C69
-      6E6B312E436F6E6669726D6174696F6E01010D0A495753694C696E6B312E4C61
-      6E6746696C6501706172616D6E616D65656469742E73696C010D0A4957526563
-      74616E676C65322E5465787401010D0A495752656374616E676C65312E546578
-      7401010D0A4E616D65456469742E54657874014E616D6545646974010D0A4465
-      6C42746E2E436F6E6669726D6174696F6E01010D0A7374436F6C6C656374696F
-      6E730D0A737443686172536574730D0A5475736572666F6F7465720144454641
-      554C545F43484152534554010D0A}
+      737443617074696F6E730D0A4A6F624C6162656C01506172616D65746572204E
+      616D65010D0A49574C6162656C33014E616D65010D0A737448696E74730D0A73
+      74446973706C61794C6162656C730D0A7374466F6E74730D0A5475736572666F
+      6F746572014D532053616E73205365726966010D0A73744D756C74694C696E65
+      730D0A4957526567696F6E312E4578747261546167506172616D7301010D0A49
+      5753694C696E6B312E4578747261546167506172616D7301010D0A426F647952
+      6567696F6E2E4578747261546167506172616D7301010D0A495752656374616E
+      676C65322E4578747261546167506172616D7301010D0A495752656374616E67
+      6C65312E4578747261546167506172616D7301010D0A4A6F624C6162656C2E45
+      78747261546167506172616D7301010D0A4E6F7465456469742E457874726154
+      6167506172616D7301010D0A49574C6162656C332E4578747261546167506172
+      616D7301010D0A44656C42746E2E4578747261546167506172616D7301010D0A
+      7374537472696E67730D0A44656C6574650144656C6574652074686973207265
+      636F72643F010D0A73744F74686572537472696E67730D0A495753694C696E6B
+      312E436F6E6669726D6174696F6E01010D0A495753694C696E6B312E4C616E67
+      46696C6501706172616D6E616D65656469742E73696C010D0A49575265637461
+      6E676C65322E5465787401010D0A495752656374616E676C65312E5465787401
+      010D0A4E6F7465456469742E54657874014E616D6545646974010D0A44656C42
+      746E2E436F6E6669726D6174696F6E01010D0A7374436F6C6C656374696F6E73
+      0D0A737443686172536574730D0A5475736572666F6F7465720144454641554C
+      545F43484152534554010D0A}
   end
 end

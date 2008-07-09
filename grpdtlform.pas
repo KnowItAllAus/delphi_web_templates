@@ -70,7 +70,8 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, grpForm, graphics, cfgtypes, dialogs, groupnameform, grptmplform;
+uses datamod, db, servercontroller, IWInit, grpForm, graphics, cfgtypes, dialogs, groupnameform, grptmplform,
+     TmplRevPropform;
 
 {$R *.dfm}
 
@@ -116,9 +117,10 @@ begin
   With TemplateGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Date');
-      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Note');
+      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Selected');
       Cell[0, 2].Text := '';
-      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('Grid.Selected');
+      Cell[0, 3].Text := '';
+      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault('Grid.Note');
   end;
   sList.Clear;
   pList.Clear;
@@ -185,19 +187,23 @@ begin
     while not GrpTmplQuery.Eof do begin
         TemplateGrid.RowCount:=TemplateGrid.RowCount+1;
         with TemplateGrid.Cell[TemplateGrid.RowCount-1, 0] do begin
-          Text := GrpTmplQuery.FieldByName('REVDATE').AsString;
-          TemplateGrid.Cell[TemplateGrid.RowCount-1, 3].text:='';
-          if GrpTmplQuery.FieldByName('PARAMVER').AsString<>'' then begin
-             TemplateGrid.Cell[TemplateGrid.RowCount-1, 3].text:=SiLangLinked1.GetTextOrDefault('Grid.Current');;
-          end;
-        end;
-        TemplateGrid.Cell[TemplateGrid.RowCount-1,1].text:=GrpTmplQuery.FieldByName('NOTE').AsString;
-        with TemplateGrid.Cell[TemplateGrid.RowCount-1,2] do begin
-          text:=SiLangLinked1.GetTextOrDefault('Grid.Edit');
-          Clickable:=true;
           celltag:=tag_obj.create;
           celltag.s:=GrpTmplQuery.FieldByName('ID').AsString;
           tag:=celltag;
+          Text := GrpTmplQuery.FieldByName('REVDATE').AsString;
+          TemplateGrid.Cell[TemplateGrid.RowCount-1, 1].text:='';
+          if GrpTmplQuery.FieldByName('PARAMVER').AsString<>'' then begin
+             TemplateGrid.Cell[TemplateGrid.RowCount-1, 1].text:=SiLangLinked1.GetTextOrDefault('Grid.Current');;
+          end;
+        end;
+        TemplateGrid.Cell[TemplateGrid.RowCount-1,4].text:=GrpTmplQuery.FieldByName('NOTE').AsString;
+        with TemplateGrid.Cell[TemplateGrid.RowCount-1,2] do begin
+          text:=SiLangLinked1.GetTextOrDefault('Grid.Edit');
+          Clickable:=true;
+        end;
+        with TemplateGrid.Cell[TemplateGrid.RowCount-1,3] do begin
+          text:=SiLangLinked1.GetTextOrDefault('Grid.Properties');
+          Clickable:=true;
         end;
         GrpTmplQuery.Next;
     end;
@@ -484,12 +490,19 @@ procedure TFormGrpDtl.TemplateGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 var
    FGT : TFormGrpTmpl;
+   TRP : TFormTmplRevProp;
 begin
+   RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,0].tag).s);
    TIWAppForm(WebApplication.ActiveForm).Release;
-   RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,acolumn].tag).s);
-   FGT:=TFormGrpTmpl.create(WebApplication);
-   FGT.CurrentBox.Checked:=CurrentTemplate=tag_obj(templategrid.Cell[arow,acolumn].tag).s;
-   FGT.show;
+   if AColumn=2 then begin
+     FGT:=TFormGrpTmpl.create(WebApplication);
+     //FGT.CurrentBox.Checked:=CurrentTemplate=tag_obj(templategrid.Cell[arow,0].tag).s;
+     FGT.show;
+   end else begin
+     TRP:=TFormTmplRevProp.create(WebApplication);
+     TRP.NoteEdit.Text:=templategrid.Cell[arow,4].Text;
+     TRP.show;
+   end;
 end;
 
 end.
