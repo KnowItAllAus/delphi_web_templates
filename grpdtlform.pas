@@ -84,10 +84,10 @@ begin
    RcDataModule.Trans.Active:=False;
    RcDataModule.Trans.StartTransaction;
    TIWAppForm(WebApplication.ActiveForm).Release;
-   if referedby=nil then
+   if usersession.group_refered_by=nil then
       TFormGrp.Create(WebApplication).Show
    else
-      referedby.Create(WebApplication).Show;
+      usersession.group_refered_by.Create(WebApplication).Show;
 end;
 
 procedure TFormGrpDtl.DrawGrids;

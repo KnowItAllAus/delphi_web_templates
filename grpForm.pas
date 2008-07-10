@@ -53,7 +53,7 @@ begin
   RcDataModule.savevalue ('editgroup',ID);
   TIWAppForm(WebApplication.ActiveForm).Release;
   tfg:=TFormGrpDtl.Create (WebApplication);
-  tfg.referedby:=refered_by;
+  usersession.group_refered_by:=refered_by;
   tfg.show;
 end;
 

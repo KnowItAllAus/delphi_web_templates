@@ -71,6 +71,7 @@ var
   jobid : integer;
   groupid : integer;
   celltag : tag_obj;
+  template : string;
 begin
   jobid:=0;
   groupid:=0;
@@ -134,6 +135,71 @@ begin
         end;
       end;
       RcDataModule.OverJobQuery.Next;
+    end;
+  end;
+  RcDataModule.OverJobQuery.Close;
+
+  template:='';
+  groupid:=0;
+  RcDataModule.OverJobTmplQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
+  RcDataModule.OverJobTmplQuery.Open;
+  with OverGrid do begin
+    while not RcDataModule.OverJobTmplQuery.Eof do begin
+      if template<>RcDataModule.OverJobTmplQuery.FieldByName('TEMPLATENAME').AsString then begin
+        RowCount:=RowCount+1;
+        Cell[i, 1].BGColor:=clDkGray;
+        Cell[i, 1].text:=htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Template'));
+        if RcDataModule.OverJobTmplQuery.FieldByName('JOBID').IsNull then begin
+           Cell[i, 2].Text:=htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Error'));
+           Cell[i, 2].BGColor:=clRed;
+        end else Cell[i, 2].BGColor:=clDkGray;
+        groupid:=0;
+        with Cell[i, 0] do begin
+           template:=RcDataModule.OverJobTmplQuery.FieldByName('TEMPLATENAME').AsString;
+           Text:=htmlquote(template);
+           inc (i);
+           BGColor:=clDkGray;
+           Font.color:=clWhite;
+        end;
+      end;
+      if RcDataModule.OverJobTmplQuery.FieldByName('GROUPNAME').AsString<>'' then begin
+        if RcDataModule.OverJobTmplQuery.FieldByName('GROUPID').AsInteger<>groupid then begin
+          RowCount:=RowCount+1;
+          with Cell[i, 1] do begin
+            Clickable := True;
+            Text :=htmlquote(RcDataModule.OverJobTmplQuery.FieldByName('GROUPNAME').AsString);
+            groupid:=RcDataModule.OverJobTmplQuery.FieldByName('GROUPID').AsInteger;
+            BGColor:=Storecol;
+            celltag:=tag_obj.create;
+            celltag.test:=false;
+            celltag.s:=inttostr(groupid);
+            tag:=celltag;
+            if RcDataModule.OverJobTmplQuery.FieldByName('GROUPTEST').AsString='Y' then begin
+               Font.Style:=[fsItalic];
+               celltag.test:=true;
+            end;
+            inc(i);
+          end;
+        end;
+      end;
+      if RcDataModule.OverJobTmplQuery.FieldByName('STORENAME').AsString<>'' then begin
+        RowCount:=RowCount+1;
+        with Cell[i, 2] do begin
+          Clickable:=True;
+          BGColor:=clWhite;
+          text:=htmlquote(RcDataModule.OverJobTmplQuery.FieldByName('STORENAME').AsString);
+          celltag:=tag_obj.create;
+          celltag.s:=RcDataModule.OverJobTmplQuery.FieldByName('STOREID').AsString;
+          celltag.test:=false;
+          if RcDataModule.OverJobTmplQuery.FieldByName('STORETEST').AsString='1' then begin
+             Font.Style:=[fsItalic];
+             celltag.test:=true;
+          end;
+          tag:=celltag;
+          inc(i);
+        end;
+      end;
+      RcDataModule.OverJobTmplQuery.Next;
     end;
   end;
   RcDataModule.OverJobQuery.Close;
@@ -205,16 +271,21 @@ begin
           tmpl:=grouplist.IndexOf(celltag.s);
           if tmpl>=0 then begin
              inc (tmpl);
+             finished:=false;
              while not finished do begin
                if tmpl<grouplist.count then begin
                   seppos:=pos('_',grouplist.Strings[tmpl]);
                   if seppos>0 then begin
-                     s:=copy(grouplist.Strings[tmpl],seppos+1,255);
+                     s:=copy(grouplist.Strings[tmpl],seppos+2,255);
                      RowCount:=RowCount+1;
                      with Cell[i, 2] do begin
                         text:=htmlquote(s);
-                        BGColor:=clDkGray;
-                        Font.Color := clWhite;
+                        if grouplist.Strings[tmpl][seppos+1]='+' then begin
+                           BGColor:=clDkGray;
+                           Font.Color := clWhite;
+                        end else begin
+                           BGColor:=clRed;
+                        end;
                      end;
                      inc(i);
                   end else finished:=true;
@@ -242,6 +313,7 @@ end;
 procedure TFormOverview.RefreshGrid;
 var
   grp, r, c : integer;
+  s : string;
 begin
   for r:=0 to Overgrid.RowCount-1 do
      for c:=0 to Overgrid.ColumnCount-1 do
@@ -257,7 +329,12 @@ begin
      while not eof do begin
         if FieldByName('GID').AsInteger<>grp then
            grouplist.add (FieldByName('GID').AsString);
-        grouplist.Add(FieldByName('GID').AsString+'_'+FieldByName('TEMPLATENAME').AsString);
+        if not FieldByName('TEMPLATENAME').IsNull then begin
+           s:=FieldByName('GID').AsString+'_';
+           if FieldByName('JOBID').IsNull then s:=s+'-' else s:=s+'+';
+           s:=s+FieldByName('TEMPLATENAME').AsString;
+           grouplist.Add(s);
+        end;
         grp:=FieldByName('GID').AsInteger;
         next;
      end;

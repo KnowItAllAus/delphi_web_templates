@@ -7,7 +7,7 @@ uses
   Classes,
   DataMod, AdminDM,
   IWServerControllerBase, IWAppForm, IWBaseForm, IWApplication,
-  IWModuleController,IWProducer,HTTPApp,SysUtils, GpTimezone;
+  IWModuleController,IWProducer,HTTPApp,SysUtils, GpTimezone, ReferredClass;
 
   //Windows, Messages, SysUtils, Classes,
 
@@ -69,6 +69,7 @@ type
     NewLayout : boolean;
     mru_list : array [1..MAX_MRU] of mru_rec;
     strict : boolean;
+    group_refered_by : referer_class;
     //
     constructor Create(AOwner: TComponent); override;
     destructor Destroy(AOwner: TComponent);
