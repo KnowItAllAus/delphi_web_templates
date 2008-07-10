@@ -26,6 +26,7 @@ object FormDistrib: TFormDistrib
     TabOrder = 0
     inherited IWRegion1: TIWRegion
       Height = 29
+      TabOrder = 1
       DesignSize = (
         1016
         29)
@@ -162,7 +163,7 @@ object FormDistrib: TFormDistrib
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = silink_footer
         LangFile = 'JobDist.sil'

@@ -111,7 +111,7 @@ begin
     end else begin
       Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.InUse');
     end;
-    Cell[0, usercol].Text := SiLangLinked1.GetTextOrDefault('Grid.User');
+    Cell[0, usercol].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.User'));
     i:=1;
     RowCount:=1;
     while not RcDataModule.ImageVerQuery.Eof do begin

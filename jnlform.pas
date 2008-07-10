@@ -210,7 +210,7 @@ begin
               Text := '';
             end;
             with Cell[i, 2] do begin
-              Text := TranItemQuery.FieldByName('DESCRIPTION').AsString;
+              Text := htmlquote(TranItemQuery.FieldByName('DESCRIPTION').AsString);
             end;
             with Cell[i, 3] do begin
               Text := TranItemQuery.FieldByName('QUANTITY').AsString;

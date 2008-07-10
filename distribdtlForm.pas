@@ -135,7 +135,7 @@ begin
         if s='' then
            text:='???'
            else
-           text:=s;
+           text:=htmlquote(s);
         if test_group then begin
            font.Style:=[fsItalic];
            font.Color:=clRed;

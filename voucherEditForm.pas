@@ -96,7 +96,6 @@ type
     procedure AddOutputBtnClick(Sender: TObject);
     procedure AddDepBtnClick(Sender: TObject);
     procedure DepGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
-    procedure AddGrpBtnClick(Sender: TObject);
     procedure GrpGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure IWAppFormDefaultAction(Sender: TObject);
@@ -437,7 +436,7 @@ begin
           end;
         end;
         with Cell[i, 3] do begin
-          Text := ItemQuery.FieldByName('NAME').AsString;
+          Text := htmlquote(ItemQuery.FieldByName('NAME').AsString);
         end;
         inc (i);
         ItemQuery.Next;
@@ -478,8 +477,8 @@ begin
           Text:=SiLangLinked1.GetTextOrDefault('Grid.Del');
         end;
         with Cell[i, 1] do begin
-          Text := GetTrigName (DepQuery.FieldByName('DEPTRIG').AsInteger,
-                                StrToInt(UserSession.Company));
+          Text := htmlquote(GetTrigName (DepQuery.FieldByName('DEPTRIG').AsInteger,
+                                StrToInt(UserSession.Company)));
         end;
         with Cell[i, 2] do begin
           try
@@ -644,24 +643,6 @@ begin
   DrawDepGrid;
 end;
 
-procedure TFormVoucherEdit.AddGrpBtnClick(Sender: TObject);
-begin
-{  if GroupCombo.ItemIndex=-1 then exit;
-  try
-    with RcDataModule.GrpAllocInsertQuery do begin
-      ParamByName ('ID').AsInteger:=RcDataModule.NextId;
-      ParamByName ('GROUPID').AsString:=GrpList.Strings[GroupCombo.ItemIndex];
-      ParamByName ('ITEMID').AsString:=RcDataModule.CurrentVoucherQuery.FieldByName ('ID').AsString;
-      ParamByName ('COMPANY').AsString:=UserSession.Company;
-      ParamByName ('ITEMKIND').AsInteger:=0;
-      ExecSQL;
-    end;
-  except
-  end;
-  DrawGrpGrid;
-  GroupCombo.ItemIndex:=-1; }
-end;
-
 procedure TFormVoucherEdit.GrpGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 begin
@@ -701,24 +682,6 @@ begin
     TFI.Show;
   end;
 end;
-
-(*var
-  ImageId : integer;
-  s : string;
-begin
-  ImageId:=RcDataModule.nextID;
-  RcDataModule.ImageHdrInsertQuery.Transaction.Active:=True;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('NAME').AsString:=
-    SiLangLinked1.GetTextOrDefault('NewContent');
-  RcDataModule.ImageHdrInsertQuery.ParamByName('ID').AsInteger:=ImageId;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('COMPANY').AsString:=
-    UserSession.Company;
-  s:=UserSession.Company+FormatDateTime('hhmmssddmmyy',now);
-  while (length(s)<20) do s:=s+char(random(10)+48);
-  RcDataModule.ImageHdrInsertQuery.ParamByName('GUID').AsString:=s;
-  RcDataModule.ImageHdrInsertQuery.ExecSQL;
-  EditHdr (IntToStr(ImageID));
-end;*)
 
 procedure TFormVoucherEdit.PurposeComboChange(Sender: TObject);
 var

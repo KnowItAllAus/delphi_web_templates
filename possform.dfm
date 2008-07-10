@@ -256,6 +256,8 @@ object formPoss: TformPoss
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
+      Width = 1086
+      Height = 110
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
         Left = 304

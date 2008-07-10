@@ -104,10 +104,10 @@ begin
         if (s='') then
            text:='-- -- -- --'
            else
-           text:=s;
+           text:=htmlquote(s);
       end;
       with Cell[i, 1] do begin
-        s := RcDataModule.GroupQuery.FieldByName('NAME').AsString;
+        s := htmlquote(RcDataModule.GroupQuery.FieldByName('NAME').AsString);
         if RcDataModule.GroupQuery.FieldByName('TESTGROUP').AsString='Y' then begin
           Font.Color:=clRed;
           text:=SiLangLinked1.GetTextOrDefault('Grid.Test');

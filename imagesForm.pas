@@ -107,10 +107,10 @@ begin
         if (s='') then
            text:='- - - - -'
            else
-           text:=s;
+           text:=htmlquote(s);
       end;
       with Cell[i, 1] do begin
-        Text := RcDataModule.ImageQuery.FieldByName('Description').AsString;
+        Text := htmlquote(RcDataModule.ImageQuery.FieldByName('Description').AsString);
       end;
       with Cell[i, 2] do begin
         Text := RcDataModule.ImageQuery.FieldByName('Tag').AsString;

@@ -40,7 +40,7 @@ implementation
 
 {$R *.dfm}
 
-uses db, datamod, servercontroller, IWInit, graphics, roleform;
+uses db, datamod, servercontroller, IWInit, graphics, roleform, cfgtypes;
 
 type
    SRObj = class
@@ -80,17 +80,17 @@ begin
         Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('Name').AsString;
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Name').AsString);
       end;
       with Cell[i, 2] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString;
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('POSName').AsString);
       end;
       with Cell[i, 3] do begin
         if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
            Text:='No' else Text:='Yes';
       end;
       with Cell[i, 4] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('Printer').AsString;
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
       end;
       with Cell[i, 5] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;

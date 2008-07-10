@@ -36,7 +36,7 @@ implementation
 
 {$R *.dfm}
 
-uses roleform, datamod, ServerController, Graphics, distribdtlForm;
+uses roleform, datamod, ServerController, Graphics, distribdtlForm, cfgtypes;
 
 procedure TFormDistrib.GetGroupName (ID : Integer; Co : Integer; var n : string; var t : boolean);
 begin
@@ -83,10 +83,10 @@ begin
           Clickable:=true;
         end;
         with Cell[i, 1] do begin
-          Text := FieldByName('NAME').AsString;
+          Text := htmlquote(FieldByName('NAME').AsString);
         end;
         with Cell[i, 2] do begin
-          Text := FieldByName('DESCRIPTION').AsString;
+          Text := htmlquote(FieldByName('DESCRIPTION').AsString);
         end;
         inc (i);
         with RcDataModule.GrpAllocQuery do begin
@@ -98,7 +98,7 @@ begin
               RowCount:=RowCount+1;
               with Cell[i, 1] do begin
                 GetGroupName(FieldByName('GROUPID').AsInteger, strtoint(UserSession.Company),n,t);
-                text:=n;
+                text:=htmlquote(n);
                 if t then begin
                    Font.Color:=clRed;
                    Font.Style:=[fsItalic];

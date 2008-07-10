@@ -197,7 +197,7 @@ begin
         if lasttmpl<>GrpTmplUsageQuery.FieldByName('ID').AsString then begin
             RowCount:=RowCount+1;
             with Cell[i, 0] do begin
-              Text := GrpTmplUsageQuery.FieldByName('TEMPLATENAME').AsString;
+              Text := htmlquote(GrpTmplUsageQuery.FieldByName('TEMPLATENAME').AsString);
             end;
             Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
             Cell[i, 2].clickable:=true;
@@ -205,7 +205,7 @@ begin
             Cell[i, 1].clickable:=true;
             Cell[i, 3].text:='';
             Cell[i, 4].text:='';
-            Cell[i, 5].text:=GrpTmplUsageQuery.FieldByName('NOTE').AsString;
+            Cell[i, 5].text:=htmlquote(GrpTmplUsageQuery.FieldByName('NOTE').AsString);
             celltag:=tag_obj.create;
             celltag.param:=false;
             celltag.s:=GrpTmplUsageQuery.FieldByName('ID').AsString;
@@ -215,7 +215,7 @@ begin
         if GrpTmplUsageQuery.FieldByName('OBJID').AsString<>'' then begin
             RowCount:=RowCount+1;
             with Cell[i, 0] do begin
-              Text := GrpTmplUsageQuery.FieldByName('NAME').AsString;
+              Text := htmlquote(GrpTmplUsageQuery.FieldByName('NAME').AsString);
             end;
             Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
             Cell[i, 2].clickable:=true;
@@ -270,8 +270,8 @@ begin
       RcDataModule.SaveValue ('edittmplinstance',t.s);
       if AColumn=2 then begin
         FTNE:=TFormTmplNameEdit.create(WebApplication);
-        FTNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
-        FTNE.NoteEdit.Text:=TmplGrid.Cell[ARow,5].Text;
+        FTNE.NameEdit.Text:=htmlunquote(TmplGrid.Cell[ARow,0].Text);
+        FTNE.NoteEdit.Text:=htmlquote(TmplGrid.Cell[ARow,5].Text);
         TIWAppForm(WebApplication.ActiveForm).Release;
         FTNE.show;
       end else if AColumn=1 then begin

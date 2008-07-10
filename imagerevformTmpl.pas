@@ -112,7 +112,7 @@ begin
         Text :=RcDataModule.ImageVerQueryTmpl.FieldByName('CREATEDTIME').AsString;
       end;
       with Cell[i, 3] do begin
-        Text :=RcDataModule.ImageVerQueryTmpl.FieldByName('CREATEDBY').AsString;
+        Text :=htmlquote(RcDataModule.ImageVerQueryTmpl.FieldByName('CREATEDBY').AsString);
       end;
       inc (i);
       RcDataModule.ImageVerQueryTmpl.Next;

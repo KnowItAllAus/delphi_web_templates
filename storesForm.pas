@@ -51,7 +51,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, storeForm, roleform;
+uses datamod, db, servercontroller, IWInit, storeForm, roleform, cfgtypes;
 
 {$R *.DFM}
 
@@ -78,25 +78,6 @@ begin
     FS.show;
   end;
 end;
-
-(*function TformStores.PosName (ID : string) : string;
-var
-  this_id : integer;
-begin
-  try
-     this_id:=strtoint(ID);
-     with RcDataModule.FindPOSQuery do begin
-       Close;
-       ParamByName('ID').AsInteger:=this_id;
-       Open;
-       if not eof then result:=Fieldbyname ('NAME').AsString;
-       Close;
-     end;
-  except
-     result:='* Not Found *';
-  end;
-end;
-*)
 
 procedure TformStores.RefreshGrid;
 var
@@ -151,14 +132,14 @@ begin
             Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
           end;
           with Cell[i, 2] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Name').AsString;
+            Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Name').AsString);
           end;
           with Cell[i, 3] do begin
             Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString;
           end;
           with Cell[i, 4] do begin
             if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
-               Text:='No' else Text:='Yes';
+               Text:=SiLangLinked1.GetTextOrDefault ('Grid.No') else Text:=SiLangLinked1.GetTextOrDefault ('Grid.Yes');
           end;
           with Cell[i, 5] do begin
             Text := RcDataModule.StoreQuery.FieldByName('Printer').AsString;

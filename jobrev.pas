@@ -198,7 +198,7 @@ begin
       while not Eof do begin
         RowCount:=RowCount+1;
         with Cell[i, 0] do begin
-          Text := FieldByName('PARAMNAME').AsString;
+          Text := htmlquote(FieldByName('PARAMNAME').AsString);
           t:=tag_obj.create;
           t.s:=FieldByName('ID').AsString;
           tag:=t;
@@ -267,7 +267,7 @@ procedure TformJobRev.JobGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 begin
    if AColumn=0 then
-      EditJobRev (JobGrid.Cell[ARow,0].text,JobGrid.Cell[ARow,2].text)
+      EditJobRev (htmlunquote(JobGrid.Cell[ARow,0].text),JobGrid.Cell[ARow,2].text)
    else with RcDataModule do begin
       Trans.Active:=False;
       JobRevCopy.ParamByName('COMPANY').AsString:=UserSession.Company;

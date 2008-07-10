@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, roleform, posForm;
+uses datamod, db, servercontroller, IWInit, roleform, posForm, cfgtypes;
 
 {$R *.DFM}
 
@@ -126,10 +126,10 @@ begin
         Text := RcDataModule.PosQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
-        Text := RcDataModule.PosQuery.FieldByName('Name').AsString;
+        Text := htmlquote(RcDataModule.PosQuery.FieldByName('Name').AsString);
       end;
       with Cell[i, 2] do begin
-        Text := RcDataModule.PosQuery.FieldByName('ProdLayout').AsString;
+        Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
       end;
       inc (i);
       RcDataModule.PosQuery.Next;

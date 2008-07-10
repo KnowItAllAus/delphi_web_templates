@@ -627,7 +627,7 @@ begin
              GList.Delete(_Index);
              GroupCombo.Items.Delete(_Index);
           end;
-          Text := GetGroupName (GrpID, StrToInt(UserSession.Company));
+          Text := htmlquote(GetGroupName (GrpID, StrToInt(UserSession.Company)));
         end;
         inc (i);
         GrpAllocQuery.Next;

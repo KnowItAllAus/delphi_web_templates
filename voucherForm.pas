@@ -124,7 +124,7 @@ begin
         else if (FieldByName('PROD_ID').AsString='') or (FieldByName('PROD_ID').AsString='0') then begin
            Font.Color:=clRed;
         end;
-        s := FieldByName('Name').AsString;
+        s := htmlquote(FieldByName('Name').AsString);
         while (copy(s,1,1)=' ') do system.delete (s,1,1);
         if (s='') then
            text:='- - - - -'
@@ -132,7 +132,7 @@ begin
            text:=s;
       end;
       with Cell[i, 1] do begin
-        Text := FieldByName('Description').AsString;
+        Text := htmlquote(FieldByName('Description').AsString);
       end;
       with Cell[i, 2] do begin
         try
@@ -222,7 +222,7 @@ begin
       IList.Add (RcDataModule.VoucherQuery.FieldByName('ID').AsString);
       with Cell[i, 0] do begin
         clickable:=true;
-        s := RcDataModule.VoucherQuery.FieldByName('Name').AsString;
+        s := htmlquote(RcDataModule.VoucherQuery.FieldByName('Name').AsString);
         while (copy(s,1,1)=' ') do delete (s,1,1);
         if s='' then
            text:=SiLangLinked1.GetTextOrDefault('Grid.NoName')

@@ -51,7 +51,7 @@ const
 implementation
 
 {$R *.dfm}
-uses Servercontroller, datamod, AdminDM, IBQuery, db, storeform, roleform;
+uses Servercontroller, datamod, AdminDM, IBQuery, db, storeform, roleform, cfgtypes;
 
 
 procedure TFormSys.rendercell(ACell: TIWGridCell; const ARow,
@@ -113,7 +113,7 @@ begin
             Text := FieldByName('ID').AsString;
           end;
           with Cell[Rowcount-1, 1] do begin
-            Text := FieldByName('Name').AsString;
+            Text := htmlquote(FieldByName('Name').AsString);
           end;
           with Cell[Rowcount-1, 2] do begin
             Text := FieldByName('LastComms').AsString;
@@ -123,7 +123,7 @@ begin
           end;
           if UserSession.Company='0' then begin
             with Cell[Rowcount-1, 4] do begin
-              Text := FieldByName('CompanyName').AsString;
+              Text := htmlquote(FieldByName('CompanyName').AsString);
             end;
           end;
           next;
@@ -179,7 +179,7 @@ begin
             Text := FieldByName('Pos').AsString;
           end;
           with Cell[Rowcount-1, 2] do begin
-            Text := FieldByName('Storename').AsString;
+            Text := Htmlquote(FieldByName('Storename').AsString);
           end;
           with Cell[Rowcount-1, 3] do begin
             Text := FieldByName('LastContact').AsString;
@@ -192,7 +192,7 @@ begin
           end;
           if (UserSession.Company='0') then begin
             with Cell[Rowcount-1, 6] do begin
-              Text := FieldByName('CompanyName').AsString;
+              Text := htmlquote(FieldByName('CompanyName').AsString);
             end;
           end;
           next;

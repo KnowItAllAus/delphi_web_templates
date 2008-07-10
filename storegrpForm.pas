@@ -163,7 +163,7 @@ begin
       ColumnCount:=2;
       RowCount:=1;
       Cell[0, 1].Text := '';
-      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+      Cell[0, 0].Text := htmlquote(SiLangLinked1.GetTextOrDefault ('Grid.Name'));
       i:=1;
       while not GrpAllocQuery.Eof do begin
         RowCount:=RowCount+1;
@@ -184,7 +184,7 @@ begin
              GList.Delete(_Index);
              GroupCombo.Items.Delete(_Index);
           end;
-          Text := GrpAllocQuery.FieldByName('NAME').AsString;
+          Text := htmlquote(GrpAllocQuery.FieldByName('NAME').AsString);
           if GrpAllocQuery.FieldByName('TESTGROUP').AsString='Y' then
              Font.Style:=[fsitalic];
         end;

@@ -90,10 +90,10 @@ begin
           Clickable:=true;
         end;
         with Cell[i, 1] do begin
-          Text := FieldByName('NAME').AsString;
+          Text := htmlquote(FieldByName('NAME').AsString);
         end;
         with Cell[i, 2] do begin
-          Text := FieldByName('DESCRIPTION').AsString;
+          Text := htmlquote(FieldByName('DESCRIPTION').AsString);
         end;
         with Cell[i, 3] do begin
           try

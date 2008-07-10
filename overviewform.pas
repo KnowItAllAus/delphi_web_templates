@@ -33,6 +33,7 @@ type
     procedure IWAppFormDestroy(Sender: TObject);
     procedure StoreComboChange(Sender: TObject);
   private
+    grouplist : TStringlist;
     procedure RefreshGrid;
     procedure RefreshStoreGrid;
     procedure RefreshJobGrid;
@@ -41,7 +42,7 @@ type
 implementation
 
 {$R *.dfm}
-uses Graphics, DataMod, roleform, ServerController, storegrpform, grpForm, ReferredClass;
+uses Graphics, DataMod, roleform, ServerController, storegrpform, grpForm, ReferredClass, Cfgtypes;
 
 const storecol = $00EBDAD0;
 
@@ -77,9 +78,9 @@ begin
   RcDataModule.OverJobQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
   RcDataModule.OverJobQuery.Open;
   with OverGrid do begin
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Store');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Group');
-    Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Job');
+    Cell[0, 2].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Store'));
+    Cell[0, 1].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Group'));
+    Cell[0, 0].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Job'));
     i:=1;
     RowCount:=1;
     while not RcDataModule.OverJobQuery.Eof do begin
@@ -89,7 +90,7 @@ begin
         Cell[i, 2].BGColor:=clLtGray;
         groupid:=0;
         with Cell[i, 0] do begin
-           Text :=RcDataModule.OverJobQuery.FieldByName('JN').AsString;
+           Text :=htmlquote(RcDataModule.OverJobQuery.FieldByName('JN').AsString);
            jobid:=RcDataModule.OverJobQuery.FieldByName('JID').AsInteger;
            inc (i);
            BGColor:=clLtGray;
@@ -100,7 +101,7 @@ begin
           RowCount:=RowCount+1;
           with Cell[i, 1] do begin
             Clickable := True;
-            Text :=RcDataModule.OverJobQuery.FieldByName('gN').AsString;
+            Text :=htmlquote(RcDataModule.OverJobQuery.FieldByName('gN').AsString);
             groupid:=RcDataModule.OverJobQuery.FieldByName('gID').AsInteger;
             BGColor:=Storecol;
             celltag:=tag_obj.create;
@@ -120,7 +121,7 @@ begin
         with Cell[i, 2] do begin
           Clickable:=True;
           BGColor:=clWhite;
-          text:=RcDataModule.OverJobQuery.FieldByName('sdn').AsString;
+          text:=htmlquote(RcDataModule.OverJobQuery.FieldByName('sdn').AsString);
           celltag:=tag_obj.create;
           celltag.s:=RcDataModule.OverJobQuery.FieldByName('sdid').AsString;
           celltag.test:=false;
@@ -145,6 +146,10 @@ var
   storeid : integer;
   groupid : integer;
   celltag : tag_obj;
+  tmpl : integer;
+  s : string;
+  finished : boolean;
+  seppos : integer;
 begin
   storeid:=0;
   groupid:=0;
@@ -152,9 +157,9 @@ begin
   RcDataModule.OverQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
   RcDataModule.OverQuery.Open;
   with OverGrid do begin
-    Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Store');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Group');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Job');
+    Cell[0, 0].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Store'));
+    Cell[0, 1].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Group'));
+    Cell[0, 2].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Job'));
     i:=1;
     RowCount:=1;
     while not RcDataModule.OverQuery.Eof do begin
@@ -166,7 +171,7 @@ begin
         with Cell[i, 0] do begin
           Clickable:=True;
           BGColor:=clWhite;
-          text:=RcDataModule.OverQuery.FieldByName('sdn').AsString;
+          text:=htmlquote(RcDataModule.OverQuery.FieldByName('sdn').AsString);
           storeid:=RcDataModule.OverQuery.FieldByName('sdID').AsInteger;
           celltag:=tag_obj.create;
           celltag.test:=false;
@@ -184,7 +189,7 @@ begin
           RowCount:=RowCount+1;
           with Cell[i, 1] do begin
             Clickable := True;
-            Text :=RcDataModule.OverQuery.FieldByName('gN').AsString;
+            Text :=htmlquote(RcDataModule.OverQuery.FieldByName('gN').AsString);
             groupid:=RcDataModule.OverQuery.FieldByName('gID').AsInteger;
             BGColor:=Storecol;
             celltag:=tag_obj.create;
@@ -197,12 +202,32 @@ begin
             tag:=celltag;
             inc(i);
           end;
+          tmpl:=grouplist.IndexOf(celltag.s);
+          if tmpl>=0 then begin
+             inc (tmpl);
+             while not finished do begin
+               if tmpl<grouplist.count then begin
+                  seppos:=pos('_',grouplist.Strings[tmpl]);
+                  if seppos>0 then begin
+                     s:=copy(grouplist.Strings[tmpl],seppos+1,255);
+                     RowCount:=RowCount+1;
+                     with Cell[i, 2] do begin
+                        text:=htmlquote(s);
+                        BGColor:=clDkGray;
+                        Font.Color := clWhite;
+                     end;
+                     inc(i);
+                  end else finished:=true;
+               end else finished:=true;
+               inc(tmpl);
+             end;
+          end;
         end;
       end;
       if RcDataModule.OverQuery.FieldByName('JN').AsString<>'' then begin
         RowCount:=RowCount+1;
         with Cell[i, 2] do begin
-           Text :=RcDataModule.OverQuery.FieldByName('JN').AsString;
+           Text :=htmlquote(RcDataModule.OverQuery.FieldByName('JN').AsString);
            inc (i);
            BGColor:=clLtGray;
         end;
@@ -216,11 +241,29 @@ end;
 
 procedure TFormOverview.RefreshGrid;
 var
-  r, c : integer;
+  grp, r, c : integer;
 begin
   for r:=0 to Overgrid.RowCount-1 do
      for c:=0 to Overgrid.ColumnCount-1 do
        Overgrid.Cell[r,c].Tag.Free;
+
+  grouplist.Clear;
+
+  with RcDataModule.OverTmplQuery do begin
+     Transaction.Active:=true;
+     ParamByName('COMPANY').AsString:=UserSession.Company;
+     Open;
+     grp:=-1;
+     while not eof do begin
+        if FieldByName('GID').AsInteger<>grp then
+           grouplist.add (FieldByName('GID').AsString);
+        grouplist.Add(FieldByName('GID').AsString+'_'+FieldByName('TEMPLATENAME').AsString);
+        grp:=FieldByName('GID').AsInteger;
+        next;
+     end;
+     Transaction.Active:=false;
+  end;
+
   if storebtn.checked then refreshstoregrid else refreshjobgrid;
 end;
 
@@ -228,6 +271,8 @@ procedure TFormOverview.IWAppFormCreate(Sender: TObject);
 begin
    Storebtn.checked:=RcDataModule.GetValue('overview_stores','1')='1';
    jobbtn.checked:=not storebtn.checked;
+   Grouplist:=TStringlist.Create;
+   Grouplist.sorted:=true;
    RefreshGrid;
 end;
 
@@ -261,6 +306,7 @@ begin
   for r:=0 to Overgrid.RowCount-1 do
      for c:=0 to Overgrid.ColumnCount-1 do
        Overgrid.Cell[r,c].Tag.Free;
+  Grouplist.free;
 end;
 
 procedure TFormOverview.StoreComboChange(Sender: TObject);

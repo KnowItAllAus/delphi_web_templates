@@ -135,7 +135,7 @@ begin
         if GrpUseQuery.FieldByName('ITEMKIND').AsInteger=1 then begin
             StoreGrid.RowCount:=StoreGrid.RowCount+1;
             with StoreGrid.Cell[StoreGrid.RowCount-1, 0] do begin
-              Text := GrpUseQuery.FieldByName('STORENAME').AsString;
+              Text := htmlquote(GrpUseQuery.FieldByName('STORENAME').AsString);
               if GrpUseQuery.FieldByName('stest').AsString='1' then begin
                  Font.Style:=[fsItalic];
               end else begin
@@ -153,7 +153,7 @@ begin
         end else if GrpUseQuery.FieldByName('ITEMKIND').AsInteger=2 then begin
             VoucherGrid.RowCount:=VoucherGrid.RowCount+1;
             with VoucherGrid.Cell[VoucherGrid.RowCount-1, 0] do begin
-              Text := GrpUseQuery.FieldByName('JOBNAME').AsString;
+              Text := htmlquote(GrpUseQuery.FieldByName('JOBNAME').AsString);
             end;
             pList.Add (GrpUseQuery.FieldByName('ID').AsString);
             if testbox.Checked then begin
@@ -162,7 +162,7 @@ begin
               can_delete:=(UserSession.privilege and PRIV_LIVE)<>0;
             end;
             if GrpUseQuery.FieldByName('TEMPLATE').AsString='1' then begin
-              VoucherGrid.Cell[VoucherGrid.RowCount-1,2].text:='Params';
+              VoucherGrid.Cell[VoucherGrid.RowCount-1,2].text:=SiLangLinked1.GetTextOrDefault('Grid.Params');
               VoucherGrid.Cell[VoucherGrid.RowCount-1,2].Clickable:=true;
             end else begin
               VoucherGrid.Cell[VoucherGrid.RowCount-1,2].text:='';
@@ -193,16 +193,16 @@ begin
           Text := GrpTmplQuery.FieldByName('REVDATE').AsString;
           TemplateGrid.Cell[TemplateGrid.RowCount-1, 1].text:='';
           if GrpTmplQuery.FieldByName('PARAMVER').AsString<>'' then begin
-             TemplateGrid.Cell[TemplateGrid.RowCount-1, 1].text:=SiLangLinked1.GetTextOrDefault('Grid.Current');;
+             TemplateGrid.Cell[TemplateGrid.RowCount-1, 1].text:=htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Current'));
           end;
         end;
         TemplateGrid.Cell[TemplateGrid.RowCount-1,4].text:=GrpTmplQuery.FieldByName('NOTE').AsString;
         with TemplateGrid.Cell[TemplateGrid.RowCount-1,2] do begin
-          text:=SiLangLinked1.GetTextOrDefault('Grid.Edit');
+          text:=htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Edit'));
           Clickable:=true;
         end;
         with TemplateGrid.Cell[TemplateGrid.RowCount-1,3] do begin
-          text:=SiLangLinked1.GetTextOrDefault('Grid.Properties');
+          text:=htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Properties'));
           Clickable:=true;
         end;
         GrpTmplQuery.Next;
@@ -235,7 +235,7 @@ begin
        live_store:=GrpStoreQuery.FieldByName('TEST').AsString<>'1';
        if (not live_store) or
           (not testbox.checked and ((UserSession.privilege and PRIV_LIVE)<>0)) then begin
-         StoreCombo.Items.Add(GrpStoreQuery.FieldByName('NAME').AsString);
+         StoreCombo.Items.Add(htmlquote(GrpStoreQuery.FieldByName('NAME').AsString));
          storeIdList.Add(GrpStoreQuery.FieldByName('ID').AsString);
        end;
        GrpStoreQuery.next;
@@ -251,7 +251,7 @@ begin
     promoIdList.Clear;
     while not GrpPromoQuery.Eof do begin
        if (GrpPromoQuery.FieldByName('Template').AsString<>'1') then begin
-          PromoCombo.Items.Add(GrpPromoQuery.FieldByName('NAME').AsString);
+          PromoCombo.Items.Add(htmlquote(GrpPromoQuery.FieldByName('NAME').AsString));
           promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
        end;
        GrpPromoQuery.next;
@@ -500,7 +500,7 @@ begin
      FGT.show;
    end else begin
      TRP:=TFormTmplRevProp.create(WebApplication);
-     TRP.NoteEdit.Text:=templategrid.Cell[arow,4].Text;
+     TRP.NoteEdit.Text:=xmlunquote(templategrid.Cell[arow,4].Text);
      TRP.show;
    end;
 end;

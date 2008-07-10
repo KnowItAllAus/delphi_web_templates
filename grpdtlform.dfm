@@ -15,8 +15,8 @@ object FormGrpDtl: TFormGrpDtl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 41
-  DesignTop = 265
+  DesignLeft = 57
+  DesignTop = 191
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
