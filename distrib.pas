@@ -64,11 +64,12 @@ var
   t : boolean;
   n : string;
 begin
-  with RcDataModule.JobQuery do begin
+  with RcDataModule.JobAllQuery do begin
     Transaction.Active:=False;
     Transaction.Active:=True;
     Close;
     ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('ALL').AsString:='0';
     Open;
     with JobGrid do begin
       RowCount:=1;
@@ -92,7 +93,7 @@ begin
         with RcDataModule.GrpAllocQuery do begin
           Close;
           ParamByName('COMPANY').AsString:=UserSession.Company;
-          ParamByName('ITEMID').AsString:=RcDataModule.JobQuery.FieldByName('ID').AsString;
+          ParamByName('ITEMID').AsString:=RcDataModule.JobAllQuery.FieldByName('ID').AsString;
           Open;
           while not Eof do begin
               RowCount:=RowCount+1;

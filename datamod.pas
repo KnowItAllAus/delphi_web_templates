@@ -111,7 +111,7 @@ type
     LangEditControl1: TLangEditControl;
     suUserPrivQuery: TIBQuery;
     RequestUpdateGroup: TIBQuery;
-    JobQuery: TIBQuery;
+    JobAllQuery: TIBQuery;
     JobInsertQuery: TIBQuery;
     CurrentJobQuery: TIBQuery;
     UpdateJobQuery: TIBQuery;

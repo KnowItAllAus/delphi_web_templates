@@ -70,11 +70,12 @@ procedure TformJobs.RefreshGrid;
 var
   i : integer;
 begin
-  with RcDataModule.JobQuery do begin
+  with RcDataModule.JobAllQuery do begin
     Transaction.Active:=False;
     Transaction.Active:=True;
     Close;
     ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('ALL').AsString:='1';
     Open;
     with JobGrid do begin
       RowCount:=1;
@@ -91,6 +92,7 @@ begin
         end;
         with Cell[i, 1] do begin
           Text := htmlquote(FieldByName('NAME').AsString);
+          if FieldByName('TEMPLATE').AsString='1' then Text:=SiLink.GetTextOrDefault('Grid.Template')+': '+Text;
         end;
         with Cell[i, 2] do begin
           Text := htmlquote(FieldByName('DESCRIPTION').AsString);
