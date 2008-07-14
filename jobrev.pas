@@ -191,9 +191,10 @@ begin
     Open;
     with ParamGrid do begin
       RowCount:=1;
+      if (UserSession.privilege and PRIV_LIVE)=0 then ParamGrid.ColumnCount:=2 else ParamGrid.ColumnCount:=3;
       Cell[0, 0].Text := SiLink.GetTextOrDefault('Grid.Parameter');
       Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Type');
-      Cell[0, 2].Text := '';
+      if (UserSession.privilege and PRIV_LIVE)<>0 then Cell[0, 2].Text := '';
       i:=1;
       while not Eof do begin
         RowCount:=RowCount+1;
@@ -209,10 +210,11 @@ begin
           except
           end;
         end;
-        with Cell[i, 2] do begin
-          Text := SiLink.GetTextOrDefault('Grid.Delete');
-          Clickable:=true;
-        end;
+        if (UserSession.privilege and PRIV_LIVE)<>0 then
+           with Cell[i, 2] do begin
+             Text := SiLink.GetTextOrDefault('Grid.Delete');
+             Clickable:=true;
+           end;
         inc (i);
         Next;
       end;
@@ -246,7 +248,15 @@ begin
         NameEdit.Visible:=true;
         TypeCombo.Visible:=true;
      end;
-     Transaction.Commit;
+     Transaction.Active:=false;
+   end;
+   if (UserSession.privilege and PRIV_LIVE)=0 then begin
+      TypeCombo.Visible:=false;
+      AddParamBtn.Visible:=false;
+      TypeLbl.Visible:=false;
+      NameLbl.Visible:=false;
+      NameEdit.Visible:=false;
+      EditJobBtn.Visible:=false;
    end;
 end;
 

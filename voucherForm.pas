@@ -382,33 +382,22 @@ procedure TformVoucher.EditHdr (ID : String);
 var
   TFIH : TFormImgHdr;
 begin
+  RcDataModule.SaveValue('ImageHdrId',ID);
   with RcDataModule.CurrentImagehdrQuery do begin
     Close;
+    Transaction.Active:=false;
     ParamByName ('COMPANY').AsString:=UserSession.Company;
     ParamByName ('ID').AsString:=ID;
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
   TFIH:=TFormImgHdr.Create (WebApplication);
-  TFIH.setTemplate(istemplate);
+  //TFIH.setTemplate(istemplate);
   TFIH.show;
 end;
 
 procedure TFormVoucher.ImageBtnClick(Sender: TObject);
-var
-  ImageId : integer;
 begin
-  ImageId:=RcDataModule.nextID;
-  RcDataModule.ImageHdrInsertQuery.Transaction.Active:=True;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('NAME').AsString:=
-    SiLangLinked1.GetTextOrDefault('NewContent');
-  RcDataModule.ImageHdrInsertQuery.ParamByName('ID').AsInteger:=ImageId;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('JOBID').AsInteger:=
-    UserSession.JobRevID;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('COMPANY').AsString:=
-    UserSession.Company;
-  RcDataModule.ImageHdrInsertQuery.ParamByName('GUID').AsString:=RcDataModule.make_guid;
-  RcDataModule.ImageHdrInsertQuery.ExecSQL;
-  EditHdr (IntToStr(ImageID));
+  EditHdr ('0');
 end;
 
 procedure TFormVoucher.ImageGridCellClick(ASender: TObject; const ARow,

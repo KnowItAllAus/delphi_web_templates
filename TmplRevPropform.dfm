@@ -14,8 +14,8 @@ object FormTmplRevProp: TFormTmplRevProp
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 179
-  DesignTop = 262
+  DesignLeft = 171
+  DesignTop = 227
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
