@@ -64,7 +64,7 @@ implementation
 
 uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit;
 
-const paramtypes : array [1..4] of string = ('Object','Text','Date','Time','Integer');
+const paramtypes : array [1..5] of string = ('Object','Text','Date','Time','Integer');
 
 type tag_obj = class
   s : string;
