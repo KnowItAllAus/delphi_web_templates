@@ -315,6 +315,7 @@ end;
 
 procedure TFormVoucher.EditParams (ID : String);
 begin
+  RcDataModule.SaveValue ('EditVoucherId',ID);
   with RcDataModule.CurrentVoucherQuery do begin
     Close;
     ParamByName ('COMPANY').AsString:=TUserSession(WebApplication.Data).Company;

@@ -16,7 +16,7 @@ object formStores: TformStores
   ShowHint = True
   XPTheme = True
   DesignLeft = 103
-  DesignTop = 385
+  DesignTop = 128
   object IWRegion1: TIWRegion
     Left = 0
     Top = 111

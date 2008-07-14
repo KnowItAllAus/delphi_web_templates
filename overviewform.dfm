@@ -28,7 +28,6 @@ object FormOverview: TFormOverview
     inherited IWRegion1: TIWRegion
       Width = 1080
       Height = 29
-      TabOrder = 3
       inherited IWRectangle1: TIWRectangle
         Left = 704
       end
@@ -93,7 +92,7 @@ object FormOverview: TFormOverview
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'IWSiLink1'
-      TabOrder = 2
+      TabOrder = 3
       RawText = False
       SiLangLinked = silanglinked1
       LangFile = 'entities.sil'

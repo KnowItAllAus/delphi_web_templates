@@ -14,8 +14,8 @@ object formPoss: TformPoss
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 219
-  DesignTop = 360
+  DesignLeft = 186
+  DesignTop = 127
   object IWRegion1: TIWRegion
     Left = 0
     Top = 110

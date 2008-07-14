@@ -14,8 +14,8 @@ object ParamForm: TParamForm
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 216
-  DesignTop = 124
+  DesignLeft = 63
+  DesignTop = 133
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -28,7 +28,7 @@ object ParamForm: TParamForm
     inherited IWFrameRegion: TIWRegion
       Width = 983
       Height = 118
-      TabOrder = 10
+      TabOrder = 21
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
@@ -104,12 +104,12 @@ object ParamForm: TParamForm
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
-      Left = 219
-      Top = 50
-      Width = 567
-      Height = 391
+      Left = 179
+      Top = 60
+      Width = 647
+      Height = 361
       Cursor = crAuto
-      Anchors = [akLeft, akTop, akRight, akBottom]
+      Anchors = []
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -122,7 +122,7 @@ object ParamForm: TParamForm
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 567
+        Width = 647
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -145,7 +145,7 @@ object ParamForm: TParamForm
         Left = 0
         Top = 3
         Width = 3
-        Height = 388
+        Height = 358
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -233,9 +233,9 @@ object ParamForm: TParamForm
         Caption = 'TEMPLATE'
         RawText = False
       end
-      object IWLabel5: TIWLabel
+      object ActiveHLbl: TIWLabel
         Left = 33
-        Top = 159
+        Top = 139
         Width = 99
         Height = 16
         Cursor = crAuto
@@ -252,13 +252,13 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel5'
+        FriendlyName = 'ActiveHLbl'
         Caption = 'Active Hours'
         RawText = False
       end
-      object IWLabel13: TIWLabel
+      object ActiveHLblFrom: TIWLabel
         Left = 47
-        Top = 192
+        Top = 172
         Width = 34
         Height = 16
         Cursor = crAuto
@@ -275,14 +275,14 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel13'
+        FriendlyName = 'ActiveHLblFrom'
         Caption = 'From'
         RawText = False
       end
       object FromEdit: TIWEdit
         Left = 97
-        Top = 191
-        Width = 177
+        Top = 171
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -291,10 +291,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -304,14 +304,14 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 3
+        TabOrder = 5
         PasswordPrompt = False
         Text = 'FromEdit'
       end
       object ToEdit: TIWEdit
         Left = 97
-        Top = 215
-        Width = 177
+        Top = 195
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -320,10 +320,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -333,13 +333,13 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 4
+        TabOrder = 9
         PasswordPrompt = False
         Text = 'ToEdit'
       end
-      object IWLabel14: TIWLabel
+      object ActiveHLblTo: TIWLabel
         Left = 47
-        Top = 216
+        Top = 196
         Width = 18
         Height = 16
         Cursor = crAuto
@@ -356,13 +356,13 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel14'
+        FriendlyName = 'ActiveHLblTo'
         Caption = 'To'
         RawText = False
       end
-      object IWLabel17: TIWLabel
+      object ActivePeriodLbl: TIWLabel
         Left = 289
-        Top = 164
+        Top = 139
         Width = 102
         Height = 16
         Cursor = crAuto
@@ -379,13 +379,13 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel17'
+        FriendlyName = 'ActivePeriodLbl'
         Caption = 'Active Period'
         RawText = False
       end
-      object IWLabel18: TIWLabel
+      object ActivePeriodLblFrom: TIWLabel
         Left = 303
-        Top = 193
+        Top = 173
         Width = 29
         Height = 16
         Cursor = crAuto
@@ -402,14 +402,14 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel18'
+        FriendlyName = 'ActivePeriodLblFrom'
         Caption = 'Start'
         RawText = False
       end
       object PeriodStartEdit: TIWEdit
         Left = 353
-        Top = 192
-        Width = 177
+        Top = 172
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -418,10 +418,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -431,14 +431,14 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 5
+        TabOrder = 7
         PasswordPrompt = False
         Text = 'PeriodStartEdit'
       end
       object PeriodEndEdit: TIWEdit
         Left = 353
-        Top = 216
-        Width = 177
+        Top = 196
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -447,10 +447,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -460,13 +460,13 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 6
+        TabOrder = 11
         PasswordPrompt = False
         Text = 'PeriodEndEdit'
       end
-      object IWLabel19: TIWLabel
+      object ActivePeriodLblTo: TIWLabel
         Left = 303
-        Top = 217
+        Top = 197
         Width = 38
         Height = 16
         Cursor = crAuto
@@ -483,42 +483,13 @@ object ParamForm: TParamForm
         NoWrap = False
         ConvertSpaces = False
         AutoSize = False
-        FriendlyName = 'IWLabel19'
+        FriendlyName = 'ActivePeriodLblTo'
         Caption = 'Finish'
         RawText = False
       end
-      object NewTrigEdit: TIWEdit
-        Left = 96
-        Top = 121
-        Width = 177
-        Height = 20
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        FocusColor = clNone
-        DoSubmitValidation = True
-        Editable = True
-        NonEditableAsLabel = True
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'NewIDEdit'
-        MaxLength = 0
-        ReadOnly = False
-        Required = False
-        ScriptEvents = <>
-        TabOrder = 1
-        PasswordPrompt = False
-        Text = 'NewTrigEdit'
-      end
       object IWLabel8: TIWLabel
-        Left = 45
-        Top = 122
+        Left = 50
+        Top = 102
         Width = 28
         Height = 16
         Cursor = crAuto
@@ -539,9 +510,9 @@ object ParamForm: TParamForm
         Caption = 'Text'
         RawText = False
       end
-      object IWLabel1: TIWLabel
+      object TrigLabel: TIWLabel
         Left = 33
-        Top = 84
+        Top = 80
         Width = 99
         Height = 16
         Cursor = crAuto
@@ -585,9 +556,9 @@ object ParamForm: TParamForm
         Caption = 'Template Field Name References'
         RawText = False
       end
-      object IWLabel4: TIWLabel
+      object DaysLbl: TIWLabel
         Left = 289
-        Top = 89
+        Top = 80
         Width = 102
         Height = 16
         Cursor = crAuto
@@ -605,12 +576,12 @@ object ParamForm: TParamForm
         ConvertSpaces = False
         AutoSize = False
         FriendlyName = 'IWLabel17'
-        Caption = 'Active Period'
+        Caption = 'Active Days'
         RawText = False
       end
       object IWLabel6: TIWLabel
         Left = 303
-        Top = 118
+        Top = 102
         Width = 48
         Height = 16
         Cursor = crAuto
@@ -633,8 +604,8 @@ object ParamForm: TParamForm
       end
       object DaysEdit: TIWEdit
         Left = 353
-        Top = 117
-        Width = 177
+        Top = 101
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -643,10 +614,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -656,14 +627,14 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 2
+        TabOrder = 3
         PasswordPrompt = False
         Text = 'DaysEdit'
       end
       object VStartedit: TIWEdit
         Left = 97
-        Top = 289
-        Width = 177
+        Top = 264
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -672,10 +643,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -685,14 +656,14 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 7
+        TabOrder = 13
         PasswordPrompt = False
         Text = 'VStartEdit'
       end
       object VEndEdit: TIWEdit
         Left = 98
-        Top = 314
-        Width = 177
+        Top = 289
+        Width = 153
         Height = 20
         Cursor = crAuto
         IW50Hint = False
@@ -701,10 +672,10 @@ object ParamForm: TParamForm
         ZIndex = 0
         RenderSize = True
         Alignment = taLeftJustify
-        BGColor = clNone
+        BGColor = clWebSILVER
         FocusColor = clNone
         DoSubmitValidation = True
-        Editable = True
+        Editable = False
         NonEditableAsLabel = True
         Font.Color = clNone
         Font.Size = 10
@@ -714,13 +685,13 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 8
+        TabOrder = 15
         PasswordPrompt = False
         Text = 'VEndEdit'
       end
-      object IWLabel9: TIWLabel
+      object ValueLblFrom: TIWLabel
         Left = 47
-        Top = 292
+        Top = 267
         Width = 34
         Height = 16
         Cursor = crAuto
@@ -741,9 +712,9 @@ object ParamForm: TParamForm
         Caption = 'From'
         RawText = False
       end
-      object IWLabel10: TIWLabel
+      object ValueLblTo: TIWLabel
         Left = 47
-        Top = 316
+        Top = 291
         Width = 18
         Height = 16
         Cursor = crAuto
@@ -764,9 +735,9 @@ object ParamForm: TParamForm
         Caption = 'To'
         RawText = False
       end
-      object IWLabel7: TIWLabel
+      object ValueLbl: TIWLabel
         Left = 33
-        Top = 259
+        Top = 234
         Width = 99
         Height = 16
         Cursor = crAuto
@@ -787,6 +758,359 @@ object ParamForm: TParamForm
         Caption = 'Value'
         RawText = False
       end
+      object NewTrigEdit: TIWEdit
+        Left = 93
+        Top = 101
+        Width = 153
+        Height = 20
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Alignment = taLeftJustify
+        BGColor = clWebSILVER
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = False
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'NewIDEdit'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        TabOrder = 1
+        PasswordPrompt = False
+        Text = 'NewTrigEdit'
+      end
+      object IWButton1: TIWButton
+        Tag = 1
+        Left = 250
+        Top = 101
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 2
+        OnClick = IWButton1Click
+      end
+      object IWButton2: TIWButton
+        Tag = 6
+        Left = 509
+        Top = 196
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 12
+        OnClick = IWButton1Click
+      end
+      object IWButton3: TIWButton
+        Tag = 5
+        Left = 509
+        Top = 172
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 8
+        OnClick = IWButton1Click
+      end
+      object IWButton4: TIWButton
+        Tag = 2
+        Left = 510
+        Top = 101
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 4
+        OnClick = IWButton1Click
+      end
+      object IWButton5: TIWButton
+        Tag = 8
+        Left = 254
+        Top = 289
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 16
+        OnClick = IWButton1Click
+      end
+      object IWButton6: TIWButton
+        Tag = 7
+        Left = 254
+        Top = 264
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 14
+        OnClick = IWButton1Click
+      end
+      object IWButton7: TIWButton
+        Tag = 3
+        Left = 253
+        Top = 171
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 6
+        OnClick = IWButton1Click
+      end
+      object IWButton8: TIWButton
+        Tag = 4
+        Left = 253
+        Top = 196
+        Width = 21
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = '...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton1'
+        ScriptEvents = <>
+        TabOrder = 10
+        OnClick = IWButton1Click
+      end
+      object EditRegion: TIWRegion
+        Left = 295
+        Top = 240
+        Width = 326
+        Height = 101
+        Cursor = crAuto
+        Visible = False
+        BorderOptions.NumericWidth = 2
+        BorderOptions.BorderWidth = cbwNumeric
+        BorderOptions.Style = cbsSolid
+        BorderOptions.Color = clWebYELLOW
+        Color = 13150098
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 1000
+        Splitter = False
+        object FieldCombo: TIWComboBox
+          Left = 150
+          Top = 35
+          Width = 156
+          Height = 21
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = True
+          BGColor = clNone
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          FocusColor = clNone
+          AutoHideOnMenuActivation = False
+          ItemsHaveValues = False
+          NoSelectionText = 'XXXXX'
+          Required = False
+          RequireSelection = True
+          ScriptEvents = <>
+          UseSize = True
+          Style = stNormal
+          ButtonColor = clBtnFace
+          DoSubmitValidation = True
+          Editable = True
+          NonEditableAsLabel = False
+          TabOrder = 17
+          ItemIndex = 0
+          Items.Strings = (
+            '- - - - - - - - -')
+          Sorted = False
+          FriendlyName = 'FieldCombo'
+        end
+        object IWLabel11: TIWLabel
+          Left = 20
+          Top = 36
+          Width = 114
+          Height = 16
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = False
+          Alignment = taLeftJustify
+          BGColor = clNone
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          NoWrap = False
+          ConvertSpaces = False
+          FriendlyName = 'IWLabel11'
+          Caption = 'Select Parameter'
+          RawText = False
+        end
+        object ModBtn: TIWButton
+          Left = 185
+          Top = 65
+          Width = 75
+          Height = 25
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = True
+          Caption = 'Modify'
+          DoSubmitValidation = True
+          Color = clBtnFace
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          FriendlyName = 'ModBtn'
+          ScriptEvents = <>
+          TabOrder = 18
+          OnClick = ModBtnClick
+        end
+        object ParamName: TIWLabel
+          Left = 20
+          Top = 11
+          Width = 128
+          Height = 16
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = False
+          Alignment = taLeftJustify
+          BGColor = clNone
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = [fsBold]
+          NoWrap = False
+          ConvertSpaces = False
+          FriendlyName = 'IWLabel11'
+          Caption = 'Parameter Name'
+          RawText = False
+        end
+        object CancelBtn: TIWButton
+          Left = 50
+          Top = 65
+          Width = 75
+          Height = 25
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = True
+          Caption = 'Cancel'
+          DoSubmitValidation = True
+          Color = clBtnFace
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          FriendlyName = 'IWButton9'
+          ScriptEvents = <>
+          TabOrder = 19
+          OnClick = CancelBtnClick
+        end
+      end
     end
   end
   inline userfooter1: Tuserfooter
@@ -800,7 +1124,7 @@ object ParamForm: TParamForm
     inherited IWRegion1: TIWRegion
       Width = 983
       Height = 29
-      TabOrder = 9
+      TabOrder = 20
       inherited IWRectangle1: TIWRectangle
         Left = 607
         Width = 416
@@ -813,6 +1137,7 @@ object ParamForm: TParamForm
       end
       inherited Cancel: TIWButton
         Left = 897
+        Caption = 'Back'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
@@ -822,9 +1147,7 @@ object ParamForm: TParamForm
       end
       inherited Extra2: TIWButton
         Left = 721
-        Visible = True
         Caption = 'Save'
-        OnClick = userfooter1Extra2Click
       end
       inherited fiwSiLink1: TIWSiLink
         Left = 353
@@ -858,19 +1181,36 @@ object ParamForm: TParamForm
     TranslationData = {
       737443617074696F6E730D0A4A6F624C6162656C014A6F62010D0A49574C6162
       656C33014F7665727269646573010D0A74656D706C6174656C626C0154454D50
-      4C415445010D0A49574C6162656C350141637469766520486F757273010D0A49
-      574C6162656C31330146726F6D010D0A49574C6162656C313401546F010D0A49
-      574C6162656C31370141637469766520506572696F64010D0A49574C6162656C
-      3138015374617274010D0A49574C6162656C31390146696E697368010D0A4957
-      4C6162656C380154657874010D0A49574C6162656C3101547269676765722054
-      657874010D0A49574C6162656C320154656D706C617465204669656C64204E61
-      6D65205265666572656E636573010D0A49574C6162656C340141637469766520
-      506572696F64010D0A49574C6162656C360144617973010D0A49574C6162656C
-      390146726F6D010D0A49574C6162656C313001546F010D0A49574C6162656C37
-      0156616C7565010D0A737448696E74730D0A7374446973706C61794C6162656C
-      730D0A7374466F6E74730D0A73744D756C74694C696E65730D0A737453747269
-      6E67730D0A73744F74686572537472696E67730D0A54506172616D466F726D2E
-      5469746C6501010D0A7374436F6C6C656374696F6E730D0A7374436861725365
-      74730D0A}
+      4C415445010D0A416374697665484C626C0141637469766520486F757273010D
+      0A416374697665484C626C46726F6D0146726F6D010D0A416374697665484C62
+      6C546F01546F010D0A416374697665506572696F644C626C0141637469766520
+      506572696F64010D0A416374697665506572696F644C626C46726F6D01537461
+      7274010D0A416374697665506572696F644C626C546F0146696E697368010D0A
+      49574C6162656C380154657874010D0A547269674C6162656C01547269676765
+      722054657874010D0A49574C6162656C320154656D706C617465204669656C64
+      204E616D65205265666572656E636573010D0A446179734C626C014163746976
+      652044617973010D0A49574C6162656C360144617973010D0A56616C75654C62
+      6C46726F6D0146726F6D010D0A56616C75654C626C546F01546F010D0A56616C
+      75654C626C0156616C7565010D0A4957427574746F6E31012E2E2E010D0A4957
+      427574746F6E32012E2E2E010D0A4957427574746F6E33012E2E2E010D0A4957
+      427574746F6E34012E2E2E010D0A4957427574746F6E35012E2E2E010D0A4957
+      427574746F6E36012E2E2E010D0A4957427574746F6E37012E2E2E010D0A4957
+      427574746F6E38012E2E2E010D0A49574C6162656C31310153656C6563742050
+      6172616D65746572010D0A4D6F6442746E014D6F64696679010D0A506172616D
+      4E616D6501506172616D65746572204E616D65010D0A43616E63656C42746E01
+      43616E63656C010D0A737448696E74730D0A7374446973706C61794C6162656C
+      730D0A7374466F6E74730D0A73744D756C74694C696E65730D0A4669656C6443
+      6F6D626F2E4974656D73012254686973207468696E6722010D0A737453747269
+      6E67730D0A4E6F4669656C64014E6F206D61746368696E67204669656C647301
+      0D0A73744F74686572537472696E67730D0A54506172616D466F726D2E546974
+      6C6501010D0A4957427574746F6E312E486F744B657901010D0A495742757474
+      6F6E322E486F744B657901010D0A4957427574746F6E332E486F744B65790101
+      0D0A4957427574746F6E342E486F744B657901010D0A4957427574746F6E352E
+      486F744B657901010D0A4957427574746F6E362E486F744B657901010D0A4957
+      427574746F6E372E486F744B657901010D0A4957427574746F6E382E486F744B
+      657901010D0A4669656C64436F6D626F2E4E6F53656C656374696F6E54657874
+      012D202D202D202D202D202D202D20010D0A4D6F6442746E2E486F744B657901
+      010D0A43616E63656C42746E2E486F744B657901010D0A7374436F6C6C656374
+      696F6E730D0A737443686172536574730D0A}
   end
 end

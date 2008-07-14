@@ -310,7 +310,7 @@ end;
 
 procedure TFormJobRev.AddParamBtnClick(Sender: TObject);
 begin
-  try
+  if NameEdit.Text<>'' then try
     with RcDataModule.SQLQry do begin
       Transaction.Active:=False;
       Transaction.Active:=True;

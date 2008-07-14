@@ -181,6 +181,7 @@ procedure GotoJob (ID : String; name : string; rev : string; note : string);
 begin
    UserSession.JobHdrID:=strtoint (ID);
    UserSession.JobName := name;
+   RcDataModule.SaveValue ('EditJob',ID);
    with RcDataModule do begin
       Trans.Active:=false;
       CurrentJobQuery.ParamByName('COMPANY').AsString:=UserSession.Company;

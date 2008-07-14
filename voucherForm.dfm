@@ -30,7 +30,6 @@ object FormVoucher: TFormVoucher
     inherited IWFrameRegion: TIWRegion
       Width = 1045
       Height = 118
-      TabOrder = 9
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
@@ -72,6 +71,7 @@ object FormVoucher: TFormVoucher
     inherited IWRegion1: TIWRegion
       Width = 1045
       Height = 29
+      TabOrder = 9
       inherited IWRectangle1: TIWRectangle
         Left = 629
         Width = 416
