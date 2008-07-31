@@ -406,6 +406,7 @@ begin
   with RcDataModule.AllocItemDelQry do begin
     ParamByName ('ITEMID').AsString:=sList[ARow-1];
     ParamByName ('ITEMKIND').AsString:='1';
+    ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
     ParamByName ('COMPANY').AsString:=UserSession.Company;
     ExecSQL;
     Transaction.commit;
@@ -422,9 +423,10 @@ begin
       SQLEx.Transaction.Active:=false;
       SQLEx.Transaction.Active:=true;
       SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('delete from GROUPALLOC where ID=:ID and ITEMKIND=2 and COMPANY=:COMPANY');
+      SQLEx.SQL.Add('delete from GROUPALLOC where ID=:ID and GROUPID=:GROUPID and ITEMKIND=2 and COMPANY=:COMPANY');
       SQLEx.ParamByName ('ID').AsString:=PList[ARow-1];
       SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLEx.ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
       SQLEx.ExecQuery;
       SQLEx.Transaction.Commit;
     end;
