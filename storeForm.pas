@@ -114,7 +114,7 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global;
+uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse_utils, IWTypes;
 
 {$R *.DFM}
 
@@ -172,6 +172,14 @@ end;
 
 procedure TformStore.PostButtonClick(Sender: TObject);
 begin
+  if (length(errataedit.text)>0) then begin
+     if check_errata (errataEdit.Text)=false then begin
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('InvalidErrata'), smAlert);
+        exit;
+     end;
+  end;
+  errataedit.text:=clean_errata (errataedit.text);
+
   try
     RcDataModule.storeUpdateQuery.ParamByName('OLD_ID').AsString:=
       RcDataModule.CurrentstoreQuery.FieldByName('ID').AsString;

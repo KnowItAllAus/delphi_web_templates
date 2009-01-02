@@ -63,7 +63,8 @@ uses
   imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm},
   groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
   imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
-  paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm};
+  paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
+  parse_utils in '..\common\parse_utils.pas';
 
 {$R *.res}
 

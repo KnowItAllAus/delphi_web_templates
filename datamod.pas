@@ -267,6 +267,7 @@ end;
 
 procedure TRcDataMod.DataModuleCreate(Sender: TObject);
 begin
+   values:=tstringlist.create;
    randomize;
    if GetDBName<>'' then
       RecastDb.DatabaseName:=GetDBName;
@@ -276,7 +277,6 @@ begin
    RecastDb.Connected:=true;
    TranDb.Connected:=true;
    SiLangDispatcher1.LoadAllFromFile ('main.sil');
-   values:=tstringlist.create;
 end;
 
 function TRcDataMod.nextID : integer;

@@ -97,6 +97,8 @@ type
     TranIDLbl: TIWLabel;
     TranIDEdit: TIWEdit;
     ExclKeepAsynchBox: TIWCheckBox;
+    IWLabel29: TIWLabel;
+    errataedit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -107,7 +109,7 @@ type
     procedure SmartCutBtnClick(Sender: TObject);
   private
     { Private declarations }
-    procedure PostData;
+    function PostData : boolean;
   public
     { Public declarations }
     regexlist : TStringlist;
@@ -120,7 +122,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, cfgtypes, possform;
+uses datamod, db, servercontroller, IWInit, cfgtypes, possform, IWTypes, parse_utils;
 {$R *.DFM}
 
 procedure GoPos;
@@ -226,15 +228,35 @@ begin
       SCTrigEdit.Text:=FieldByName ('SMARTCUTTRIG').AsString;
       DocLinesEdit.Text:=FieldByName('SMARTCUTMIN').AsString;
       TranIDEdit.Text:=FieldByName('TRANIDTRIG').AsString;
+      ErrataEdit.Text:=FieldByName('PRNERRATA').AsString;
   end;
   SmartCutBtnClick(self);
 end;
 
-procedure TFormPOS.PostData;
+function TFormPOS.PostData : boolean;
 var
   offset : integer;
   sup : integer;
 begin
+  result:=true;
+
+  try
+      if (length(SCTrigEdit.text)>0) and smartcutbtn.Checked then getcodestringex (SCTrigEdit.Text);
+  except
+      WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('InvalidSCText'), smAlert);
+      result:=false;
+      exit;
+  end;
+
+  if (length(errataedit.text)>0) then begin
+     if check_errata (errataEdit.Text)=false then begin
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('InvalidErrata'), smAlert);
+        result:=false;
+        exit;
+     end;
+  end;
+  errataedit.text:=clean_errata (errataedit.text);
+
   with RcDataModule.posUpdateQuery do begin
       ParamByName('OLD_ID').AsString:=
         RcDataModule.CurrentposQuery.FieldByName('ID').AsString;
@@ -278,6 +300,7 @@ begin
       ParamByName('EXTRATRIGS').AsString:=ExtraEdit.Text;
       ParamByName('PARAMS').AsString:=ParamEdit.Text;
       ParamByName('TRANIDTRIG').AsString:=TranIDEdit.Text;
+      ParamByName('PRNERRATA').AsString:=ErrataEdit.Text;
       try
         offset:=strtoint (DocLinesEdit.text);
         if (offset<=0) or (offset>=99) then offset:=10;
@@ -297,7 +320,7 @@ end;
 procedure TFormPOS.PostButtonClick(Sender: TObject);
 begin
   try
-    postdata;
+    if not postdata then exit;
     RcDataModule.posUpdateQuery.Transaction.Commit;
     GoPos;
   except

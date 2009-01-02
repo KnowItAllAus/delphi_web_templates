@@ -2,7 +2,7 @@ object FormPOS: TFormPOS
   Left = 0
   Top = 0
   Width = 1087
-  Height = 717
+  Height = 755
   ConnectionMode = cmAny
   SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
@@ -16,13 +16,13 @@ object FormPOS: TFormPOS
   ShowHint = True
   OnDefaultAction = PostButtonClick
   XPTheme = True
-  DesignLeft = 57
-  DesignTop = 145
+  DesignLeft = 126
+  DesignTop = 61
   object IWRegion1: TIWRegion
     Left = 0
     Top = 115
     Width = 1087
-    Height = 573
+    Height = 611
     Cursor = crAuto
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -36,7 +36,7 @@ object FormPOS: TFormPOS
     Splitter = False
     DesignSize = (
       1087
-      573)
+      611)
     object IWSiLink1: TIWSiLink
       Left = 0
       Top = -1
@@ -56,7 +56,7 @@ object FormPOS: TFormPOS
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'IWSiLink1'
-      TabOrder = 37
+      TabOrder = 38
       RawText = False
       SiLangLinked = siLangLinked1
       LangFile = 'pos.sil'
@@ -66,7 +66,7 @@ object FormPOS: TFormPOS
       Left = 150
       Top = 18
       Width = 777
-      Height = 539
+      Height = 577
       Cursor = crAuto
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
@@ -80,7 +80,7 @@ object FormPOS: TFormPOS
       Splitter = False
       object IWLabel20: TIWLabel
         Left = 51
-        Top = 478
+        Top = 513
         Width = 57
         Height = 16
         Cursor = crAuto
@@ -301,7 +301,7 @@ object FormPOS: TFormPOS
         Left = 0
         Top = 3
         Width = 3
-        Height = 536
+        Height = 574
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -321,7 +321,7 @@ object FormPOS: TFormPOS
       end
       object IWRegion3: TIWRegion
         Left = 120
-        Top = 472
+        Top = 507
         Width = 609
         Height = 59
         Cursor = crAuto
@@ -383,7 +383,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
-          TabOrder = 33
+          TabOrder = 34
           PasswordPrompt = False
         end
         object IWLabel26: TIWLabel
@@ -434,7 +434,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
-          TabOrder = 34
+          TabOrder = 35
           PasswordPrompt = False
         end
       end
@@ -442,7 +442,7 @@ object FormPOS: TFormPOS
         Left = 120
         Top = 139
         Width = 609
-        Height = 327
+        Height = 362
         Cursor = crAuto
         TabOrder = 8
         BorderOptions.NumericWidth = 1
@@ -456,9 +456,9 @@ object FormPOS: TFormPOS
         Splitter = False
         object DupEdit: TIWEdit
           Left = 123
-          Top = 5
+          Top = 3
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -530,9 +530,9 @@ object FormPOS: TFormPOS
         end
         object ReqEdit: TIWEdit
           Left = 123
-          Top = 29
+          Top = 27
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -581,9 +581,9 @@ object FormPOS: TFormPOS
         end
         object ExclEdit: TIWEdit
           Left = 123
-          Top = 54
+          Top = 52
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -632,9 +632,9 @@ object FormPOS: TFormPOS
         end
         object MerchEdit: TIWEdit
           Left = 427
-          Top = 5
+          Top = 3
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -683,9 +683,9 @@ object FormPOS: TFormPOS
         end
         object ProdEndEdit: TIWEdit
           Left = 123
-          Top = 127
+          Top = 125
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -711,9 +711,9 @@ object FormPOS: TFormPOS
         end
         object ProdStartEdit: TIWEdit
           Left = 123
-          Top = 101
+          Top = 99
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -846,9 +846,9 @@ object FormPOS: TFormPOS
         end
         object LogoEdit: TIWEdit
           Left = 427
-          Top = 31
+          Top = 29
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -897,9 +897,9 @@ object FormPOS: TFormPOS
         end
         object VoucherEdit: TIWEdit
           Left = 427
-          Top = 57
+          Top = 55
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -971,9 +971,9 @@ object FormPOS: TFormPOS
         end
         object StartEdit: TIWEdit
           Left = 123
-          Top = 184
+          Top = 182
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1022,9 +1022,9 @@ object FormPOS: TFormPOS
         end
         object EndEdit: TIWEdit
           Left = 123
-          Top = 216
+          Top = 214
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1073,9 +1073,9 @@ object FormPOS: TFormPOS
         end
         object VoidEdit: TIWEdit
           Left = 427
-          Top = 173
+          Top = 171
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1124,9 +1124,9 @@ object FormPOS: TFormPOS
         end
         object CancelEdit: TIWEdit
           Left = 427
-          Top = 224
+          Top = 222
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1175,9 +1175,9 @@ object FormPOS: TFormPOS
         end
         object ExceptEdit: TIWEdit
           Left = 460
-          Top = 198
+          Top = 196
           Width = 137
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1226,9 +1226,9 @@ object FormPOS: TFormPOS
         end
         object OffsetEdit: TIWEdit
           Left = 438
-          Top = 82
+          Top = 80
           Width = 38
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1300,9 +1300,9 @@ object FormPOS: TFormPOS
         end
         object SuppressEdit: TIWEdit
           Left = 123
-          Top = 246
+          Top = 244
           Width = 170
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1399,9 +1399,9 @@ object FormPOS: TFormPOS
         end
         object ExtraEdit: TIWEdit
           Left = 123
-          Top = 273
-          Width = 468
-          Height = 20
+          Top = 271
+          Width = 475
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1475,9 +1475,9 @@ object FormPOS: TFormPOS
         end
         object SCTrigEdit: TIWEdit
           Left = 427
-          Top = 124
+          Top = 122
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           Visible = False
           IW50Hint = False
@@ -1528,9 +1528,9 @@ object FormPOS: TFormPOS
         end
         object DocLinesEdit: TIWEdit
           Left = 427
-          Top = 148
+          Top = 146
           Width = 38
-          Height = 20
+          Height = 22
           Cursor = crAuto
           Visible = False
           IW50Hint = False
@@ -1627,9 +1627,9 @@ object FormPOS: TFormPOS
         end
         object ParamEdit: TIWEdit
           Left = 123
-          Top = 298
-          Width = 468
-          Height = 20
+          Top = 296
+          Width = 475
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1650,7 +1650,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
-          TabOrder = 38
+          TabOrder = 39
           PasswordPrompt = False
         end
         object TranIDLbl: TIWLabel
@@ -1678,9 +1678,9 @@ object FormPOS: TFormPOS
         end
         object TranIDEdit: TIWEdit
           Left = 427
-          Top = 249
+          Top = 247
           Width = 171
-          Height = 20
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1701,7 +1701,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
-          TabOrder = 39
+          TabOrder = 40
           PasswordPrompt = False
         end
         object ExclKeepAsynchBox: TIWCheckBox
@@ -1723,9 +1723,61 @@ object FormPOS: TFormPOS
           ScriptEvents = <>
           DoSubmitValidation = True
           Style = stNormal
-          TabOrder = 40
+          TabOrder = 41
           Checked = False
           FriendlyName = 'Signbox'
+        end
+        object IWLabel29: TIWLabel
+          Left = 10
+          Top = 335
+          Width = 103
+          Height = 16
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 1
+          RenderSize = True
+          Alignment = taLeftJustify
+          BGColor = clNone
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          NoWrap = False
+          ConvertSpaces = False
+          AutoSize = False
+          FriendlyName = 'IWLabel14'
+          Caption = 'Printer Errata'
+          RawText = False
+        end
+        object errataedit: TIWEdit
+          Left = 123
+          Top = 331
+          Width = 475
+          Height = 22
+          Cursor = crAuto
+          Hint = '#n'#39'text'#39' format separated by colons. Use > to replace codes.'
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = True
+          Alignment = taLeftJustify
+          BGColor = clNone
+          FocusColor = clNone
+          DoSubmitValidation = True
+          Editable = True
+          NonEditableAsLabel = True
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          FriendlyName = 'NewNameEdit'
+          MaxLength = 0
+          ReadOnly = False
+          Required = False
+          ScriptEvents = <>
+          TabOrder = 33
+          PasswordPrompt = False
         end
       end
       object IWRegion5: TIWRegion
@@ -1771,7 +1823,7 @@ object FormPOS: TFormPOS
           Left = 136
           Top = 4
           Width = 17
-          Height = 26
+          Height = 25
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1824,7 +1876,7 @@ object FormPOS: TFormPOS
           Left = 336
           Top = 4
           Width = 17
-          Height = 26
+          Height = 25
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1875,9 +1927,9 @@ object FormPOS: TFormPOS
         end
         object FormEdit: TIWEdit
           Left = 123
-          Top = 37
-          Width = 286
-          Height = 20
+          Top = 35
+          Width = 338
+          Height = 22
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -1926,7 +1978,7 @@ object FormPOS: TFormPOS
         end
         object IWLabel28: TIWLabel
           Left = 410
-          Top = 10
+          Top = 4
           Width = 66
           Height = 16
           Cursor = crAuto
@@ -1948,7 +2000,7 @@ object FormPOS: TFormPOS
         end
         object DetectBtn: TIWRadioButton
           Left = 480
-          Top = 10
+          Top = 4
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -1971,7 +2023,7 @@ object FormPOS: TFormPOS
         end
         object SuppressBtn: TIWRadioButton
           Left = 480
-          Top = 30
+          Top = 22
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -1994,7 +2046,7 @@ object FormPOS: TFormPOS
         end
         object AssumeBtn: TIWRadioButton
           Left = 480
-          Top = 50
+          Top = 40
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -2020,7 +2072,7 @@ object FormPOS: TFormPOS
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 688
+    Top = 726
     Width = 1087
     Height = 29
     HorzScrollBar.Visible = False
@@ -2029,7 +2081,7 @@ object FormPOS: TFormPOS
     inherited IWRegion1: TIWRegion
       Width = 1087
       Height = 29
-      TabOrder = 35
+      TabOrder = 36
       inherited IWRectangle1: TIWRectangle
         Left = 711
       end
@@ -2076,7 +2128,7 @@ object FormPOS: TFormPOS
     inherited IWFrameRegion: TIWRegion
       Width = 1087
       Height = 115
-      TabOrder = 36
+      TabOrder = 37
       inherited titleimage: TIWImageFile
         Width = 461
         ImageFile.Filename = 'E:\delphi\delphi_web\files\admin.GIF'
@@ -2163,27 +2215,36 @@ object FormPOS: TFormPOS
       3701506172616D73010D0A49574C6162656C323801466972737420436F707901
       0D0A44657465637442746E01446574656374010D0A537570707265737342746E
       015375707072657373010D0A417373756D6542746E01416C7761797320417373
-      756D65010D0A5472616E49444C626C015472616E204944010D0A737448696E74
-      730D0A7374446973706C61794C6162656C730D0A7374466F6E74730D0A73744D
-      756C74694C696E65730D0A50726F64536570426F782E4974656D7301224E6F20
-      53657061726174696F6E222C536570617261746F722C426C616E6B2C22536570
-      617261746F72206F7220426C616E6B22010D0A7374537472696E67730D0A4465
-      6C436F6E660144656C657465205468697320504F533F010D0A73744F74686572
-      537472696E67730D0A50726F64536570426F782E4E6F53656C656374696F6E54
-      657874012D2D204E6F2053656C656374696F6E202D2D010D0A456F70426F782E
-      436F6E6669726D6174696F6E01010D0A495753694C696E6B312E436F6E666972
-      6D6174696F6E01010D0A5369676E626F782E436F6E6669726D6174696F6E0101
-      0D0A54696D656F757442746E2E47726F7570016E6F2067726F7570010D0A5469
-      6D656F757442746E2E56616C75650154696D656F757442746E010D0A536D6172
-      7443757442746E2E47726F7570016E6F2067726F7570010D0A536D6172744375
-      7442746E2E56616C756501536D61727443757442746E010D0A4E6F726D42746E
-      2E47726F7570016E6F2067726F7570010D0A4E6F726D42746E2E56616C756501
-      4E6F726D42746E010D0A496E63426F782E436F6E6669726D6174696F6E01010D
-      0A44657465637442746E2E47726F7570016669727374010D0A44657465637442
-      746E2E56616C75650144657465637442746E010D0A537570707265737342746E
-      2E47726F7570016669727374010D0A537570707265737342746E2E56616C7565
-      01537570707265737342746E010D0A417373756D6542746E2E47726F75700166
-      69727374010D0A417373756D6542746E2E56616C756501417373756D6542746E
-      010D0A7374436F6C6C656374696F6E730D0A737443686172536574730D0A}
+      756D65010D0A5472616E49444C626C015472616E204944010D0A4578636C4B65
+      65704173796E6368426F78014B656570204173796E6368010D0A49574C616265
+      6C3239015072696E74657220457272617461010D0A737448696E74730D0A7374
+      446973706C61794C6162656C730D0A7374466F6E74730D0A73744D756C74694C
+      696E65730D0A50726F64536570426F782E4974656D7301224E6F205365706172
+      6174696F6E222C536570617261746F722C426C616E6B2C22536570617261746F
+      72206F7220426C616E6B22010D0A7374537472696E67730D0A44656C436F6E66
+      0144656C657465205468697320504F533F010D0A496E76616C69645343546578
+      7401496E76616C696420536D617274204375742074657874202D207573652023
+      6E277465787427206E6F746174696F6E2E010D0A496E76616C69644572726174
+      6101496E76616C6964206572726174612074657874202D2075736520236E2774
+      65787427206E6F746174696F6E2C20736570617261746520656E747269657320
+      7769746820636F6C6F6E73206F722073656D69636F6C6F6E732E010D0A73744F
+      74686572537472696E67730D0A50726F64536570426F782E4E6F53656C656374
+      696F6E54657874012D2D204E6F2053656C656374696F6E202D2D010D0A456F70
+      426F782E436F6E6669726D6174696F6E01010D0A495753694C696E6B312E436F
+      6E6669726D6174696F6E01010D0A5369676E626F782E436F6E6669726D617469
+      6F6E01010D0A54696D656F757442746E2E47726F7570016E6F2067726F757001
+      0D0A54696D656F757442746E2E56616C75650154696D656F757442746E010D0A
+      536D61727443757442746E2E47726F7570016E6F2067726F7570010D0A536D61
+      727443757442746E2E56616C756501536D61727443757442746E010D0A4E6F72
+      6D42746E2E47726F7570016E6F2067726F7570010D0A4E6F726D42746E2E5661
+      6C7565014E6F726D42746E010D0A496E63426F782E436F6E6669726D6174696F
+      6E01010D0A44657465637442746E2E47726F7570016669727374010D0A446574
+      65637442746E2E56616C75650144657465637442746E010D0A53757070726573
+      7342746E2E47726F7570016669727374010D0A537570707265737342746E2E56
+      616C756501537570707265737342746E010D0A417373756D6542746E2E47726F
+      7570016669727374010D0A417373756D6542746E2E56616C756501417373756D
+      6542746E010D0A4578636C4B6565704173796E6368426F782E436F6E6669726D
+      6174696F6E01010D0A7374436F6C6C656374696F6E730D0A7374436861725365
+      74730D0A}
   end
 end
