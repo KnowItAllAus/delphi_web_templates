@@ -555,11 +555,8 @@ object FormVoucherEdit2: TFormVoucherEdit2
           'Print: Text'
           'Print: Product'
           'Print: Stock'
-          'Scan: Loyalty'
-          'Scan: Voucher'
-          'Scan: General'
-          'Card: Loyalty'
-          'Card: General')
+          'Scan'
+          'Card')
         Sorted = False
         FriendlyName = 'PurposeCombo'
       end
@@ -836,8 +833,8 @@ object FormVoucherEdit2: TFormVoucherEdit2
           RawText = False
         end
         object DupBox: TIWCheckBox
-          Left = 552
-          Top = 25
+          Left = 467
+          Top = 60
           Width = 129
           Height = 21
           Cursor = crAuto
@@ -859,8 +856,8 @@ object FormVoucherEdit2: TFormVoucherEdit2
           FriendlyName = 'DupBox'
         end
         object PassthroughBox: TIWCheckBox
-          Left = 552
-          Top = 6
+          Left = 467
+          Top = 36
           Width = 97
           Height = 21
           Cursor = crAuto
@@ -882,10 +879,10 @@ object FormVoucherEdit2: TFormVoucherEdit2
           FriendlyName = 'DupBox'
         end
         object IWRadioGroup1: TIWRadioGroup
-          Left = 405
-          Top = 65
-          Width = 321
-          Height = 19
+          Left = 625
+          Top = 20
+          Width = 76
+          Height = 61
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -901,9 +898,8 @@ object FormVoucherEdit2: TFormVoucherEdit2
           Items.Strings = (
             'Normal'
             'Rnd Qty'
-            'Transaction'
             'Customer.')
-          Layout = glHorizontal
+          Layout = glVertical
           ScriptEvents = <>
           TabOrder = 31
         end
@@ -969,7 +965,7 @@ object FormVoucherEdit2: TFormVoucherEdit2
         object NewTrigEdit: TIWEdit
           Left = 191
           Top = 6
-          Width = 305
+          Width = 375
           Height = 20
           Cursor = crAuto
           IW50Hint = False
