@@ -687,7 +687,7 @@ procedure TFormVoucherEdit.PurposeComboChange(Sender: TObject);
 var
    receiptTrigger : boolean;
 begin
-   receipttrigger:=PurposeCombo.ItemIndex in [0,1,2,3,6,13];
+   receipttrigger:=PurposeCombo.ItemIndex in [0,1,2,3,6,13,15];
    Passthroughbox.visible:=not receiptTrigger;
    DupBox.visible:=receiptTrigger;
    NewVendEdit.Visible:=not receipttrigger or (PurposeCombo.ItemIndex=13);
