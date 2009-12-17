@@ -109,6 +109,7 @@ begin
     end;
   except
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
+    exit;
   end;
 
   // Automatically add template parameters

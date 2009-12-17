@@ -417,7 +417,8 @@ begin
     dmKeyboard,
     dmInput,
     dmEvent,
-    dmScript:
+    dmScript,
+    dmInterceptor:
       begin
         Image.Visible := False;
         Memo.Visible := True;
