@@ -98,7 +98,7 @@ begin
    end;
    if (UserSession.UserCompany<>'0') and ((UserSession.privilege and PRIV_EDIT) = 0)  then begin
       disable(PromoLnk);
-      disable(DistribLnk);
+      //disable(DistribLnk);
    end;
    disable (InstallLnk);
    if UserSession.Company='0' then begin
@@ -160,10 +160,14 @@ begin
       TFormJobs.Create(WebApplication).Show;
     end;
     1: begin
-      if (UserSession.Company='0') or ((usersession.privilege and PRIV_EDIT)=0) then exit;
+      if (UserSession.Company='0') then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
-      Tformdistrib.Create(WebApplication).show;
+      if ((usersession.privilege and PRIV_EDIT)=0) then begin
+         TFormDistribStatus.Create(WebApplication).show;
+      end else begin
+         Tformdistrib.Create(WebApplication).show;
+      end;
     end;
     2: begin
       if UserSession.Company='0' then exit;

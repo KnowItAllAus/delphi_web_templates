@@ -27,6 +27,7 @@ type
       AColumn: Integer);
     procedure JobGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
+    procedure DistribFrameTitle1statuslinkClick(Sender: TObject);
   public
     procedure drawgrid;
     procedure GetGroupName (ID : Integer; Co : Integer; var n : string; var t : boolean);
@@ -160,6 +161,12 @@ begin
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
   TFormdistribdtl.Create(WebApplication).Show;
+end;
+
+procedure TFormDistrib.DistribFrameTitle1statuslinkClick(Sender: TObject);
+begin
+  DistribFrameTitle1.statuslinkClick(Sender);
+
 end;
 
 end.

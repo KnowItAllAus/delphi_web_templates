@@ -185,6 +185,7 @@ begin
      newbtn.enabled:=false;
      delbtn.enabled:=false;
      testbtn.enabled:=false;
+     cpybtn.enabled:=false;
   end;
 end;
 

@@ -257,6 +257,11 @@ object FormDistrib: TFormDistrib
       inherited EntityRegn: TIWRegion
         Color = 10526880
       end
+      inherited statusregn: TIWRegion
+        inherited statuslink: TIWLink
+          OnClick = DistribFrameTitle1statuslinkClick
+        end
+      end
     end
   end
   object silink_footer: TsiLangLinked

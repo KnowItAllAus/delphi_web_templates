@@ -131,6 +131,12 @@ begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   RefreshGrid;
+  if ((usersession.privilege and PRIV_EDIT)=0) then begin
+     distribFrameTitle1.SendLink.enabled:=false;
+     distribFrameTitle1.Grouplink.enabled:=false;
+     distribFrameTitle1.JobLink.enabled:=false;
+     distribFrameTitle1.Overviewlink.enabled:=false;
+  end;
 end;
 
 procedure TformDistribStatus.RefreshBtnClick(Sender: TObject);

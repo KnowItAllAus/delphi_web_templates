@@ -14,8 +14,8 @@ object formDistribStatus: TformDistribStatus
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 255
-  DesignTop = 293
+  DesignLeft = 160
+  DesignTop = 219
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -28,6 +28,7 @@ object formDistribStatus: TformDistribStatus
     inherited IWFrameRegion: TIWRegion
       Width = 1017
       Height = 114
+      TabOrder = 3
       inherited IWRectangle1: TIWRectangle
         Left = 608
         Width = 422
@@ -211,7 +212,7 @@ object formDistribStatus: TformDistribStatus
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'diststat.sil'
@@ -237,7 +238,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
-        TabOrder = 2
+        TabOrder = 1
         OnClick = RefreshBtnClick
       end
       object IWLabel1: TIWLabel
@@ -317,7 +318,7 @@ object formDistribStatus: TformDistribStatus
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 3
+        TabOrder = 2
         ItemIndex = 0
         Items.Strings = (
           '120'
