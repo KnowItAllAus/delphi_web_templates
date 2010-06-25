@@ -47,6 +47,7 @@ type
     IWLabel13: TIWLabel;
     NClassCombo: TIWComboBox;
     StrictBox: TIWCheckBox;
+    NewBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure UserGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -107,6 +108,7 @@ begin
       AliasEdit.Text:=FieldByName ('AliasName').AsString;
       NotifyEdit.Text:=FieldByName ('Notify').AsString;
       StrictBox.Checked:=FieldByName ('Strict').AsString='1';
+      NewBox.Checked:=FieldByName ('TRANDBNEW').AsString='1';
       try
         NClassCombo.ItemIndex:=FieldByName ('NotifyClass').AsInteger;
       except
@@ -202,6 +204,7 @@ begin
        ParamByName ('ALIASNAME').AsString:=ansilowercase(AliasEdit.Text);
        ParamByName ('NOTIFY').AsString:=Notifyedit.text;
        ParamByName ('STRICT').AsInteger:=Ord(StrictBox.checked);
+       ParamByName ('TRANDBNEW').AsInteger:=Ord(NewBox.checked);
        ParamByName ('NOTIFYCLASS').AsInteger:=NClassCombo.ItemIndex;
        if Timezonebox.ItemIndex>-1 then begin
           ParamByName('TIMEZONE').AsString:=tz_obj(TimeZoneBox.Items.Objects[TimeZoneBox.ItemIndex]).zonename;

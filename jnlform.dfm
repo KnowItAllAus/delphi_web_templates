@@ -16,8 +16,8 @@ object formJnl: TformJnl
   ShowHint = True
   OnDefaultAction = DisplayBtnClick
   XPTheme = True
-  DesignLeft = 116
-  DesignTop = 117
+  DesignLeft = 140
+  DesignTop = 167
   inline StatsFrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0

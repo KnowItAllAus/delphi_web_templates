@@ -49,6 +49,7 @@ type
     procedure IWTimer1Timer(Sender: TObject);
     procedure langfooter1Click(Sender: TObject);
     procedure langcomboChange(Sender: TObject);
+    function newtrandb (co_id : integer) : boolean;
   public
     function findcompanyid (s : string) : integer;
   end;
@@ -74,6 +75,17 @@ begin
       Transaction.Active:=false;
     end;
   end;
+end;
+
+function Tform_login.newtrandb (co_id : integer) : boolean;
+begin
+    with rcdatamodule.CoQuery do begin
+      Transaction.Active:=true;
+      ParamByName ('ID').asinteger:= co_id;
+      Open;
+      if not eof then result:=fieldbyname ('TRANDBNEW').AsString='1';
+      Transaction.Active:=false;
+    end;
 end;
 
 procedure Tform_login.LoginBtnClick(Sender: TObject);
@@ -170,6 +182,8 @@ begin
       UserSession.UserCompany:=inttostr(alias);
       UserSession.User:=UserEdit.Text;
       RcDataModule.Trans.Commit;
+
+      RcDataModule.SelectTransDB(newtrandb(co));
 
       // Next form...
       TIWAppForm(WebApplication.ActiveForm).Release;

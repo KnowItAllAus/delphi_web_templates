@@ -913,6 +913,29 @@ object su_coForm: Tsu_coForm
         Checked = False
         FriendlyName = 'StrictBox'
       end
+      object NewBox: TIWCheckBox
+        Left = 395
+        Top = 165
+        Width = 156
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        Caption = 'New Transaction DB'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 16
+        Checked = False
+        FriendlyName = 'StrictBox'
+      end
     end
   end
   inline FrameBareTitle1: TFrameBareTitle

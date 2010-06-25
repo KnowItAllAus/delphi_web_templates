@@ -184,6 +184,7 @@ type
     procedure SaveValue (name : string; value : string);
     function GetValue (name : string; default : string) : string;
     function make_guid : string;
+    procedure SelectTransDB(new : boolean);
   end;
 
 function RcDatamodule : TRcDataMod;
@@ -269,14 +270,23 @@ procedure TRcDataMod.DataModuleCreate(Sender: TObject);
 begin
    values:=tstringlist.create;
    randomize;
-   if GetDBName<>'' then
+   if GetDBName<>'' then begin
       RecastDb.DatabaseName:=GetDBName;
-   TranDb.DatabaseName:=GetTransDBName;
-   if GetTransDBName='' then
       TranDb.DatabaseName:=GetDBName;
+   end;
    RecastDb.Connected:=true;
    TranDb.Connected:=true;
    SiLangDispatcher1.LoadAllFromFile ('main.sil');
+end;
+
+procedure TRcDataMod.SelectTransDB(new : boolean);
+begin
+   TranDb.Connected:=false;
+   if new then
+      TranDb.DatabaseName:=GetTransDBName
+   else
+      TranDb.DatabaseName:=GetDBName;
+   TranDb.Connected:=true;
 end;
 
 function TRcDataMod.nextID : integer;

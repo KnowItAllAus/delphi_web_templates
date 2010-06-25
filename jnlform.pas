@@ -121,6 +121,7 @@ var
   newstart : TDateTime;
   newend : TDatetime;
   newstore : integer;
+  f : TField;
 begin
   recs:=0;
   if UTCBox.Checked then timeoffset:=UserSession.TimeOffset else timeoffset:=0;
@@ -207,7 +208,11 @@ begin
               Text := '';
             end;
             with Cell[i, 1] do begin
-              Text := '';
+              f:=TranItemQuery.FieldByName('RESOLVEDBC');
+              if (f=nil) then
+                  Text:=''
+                  else
+                  Text := htmlquote(f.AsString);
             end;
             with Cell[i, 2] do begin
               Text := htmlquote(TranItemQuery.FieldByName('DESCRIPTION').AsString);
