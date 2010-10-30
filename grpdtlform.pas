@@ -38,6 +38,10 @@ type
     NewTmplRevBtn: TIWButton;
     IWLabel4: TIWLabel;
     EditBtn: TIWButton;
+    GroupGrid: TIWGrid;
+    AddGroupButton: TIWButton;
+    GroupCombo: TIWComboBox;
+    IWLabel5: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -55,11 +59,16 @@ type
     procedure EditBtnClick(Sender: TObject);
     procedure TemplateGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
+    procedure AddGroupButtonClick(Sender: TObject);
+    procedure GroupGridCellClick(ASender: TObject; const ARow,
+      AColumn: Integer);
   private
     StoreIdList : TStringlist;
     PromoIdList : TStringlist;
+    GroupIdList : TStringlist;
     sList : TStringlist;
     pList : TStringList;
+    gList : TStringList;
     has_live_stores : boolean;
     currenttemplate : string;
     procedure InitCombos;
@@ -108,6 +117,11 @@ begin
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
       Cell[0, 1].Text:='';
   end;
+  With GroupGrid do begin
+      RowCount:=1;
+      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
+      Cell[0, 1].Text:='';
+  end;
   With VoucherGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
@@ -124,6 +138,7 @@ begin
   end;
   sList.Clear;
   pList.Clear;
+  glist.Clear;
   storedel:=false;
   with RcDataModule do begin
     GrpUseQuery.Close;
@@ -172,6 +187,22 @@ begin
               VoucherGrid.Cell[VoucherGrid.RowCount-1,1].Clickable := True;
             end else
               VoucherGrid.Cell[VoucherGrid.RowCount-1,1].text:='';
+        end else if GrpUseQuery.FieldByName('ITEMKIND').AsInteger=3 then begin
+            GroupGrid.RowCount:=GroupGrid.RowCount+1;
+            with GroupGrid.Cell[GroupGrid.RowCount-1, 0] do begin
+              Text := htmlquote(GrpUseQuery.FieldByName('GROUPNAME').AsString);
+            end;
+            gList.Add (GrpUseQuery.FieldByName('ID').AsString);
+            if testbox.Checked then begin
+              can_delete:=(UserSession.privilege and PRIV_EDIT)<>0;
+            end else begin
+              can_delete:=(UserSession.privilege and PRIV_LIVE)<>0;
+            end;
+            if can_delete then begin
+              GroupGrid.Cell[GroupGrid.RowCount-1,1].text:=SiLangLinked1.GetTextOrDefault('Grid.Delete');
+              GroupGrid.Cell[GroupGrid.RowCount-1,1].Clickable := True;
+            end else
+              GroupGrid.Cell[GroupGrid.RowCount-1,1].text:='';
         end;
         GrpUseQuery.Next;
     end;
@@ -258,6 +289,38 @@ begin
     end;
     GrpPromoQuery.Close;
     GrpPromoQuery.Transaction.Active:=false;
+
+(*
+    GrpSubQuery.Close;
+    GrpSubQuery.ParamByName('COMPANY').AsString:=
+       UserSession.Company;
+    GrpSubQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+    GrpSubQuery.Open;
+    GroupCombo.Items.Clear;
+    GroupIdList.Clear;
+    while not GrpSubQuery.Eof do begin
+       GroupCombo.Items.Add(htmlquote(GrpSubQuery.FieldByName('NAME').AsString));
+       GroupIdList.Add(GrpSubQuery.FieldByName('ID').AsString);
+       GrpSubQuery.next;
+    end;
+    GrpSubQuery.Close;
+    GrpSubQuery.Transaction.Active:=false;
+*)
+    GrpAvail.Close;
+    GrpAvail.ParamByName('COMPANY').AsString:=
+       UserSession.Company;
+    GrpAvail.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+    GrpAvail.Open;
+    GroupCombo.Items.Clear;
+    GroupIdList.Clear;
+    while not GrpAvail.Eof do begin
+       GroupCombo.Items.Add(htmlquote(GrpAvail.FieldByName('NAME').AsString));
+       GroupIdList.Add(GrpAvail.FieldByName('AVAILABLE_GROUP').AsString);
+       GrpAvail.next;
+    end;
+    GrpAvail.Close;
+    GrpAvail.Transaction.Active:=false;
+
   end;
   if not testbox.Checked then begin
     addjobbtn.Visible:=(promocombo.Items.Count>0) and ((UserSession.privilege and PRIV_LIVE)<>0);
@@ -267,6 +330,8 @@ begin
   promocombo.visible:=addjobbtn.Visible;
   storecombo.visible:=storecombo.Items.Count>0;
   addstorebtn.Visible:=storecombo.Items.Count>0;
+  groupcombo.visible:=groupcombo.Items.Count>0;
+  addgroupbutton.Visible:=groupcombo.Items.Count>0;
 end;
 
 
@@ -274,9 +339,10 @@ procedure TFormGrpDtl.IWAppFormCreate(Sender: TObject);
 begin
    StoreIdList := TStringlist.Create;
    PromoIdList := TStringlist.Create;
+   GroupIdList := TStringlist.Create;
    sList:=TStringList.create;
    pList:=TStringList.create;
-
+   glist:=TStringList.create;
    IWSiLink1.InitForm;
    DelBtn.Confirmation:=SiLangLinked1.GetTextOrDefault('Delete');
    with RcDataModule.CurrentGroupQuery do begin
@@ -337,8 +403,10 @@ var
 begin
    StoreIdList.Free;
    PromoIdList.Free;
+   GroupIDList.Free;
    SList.Free;
    PList.Free;
+   GList.free;
    for r:=0 to Templategrid.RowCount-1 do
      for c:=0 to Templategrid.ColumnCount-1 do
        Templategrid.Cell[r,c].Tag.Free;
@@ -505,6 +573,55 @@ begin
      TRP.NoteEdit.Text:=xmlunquote(templategrid.Cell[arow,4].Text);
      TRP.show;
    end;
+end;
+
+procedure TFormGrpDtl.AddGroupButtonClick(Sender: TObject);
+var
+   index : integer;
+begin
+   index:=groupcombo.ItemIndex;
+   if index<0 then exit;
+   try
+     with RcDataModule.GrpAllocInsertQuery do begin
+       ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+       ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+       ParamByName ('ITEMID').AsString:=GroupIDList.Strings[groupcombo.ItemIndex];
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       ParamByName ('ITEMKIND').AsInteger:=3;
+       ExecSQL;
+       Transaction.Commit;
+     end;
+   except
+   end;
+   groupcombo.items.Delete(index);
+   groupidlist.Delete(index);
+   groupcombo.itemindex:=-1;
+   if groupcombo.Items.Count=0 then begin
+       groupcombo.visible:=false;
+       addgroupbutton.Visible:=false;
+   end;
+   DrawGrids;
+end;
+
+procedure TFormGrpDtl.GroupGridCellClick(ASender: TObject; const ARow,
+  AColumn: Integer);
+begin
+  try
+    with RcDataModule do begin
+      SQLEx.Transaction.Active:=false;
+      SQLEx.Transaction.Active:=true;
+      SQLEx.SQL.Clear;
+      SQLEx.SQL.Add('delete from GROUPALLOC where ID=:ID and GROUPID=:GROUPID and ITEMKIND=3 and COMPANY=:COMPANY');
+      SQLEx.ParamByName ('ID').AsString:=GList[ARow-1];
+      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLEx.ParamByName ('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
+      SQLEx.ExecQuery;
+      SQLEx.Transaction.Commit;
+    end;
+  except
+  end;
+  DrawGrids;
+  InitCombos;
 end;
 
 end.

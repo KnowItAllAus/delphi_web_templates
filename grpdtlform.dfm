@@ -15,8 +15,8 @@ object FormGrpDtl: TFormGrpDtl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 57
-  DesignTop = 191
+  DesignLeft = 170
+  DesignTop = 344
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -81,7 +81,7 @@ object FormGrpDtl: TFormGrpDtl
     object IWRegion2: TIWRegion
       Left = 144
       Top = 15
-      Width = 751
+      Width = 897
       Height = 552
       Cursor = crAuto
       Anchors = [akTop, akBottom]
@@ -95,7 +95,7 @@ object FormGrpDtl: TFormGrpDtl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        751
+        897
         552)
       object GrpLabel: TIWLabel
         Left = 14
@@ -200,7 +200,7 @@ object FormGrpDtl: TFormGrpDtl
       object StoreGrid: TIWGrid
         Left = 54
         Top = 92
-        Width = 287
+        Width = 267
         Height = 293
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
@@ -234,9 +234,9 @@ object FormGrpDtl: TFormGrpDtl
         ScrollToCurrentRow = False
       end
       object VoucherGrid: TIWGrid
-        Left = 407
+        Left = 337
         Top = 92
-        Width = 299
+        Width = 274
         Height = 293
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
@@ -270,7 +270,7 @@ object FormGrpDtl: TFormGrpDtl
         ScrollToCurrentRow = False
       end
       object IWLabel6: TIWLabel
-        Left = 407
+        Left = 337
         Top = 73
         Width = 57
         Height = 16
@@ -365,7 +365,7 @@ object FormGrpDtl: TFormGrpDtl
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 751
+        Width = 897
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -412,7 +412,7 @@ object FormGrpDtl: TFormGrpDtl
       object StoreCombo: TIWComboBox
         Left = 118
         Top = 394
-        Width = 223
+        Width = 203
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -467,7 +467,7 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddStoreBtnClick
       end
       object AddJobBtn: TIWButton
-        Left = 407
+        Left = 337
         Top = 393
         Width = 61
         Height = 25
@@ -490,9 +490,9 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddJobBtnClick
       end
       object PromoCombo: TIWComboBox
-        Left = 480
+        Left = 400
         Top = 394
-        Width = 226
+        Width = 211
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -651,6 +651,122 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         TabOrder = 11
         OnClick = EditBtnClick
+      end
+      object GroupGrid: TIWGrid
+        Left = 625
+        Top = 92
+        Width = 251
+        Height = 293
+        Cursor = crAuto
+        Anchors = [akLeft, akTop, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        BorderColors.Color = clNone
+        BorderColors.Light = clNone
+        BorderColors.Dark = clNone
+        BGColor = clNone
+        BorderSize = 1
+        BorderStyle = tfDefault
+        CellPadding = 0
+        CellSpacing = 0
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FrameBuffer = 40
+        Lines = tlAll
+        OnRenderCell = StoreGridRenderCell
+        UseFrame = True
+        UseSize = True
+        FriendlyName = 'VoucherGrid'
+        ColumnCount = 2
+        OnCellClick = GroupGridCellClick
+        RowCount = 1
+        TabOrder = -1
+        ShowEmptyCells = True
+        ScrollToCurrentRow = False
+      end
+      object AddGroupButton: TIWButton
+        Left = 627
+        Top = 395
+        Width = 61
+        Height = 23
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = 'Add'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton2'
+        ScriptEvents = <>
+        TabOrder = 12
+        OnClick = AddGroupButtonClick
+      end
+      object GroupCombo: TIWComboBox
+        Left = 695
+        Top = 394
+        Width = 181
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- No Selection --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = False
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        TabOrder = 13
+        ItemIndex = -1
+        Sorted = False
+        FriendlyName = 'RegionCombo'
+      end
+      object IWLabel5: TIWLabel
+        Left = 627
+        Top = 73
+        Width = 57
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        AutoSize = False
+        FriendlyName = 'IWLabel6'
+        Caption = 'Groups'
+        RawText = False
       end
     end
   end

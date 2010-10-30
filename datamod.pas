@@ -167,6 +167,8 @@ type
     SQLQry: TIBQuery;
     OverTmplQuery: TIBQuery;
     OverJobTmplQuery: TIBQuery;
+    GrpSubQuery: TIBQuery;
+    GrpAvail: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

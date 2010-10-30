@@ -76,7 +76,7 @@ begin
   jobid:=0;
   groupid:=0;
   RcDataModule.OverJobQuery.Transaction.Active:=true;
-  RcDataModule.OverJobQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
+  RcDataModule.OverJobQuery.ParamByName('COMPANY').AsInteger:=strtoint(UserSession.Company);
   RcDataModule.OverJobQuery.Open;
   with OverGrid do begin
     Cell[0, 2].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Store'));
@@ -141,7 +141,7 @@ begin
 
   template:='';
   groupid:=0;
-  RcDataModule.OverJobTmplQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
+  RcDataModule.OverJobTmplQuery.ParamByName('COMPANY').AsInteger:=Strtoint(UserSession.Company);
   RcDataModule.OverJobTmplQuery.Open;
   with OverGrid do begin
     while not RcDataModule.OverJobTmplQuery.Eof do begin
@@ -220,7 +220,7 @@ begin
   storeid:=0;
   groupid:=0;
   RcDataModule.OverQuery.Transaction.Active:=true;
-  RcDataModule.OverQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
+  RcDataModule.OverQuery.ParamByName('COMPANY').AsInteger:=strtoint(UserSession.Company);
   RcDataModule.OverQuery.Open;
   with OverGrid do begin
     Cell[0, 0].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Store'));
