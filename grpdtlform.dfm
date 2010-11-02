@@ -748,7 +748,7 @@ object FormGrpDtl: TFormGrpDtl
       object IWLabel5: TIWLabel
         Left = 627
         Top = 73
-        Width = 57
+        Width = 124
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -765,7 +765,7 @@ object FormGrpDtl: TFormGrpDtl
         ConvertSpaces = False
         AutoSize = False
         FriendlyName = 'IWLabel6'
-        Caption = 'Groups'
+        Caption = 'Import from Groups'
         RawText = False
       end
     end

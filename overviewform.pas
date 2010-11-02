@@ -261,14 +261,14 @@ begin
             celltag:=tag_obj.create;
             celltag.s:=inttostr(groupid);
             celltag.test:=false;
-            if RcDataModule.OverQuery.FieldByName('TEST').AsString='Y' then begin
+            if RcDataModule.OverQuery.FieldByName('TEST').AsString='1' then begin
                Font.Style:=[fsItalic];
                celltag.test:=true;
             end;
             tag:=celltag;
             inc(i);
           end;
-          tmpl:=grouplist.IndexOf(celltag.s);
+(*          tmpl:=grouplist.IndexOf(celltag.s);
           if tmpl>=0 then begin
              inc (tmpl);
              finished:=false;
@@ -292,15 +292,19 @@ begin
                end else finished:=true;
                inc(tmpl);
              end;
-          end;
+          end; *)
         end;
       end;
       if RcDataModule.OverQuery.FieldByName('JN').AsString<>'' then begin
         RowCount:=RowCount+1;
         with Cell[i, 2] do begin
            Text :=htmlquote(RcDataModule.OverQuery.FieldByName('JN').AsString);
-           inc (i);
            BGColor:=clLtGray;
+           if (RcDataModule.OverQuery.FieldByName('TEMPLATE').AsString='1') then begin
+              BGColor:=clDkGray;
+              Font.Color := clWhite;
+           end;
+           inc (i);
         end;
       end;
       RcDataModule.OverQuery.Next;
@@ -320,6 +324,15 @@ begin
        Overgrid.Cell[r,c].Tag.Free;
 
   grouplist.Clear;
+
+  (* Grouplist is a listing of groups and their templates (nnnnn=a group id)
+  ...
+  nnnnn
+  nnnnn_templatename+
+  nnnnn_templatename-   template job error (deleted?)
+  mmmmm
+  ...
+  *)
 
   with RcDataModule.OverTmplQuery do begin
      Transaction.Active:=true;

@@ -169,6 +169,8 @@ type
     OverJobTmplQuery: TIBQuery;
     GrpSubQuery: TIBQuery;
     GrpAvail: TIBQuery;
+    RequestUpdateGroupXX: TIBSQL;
+    RequestUpdateGroupX: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

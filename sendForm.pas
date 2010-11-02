@@ -54,7 +54,22 @@ uses
 
 procedure TformSend.PublishToGroup (g : string; buildtime : TDateTime);
 begin
-    with RcDataModule.RequestUpdateGroup do begin
+    with RcDataModule.RequestUpdateGroupX do begin
+      try
+        Transaction.Active:=False;
+        Transaction.StartTransaction;
+        ParamByName('COMPANY').AsString:=UserSession.Company;
+        ParamByName('PUBTIME').AsDateTime:=buildtime;
+        ParamByName('GROUPID').AsString:=g;
+        ExecSQL;
+        Transaction.Commit;
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+      except
+        Transaction.Active:=False;
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+      end;
+    end;
+(*    with RcDataModule.RequestUpdateGroup do begin
       try
         Transaction.Active:=False;
         Transaction.StartTransaction;
@@ -68,7 +83,7 @@ begin
         Transaction.Active:=False;
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
       end;
-    end;
+    end;*)
 end;
 
 procedure TformSend.IWAppFormCreate(Sender: TObject);

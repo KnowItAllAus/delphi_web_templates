@@ -17,8 +17,8 @@ object formSend: TformSend
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 367
-  DesignTop = 405
+  DesignLeft = 106
+  DesignTop = 272
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -31,6 +31,7 @@ object formSend: TformSend
     inherited IWFrameRegion: TIWRegion
       Width = 1016
       Height = 114
+      TabOrder = 6
       inherited IWRectangle1: TIWRectangle
         Left = 456
         Width = 2161
@@ -71,7 +72,6 @@ object formSend: TformSend
     TabOrder = 1
     inherited IWRegion1: TIWRegion
       Height = 29
-      TabOrder = 4
       inherited Cancel: TIWButton
         Left = 929
         Caption = 'Menu'
@@ -313,7 +313,7 @@ object formSend: TformSend
         Font.Style = []
         FriendlyName = 'PubBtn'
         ScriptEvents = <>
-        TabOrder = 5
+        TabOrder = 4
         OnClick = TestBtnClick
       end
       object TestGroups: TIWComboBox
@@ -344,7 +344,7 @@ object formSend: TformSend
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 6
+        TabOrder = 5
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'GroupItems'
