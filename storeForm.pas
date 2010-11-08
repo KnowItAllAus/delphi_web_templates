@@ -76,6 +76,7 @@ type
     auxpromolbl: TIWLabel;
     IWLabel20: TIWLabel;
     TestBox: TIWCheckBox;
+    AutoBox: TIWCheckBox;
     procedure CancelBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
@@ -171,6 +172,8 @@ begin
 end;
 
 procedure TformStore.PostButtonClick(Sender: TObject);
+var
+  newgroup : integer;
 begin
   if (length(errataedit.text)>0) then begin
      if check_errata (errataEdit.Text)=false then begin
@@ -230,6 +233,29 @@ begin
   except
      WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
      exit;
+  end;
+
+  if (autobox.checked) then try
+    newgroup:=RcDataModule.nextID;
+    with RcDataModule.GroupInsertQuery do begin
+       Transaction.Active:=True;
+       ParamByName('NAME').AsString:=NewNameEdit.Text;
+       ParamByName('ID').AsInteger:=newgroup;
+       ParamByName('COMPANY').AsString:=UserSession.Company;
+       if (testbox.checked) then ParamByName('TESTGROUP').AsString:='Y'
+          else ParamByName('TESTGROUP').AsString:='N';
+       ExecSQL;
+     end;
+     with RcDataModule.GrpAllocInsertQuery do begin
+       ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+       ParamByName ('GROUPID').AsInteger:=newgroup;
+       ParamByName ('ITEMID').AsString:=NewIDEdit.Text;
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       ParamByName ('ITEMKIND').AsInteger:=1;
+       ExecSQL;
+       transaction.commitretaining;
+    end;
+  except
   end;
 
   try

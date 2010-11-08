@@ -110,7 +110,6 @@ type
     siLangDispatcher1: TsiLangDispatcher;
     LangEditControl1: TLangEditControl;
     suUserPrivQuery: TIBQuery;
-    RequestUpdateGroup: TIBQuery;
     JobAllQuery: TIBQuery;
     JobInsertQuery: TIBQuery;
     CurrentJobQuery: TIBQuery;
@@ -169,8 +168,9 @@ type
     OverJobTmplQuery: TIBQuery;
     GrpSubQuery: TIBQuery;
     GrpAvail: TIBQuery;
-    RequestUpdateGroupXX: TIBSQL;
     RequestUpdateGroupX: TIBQuery;
+    GrpDepUpQuery: TIBQuery;
+    GrpDepDnQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

@@ -42,7 +42,7 @@ type
     IList : TList;
   public
     { Public declarations }
-    procedure EditStore (ID : String);
+    procedure EditStore (ID : String; isnew : boolean);
     procedure RefreshGrid;
   end;
 
@@ -62,7 +62,7 @@ type
                 Enabled : boolean;
            end;
 
-procedure TFormStores.EditStore (ID : String);
+procedure TFormStores.EditStore (ID : String; isnew : boolean);
 var
   FS : TFormStore;
 begin
@@ -75,6 +75,8 @@ begin
     TIWAppForm(WebApplication.ActiveForm).Release;
     FS:=TFormStore.Create (WebApplication);
     FS.referedby:=TFormStores;
+    FS.AutoBox.Visible:=isnew;
+    FS.AutoBox.Checked:=isnew;
     FS.show;
   end;
 end;
@@ -323,13 +325,13 @@ begin
     UserSession.Company;
   RcDataModule.configInsertQuery.ExecSQL;
 
-  EditStore (IntToStr(storeID));
+  EditStore (IntToStr(storeID), true);
 end;
 
 procedure TformStores.StoreGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
 begin
   RcDataModule.Trans.Active:=False;
-  EditStore (StoreGrid.Cell[ARow,AColumn].Text);
+  EditStore (StoreGrid.Cell[ARow,AColumn].Text,false);
 end;
 
 procedure TformStores.RefreshBtnClick(Sender: TObject);
