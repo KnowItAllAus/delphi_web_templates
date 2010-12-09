@@ -1,7 +1,7 @@
 object su_coForm: Tsu_coForm
   Left = 0
   Top = 0
-  Width = 1088
+  Width = 1024
   Height = 774
   ConnectionMode = cmAny
   SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
@@ -15,49 +15,49 @@ object su_coForm: Tsu_coForm
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 75
-  DesignTop = 157
+  DesignLeft = 212
+  DesignTop = 187
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 745
-    Width = 1088
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 0
     inherited IWRegion1: TIWRegion
-      Width = 1088
+      Width = 1024
       Height = 29
-      TabOrder = 14
+      TabOrder = 15
       inherited IWRectangle1: TIWRectangle
-        Left = 710
+        Left = 646
         Width = 416
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1702
+        Width = 1638
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 668
+        Width = 604
       end
       inherited Cancel: TIWButton
-        Left = 1000
+        Left = 936
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 912
+        Left = 848
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
         OnClick = DelBtnClick
       end
       inherited Extra2: TIWButton
-        Left = 824
+        Left = 760
         Visible = True
         Caption = 'Save'
         OnClick = PostButtonClick
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 744
+        Left = 680
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -81,7 +81,7 @@ object su_coForm: Tsu_coForm
   object IWRegion1: TIWRegion
     Left = 0
     Top = 115
-    Width = 1088
+    Width = 1024
     Height = 630
     Cursor = crAuto
     Align = alClient
@@ -95,11 +95,11 @@ object su_coForm: Tsu_coForm
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1088
+      1024
       630)
     object IWRegion2: TIWRegion
-      Left = 218
-      Top = 18
+      Left = 185
+      Top = 23
       Width = 671
       Height = 594
       Cursor = crAuto
@@ -291,7 +291,7 @@ object su_coForm: Tsu_coForm
         UseFrame = True
         UseSize = True
         FriendlyName = 'UserGrid'
-        ColumnCount = 2
+        ColumnCount = 4
         OnCellClick = UserGridCellClick
         RowCount = 1
         TabOrder = -1
@@ -532,9 +532,9 @@ object su_coForm: Tsu_coForm
         PasswordPrompt = False
       end
       object IWLabel5: TIWLabel
-        Left = 289
+        Left = 275
         Top = 532
-        Width = 66
+        Width = 171
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -552,11 +552,11 @@ object su_coForm: Tsu_coForm
         ConvertSpaces = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
-        Caption = 'Password'
+        Caption = 'Password (new users only)'
         RawText = False
       end
       object pwdedit: TIWEdit
-        Left = 362
+        Left = 452
         Top = 532
         Width = 89
         Height = 21
@@ -585,7 +585,7 @@ object su_coForm: Tsu_coForm
         PasswordPrompt = True
       end
       object CreateUserBtn: TIWButton
-        Left = 482
+        Left = 557
         Top = 531
         Width = 75
         Height = 25
@@ -909,7 +909,7 @@ object su_coForm: Tsu_coForm
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
-        TabOrder = 15
+        TabOrder = 14
         Checked = False
         FriendlyName = 'StrictBox'
       end
@@ -941,14 +941,14 @@ object su_coForm: Tsu_coForm
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1088
+    Width = 1024
     Height = 115
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1088
+      Width = 1024
       Height = 115
       TabOrder = 11
       inherited titleimage: TIWImageFile
@@ -957,26 +957,26 @@ object su_coForm: Tsu_coForm
       end
       inherited IWRectangle1: TIWRectangle
         Top = 90
-        Width = 1088
+        Width = 1024
       end
       inherited IWRectangle3: TIWRectangle
         Top = 95
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 753
+        Left = 689
       end
       inherited TitleLabel: TIWLabel
         Width = 486
         Caption = 'administration'
       end
       inherited langlink: TIWSiLink
-        Left = 689
+        Left = 625
       end
       inherited Smalltitle: TIWLabel
-        Left = 966
+        Left = 902
       end
       inherited HideBox: TIWImageFile
-        Left = 1072
+        Left = 1008
       end
     end
     inherited silink: TsiLangLinked

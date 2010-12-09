@@ -19,10 +19,8 @@ type
     BodyRegion: TIWRegion;
     IWRectangle2: TIWRectangle;
     IWRectangle1: TIWRectangle;
-    CoEdit: TIWEdit;
     UserEdit: TIWEdit;
     PassEdit: TIWEdit;
-    CoRect: TIWRectangle;
     UserRect: TIWRectangle;
     PassRect: TIWRectangle;
     IWSiLink1: TIWSiLink;
@@ -95,97 +93,73 @@ var
    s : string;
    mins : double;
    coname, aliasname : string;
+   cos : TStringlist;
+   user_id : integer;
+   cobj : co_obj;
+   admin : boolean;
+   adminpriv : integer;
+   lastco : integer;
 begin
-   s:=coedit.text;
-   if (pos(':',s)>0) then begin
-      try
-        coname:=copy(s,pos (':',s)+1,length(s));
-        aliasname:=copy(s,1,pos (':',s)-1);
-      except
-        CoEdit.Text:='';
-        exit;
-      end;
-   end else begin
-       try
-          coname:=CoEdit.Text;
-          aliasname:=Coname;
-       except
-          CoEdit.Text:='';
-          exit;
-       end;
-   end;
-
    try
-     co:=findcompanyid (coname);
-     if aliasname<>coname then begin
-        alias:=findcompanyid (aliasname);
-        if alias<>0 then begin
-           raise exception.create ('Not an admin login');
-        end else begin
-           alias:=0;
-        end;
-     end else begin
-        alias:=co;
-     end;
-   except
-     CoEdit.Text:='';
-     exit;
-   end;
-
-   RcDataModule.VoucherQuery.Close;
-   RcDataModule.UserQuery.Close;
-   RcDataModule.Trans.Active:=False;
-   RcDataModule.Trans.StartTransaction;
-   try
-      RcDataModule.UserQuery.ParamByName ('COMPANY').AsInteger:=alias;
-      RcDataModule.UserQuery.ParamByName ('USERID').AsString:=UserEdit.Text;
-      RcDataModule.UserQuery.ParamByName ('PASSWD').AsString:=PassEdit.Text;
-      RcDataModule.UserQuery.Open;
-      if RcDataModule.UserQuery.RecordCount<>1 then raise Exception.Create ('Invalid Login');
-      with RcDataModule.CoQuery do begin
-        Close;
-        ParamByName('ID').AsString:=inttostr (co);
-        Open;
-        try
-          UserSession.SetPriv (RcDataModule.UserQuery.FieldByName ('PRIVILEGE').AsInteger);
-        except
-          UserSession.SetPriv (0);
-        end;
-        UserSession.CompanyName:=FieldByName('NAME').AsString;
-        if FieldByName('LASTACCESS').AsString ='' then begin
-           UserSession.LastAccess:=0;
-        end else begin
-           UserSession.LastAccess:=FieldByName('LASTACCESS').AsDateTime;
-        end;
-        if FieldByName('LASTCOMMS').AsString='' then begin
-           UserSession.LastComms:=0;
-        end else begin
-           UserSession.LastComms:=FieldByName('LASTCOMMS').AsDateTime;
-        end;
-        try
-           mins:=FieldByName('TIMEOFFSET').AsInteger;
-           mins:=mins/1440;
-           UserSession.TimeOffset:=mins;
-        except
-           UserSession.Timeoffset:=0;
-        end;
-        UserSession.timezonename:=FieldByName('TIMEZONE').AsString;
-        UserSession.strict:=FieldByName('STRICT').AsString='1';
-      end;
-      if RcDataModule.CoQuery.FieldByName('ID').AsString='' then raise Exception.Create ('Invalid Company');
-
-      RcDataModule.CoQuery.Close;
-      RcDataModule.StampSession.ParamByName('TIME').Value:=now;
-      RcDataModule.StampSession.ParamByName('ID').AsString:=inttostr(co);
-      RcDataModule.StampSession.ExecSQL;
-      UserSession.Company:=inttostr(co);
-      UserSession.UserCompany:=inttostr(alias);
-      UserSession.User:=UserEdit.Text;
-      RcDataModule.Trans.Commit;
-
-      RcDataModule.SelectTransDB(newtrandb(co));
-
       // Next form...
+      with RCDataModule.SQLQry do begin
+         SQL.Clear;
+         SQL.Add('Select * from users where userid='''+UserEdit.text+''' and passwd='''+PassEdit.Text+'''');
+         Open;
+         if eof then begin
+            raise Exception.Create ('Invalid Login');
+         end else begin
+           usersession.User:=UserEdit.Text;
+           user_id:=FieldByName('ID').AsInteger;
+           lastco:=-1;
+           if not FieldByName('LASTCO').IsNull then
+              lastco:=FieldByName('LASTCO').AsInteger;
+           Close;
+
+           SQL.Clear;
+           SQL.Add('Select * from user_co join company on user_co.company=company.id where user_co.user_id='+inttostr(user_id)+' and company.id=0');
+           Open;
+           admin:=not eof;
+           adminpriv:=FieldByName('PRIVILEGE').AsInteger;
+           close;
+
+           SQL.Clear;
+           if admin then
+             SQL.Add('Select * from company where company.enabled=1 order by name')
+           else
+             SQL.Add('Select * from user_co join company on user_co.company=company.id where user_co.user_id='+inttostr(user_id)+' and company.enabled=1 order by company.name');
+           Open;
+           try
+               cos:=TStringlist.create;
+               while not eof do begin
+                 cobj:=co_obj.create;
+                 if admin then begin
+                   cobj.priv:=adminpriv;
+                   cobj.co_id:=FieldByName('ID').AsInteger;
+                 end else begin
+                   cobj.co_id:=FieldByName('COMPANY').AsInteger;
+                   cobj.priv:=FieldByName('PRIVILEGE').AsInteger
+                 end;
+                 cobj.new_journ:=FieldByName('TRANDBNEW').AsString='1';
+                 cobj.strict:=FieldByName('STRICT').AsString='1';
+                 try
+                   cobj.time_offset:=FieldByName('TIMEOFFSET').AsInteger;
+                 except
+                   cobj.time_offset:=0;
+                 end;
+                 cos.addobject (FieldByName('NAME').AsString,cobj);
+                 next;
+               end;
+               usersession.setcolist(cos);
+               if (cos.count=0) then
+                  raise Exception.Create ('Invalid Company');
+               if (lastco<>-1) then usersession.selectco (lastco) else
+                  usersession.selectco (co_obj(cos.objects[0]).co_id);
+           finally
+               cos.free;
+           end;
+         end;
+      end;
       TIWAppForm(WebApplication.ActiveForm).Release;
       Tsu_FormRole.Create(WebApplication).Show;
    except
@@ -204,10 +178,8 @@ end;
 procedure Tform_login.IWAppFormCreate(Sender: TObject);
 begin
    IWSilink1.InitForm;
-   CoEdit.Text:=UserSession.Company;
    PassEdit.Text:=UserSession.pwd;
    UserEdit.Text:=UserSession.User;
-   CoRect.Text:=silink.GetTextOrDefault('Company')+'&nbsp;';
    UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
    PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
    if comparetext(titlelabel.caption,'login')=0 then begin
@@ -244,7 +216,7 @@ procedure Tform_login.langcomboChange(Sender: TObject);
 begin
   RcDatamodule.siLangDispatcher1.ActiveLanguage:=LangCombo.ItemIndex+1;
   IWSilink1.InitForm;
-  CoRect.Text:=silink.GetTextOrDefault('Company')+'&nbsp;';
+  //CoRect.Text:=silink.GetTextOrDefault('Company')+'&nbsp;';
   UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
   PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
   titleimage.visible:=false;

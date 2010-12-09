@@ -22,6 +22,14 @@ type
      note : string;
   end;
 
+  co_obj = class (TObject)
+     co_id : integer;
+     priv : integer;
+     new_journ : boolean;
+     strict : boolean;
+     time_offset : integer;
+  end;
+
   TRcWebController = class(TIWServerControllerBase)
     procedure IWServerControllerBaseCreate(Sender: TObject);
     procedure IWServerControllerBaseNewSession(ASession: TIWApplication;
@@ -70,12 +78,16 @@ type
     mru_list : array [1..MAX_MRU] of mru_rec;
     strict : boolean;
     group_refered_by : referer_class;
+    Companies_available : TStringList;
     //
     constructor Create(AOwner: TComponent); override;
-    destructor Destroy(AOwner: TComponent);
+    destructor Destroy; override;
     procedure SetPriv (priv : integer);
     procedure mru_add (id : string; name : string; rev : string; note : string);
     procedure mru_delete (id : string; rev : string);
+    procedure SetCoList (list : TStringList);
+    procedure SelectCo (id : integer);
+    procedure SelectCoIndex (index : integer);
   end;
 
 // Procs
@@ -142,16 +154,64 @@ begin
   AdminData := TAdminData.Create(AOwner);
   RcDataMod.LangEditControl1.Basedir:=getTransBase;
   TimeZones:=TGpRegistryTimeZones.Create;
+  Companies_Available := TStringList.create;
 end;
 
-destructor TUserSession.Destroy(AOwner: TComponent);
+destructor TUserSession.Destroy;
 begin
+  While companies_Available.Count>0 do begin
+    companies_available.Objects[0].free;
+    companies_available.Delete(0);
+  end;
+  Companies_Available.free;
+  TimeZones.Free;
 end;
 
 procedure TUserSession.SetPriv (priv : integer);
 begin
    privilege:=priv;
    RcDataMod.LangEditControl1.AllowEdit:=(priv and PRIV_LANG)>0;
+end;
+
+procedure TUserSession.SelectCo (id : integer);
+var
+  cobj : co_obj;
+  index : integer;
+begin
+  for index:=0 to Companies_Available.Count-1 do begin
+    Cobj:=co_obj(Companies_Available.objects[index]);
+    if (cobj.co_id=id) then begin
+      SelectCoIndex (index);
+      exit;
+    end;
+  end;
+  SelectCoIndex(0);
+end;
+
+procedure TUserSession.SelectCoIndex (index : integer);
+var
+  cobj : co_obj;
+  j : integer;
+begin
+  if (index>=0) and (index<Companies_Available.Count) then begin
+      CompanyName:=Companies_Available.Strings[index];
+      Cobj:=co_obj(Companies_Available.objects[index]);
+      UserCompany:=inttostr(cobj.co_id);
+      Company:=inttostr(cobj.co_id);
+      RcDataModule.SelectTransDB(cobj.new_journ);
+      strict:=cobj.strict;
+      SetPriv (cobj.priv);
+      Timeoffset:=cobj.time_offset/1440;
+      for j:=1 to MAX_MRU-1 do begin
+         mru_list[j].name:='';
+         mru_list[j].id:='';
+      end;
+  end;
+end;
+
+procedure TUserSession.SetCoList (list : TStringList);
+begin
+  Companies_available.Assign(list);
 end;
 
 procedure TRcWebController.IWServerControllerBaseCreate(Sender: TObject);

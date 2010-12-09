@@ -27,7 +27,6 @@ type
     AdminImg: TIWImageFile;
     silink: TsiLangLinked;
     langlink: TIWSiLink;
-    CompanyLabel: TIWLabel;
     LastLoginLabel: TIWLabel;
     AccessLabel: TIWLabel;
     userfooter1: Tuserfooter;
@@ -44,6 +43,8 @@ type
     AdminLnk: TIWLink;
     IWRegion6: TIWRegion;
     InstallLnk: TIWLink;
+    CoBox: TIWComboBox;
+    CoLabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWLogoutClick(Sender: TObject);
     procedure PromoLinkClick(Sender: TObject);
@@ -52,6 +53,7 @@ type
     procedure loginlanglinkClick(Sender: TObject);
     procedure StatLnkClick(Sender: TObject);
     procedure DistribLnkClick(Sender: TObject);
+    procedure CoBoxChange(Sender: TObject);
   public
   end;
 
@@ -86,12 +88,12 @@ begin
    InstallLnk.Color:=clNone;
    DistribLnk.Color:=clNone;
 
-   CompanyLabel.Caption:=usersession.CompanyName;
-   if UserSession.LastAccess>0 then begin
-     AccessLabel.Caption:=DateTimeToStr(UserSession.LastAccess);
-   end else begin
-     AccessLabel.Caption:='- - - - - - -';
-   end;
+   CoLabel.Caption:=usersession.CompanyName;
+   //if UserSession.LastAccess>0 then begin
+   //  AccessLabel.Caption:=DateTimeToStr(UserSession.LastAccess);
+   //end else begin
+   //  AccessLabel.Caption:='- - - - - - -';
+   //end;
    if (UserSession.privilege and PRIV_LANG)=0 then loginlanglink.Visible:=false;
    if (UserSession.UserCompany<>'0') and ((UserSession.privilege and PRIV_ADMIN) = 0)  then begin
       disable(AdminLnk);
@@ -106,6 +108,9 @@ begin
       disable (PromoLnk);
       disable (StatLnk);
    end;
+
+   CoBox.Items.Assign(UserSession.Companies_available);
+   If CoBox.Items.Count<2 then CoBox.visible:=false;
 end;
 
 procedure Tsu_FormRole.IWLogoutClick(Sender: TObject);
@@ -211,6 +216,99 @@ begin
       gotoJob (id,name,rev,note);
     end;
   end;
+end;
+
+procedure Tsu_FormRole.CoBoxChange(Sender: TObject);
+begin
+  if CoBox.ItemIndex>=0 then begin
+     usersession.selectCoIndex (CoBox.ItemIndex);
+     CoBox.ItemIndex:=-1;
+     CoLabel.Text:=UserSession.CompanyName;
+     try
+       with RcdataModule.SQLQry do begin
+          Transaction.Active:=false;
+          Transaction.Active:=true;
+          SQL.Clear;
+          SQL.Add ('update users set lastco='+Usersession.Company+' where userid='''+Usersession.User+'''');
+          ExecSQL;
+          Transaction.commit;
+       end;
+     except
+     end;
+     TIWAppForm(WebApplication.ActiveForm).Release;
+     Tsu_FormRole.Create(WebApplication).Show;
+  end;
+(*   try
+     co:=findcompanyid (coname);
+     if aliasname<>coname then begin
+        alias:=findcompanyid (aliasname);
+        if alias<>0 then begin
+           raise exception.create ('Not an admin login');
+        end else begin
+           alias:=0;
+        end;
+     end else begin
+        alias:=co;
+     end;
+   except
+     CoEdit.Text:='';
+     exit;
+   end;
+
+   RcDataModule.VoucherQuery.Close;
+   RcDataModule.UserQuery.Close;
+   RcDataModule.Trans.Active:=False;
+   RcDataModule.Trans.StartTransaction;
+   try
+      RcDataModule.UserQuery.ParamByName ('COMPANY').AsInteger:=alias;
+      RcDataModule.UserQuery.ParamByName ('USERID').AsString:=UserEdit.Text;
+      RcDataModule.UserQuery.ParamByName ('PASSWD').AsString:=PassEdit.Text;
+      RcDataModule.UserQuery.Open;
+      if RcDataModule.UserQuery.RecordCount<>1 then raise Exception.Create ('Invalid Login');
+      with RcDataModule.CoQuery do begin
+        Close;
+        ParamByName('ID').AsString:=inttostr (co);
+        Open;
+        try
+          UserSession.SetPriv (RcDataModule.UserQuery.FieldByName ('PRIVILEGE').AsInteger);
+        except
+          UserSession.SetPriv (0);
+        end;
+        UserSession.CompanyName:=FieldByName('NAME').AsString;
+        if FieldByName('LASTACCESS').AsString ='' then begin
+           UserSession.LastAccess:=0;
+        end else begin
+           UserSession.LastAccess:=FieldByName('LASTACCESS').AsDateTime;
+        end;
+        if FieldByName('LASTCOMMS').AsString='' then begin
+           UserSession.LastComms:=0;
+        end else begin
+           UserSession.LastComms:=FieldByName('LASTCOMMS').AsDateTime;
+        end;
+        try
+           mins:=FieldByName('TIMEOFFSET').AsInteger;
+           mins:=mins/1440;
+           UserSession.TimeOffset:=mins;
+        except
+           UserSession.Timeoffset:=0;
+        end;
+        UserSession.timezonename:=FieldByName('TIMEZONE').AsString;
+        UserSession.strict:=FieldByName('STRICT').AsString='1';
+      end;
+      if RcDataModule.CoQuery.FieldByName('ID').AsString='' then raise Exception.Create ('Invalid Company');
+
+      RcDataModule.CoQuery.Close;
+      RcDataModule.StampSession.ParamByName('TIME').Value:=now;
+      RcDataModule.StampSession.ParamByName('ID').AsString:=inttostr(co);
+      RcDataModule.StampSession.ExecSQL;
+      UserSession.Company:=inttostr(co);
+      UserSession.UserCompany:=inttostr(alias);
+      UserSession.User:=UserEdit.Text;
+      RcDataModule.Trans.Commit;
+
+      RcDataModule.SelectTransDB(newtrandb(co));
+   except
+   end; *)
 end;
 
 end.

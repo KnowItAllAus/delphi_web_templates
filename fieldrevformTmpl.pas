@@ -145,15 +145,15 @@ procedure TformFieldVersionsTmpl.ImageGridCellClick(ASender: TObject;
 begin
     try
       with RcDataModule do begin
-        SQLEx.Transaction.Active:=false;
-        SQLEx.Transaction.Active:=true;
-        SQLEx.SQL.Clear;
-        SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
-        SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-        SQLEx.ParamByName ('CURRENT').AsString:=ImageGrid.Cell[ARow,0].Text;
-        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-        SQLEx.ExecQuery;
-        SQLEx.Transaction.Commit;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Clear;
+        SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+        SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+        SQLQry.ParamByName ('CURRENT').AsString:=ImageGrid.Cell[ARow,0].Text;
+        SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLQry.ExecSQL;
+        SQLQry.Transaction.Commit;
         RefreshGrid;
       end;
     except
@@ -175,27 +175,27 @@ begin
     ImageId:=nextID;
     try
       with RcDataModule do begin
-        SQLEx.Transaction.Active:=false;
-        SQLEx.Transaction.Active:=true;
-        SQLEx.SQL.Clear;
-        SQLEx.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME,DATAFIELD) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME,:DATAFIELD)');
-        SQLEx.ParamByName ('ID').AsString:=inttostr(ImageID);
-        SQLEx.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
-        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-        SQLEx.ParamByName ('CREATEDBY').AsString:=UserSession.User;
-        SQLEx.ParamByName ('CREATEDTIME').AsDateTime:=now;
-        SQLEx.ParamByName ('DATAFIELD').AsString:=ValueEdit.text;
-        SQLEx.ExecQuery;
-        SQLEx.Transaction.Commit;
-        SQLEx.Transaction.Active:=false;
-        SQLEx.Transaction.Active:=true;
-        SQLEx.SQL.Clear;
-        SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
-        SQLEx.ParamByName ('CURRENT').AsString:=inttostr(ImageID);
-        SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-        SQLEx.ExecQuery;
-        SQLEx.Transaction.Commit;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Clear;
+        SQLQry.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME,DATAFIELD) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME,:DATAFIELD)');
+        SQLQry.ParamByName ('ID').AsString:=inttostr(ImageID);
+        SQLQry.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
+        SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLQry.ParamByName ('CREATEDBY').AsString:=UserSession.User;
+        SQLQry.ParamByName ('CREATEDTIME').AsDateTime:=now;
+        SQLQry.ParamByName ('DATAFIELD').AsString:=ValueEdit.text;
+        SQLQry.ExecSQL;
+        SQLQry.Transaction.Commit;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Clear;
+        SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+        SQLQry.ParamByName ('CURRENT').AsString:=inttostr(ImageID);
+        SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+        SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLQry.ExecSQL;
+        SQLQry.Transaction.Commit;
       end;
     except
       WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));

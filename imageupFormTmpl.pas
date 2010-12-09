@@ -485,15 +485,15 @@ begin
   uq.Transaction.Commit;
 
   with RcDataModule do try
-    SQLEx.Transaction.Active:=false;
-    SQLEx.Transaction.Active:=true;
-    SQLEx.SQL.Clear;
-    SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
-    SQLEx.ParamByName ('CURRENT').AsString:=RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
-    SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-    SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-    SQLEx.ExecQuery;
-    SQLEx.Transaction.Commit;
+    SQLQry.Transaction.Active:=false;
+    SQLQry.Transaction.Active:=true;
+    SQLQry.SQL.Clear;
+    SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+    SQLQry.ParamByName ('CURRENT').AsString:=RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
+    SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    SQLQry.ExecSQL;
+    SQLQry.Transaction.Commit;
   except
   end;
   GoImages;

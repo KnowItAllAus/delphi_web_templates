@@ -15,8 +15,8 @@ object su_FormMain: Tsu_FormMain
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 211
-  DesignTop = 192
+  DesignLeft = 198
+  DesignTop = 307
   object IWRegion1: TIWRegion
     Left = 0
     Top = 111

@@ -334,15 +334,15 @@ end;
 procedure TformImageVersionsTmpl.ProdBtnClick(Sender: TObject);
 begin
   with RcDataModule do try
-    SQLEx.Transaction.Active:=false;
-    SQLEx.Transaction.Active:=true;
-    SQLEx.SQL.Clear;
-    SQLEx.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
-    SQLEx.ParamByName ('CURRENT').AsString:=IDEdit.text;
-    SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-    SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-    SQLEx.ExecQuery;
-    SQLEx.Transaction.Commit;
+    SQLQry.Transaction.Active:=false;
+    SQLQry.Transaction.Active:=true;
+    SQLQry.SQL.Clear;
+    SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+    SQLQry.ParamByName ('CURRENT').AsString:=IDEdit.text;
+    SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    SQLQry.ExecSQL;
+    SQLQry.Transaction.Commit;
   except
   end;
   RefreshGrid;
@@ -359,16 +359,16 @@ begin
     ImageId:=nextID;
     try
       with RcDataModule do begin
-        SQLEx.Transaction.Active:=false;
-        SQLEx.Transaction.Active:=true;
-        SQLEx.SQL.Clear;
-        SQLEx.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME)');
-        SQLEx.ParamByName ('ID').AsString:=inttostr(ImageID);
-        SQLEx.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
-        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-        SQLEx.ParamByName ('CREATEDBY').AsString:=UserSession.User;
-        SQLEx.ParamByName ('CREATEDTIME').AsDateTime:=now;
-        SQLEx.ExecQuery;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Clear;
+        SQLQry.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME)');
+        SQLQry.ParamByName ('ID').AsString:=inttostr(ImageID);
+        SQLQry.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
+        SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLQry.ParamByName ('CREATEDBY').AsString:=UserSession.User;
+        SQLQry.ParamByName ('CREATEDTIME').AsDateTime:=now;
+        SQLQry.ExecSQL;
       end;
     except
       WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
@@ -391,14 +391,14 @@ procedure TformImageVersionsTmpl.DelBtnClick(Sender: TObject);
 begin
     try
       with RcDataModule do begin
-        SQLEx.Transaction.Active:=false;
-        SQLEx.Transaction.Active:=true;
-        SQLEx.SQL.Clear;
-        SQLEx.SQL.Add('delete from GROUPPARAMOBJ where ID=:ID and COMPANY=:COMPANY');
-        SQLEx.ParamByName ('ID').AsString:=IDEdit.text;
-        SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-        SQLEx.ExecQuery;
-        SQLEx.Transaction.Commit;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Clear;
+        SQLQry.SQL.Add('delete from GROUPPARAMOBJ where ID=:ID and COMPANY=:COMPANY');
+        SQLQry.ParamByName ('ID').AsString:=IDEdit.text;
+        SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        SQLQry.ExecSQL;
+        SQLQry.Transaction.Commit;
       end;
     except
       WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));

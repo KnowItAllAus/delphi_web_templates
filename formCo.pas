@@ -116,14 +116,14 @@ begin
       zone:=FieldByName ('TIMEZONE').AsString;
    end;
    selectname:='';
-   for i:=0 to UserSession.TimeZones.Count-1 do with UserSession.TimeZones.Items[i] do begin
+(*   for i:=0 to UserSession.TimeZones.Count-1 do with UserSession.TimeZones.Items[i] do begin
       tz:=tz_obj.create;
       tz.zonename:=Englishname;
       TimezoneBox.Items.AddObject(DisplayName,tz);
       if zone=Englishname then
          selectname:=Displayname;
    end;
-   TimeZoneBox.ItemIndex:=TimeZoneBox.Items.Indexof(selectname);
+   TimeZoneBox.ItemIndex:=TimeZoneBox.Items.Indexof(selectname);  *)
    RefreshGrid;
 end;
 
@@ -132,21 +132,29 @@ var
   i : integer;
 begin
   RcDataModule.suUserQuery.Close;
-  RcDataModule.suUserQuery.ParamByName('COMPANY').AsString:=RcDataModule.CoQuery.FieldByName ('ID').AsString;
+  RcDataModule.suUserQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
   RcDataModule.suUserQuery.Open;
   with UserGrid do begin
-    Cell[0, 0].Text := 'User ID';
-    Cell[0, 1].Text := 'Privilege';
+    Cell[0, 1].Text := 'User ID';
+    Cell[0, 2].Text := 'Privilege';
+    Cell[0, 0].Text := 'ID';
+    Cell[0, 3].Text := '';
     i:=1;
     RowCount:=1;
     while not RcDataModule.suUserQuery.Eof do begin
       RowCount:=RowCount+1;
       with Cell[i, 0] do begin
-        Text := RcDataModule.suUserQuery.FieldByName('USERID').AsString;
-        Clickable:=true;
+        Text := RcDataModule.suUserQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
+        Text := RcDataModule.suUserQuery.FieldByName('USERID').AsString;
+      end;
+      with Cell[i, 2] do begin
         Text := RcDataModule.suUserQuery.FieldByName('PRIVILEGE').AsString;
+      end;
+      with Cell[i, 3] do begin
+        Text := 'Delete';
+        Clickable:=true;
       end;
       inc (i);
       RcDataModule.suUserQuery.Next;
@@ -227,22 +235,66 @@ begin
 end;
 
 procedure Tsu_coForm.CreateUserClick(Sender: TObject);
+var
+  user_id : integer;
 begin
+  user_id:=-1;
+  with RcDataModule.SQLQry do begin
+    SQL.clear;
+    SQL.Add ('select * from users where userid=:NAME');
+    ParamByName ('NAME').AsString:=unameEdit.text;
+    unameEdit.text:='';
+    pwdedit.text:='';
+    Open;
+    if not eof then begin
+       user_id:=Fieldbyname ('ID').AsInteger;
+    end;
+    if user_id<>-1 then begin
+       with RcDataModule.SQLQry do begin
+         SQL.Clear;
+         SQL.Add ('insert into USER_CO (ID, COMPANY, USER_ID) values (:ID,:CO,:USER_ID)');
+         ParamByName ('CO').AsString:=UserSession.Company;
+         ParamByName ('ID').AsInteger:=rcdatamodule.nextid;
+         ParamByName ('USER_ID').AsInteger:=user_id;
+         ExecSQL;
+         RefreshGrid;
+         exit;
+       end;
+    end;
+  end;
   with RcDataModule.suUserInsertQuery do begin
-    ParamByName('COMPANY').AsString:=RcDataModule.CoQuery.FieldByName('ID').AsString;
+    user_id:=RcDataModule.nextID;
+    ParamByName('COMPANY').AsString:=UserSession.Company;        // Obsolete field
     ParamByName('USERID').AsString:=unameEdit.text;
     ParamByName('PASSWD').AsString:=pwdedit.text;
+    ParamByName('ID').AsInteger:=user_id;
     ExecSQL;
-    RefreshGrid;
   end;
+  with RcDataModule.suUserAddQuery do begin
+    ParamByName('COMPANY').AsString:=usersession.company;
+    ParamByName('ID').AsInteger:=rcdatamodule.nextid;
+    ParamByName('USER_ID').AsInteger:=user_id;
+    ExecSQL;
+  end;
+  unameEdit.text:='';
+  pwdedit.text:='';
+  RefreshGrid;
 end;
 
 procedure Tsu_coForm.UserGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
-var
-    pwdform : Tsupwdform;
+//var
+//    pwdform : Tsupwdform;
 begin
-    with RcDataModule.changepasswd do begin
+    with RcDataModule.SQLQry do begin
+       SQL.Clear;
+       SQL.Add ('delete from USER_CO where COMPANY=:COMPANY and USER_ID=:ID');
+       ParamByName('ID').AsString:=UserGrid.Cell[ARow,0].Text;
+       ParamByName('COMPANY').AsString:=UserSession.Company;
+       ExecSQL;
+    end;
+    RefreshGrid;
+(*  with RcDataModule.changepasswd do begin
       ParamByName('COMPANY').AsString:=RcDataModule.CoQuery.FieldByName('ID').AsString;
       ParamByName('ID').AsString:=UserGrid.Cell[ARow,0].Text;
       TIWAppForm(WebApplication.ActiveForm).Release;
@@ -253,7 +305,7 @@ begin
         pwdform.setpriv(0);
       end;
       pwdform.Show;
-    end;
+    end; *)
 end;
 
 procedure Tsu_coForm.IWAppFormDestroy(Sender: TObject);

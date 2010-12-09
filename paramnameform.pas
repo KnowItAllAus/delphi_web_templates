@@ -40,18 +40,18 @@ procedure TFormParamnameEdit.userfooter1Extra2Click(Sender: TObject);
 begin
   try
     with RcDataModule do begin
-      SQLEx.Transaction.Active:=false;
-      SQLEx.Transaction.Active:=true;
-      SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('update GROUPOBJHDR set NAME=:NAME where ID=:ID and COMPANY=:COMPANY');
-      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-      SQLEx.ParamByName ('NAME').AsString:=NameEdit.Text;
-      SQLEx.ExecQuery;
-      SQLEx.Transaction.Commit;
+      SQLQry.Transaction.Active:=false;
+      SQLQry.Transaction.Active:=true;
+      SQLQry.SQL.Clear;
+      SQLQry.SQL.Add('update GROUPOBJHDR set NAME=:NAME where ID=:ID and COMPANY=:COMPANY');
+      SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLQry.ParamByName ('NAME').AsString:=NameEdit.Text;
+      SQLQry.ExecSQL;
+      SQLQry.Transaction.Commit;
     end;
   except
-    RcDataModule.SQLEx.Transaction.Rollback;
+    RcDataModule.SQLQry.Transaction.Rollback;
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
@@ -73,17 +73,17 @@ procedure TFormParamnameEdit.DelBtnClick(Sender: TObject);
 begin
   try
     with RcDataModule do begin
-      SQLEx.Transaction.Active:=false;
-      SQLEx.Transaction.Active:=true;
-      SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('delete from GROUPOBJHDR where ID=:ID and COMPANY=:COMPANY');
-      SQLEx.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-      SQLEx.ExecQuery;
-      SQLEx.Transaction.Commit;
+      SQLQry.Transaction.Active:=false;
+      SQLQry.Transaction.Active:=true;
+      SQLQry.SQL.Clear;
+      SQLQry.SQL.Add('delete from GROUPOBJHDR where ID=:ID and COMPANY=:COMPANY');
+      SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLQry.ExecSQL;
+      SQLQry.Transaction.Commit;
     end;
   except
-    RcDataModule.SQLEx.Transaction.Rollback;
+    RcDataModule.SQLQry.Transaction.Rollback;
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;

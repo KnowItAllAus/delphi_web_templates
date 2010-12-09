@@ -34,6 +34,7 @@ type
     function FindForm (obj : TComponent) : TComponent;
   public
     { Public declarations }
+    procedure UpdateDetails;
   end;
 
 implementation
@@ -73,7 +74,7 @@ begin
             navcombo.Items.Add(UserSession.mru_list[i].name+' - '+UserSession.mru_list[i].note)
          else
             navcombo.Items.Add(UserSession.mru_list[i].name);
-      end;      
+      end;
       inc (i);
    until (i=MAX_MRU) or (UserSession.mru_list[i].id='');
 end;
@@ -97,6 +98,11 @@ begin
   langForm.Show;
 end;
 
+procedure Tuserfooter.UpdateDetails;
+begin
+   userlabel.Caption:=UserSession.CompanyName+' - '+ silink_footer.GetTextOrDefault(UserLabel.FriendlyName)+' : '+UserSession.User;
+end;
+
 procedure Tuserfooter.silink_footerChangeLanguage(Sender: TObject);
 begin
    if not initialised then begin
@@ -106,12 +112,12 @@ begin
      Cancel.FriendlyName:=Cancel.Caption;
      initialised:=true;
    end;
-   userlabel.Caption:=UserSession.CompanyName+' - '+ silink_footer.GetTextOrDefault(UserLabel.FriendlyName)+' : '+UserSession.User;
    Extra1.Caption:=silink_footer.GetTextOrDefault(Extra1.FriendlyName);
    Extra2.Caption:=silink_footer.GetTextOrDefault(Extra2.FriendlyName);
    Cancel.Caption:=silink_footer.GetTextOrDefault(Cancel.FriendlyName);
    if Extra1.FriendlyName='Delete' then Extra1.Confirmation:=silink_footer.GetTextOrDefault('DeletePrompt');
    if Extra2.FriendlyName='Delete' then Extra2.Confirmation:=silink_footer.GetTextOrDefault('DeletePrompt');
+   Updatedetails;
 end;
 
 procedure Tuserfooter.navcomboChange(Sender: TObject);

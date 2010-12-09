@@ -171,6 +171,7 @@ type
     RequestUpdateGroupX: TIBQuery;
     GrpDepUpQuery: TIBQuery;
     GrpDepDnQuery: TIBQuery;
+    suUserAddQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
