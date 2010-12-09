@@ -129,6 +129,7 @@ begin
            else
              SQL.Add('Select * from user_co join company on user_co.company=company.id where user_co.user_id='+inttostr(user_id)+' and company.enabled=1 order by company.name');
            Open;
+           UserSession.admin:=admin;
            try
                cos:=TStringlist.create;
                while not eof do begin

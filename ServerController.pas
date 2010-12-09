@@ -59,6 +59,7 @@ type
     Company: string;
     User: string;
     pwd : string;
+    admin : boolean;
     UserCompany : string;
     LastAccess: TDateTime;
     LastComms: TDateTime;

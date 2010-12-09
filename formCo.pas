@@ -48,6 +48,10 @@ type
     NClassCombo: TIWComboBox;
     StrictBox: TIWCheckBox;
     NewBox: TIWCheckBox;
+    IWLabel14: TIWLabel;
+    IWLabel15: TIWLabel;
+    AddEdit: TIWEdit;
+    AddBtn: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure UserGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -58,6 +62,7 @@ type
     procedure UserGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure IWAppFormDestroy(Sender: TObject);
+    procedure AddBtnClick(Sender: TObject);
   private
   public
     procedure RefreshGrid;
@@ -65,7 +70,7 @@ type
 
 implementation
 
-uses datamod, Graphics, db, su_main, IWInit, su_pwdform, cfgtypes, servercontroller;
+uses datamod, Graphics, db, sysform, su_main, IWInit, su_pwdform, cfgtypes, servercontroller;
 
 {$R *.dfm}
 
@@ -188,7 +193,10 @@ procedure Tsu_coForm.CancelBtnClick(Sender: TObject);
 begin
   RcDataModule.CurrentStoreQuery.Transaction.Active:=False;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  Tsu_FormMain.Create(WebApplication).Show;
+  if Usersession.admin then
+    Tsu_FormMain.Create(WebApplication).Show
+  else
+    TFormSys.Create(WebApplication).Show;
 end;
 
 procedure Tsu_coForm.DelBtnClick(Sender: TObject);
@@ -198,7 +206,10 @@ begin
   RcDataModule.suCoDeleteQuery.ExecSQL;
   RcDataModule.suCoDeleteQuery.Transaction.Commit;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  Tsu_FormMain.Create(WebApplication).Show;
+  if Usersession.admin then
+    Tsu_FormMain.Create(WebApplication).Show
+  else
+    TFormSys.Create(WebApplication).Show;
 end;
 
 procedure Tsu_coForm.PostButtonClick(Sender: TObject);
@@ -227,7 +238,10 @@ begin
        ExecSQL;
        Transaction.Commit;
        TIWAppForm(WebApplication.ActiveForm).Release;
-       Tsu_FormMain.Create(WebApplication).Show;
+       if Usersession.admin then
+         Tsu_FormMain.Create(WebApplication).Show
+       else
+         TFormSys.Create(WebApplication).Show;
     end;
   except
     WebApplication.ShowMessage(userfooter1.siLink_footer.GetTextOrDefault('DBError'));
@@ -238,6 +252,7 @@ procedure Tsu_coForm.CreateUserClick(Sender: TObject);
 var
   user_id : integer;
 begin
+  if unameedit.text='' then exit;
   user_id:=-1;
   with RcDataModule.SQLQry do begin
     SQL.clear;
@@ -249,18 +264,15 @@ begin
     if not eof then begin
        user_id:=Fieldbyname ('ID').AsInteger;
     end;
-    if user_id<>-1 then begin
-       with RcDataModule.SQLQry do begin
-         SQL.Clear;
-         SQL.Add ('insert into USER_CO (ID, COMPANY, USER_ID) values (:ID,:CO,:USER_ID)');
-         ParamByName ('CO').AsString:=UserSession.Company;
-         ParamByName ('ID').AsInteger:=rcdatamodule.nextid;
-         ParamByName ('USER_ID').AsInteger:=user_id;
-         ExecSQL;
-         RefreshGrid;
-         exit;
-       end;
+
+    if (user_id<>-1) then begin
+       WebApplication.ShowMessage('User name already in use', smAlert);
+       exit; // Already got this one.
     end;
+  end;
+  if pwdedit.Text='' then begin
+     WebApplication.ShowMessage('No password defined for new user', smAlert);
+     exit;
   end;
   with RcDataModule.suUserInsertQuery do begin
     user_id:=RcDataModule.nextID;
@@ -283,8 +295,6 @@ end;
 
 procedure Tsu_coForm.UserGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
-//var
-//    pwdform : Tsupwdform;
 begin
     with RcDataModule.SQLQry do begin
        SQL.Clear;
@@ -294,18 +304,6 @@ begin
        ExecSQL;
     end;
     RefreshGrid;
-(*  with RcDataModule.changepasswd do begin
-      ParamByName('COMPANY').AsString:=RcDataModule.CoQuery.FieldByName('ID').AsString;
-      ParamByName('ID').AsString:=UserGrid.Cell[ARow,0].Text;
-      TIWAppForm(WebApplication.ActiveForm).Release;
-      pwdform:=Tsupwdform.Create(WebApplication);
-      try
-        pwdform.setpriv(strtoint(UserGrid.Cell[ARow,1].Text));
-      except
-        pwdform.setpriv(0);
-      end;
-      pwdform.Show;
-    end; *)
 end;
 
 procedure Tsu_coForm.IWAppFormDestroy(Sender: TObject);
@@ -314,6 +312,49 @@ var
 begin
    For i:=0 to Timezonebox.items.Count-1 do
        TimeZoneBox.Items.Objects[i].free;
+end;
+
+procedure Tsu_coForm.AddBtnClick(Sender: TObject);
+var
+  user_id : integer;
+begin
+  if addedit.text='' then exit;
+  user_id:=-1;
+  with RcDataModule.SQLQry do begin
+    SQL.clear;
+    SQL.Add ('select * from users where userid=:NAME');
+    ParamByName ('NAME').AsString:=addEdit.text;
+    addEdit.text:='';
+    Open;
+    if not eof then begin
+       user_id:=Fieldbyname ('ID').AsInteger;
+    end;
+
+    if (user_id<>-1) then begin
+      SQL.clear;
+      SQL.Add ('select * from user_co where user_id=:USER_ID and company=:CO');
+      ParamByName ('USER_ID').AsInteger:=user_id;
+      ParamByName ('CO').AsString:=Usersession.Company;
+      Open;
+      if not eof then begin
+         exit; // Already got this one.
+      end;
+    end;
+
+    if user_id<>-1 then begin
+       with RcDataModule.SQLQry do begin
+         SQL.Clear;
+         SQL.Add ('insert into USER_CO (ID, COMPANY, USER_ID) values (:ID,:CO,:USER_ID)');
+         ParamByName ('CO').AsString:=UserSession.Company;
+         ParamByName ('ID').AsInteger:=rcdatamodule.nextid;
+         ParamByName ('USER_ID').AsInteger:=user_id;
+         ExecSQL;
+         RefreshGrid;
+         exit;
+       end;
+    end;
+  end;
+  WebApplication.ShowMessage('No existing user named '+addedit.text, smAlert);
 end;
 
 end.

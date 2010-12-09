@@ -266,7 +266,7 @@ object su_coForm: Tsu_coForm
         Left = 162
         Top = 195
         Width = 390
-        Height = 329
+        Height = 301
         Cursor = crAuto
         Anchors = [akTop, akBottom]
         IW50Hint = False
@@ -475,7 +475,7 @@ object su_coForm: Tsu_coForm
         ConvertSpaces = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
-        Caption = 'Add User'
+        Caption = 'New User'
         RawText = False
       end
       object IWLabel4: TIWLabel
@@ -585,7 +585,7 @@ object su_coForm: Tsu_coForm
         PasswordPrompt = True
       end
       object CreateUserBtn: TIWButton
-        Left = 557
+        Left = 552
         Top = 531
         Width = 75
         Height = 25
@@ -935,6 +935,106 @@ object su_coForm: Tsu_coForm
         TabOrder = 16
         Checked = False
         FriendlyName = 'StrictBox'
+      end
+      object IWLabel14: TIWLabel
+        Left = 27
+        Top = 507
+        Width = 72
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = [fsBold]
+        NoWrap = False
+        ConvertSpaces = False
+        AutoSize = False
+        FriendlyName = 'IWLabel4'
+        Caption = 'Add User'
+        RawText = False
+      end
+      object IWLabel15: TIWLabel
+        Left = 115
+        Top = 507
+        Width = 41
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        AutoSize = False
+        FriendlyName = 'IWLabel4'
+        Caption = 'Name'
+        RawText = False
+      end
+      object AddEdit: TIWEdit
+        Left = 162
+        Top = 505
+        Width = 97
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'unameedit'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        TabOrder = 17
+        PasswordPrompt = False
+      end
+      object AddBtn: TIWButton
+        Left = 277
+        Top = 504
+        Width = 75
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        Caption = 'Add'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'CreateUserBtn'
+        ScriptEvents = <>
+        TabOrder = 18
+        OnClick = AddBtnClick
       end
     end
   end
