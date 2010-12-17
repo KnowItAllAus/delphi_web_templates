@@ -16,7 +16,7 @@ function debug : boolean;
 
 implementation
 
-uses IniFiles,sysutils;
+uses IniFiles,sysutils,scripting;
 
 var
   PrinterDirectory: string;
@@ -122,6 +122,7 @@ begin
     if zonedirectory='' then zonedirectory:=Basedirectory+'timezones\';
     if Printerdirectory='' then Printerdirectory:=Basedirectory+'printers\';
     if Langdirectory='' then Langdirectory:=Basedirectory+'lang\';
+    script_dll_load;
   except
   end;
 end.

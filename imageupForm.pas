@@ -55,6 +55,7 @@ type
     Widthguide3: TIWRectangle;
     ColLabel: TIWLabel;
     ColCombo: TIWComboBox;
+    SynBtn: TIWButton;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -64,6 +65,7 @@ type
     procedure FormatComboChange(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure AdjBtnClick(Sender: TObject);
+    procedure SynBtnClick(Sender: TObject);
   private
     { Private declarations }
     function showImage(ms: TStream): boolean;
@@ -87,7 +89,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevform;
+uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevform, scripting;
 
 {$R *.DFM}
 
@@ -370,6 +372,7 @@ begin
   Senselabel.Visible:=false;
   pclabel.Visible:=false;
   pclabel2.Visible:=false;
+  synbtn.visible:=false;
 
   NewVendEdit.Visible:=False;
   NewProdEdit.Visible:=False;
@@ -427,6 +430,7 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         gettextfromdb;
+        synbtn.visible:=datamodes(ModeCombo.itemindex)=dmScript;
       end;
     dmRandom:
       begin
@@ -785,6 +789,33 @@ begin
       end;
       L:=P;
     end;
+end;
+
+procedure TFormImageUp.SynBtnClick(Sender: TObject);
+var
+  msg : array [0..1023] of char;
+  buf : array [0..65535] of char;
+  buflen : integer;
+  i,j : integer;
+  s : string;
+begin
+  if assigned(script_test) then begin
+     buflen:=0;
+     for i:=0 to memo.Lines.Count-1 do begin
+       s:=memo.lines[i];
+       for j:=1 to length(s) do begin
+         buf[buflen]:=s[j];
+         inc(buflen);
+         if (buflen>65532) then exit;
+       end;
+       buf[buflen]:=#13;
+       inc(buflen);
+       buf[buflen]:=#10;
+       inc(buflen);
+     end;
+     script_test (@buf[0], buflen, @msg[0], 1024);
+     WebApplication.ShowMessage(pchar(@msg[0]), smAlert);
+  end;
 end;
 
 end.

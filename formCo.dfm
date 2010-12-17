@@ -15,8 +15,8 @@ object su_coForm: Tsu_coForm
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 212
-  DesignTop = 187
+  DesignLeft = 204
+  DesignTop = 130
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 745
