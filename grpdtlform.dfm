@@ -15,8 +15,8 @@ object FormGrpDtl: TFormGrpDtl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 139
-  DesignTop = 182
+  DesignLeft = 193
+  DesignTop = 155
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -29,7 +29,6 @@ object FormGrpDtl: TFormGrpDtl
     inherited IWFrameRegion: TIWRegion
       Width = 1084
       Height = 118
-      TabOrder = 10
       inherited IWRectangle1: TIWRectangle
         Top = 93
         Width = 1084
@@ -169,7 +168,7 @@ object FormGrpDtl: TFormGrpDtl
         ReadOnly = True
         Required = False
         ScriptEvents = <>
-        TabOrder = 0
+        TabOrder = 1
         Enabled = False
         PasswordPrompt = False
         Text = 'NameEdit'
@@ -311,7 +310,7 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'DelBtn'
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 2
         OnClick = DelBtnClick
       end
       object IWSiLink1: TIWSiLink
@@ -333,7 +332,7 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 2
+        TabOrder = 3
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'Grpdtl.sil'
@@ -402,7 +401,7 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
-        TabOrder = 4
+        TabOrder = 5
         OnClick = TestBoxChange
         OnChange = TestBoxChange
         Checked = False
@@ -437,7 +436,7 @@ object FormGrpDtl: TFormGrpDtl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 5
+        TabOrder = 6
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
@@ -462,7 +461,7 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'IWButton2'
         ScriptEvents = <>
-        TabOrder = 6
+        TabOrder = 7
         OnClick = AddStoreBtnClick
       end
       object AddJobBtn: TIWButton
@@ -484,7 +483,7 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'IWButton2'
         ScriptEvents = <>
-        TabOrder = 7
+        TabOrder = 8
         OnClick = AddJobBtnClick
       end
       object PromoCombo: TIWComboBox
@@ -515,7 +514,7 @@ object FormGrpDtl: TFormGrpDtl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 8
+        TabOrder = 9
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
@@ -598,7 +597,7 @@ object FormGrpDtl: TFormGrpDtl
         Font.Style = []
         FriendlyName = 'IWButton2'
         ScriptEvents = <>
-        TabOrder = 9
+        TabOrder = 10
         OnClick = NewTmplRevBtnClick
       end
       object EditBtn: TIWButton
@@ -966,7 +965,7 @@ object FormGrpDtl: TFormGrpDtl
     inherited IWRegion1: TIWRegion
       Width = 1084
       Height = 29
-      TabOrder = 3
+      TabOrder = 4
       inherited IWRectangle1: TIWRectangle
         Left = 708
       end

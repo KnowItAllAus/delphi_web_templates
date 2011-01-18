@@ -675,6 +675,7 @@ var
 begin
    RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,0].tag).s);
    TIWAppForm(WebApplication.ActiveForm).Release;
+   RcDataModule.SaveValue ('JobInstance','N');
    if AColumn=2 then begin
      FGT:=TFormGrpTmpl.create(WebApplication);
      //FGT.CurrentBox.Checked:=CurrentTemplate=tag_obj(templategrid.Cell[arow,0].tag).s;

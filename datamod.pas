@@ -66,7 +66,7 @@ type
     DelAllJnlItemQuery: TIBQuery;
     ItemMoveQuery: TIBQuery;
     IntegerField10: TIntegerField;
-    IntegerField11: TIntegerField;
+    IntegerField11: TIntegerField;                        
     IBStringField7: TIBStringField;
     IBStringField8: TIBStringField;
     IntegerField12: TIntegerField;

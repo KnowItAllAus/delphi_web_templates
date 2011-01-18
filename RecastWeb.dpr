@@ -10,7 +10,7 @@ uses
   datamod in 'datamod.pas' {RcDataMod: TDataModule},
   imageupFormTmpl in 'imageupFormTmpl.pas' {FormImageUpTmpl: TIWAppForm},
   voucherForm in 'voucherForm.pas' {FormVoucher: TIWAppForm},
-  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
+  editTmplForm in 'editTmplForm.pas' {formEditTmpl: TIWAppForm},
   printerForm in 'printerForm.pas' {formPrinter: TIWAppForm},
   sendForm in 'sendForm.pas' {formSend: TIWAppForm},
   passwdForm in 'passwdForm.pas' {FormPasswd: TIWAppForm},
@@ -64,7 +64,8 @@ uses
   groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},
   imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
   paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
-  parse_utils in '..\common\parse_utils.pas';
+  parse_utils in '..\common\parse_utils.pas',
+  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm};
 
 {$R *.res}
 

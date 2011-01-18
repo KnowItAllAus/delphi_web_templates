@@ -46,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, jobrev, servercontroller, jobs, IBQuery, dialogs;
+uses datamod, jobrev, servercontroller, jobs, IBQuery, dialogs,edittmplform;
 
 
 procedure TFormJobDtl.IWAppFormCreate(Sender: TObject);
@@ -69,7 +69,7 @@ begin
     except
     end;
     NameEdit.Text:=FieldByName ('Name').AsString;
-    TemplateBox.Checked:=FieldByName ('Template').AsString='1';
+    if (RcDataModule.GetValue ('JobInstance','N')='Y') then TemplateBox.visible:=false;
   end;
 end;
 
@@ -92,7 +92,10 @@ begin
         ParamByName ('LastChanged').AsDateTime:=Now;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsInteger:=RcDataModule.CurrentJobQuery.FieldByName ('ID').AsInteger;
-        ParamByName ('TEMPLATE').AsInteger:=Ord (TemplateBox.Checked);
+        if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+          ParamByName ('TEMPLATE').AsInteger:=2
+          else
+          ParamByName ('TEMPLATE').AsInteger:=Ord (TemplateBox.Checked);
         ExecSQL;
         RcDataModule.CurrentJobQuery.Close;
         RcDataModule.CurrentJobQuery.Open;
@@ -122,14 +125,20 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TFormJobRev.Create(WebApplication).Show;
+  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+  else
+      TFormJobRev.Create(WebApplication).Show;
 end;
 
 procedure TFormJobDtl.userfooter1CancelClick(Sender: TObject);
 begin
-   rcDataModule.Trans.Rollback;
-   TIWAppForm(WebApplication.ActiveForm).Release;
-   TFormJobRev.Create(WebApplication).Show;
+  rcDataModule.Trans.Rollback;
+  TIWAppForm(WebApplication.ActiveForm).Release;
+  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+  else
+      TFormJobRev.Create(WebApplication).Show;
 end;
 
 procedure TFormJobDtl.DelJobRevBtnClick(Sender: TObject);

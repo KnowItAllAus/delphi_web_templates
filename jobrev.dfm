@@ -17,7 +17,7 @@ object FormJobRev: TFormJobRev
   XPTheme = True
   UpdateMode = umPartial
   DesignLeft = 137
-  DesignTop = 270
+  DesignTop = 229
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 698

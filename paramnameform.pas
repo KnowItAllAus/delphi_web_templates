@@ -34,7 +34,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, voucherform, ServerController, jobrev, grptmplform;
+uses datamod, voucherform, ServerController, jobrev, grptmplform, edittmplform;
 
 procedure TFormParamnameEdit.userfooter1Extra2Click(Sender: TObject);
 begin
@@ -55,13 +55,19 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TformGrpTmpl.Create(WebApplication).Show;
+  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+  else
+      TformGrpTmpl.Create(WebApplication).Show;
 end;
 
 procedure TFormParamnameEdit.userfooter1CancelClick(Sender: TObject);
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
-   TformGrpTmpl.Create(WebApplication).Show;
+   if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+   else
+      TformGrpTmpl.Create(WebApplication).Show;
 end;
 
 procedure TFormParamnameEdit.IWAppFormCreate(Sender: TObject);
@@ -87,7 +93,10 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TformGrpTmpl.Create(WebApplication).Show;
+  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+  else
+      TformGrpTmpl.Create(WebApplication).Show;
 end;
 
 end.

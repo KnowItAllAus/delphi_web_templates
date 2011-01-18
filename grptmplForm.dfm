@@ -15,8 +15,8 @@ object formGrpTmpl: TformGrpTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 128
-  DesignTop = 159
+  DesignLeft = 195
+  DesignTop = 196
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118

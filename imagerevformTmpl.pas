@@ -66,8 +66,7 @@ implementation
 {$R *.dfm}
 
 uses datamod, graphics, serverController, jpeg, db, imagesform, imageupformtmpl, grptmplform,
-IBCustomDataSet, IBQuery, IBDatabase,
-  IBTable, IBUpdateSQL, dialogs;
+IBCustomDataSet, IBQuery, IBDatabase, IBTable, IBUpdateSQL, dialogs, editTmplForm;
 
 var
   t : TIBTransaction;
@@ -328,7 +327,10 @@ end;
 procedure TformImageVersionsTmpl.userfooter1CancelClick(Sender: TObject);
 begin
     TIWAppForm(WebApplication.ActiveForm).Release;
-    TformGrpTmpl.Create (WebApplication).show;
+    if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+      TFormEditTmpl.Create(WebApplication).Show
+    else
+      TformGrpTmpl.Create (WebApplication).show;
 end;
 
 procedure TformImageVersionsTmpl.ProdBtnClick(Sender: TObject);
