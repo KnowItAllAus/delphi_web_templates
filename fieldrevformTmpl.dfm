@@ -14,8 +14,8 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 102
-  DesignTop = 115
+  DesignLeft = 108
+  DesignTop = 10
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0

@@ -92,10 +92,18 @@ begin
         ParamByName ('LastChanged').AsDateTime:=Now;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsInteger:=RcDataModule.CurrentJobQuery.FieldByName ('ID').AsInteger;
-        if (RcDataModule.GetValue ('JobInstance','N')='Y') then
-          ParamByName ('TEMPLATE').AsInteger:=2
-          else
-          ParamByName ('TEMPLATE').AsInteger:=Ord (TemplateBox.Checked);
+        if (RcDataModule.GetValue ('JobInstance','N')='Y') then begin
+            ParamByName ('TEMPLATE').AsInteger:=2;
+            ParamByName ('JOBKIND').AsString:='INSTANCE';
+          end else begin
+            if TemplateBox.checked then begin
+               ParamByName ('TEMPLATE').AsInteger:=1;
+               ParamByName ('JOBKIND').AsString:='TEMPLATE';
+            end else begin
+               ParamByName ('TEMPLATE').AsInteger:=0;
+               ParamByName ('JOBKIND').AsString:='JOB';
+            end;
+          end;
         ExecSQL;
         RcDataModule.CurrentJobQuery.Close;
         RcDataModule.CurrentJobQuery.Open;

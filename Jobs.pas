@@ -150,6 +150,7 @@ begin
     NextId:=RcDataModule.nextID;
     ParamByName('ID').AsString:=inttostr(nextID);
     ParamByName('NAME').AsString:=newjobedit.text;
+    ParamByName ('JOBKIND').AsString:='JOB';
     ExecSQL;
     RcDataModule.JobInsertQuery.Transaction.Commit;
     RcDataModule.VoucherQuery.ParamByName('JOBID').AsInteger:=nextID;
@@ -265,7 +266,7 @@ begin
 
       // Create job entry that links to groupparamtmpl just created.
       SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('insert into JOBS (ID,COMPANY,NAME,DESCRIPTION,TEMPLATE,INSTANCEOFJOB,PARAMTMPLID,STATUS) VALUES (:ID,:COMPANY,:NAME,:DESCRIPTION,:TEMPLATE,:JOB,:TMPLID,3)');
+      SQLEx.SQL.Add('insert into JOBS (ID,COMPANY,NAME,DESCRIPTION,TEMPLATE,REFERJOB,PARAMTMPLID,STATUS,JOBKIND) VALUES (:ID,:COMPANY,:NAME,:DESCRIPTION,:TEMPLATE,:JOB,:TMPLID,3,:JOBKIND)');
       newjobid:=rcdatamodule.nextID;
       SQLEx.ParamByName ('ID').AsString:=inttostr(newjobid);
       SQLEx.ParamByName ('TMPLID').AsInteger:=newinstanceid;
@@ -274,6 +275,7 @@ begin
       SQLEx.ParamByName ('NAME').AsString:=newname;
       SQLEx.ParamByName ('JOB').AsString:=tmplid;
       SQLEx.ParamByName ('TEMPLATE').AsString:='2';
+      SQLEx.ParamByName ('JOBKIND').AsString:='INSTANCE';
       SQLEx.ExecQuery;
 
       while not SQLQry.EOF do begin
