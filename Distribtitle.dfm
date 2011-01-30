@@ -1,7 +1,7 @@
 object DistribFrameTitle: TDistribFrameTitle
   Left = 0
   Top = 0
-  Width = 1034
+  Width = 1024
   Height = 115
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,7 +10,7 @@ object DistribFrameTitle: TDistribFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1034
+    Width = 1024
     Height = 115
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -28,7 +28,7 @@ object DistribFrameTitle: TDistribFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1034
+      1024
       115)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -76,7 +76,7 @@ object DistribFrameTitle: TDistribFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 304
       Top = 90
-      Width = 743
+      Width = 733
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -118,9 +118,9 @@ object DistribFrameTitle: TDistribFrameTitle
       VAlign = vaMiddle
     end
     object IWRectangle3: TIWRectangle
-      Left = 760
+      Left = 913
       Top = 95
-      Width = 278
+      Width = 111
       Height = 20
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -140,7 +140,7 @@ object DistribFrameTitle: TDistribFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 700
+      Left = 690
       Top = 0
       Width = 300
       Height = 86
@@ -187,7 +187,7 @@ object DistribFrameTitle: TDistribFrameTitle
       RawText = False
     end
     object langlink: TIWSiLink
-      Left = 595
+      Left = 585
       Top = 65
       Width = 65
       Height = 17
@@ -213,7 +213,7 @@ object DistribFrameTitle: TDistribFrameTitle
       LangControl = RcDataMod.LangEditControl1
     end
     object HideBox: TIWImageFile
-      Left = 1021
+      Left = 1011
       Top = 96
       Width = 13
       Height = 17
@@ -236,9 +236,9 @@ object DistribFrameTitle: TDistribFrameTitle
       ImageFile.Filename = 'F:\delphi\delphi_web_ext\Files\X.bmp'
     end
     object Smalltitle: TIWLabel
-      Left = 896
+      Left = 915
       Top = 96
-      Width = 122
+      Width = 103
       Height = 19
       Cursor = crAuto
       Visible = False
@@ -536,6 +536,61 @@ object DistribFrameTitle: TDistribFrameTitle
         Caption = 'STATUS'
       end
     end
+    object IWRegion1: TIWRegion
+      Left = 760
+      Top = 95
+      Width = 150
+      Height = 20
+      Cursor = crAuto
+      HorzScrollBar.Visible = False
+      VertScrollBar.Visible = False
+      Anchors = [akLeft, akBottom]
+      BorderOptions.NumericWidth = 0
+      BorderOptions.BorderWidth = cbwNumeric
+      BorderOptions.Style = cbsNone
+      BorderOptions.Color = clNone
+      Color = 10526880
+      ParentShowHint = False
+      ShowHint = True
+      ZIndex = 1000
+      Splitter = False
+      object Exportlink: TIWLink
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 20
+        Cursor = crAuto
+        Align = alClient
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 1
+        RenderSize = False
+        Alignment = taLeftJustify
+        Color = clNone
+        Font.Color = clWebWHITE
+        Font.FontFamily = 'Arial, Sans-Serif, Verdana'
+        Font.Size = 13
+        Font.Style = [fsBold]
+        ScriptEvents = <
+          item
+            EventCode.Strings = (
+              'this.style.color='#39'white'#39';')
+            Event = 'onMouseOut'
+          end
+          item
+            EventCode.Strings = (
+              'this.style.color='#39'yellow'#39';')
+            Event = 'onMouseOver'
+          end>
+        DoSubmitValidation = False
+        FriendlyName = 'HomeLink'
+        OnClick = ExportlinkClick
+        TabOrder = 10
+        RawText = False
+        Caption = 'EXPORTS'
+      end
+    end
   end
   object silink: TsiLangLinked
     Version = '5.3.1.1'
@@ -562,12 +617,13 @@ object DistribFrameTitle: TDistribFrameTitle
       696F6E010D0A4A6F624C696E6B014A4F4253010D0A47726F75704C696E6B0147
       524F555053010D0A4F766572766965774C696E6B014F56455256494557010D0A
       53656E644C696E6B015055424C495348010D0A7374617475736C696E6B015354
-      41545553010D0A536D616C6C7469746C65015B64656661756C745D010D0A7374
-      48696E74730D0A7374446973706C61794C6162656C730D0A7374466F6E74730D
-      0A54446973747269624672616D655469746C65014D532053616E732053657269
-      66010D0A73744D756C74694C696E65730D0A7374537472696E67730D0A73744F
-      74686572537472696E67730D0A7374436F6C6C656374696F6E730D0A73744368
-      6172536574730D0A54446973747269624672616D655469746C65014445464155
-      4C545F43484152534554010D0A}
+      41545553010D0A536D616C6C7469746C65015B64656661756C745D010D0A4578
+      706F72746C696E6B014558504F525453010D0A737448696E74730D0A73744469
+      73706C61794C6162656C730D0A7374466F6E74730D0A54446973747269624672
+      616D655469746C65014D532053616E73205365726966010D0A73744D756C7469
+      4C696E65730D0A7374537472696E67730D0A73744F74686572537472696E6773
+      0D0A7374436F6C6C656374696F6E730D0A737443686172536574730D0A544469
+      73747269624672616D655469746C650144454641554C545F4348415253455401
+      0D0A}
   end
 end

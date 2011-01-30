@@ -47,7 +47,7 @@ uses
   imghdrform in 'imghdrform.pas' {FormImgHdr: TIWAppForm},
   overviewform in 'overviewform.pas' {FormOverview: TIWAppForm},
   distribstatusform in 'distribstatusform.pas' {formDistribStatus: TIWAppForm},
-  distrib in 'distrib.pas' {FormDistrib: TIWAppForm},
+  exportfrm in 'exportfrm.pas' {FormExport: TIWAppForm},
   voucherNewEditForm in 'voucherNewEditForm.pas' {FormVoucherNewEdit: TIWAppForm},
   jobrev in 'jobrev.pas' {FormJobRev: TIWAppForm},
   jobrevdtlform in 'jobrevdtlform.pas' {FormJobRevDtl: TIWAppForm},

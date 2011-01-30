@@ -88,10 +88,14 @@ begin
       Cell[0, 3].Text := SiLink.GetTextOrDefault('Grid.Desc');
       Cell[0, 4].Text := SiLink.GetTextOrDefault('Grid.Status');
       Cell[0, 5].Text := '';
+      Cell[0, 6].Text := SiLink.GetTextOrDefault('Grid.Source');
       i:=1;
       while not Eof do begin
         RowCount:=RowCount+1;
         istemplate:=FieldByName('TEMPLATE').AsString='1';
+        if not istemplate then
+           istemplate:=(FieldByName('REFERJOBKIND').AsString='TEMPLATE') and
+                       (FieldByName('JOBKIND').AsString='LINK');
         with Cell[i, 0] do begin
           Text := FieldByName('ID').AsString;
           Clickable:=true;
@@ -108,6 +112,11 @@ begin
             Text:=SiLink.GetTextOrDefault('Grid.NewInstance');
             Clickable:=true;
           end;
+        end;
+        with Cell[i, 6] do begin
+          if FieldByName('TEMPLATE').AsString='3' then begin
+            Text:=SiLink.GetTextOrDefault('Grid.Import');
+          end else Text:=SiLink.GetTextOrDefault('Grid.Original');
         end;
         with Cell[i, 3] do begin
           Text := htmlquote(FieldByName('DESCRIPTION').AsString);
@@ -234,7 +243,31 @@ var
   newinstanceid :  integer;
   newjobid : integer;
   newname : string;
+  kind : string;
+  tmplco : string;
+  tmplrealid : string;
 begin
+  tmplco:=usersession.company;
+  tmplrealid:=tmplid;
+  with RcDataModule.SQLQry do begin
+    SQL.Clear;
+    SQL.Add('select * from JOBS');
+    SQL.Add('where ID=:ID and COMPANY=:COMPANY');
+    ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('ID').AsString:=tmplid;
+    Open;
+    if not eof then begin
+      kind:=FieldByName ('JobKind').AsString;
+      if kind='LINK' then begin
+         tmplrealid:=FieldByName ('REFERJOB').AsString;
+         tmplco:=FieldByName ('REFERJOBCO').AsString;
+      end;
+    end;
+    close;
+  end;
+
+  // Tmplrealid and tmplco now point to the real job and source co.
+
   newjobid:=0;
   try
     with RcDataModule.GrpTmplInsertQuery do begin
@@ -243,7 +276,8 @@ begin
       ParamByName ('COMPANY').AsString:=UserSession.Company;
       ParamByName ('GROUPPARAMHDRID').AsString:='0';
       ParamByName ('TEMPLATENAME').AsString:=tmplname;
-      ParamByName ('JOBTEMPLATEID').AsString:=tmplid;
+      ParamByName ('JOBTEMPLATEID').AsString:=tmplrealid;
+      ParamByName ('JOBTEMPLATECO').AsString:=tmplco;
       ParamByName ('NOTE').AsString:=datetimetostr (now);
       ExecSQL;
       Transaction.Commit;
@@ -260,20 +294,21 @@ begin
       SQLQry.Transaction.Active:=false;
       SQLQry.Transaction.Active:=true;
       SQLQry.SQL.Add('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID');
-      SQLQry.ParamByName ('JOBID').AsString:=tmplid;
-      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLQry.ParamByName ('JOBID').AsString:=tmplrealid;
+      SQLQry.ParamByName ('COMPANY').AsString:=tmplco;
       SQLQry.Open;
 
       // Create job entry that links to groupparamtmpl just created.
       SQLEx.SQL.Clear;
-      SQLEx.SQL.Add('insert into JOBS (ID,COMPANY,NAME,DESCRIPTION,TEMPLATE,REFERJOB,PARAMTMPLID,STATUS,JOBKIND) VALUES (:ID,:COMPANY,:NAME,:DESCRIPTION,:TEMPLATE,:JOB,:TMPLID,3,:JOBKIND)');
+      SQLEx.SQL.Add('insert into JOBS (ID,COMPANY,NAME,DESCRIPTION,TEMPLATE,REFERJOB,REFERJOBCO,PARAMTMPLID,STATUS,JOBKIND) VALUES (:ID,:COMPANY,:NAME,:DESCRIPTION,:TEMPLATE,:JOB,:JOBCO,:TMPLID,3,:JOBKIND)');
       newjobid:=rcdatamodule.nextID;
       SQLEx.ParamByName ('ID').AsString:=inttostr(newjobid);
       SQLEx.ParamByName ('TMPLID').AsInteger:=newinstanceid;
       SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
-      newname:='New Instance of '+tmplname;
+      newname:='<'+tmplname+'>';
       SQLEx.ParamByName ('NAME').AsString:=newname;
-      SQLEx.ParamByName ('JOB').AsString:=tmplid;
+      SQLEx.ParamByName ('JOB').AsString:=tmplrealid;
+      SQLEx.ParamByName ('JOBCO').AsString:=tmplco;
       SQLEx.ParamByName ('TEMPLATE').AsString:='2';
       SQLEx.ParamByName ('JOBKIND').AsString:='INSTANCE';
       SQLEx.ExecQuery;

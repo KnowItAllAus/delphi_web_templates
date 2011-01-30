@@ -1,7 +1,7 @@
 object FormDistrib: TFormDistrib
   Left = 0
   Top = 0
-  Width = 1016
+  Width = 1024
   Height = 692
   ConnectionMode = cmAny
   SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
@@ -14,42 +14,52 @@ object FormDistrib: TFormDistrib
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 101
-  DesignTop = 219
+  DesignLeft = 160
+  DesignTop = 138
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 663
-    Width = 1016
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 0
     inherited IWRegion1: TIWRegion
+      Width = 1024
       Height = 29
       TabOrder = 1
       DesignSize = (
-        1016
+        1024
         29)
+      inherited IWRectangle1: TIWRectangle
+        Left = 648
+      end
+      inherited IWRectangle4: TIWRectangle
+        Width = 1640
+      end
+      inherited IWRectangle6: TIWRectangle
+        Width = 606
+      end
       inherited Cancel: TIWButton
-        Left = 929
+        Left = 937
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 841
+        Left = 849
       end
       inherited Extra2: TIWButton
-        Left = 753
+        Left = 761
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 681
+        Left = 689
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1016
+    Width = 1024
     Height = 549
     Cursor = crAuto
     Align = alClient
@@ -63,10 +73,10 @@ object FormDistrib: TFormDistrib
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1016
+      1024
       549)
     object IWRegion2: TIWRegion
-      Left = 209
+      Left = 213
       Top = 32
       Width = 593
       Height = 491
@@ -218,38 +228,40 @@ object FormDistrib: TFormDistrib
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 1024
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1016
       Height = 114
       TabOrder = 2
+      DesignSize = (
+        1024
+        114)
       inherited IWRectangle1: TIWRectangle
         Left = 0
-        Width = 1705
+        Width = 1713
       end
       inherited IWRectangle2: TIWRectangle
         Left = 0
         Width = 4
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 2013
+        Width = 2021
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 678
+        Left = 686
       end
       inherited langlink: TIWSiLink
-        Left = 752
+        Left = 760
       end
       inherited HideBox: TIWImageFile
-        Left = 1002
+        Left = 1010
       end
       inherited Smalltitle: TIWLabel
-        Left = 877
+        Width = 93
       end
       inherited JobRegn: TIWRegion
         Color = 11100191

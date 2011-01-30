@@ -33,6 +33,8 @@ type
     langlink: TIWSiLink;
     HideBox: TIWImageFile;
     Smalltitle: TIWLabel;
+    IWRegion1: TIWRegion;
+    Exportlink: TIWLink;
     procedure JobLinkClick(Sender: TObject);
     procedure GroupLinkClick(Sender: TObject);
     procedure OverviewLinkClick(Sender: TObject);
@@ -40,6 +42,7 @@ type
     procedure statuslinkClick(Sender: TObject);
     procedure IWFrameRegionCreate(Sender: TObject);
     procedure HideBoxClick(Sender: TObject);
+    procedure ExportlinkClick(Sender: TObject);
   private
     { Private declarations }
     fullheight : integer;
@@ -52,7 +55,7 @@ type
 implementation
 
 uses PossForm, IWAppForm, StoresForm, SysForm, Servercontroller, datamod, IBQuery,
-     db, grpform, roleform, IWInit, su_main, distrib, overviewForm, sendForm, distribstatusform;
+     db, exportfrm, grpform, roleform, IWInit, su_main, distrib, overviewForm, sendForm, distribstatusform;
 
 {$R *.dfm}
 
@@ -125,6 +128,12 @@ procedure TDistribFrameTitle.HideBoxClick(Sender: TObject);
 begin
    UserSession.HideTitles:=not UserSession.HideTitles;
    UpdateViz;
+end;
+
+procedure TDistribFrameTitle.ExportlinkClick(Sender: TObject);
+begin
+   TIWAppForm(WebApplication.ActiveForm).Release;
+   TFormExport.Create(WebApplication).Show;
 end;
 
 end.
