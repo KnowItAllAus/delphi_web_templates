@@ -245,6 +245,8 @@ begin
          // This instance may refer to either a local job or an imported job.
       end else if kind='TEMPLATE' then begin
          // Local job, no parameters to export
+         referjob:=JobList[JobCombo.itemindex];
+         referjobco:=UserSession.Company;
       end else if kind='JOB' then begin
          // no params for normal jobs
          referjob:=JobList[JobCombo.itemindex];

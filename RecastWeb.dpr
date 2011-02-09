@@ -54,7 +54,6 @@ uses
   voucherEditForm in 'voucherEditForm.pas' {FormVoucherEdit: TIWAppForm},
   storeForm in 'storeForm.pas' {formStore: TIWAppForm},
   AdminDM in 'AdminDM.pas' {AdminData: TDataModule},
-  paramForm in 'paramform.pas' {IWForm2: TIWAppForm},
   tmplnameform in 'tmplnameform.pas' {FormTmplnameEdit: TIWAppForm},
   storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
   imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm},
@@ -65,7 +64,8 @@ uses
   imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
   paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
   parse_utils in '..\common\parse_utils.pas',
-  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm};
+  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
+  paramform in 'paramform.pas' {ParamForm: TIWAppForm};
 
 {$R *.res}
 
