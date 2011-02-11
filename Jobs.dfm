@@ -29,7 +29,6 @@ object formJobs: TformJobs
     inherited IWRegion1: TIWRegion
       Width = 1024
       Height = 29
-      TabOrder = 3
       DesignSize = (
         1024
         29)
@@ -106,7 +105,7 @@ object formJobs: TformJobs
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 0
+      TabOrder = 1
       RawText = False
       SiLangLinked = silink
       LangFile = 'jobs.sil'
@@ -226,7 +225,7 @@ object formJobs: TformJobs
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 2
         PasswordPrompt = False
       end
       object JobGrid: TIWGrid
@@ -285,7 +284,7 @@ object formJobs: TformJobs
         Font.Style = []
         FriendlyName = 'CreateBtn'
         ScriptEvents = <>
-        TabOrder = 2
+        TabOrder = 3
         OnClick = CreateBtnClick
       end
     end

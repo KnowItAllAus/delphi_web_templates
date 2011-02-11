@@ -28,6 +28,7 @@ object FormExport: TFormExport
     inherited IWRegion1: TIWRegion
       Width = 1029
       Height = 29
+      TabOrder = 4
       DesignSize = (
         1029
         29)
@@ -173,7 +174,7 @@ object FormExport: TFormExport
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = silink_footer
         LangFile = 'JobExport.sil'
@@ -252,7 +253,7 @@ object FormExport: TFormExport
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 3
+        TabOrder = 2
         ItemIndex = -1
         Items.Strings = (
           'Jobs'
@@ -346,7 +347,7 @@ object FormExport: TFormExport
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 4
+        TabOrder = 3
         ItemIndex = -1
         Items.Strings = (
           'Jobs'
@@ -398,7 +399,7 @@ object FormExport: TFormExport
     inherited IWFrameRegion: TIWRegion
       Width = 1029
       Height = 114
-      TabOrder = 2
+      TabOrder = 1
       DesignSize = (
         1029
         114)

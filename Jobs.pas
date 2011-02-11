@@ -92,10 +92,13 @@ begin
       i:=1;
       while not Eof do begin
         RowCount:=RowCount+1;
-        istemplate:=FieldByName('TEMPLATE').AsString='1';
+        istemplate:=FieldByName('JOBKIND').AsString='TEMPLATE';
         if not istemplate then
+           // If not a direct template, it may be a link to one
+           // If the link has paramtmplid then it is a complete instance
            istemplate:=(FieldByName('REFERJOBKIND').AsString='TEMPLATE') and
-                       (FieldByName('JOBKIND').AsString='LINK');
+                       (FieldByName('JOBKIND').AsString='LINK') and
+                       (FieldByName('PARAMTMPLID').IsNull);
         with Cell[i, 0] do begin
           Text := FieldByName('ID').AsString;
           Clickable:=true;
@@ -114,8 +117,8 @@ begin
           end;
         end;
         with Cell[i, 6] do begin
-          if FieldByName('TEMPLATE').AsString='3' then begin
-            Text:=SiLink.GetTextOrDefault('Grid.Import');
+          if FieldByName('JOBKIND').AsString='LINK' then begin
+            Text:=SiLink.GetTextOrDefault('Grid.Import')+': '+FieldByName('REFERCONAME').AsString;
           end else Text:=SiLink.GetTextOrDefault('Grid.Original');
         end;
         with Cell[i, 3] do begin

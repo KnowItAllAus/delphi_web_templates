@@ -253,44 +253,45 @@ var
   user_id : integer;
 begin
   if unameedit.text='' then exit;
-  user_id:=-1;
-  with RcDataModule.SQLQry do begin
-    SQL.clear;
-    SQL.Add ('select * from users where userid=:NAME');
-    ParamByName ('NAME').AsString:=unameEdit.text;
+  try
+    user_id:=-1;
+    with RcDataModule.SQLQry do begin
+      SQL.clear;
+      SQL.Add ('select * from users where userid=:NAME');
+      ParamByName ('NAME').AsString:=unameEdit.text;
+      Open;
+      if not eof then begin
+         user_id:=Fieldbyname ('ID').AsInteger;
+      end;
+
+      if (user_id<>-1) then begin
+         WebApplication.ShowMessage('User name already in use', smAlert);
+         exit; // Already got this one.
+      end;
+    end;
+    if pwdedit.Text='' then begin
+       WebApplication.ShowMessage('No password defined for new user', smAlert);
+       exit;
+    end;
+    with RcDataModule.suUserInsertQuery do begin
+      user_id:=RcDataModule.nextID;
+      ParamByName('COMPANY').AsString:=UserSession.Company;        // Obsolete field
+      ParamByName('USERID').AsString:=unameEdit.text;
+      ParamByName('PASSWD').AsString:=pwdedit.text;
+      ParamByName('ID').AsInteger:=user_id;
+      ExecSQL;
+    end;
+    with RcDataModule.suUserAddQuery do begin
+      ParamByName('COMPANY').AsString:=usersession.company;
+      ParamByName('ID').AsInteger:=rcdatamodule.nextid;
+      ParamByName('USER_ID').AsInteger:=user_id;
+      ExecSQL;
+    end;
+  finally
     unameEdit.text:='';
     pwdedit.text:='';
-    Open;
-    if not eof then begin
-       user_id:=Fieldbyname ('ID').AsInteger;
-    end;
-
-    if (user_id<>-1) then begin
-       WebApplication.ShowMessage('User name already in use', smAlert);
-       exit; // Already got this one.
-    end;
+    RefreshGrid;
   end;
-  if pwdedit.Text='' then begin
-     WebApplication.ShowMessage('No password defined for new user', smAlert);
-     exit;
-  end;
-  with RcDataModule.suUserInsertQuery do begin
-    user_id:=RcDataModule.nextID;
-    ParamByName('COMPANY').AsString:=UserSession.Company;        // Obsolete field
-    ParamByName('USERID').AsString:=unameEdit.text;
-    ParamByName('PASSWD').AsString:=pwdedit.text;
-    ParamByName('ID').AsInteger:=user_id;
-    ExecSQL;
-  end;
-  with RcDataModule.suUserAddQuery do begin
-    ParamByName('COMPANY').AsString:=usersession.company;
-    ParamByName('ID').AsInteger:=rcdatamodule.nextid;
-    ParamByName('USER_ID').AsInteger:=user_id;
-    ExecSQL;
-  end;
-  unameEdit.text:='';
-  pwdedit.text:='';
-  RefreshGrid;
 end;
 
 procedure Tsu_coForm.UserGridCellClick(ASender: TObject; const ARow,

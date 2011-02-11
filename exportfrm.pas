@@ -237,11 +237,13 @@ begin
       paramtmplid:='';
       paramco:='';
       if kind='INSTANCE' then begin
-         paramtmplid:=FieldByName ('PARAMTMPLID').AsString;
-         paramco:=UserSession.Company;
+         //paramtmplid:=FieldByName ('PARAMTMPLID').AsString;
+         //paramco:=UserSession.Company;
          // paramco must be the current co as it is an instance within this co.
-         referjob:=FieldByName ('REFERJOB').AsString;
-         referjobco:=FieldByName ('REFERJOBCO').AsString;
+         referjob:=JobList[JobCombo.itemindex];
+         referjobco:=UserSession.Company;
+         //referjob:=FieldByName ('REFERJOB').AsString;
+         //referjobco:=FieldByName ('REFERJOBCO').AsString;
          // This instance may refer to either a local job or an imported job.
       end else if kind='TEMPLATE' then begin
          // Local job, no parameters to export
