@@ -275,7 +275,6 @@ begin
     end;
     with RcDataModule.suUserInsertQuery do begin
       user_id:=RcDataModule.nextID;
-      ParamByName('COMPANY').AsString:=UserSession.Company;        // Obsolete field
       ParamByName('USERID').AsString:=unameEdit.text;
       ParamByName('PASSWD').AsString:=pwdedit.text;
       ParamByName('ID').AsInteger:=user_id;
