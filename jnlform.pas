@@ -339,6 +339,16 @@ begin
              str:=str+quote(D.Fields[i].AsString);
              inc(count);
            end;
+       3 : if (fname<>'ITEM_ID') and (fname<>'ITEM_TRANID') then begin
+             if itm then begin
+               if (count>0) then str:=str+',';
+               str:=str+quote(D.Fields[i].AsString);
+               inc(count);
+             end else begin
+               if (count>0) then str:=str+',';
+               inc(count);
+             end;
+           end;
      end;
   end;
   str:=str+#13#10;
@@ -407,7 +417,7 @@ begin
 
   with TranGrid, rcDataModule do begin
     case option of
-      0 : begin
+      0,2 : begin
         WriteNames (itm,TranExptQry,2);
       end;
       1 : begin
@@ -421,6 +431,12 @@ begin
       case option of
         0: begin
           WriteRecord (itm,TranExptQry,2);
+        end;
+        2: begin
+            if (TranExptQry.FieldByName('ID').AsInteger=lasttran) then
+               WriteRecord (itm,TranExptQry,3)
+               else
+               WriteRecord (itm,TranExptQry,2)
         end;
         1: begin
           if (TranExptQry.FieldByName('ID').AsInteger<>lasttran) then
