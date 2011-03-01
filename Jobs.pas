@@ -221,12 +221,15 @@ begin
       JobRevQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
       JobRevQuery.ParamByName('JOBID').AsString:=ID;
    end;
-   RcDataModule.SaveValue ('JobInstance','N');
+   RcDataModule.SaveValue ('JobInstance','JOB');
    if rev='' then begin
       if job_exists (ID,kind) then begin
          TIWAppForm(WebApplication.ActiveForm).Release;
          if (kind=2) then begin  // Template instance
-           RcDataModule.SaveValue ('JobInstance','Y');
+           RcDataModule.SaveValue ('JobInstance','INSTANCE');
+           TFormEditTmpl.Create(WebApplication).Show;
+         end else if (kind=3) then begin  // Template instance
+           RcDataModule.SaveValue ('JobInstance','LINK');
            TFormEditTmpl.Create(WebApplication).Show;
          end else begin
            TFormJobRev.Create(WebApplication).Show;

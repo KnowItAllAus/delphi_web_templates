@@ -69,7 +69,7 @@ begin
     except
     end;
     NameEdit.Text:=FieldByName ('Name').AsString;
-    if (RcDataModule.GetValue ('JobInstance','N')='Y') then TemplateBox.visible:=false;
+    if (RcDataModule.GetValue ('JobInstance','JOB')<>'JOB') then TemplateBox.visible:=false;
   end;
 end;
 
@@ -92,9 +92,12 @@ begin
         ParamByName ('LastChanged').AsDateTime:=Now;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsInteger:=RcDataModule.CurrentJobQuery.FieldByName ('ID').AsInteger;
-        if (RcDataModule.GetValue ('JobInstance','N')='Y') then begin
+        if (RcDataModule.GetValue ('JobInstance','JOB')='INSTANCE') then begin
             ParamByName ('TEMPLATE').AsInteger:=2;
             ParamByName ('JOBKIND').AsString:='INSTANCE';
+        end else if (RcDataModule.GetValue ('JobInstance','JOB')='LINK') then begin
+            ParamByName ('TEMPLATE').AsInteger:=3;
+            ParamByName ('JOBKIND').AsString:='LINK';
           end else begin
             if TemplateBox.checked then begin
                ParamByName ('TEMPLATE').AsInteger:=1;
