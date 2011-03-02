@@ -101,7 +101,9 @@ begin
                        (FieldByName('PARAMTMPLID').IsNull);
         with Cell[i, 0] do begin
           Text := FieldByName('ID').AsString;
-          Clickable:=true;
+          if FieldByName('JOBKIND').AsString='LINK' then begin
+            Font.Style:=[fsItalic];
+          end else Clickable:=true;
         end;
         with Cell[i, 1] do begin
           Text := htmlquote(FieldByName('NAME').AsString);
@@ -109,6 +111,8 @@ begin
         with Cell[i, 2] do begin
           Text:='';
           if istemplate then Text:=SiLink.GetTextOrDefault('Grid.Template');
+          if FieldByName('JOBKIND').AsString='LINK' then
+             Text:=SiLink.GetTextOrDefault('Grid.Link')+' '+Text;
         end;
         with Cell[i, 5] do begin
           if istemplate then begin
@@ -119,7 +123,15 @@ begin
         with Cell[i, 6] do begin
           if FieldByName('JOBKIND').AsString='LINK' then begin
             Text:=SiLink.GetTextOrDefault('Grid.Import')+': '+FieldByName('REFERCONAME').AsString;
-          end else Text:=SiLink.GetTextOrDefault('Grid.Original');
+          end else if FieldByName('JOBKIND').AsString='INSTANCE' then begin
+            if fieldbyname ('REFERJOBCO').AsString<>UserSession.Company then begin
+                Text:=SiLink.GetTextOrDefault('Grid.Instance')+
+                  ' : '+FieldByName('REFERJOBNAME').AsString+' - '+FieldByName('REFERCONAME').AsString;;
+            end else
+                Text:=SiLink.GetTextOrDefault('Grid.Instance')+
+                  ' : '+FieldByName('REFERJOBNAME').AsString;
+          end else
+            Text:=SiLink.GetTextOrDefault('Grid.Original');
         end;
         with Cell[i, 3] do begin
           Text := htmlquote(FieldByName('DESCRIPTION').AsString);
@@ -228,7 +240,7 @@ begin
          if (kind=2) then begin  // Template instance
            RcDataModule.SaveValue ('JobInstance','INSTANCE');
            TFormEditTmpl.Create(WebApplication).Show;
-         end else if (kind=3) then begin  // Template instance
+         end else if (kind=3) then begin  // Linked job
            RcDataModule.SaveValue ('JobInstance','LINK');
            TFormEditTmpl.Create(WebApplication).Show;
          end else begin

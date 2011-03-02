@@ -136,7 +136,7 @@ begin
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
   end;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+  if (RcDataModule.GetValue ('JobInstance','JOB')='INSTANCE') then
       TFormEditTmpl.Create(WebApplication).Show
   else
       TFormJobRev.Create(WebApplication).Show;
@@ -146,7 +146,7 @@ procedure TFormJobDtl.userfooter1CancelClick(Sender: TObject);
 begin
   rcDataModule.Trans.Rollback;
   TIWAppForm(WebApplication.ActiveForm).Release;
-  if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+  if (RcDataModule.GetValue ('JobInstance','JOB')='INSTANCE') then
       TFormEditTmpl.Create(WebApplication).Show
   else
       TFormJobRev.Create(WebApplication).Show;

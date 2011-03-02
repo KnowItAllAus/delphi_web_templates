@@ -69,7 +69,7 @@ end;
 
 procedure TformEditTmpl.CancelBtnClick(Sender: TObject);
 begin
-  if RcDataModule.GetValue ('JobInstance','Y')='Y' then begin
+  if RcDataModule.GetValue ('JobInstance','JOB')='INSTANCE' then begin
      TIWAppForm(WebApplication.ActiveForm).Release;
      TFormJobs.Create(WebApplication).Show;
   end else GoParent(referedby);
