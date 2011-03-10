@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
   IWHTMLControls, IWCompRectangle, IWCompButton, IWSiLink, siComp,
-  siLngLnk, IWCompLabel;
+  siLngLnk, IWCompLabel, IWHTML40Container;
 
 type
   TAdminFrameTitle = class(TFrame)

@@ -7,7 +7,7 @@ uses
   IWHTMLControls, IWExtCtrls, IWCompLabel, IWCompListbox, Graphics,
   IWSiLink, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompRectangle, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
-  IWRegion, IWCompButton;
+  IWRegion, IWCompButton, IWHTML40Container;
 
 type
   Tuserfooter = class(TFrame)

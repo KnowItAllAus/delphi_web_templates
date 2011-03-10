@@ -3,10 +3,11 @@ object su_FormRole: Tsu_FormRole
   Top = 0
   Width = 1014
   Height = 698
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -14,8 +15,8 @@ object su_FormRole: Tsu_FormRole
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 102
-  DesignTop = 195
+  DesignLeft = 63
+  DesignTop = 11
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
@@ -24,6 +25,7 @@ object su_FormRole: Tsu_FormRole
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -47,7 +49,14 @@ object su_FormRole: Tsu_FormRole
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -56,7 +65,7 @@ object su_FormRole: Tsu_FormRole
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 4
+      TabOrder = 0
       RawText = False
       SiLangLinked = silink
       LangFile = 'role.sil'
@@ -73,6 +82,13 @@ object su_FormRole: Tsu_FormRole
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -82,7 +98,7 @@ object su_FormRole: Tsu_FormRole
       DoSubmitValidation = False
       FriendlyName = 'Login Language'
       OnClick = loginlanglinkClick
-      TabOrder = 6
+      TabOrder = 2
       RawText = False
       Caption = 'Login language'
     end
@@ -94,6 +110,7 @@ object su_FormRole: Tsu_FormRole
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -116,6 +133,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -138,6 +162,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -160,6 +191,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -167,6 +205,7 @@ object su_FormRole: Tsu_FormRole
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'LastLoginLabel'
         Caption = 'Last Login @ '
@@ -184,6 +223,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -191,6 +237,7 @@ object su_FormRole: Tsu_FormRole
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'AccessLabel'
         Caption = 'AccessLabel'
@@ -207,6 +254,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -225,7 +279,8 @@ object su_FormRole: Tsu_FormRole
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 14
+        SubmitOnAsyncEvent = True
+        TabOrder = 9
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'CoBox'
@@ -241,6 +296,13 @@ object su_FormRole: Tsu_FormRole
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -250,6 +312,7 @@ object su_FormRole: Tsu_FormRole
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'CoLabel'
         Caption = 'CoLabel'
@@ -263,6 +326,7 @@ object su_FormRole: Tsu_FormRole
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
+        RenderInvisibleControls = False
         TabOrder = 6
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -285,12 +349,18 @@ object su_FormRole: Tsu_FormRole
           ShowHint = True
           ZIndex = 0
           RenderSize = True
-          AutoSize = False
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderOptions.Color = clNone
           BorderOptions.Width = 0
           DoSubmitValidation = True
           ScriptEvents = <>
-          TabOrder = 0
+          TabOrder = -1
           UseSize = True
           OnClick = PromoLinkClick
           Cacheable = True
@@ -305,6 +375,7 @@ object su_FormRole: Tsu_FormRole
           Cursor = crAuto
           HorzScrollBar.Visible = False
           VertScrollBar.Visible = False
+          RenderInvisibleControls = False
           BorderOptions.NumericWidth = 1
           BorderOptions.BorderWidth = cbwNumeric
           BorderOptions.Style = cbsNone
@@ -326,6 +397,13 @@ object su_FormRole: Tsu_FormRole
             ShowHint = True
             ZIndex = 0
             RenderSize = False
+            StyleRenderOptions.RenderSize = False
+            StyleRenderOptions.RenderPosition = True
+            StyleRenderOptions.RenderFont = True
+            StyleRenderOptions.RenderZIndex = True
+            StyleRenderOptions.RenderVisibility = True
+            StyleRenderOptions.RenderStatus = True
+            StyleRenderOptions.RenderAbsolute = True
             Alignment = taLeftJustify
             Color = clMenuText
             Font.Color = clWebWHITE
@@ -346,9 +424,9 @@ object su_FormRole: Tsu_FormRole
             DoSubmitValidation = False
             FriendlyName = 'PromoLnk'
             OnClick = PromoLinkClick
-            TabOrder = 11
+            TabOrder = 6
             RawText = False
-            Caption = '&nbsp;PROMOTIONS'
+            Caption = 'PROMOTIONS'
           end
         end
       end
@@ -360,6 +438,7 @@ object su_FormRole: Tsu_FormRole
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
+        RenderInvisibleControls = False
         TabOrder = 6
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -382,12 +461,18 @@ object su_FormRole: Tsu_FormRole
           ShowHint = True
           ZIndex = 0
           RenderSize = True
-          AutoSize = False
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderOptions.Color = clNone
           BorderOptions.Width = 0
           DoSubmitValidation = True
           ScriptEvents = <>
-          TabOrder = 1
+          TabOrder = -1
           UseSize = True
           Cacheable = True
           FriendlyName = 'IWImageFile1'
@@ -401,6 +486,7 @@ object su_FormRole: Tsu_FormRole
           Cursor = crAuto
           HorzScrollBar.Visible = False
           VertScrollBar.Visible = False
+          RenderInvisibleControls = False
           BorderOptions.NumericWidth = 1
           BorderOptions.BorderWidth = cbwNumeric
           BorderOptions.Style = cbsNone
@@ -422,6 +508,13 @@ object su_FormRole: Tsu_FormRole
             ShowHint = True
             ZIndex = 0
             RenderSize = False
+            StyleRenderOptions.RenderSize = False
+            StyleRenderOptions.RenderPosition = True
+            StyleRenderOptions.RenderFont = True
+            StyleRenderOptions.RenderZIndex = True
+            StyleRenderOptions.RenderVisibility = True
+            StyleRenderOptions.RenderStatus = True
+            StyleRenderOptions.RenderAbsolute = True
             Alignment = taLeftJustify
             Color = clMenuText
             Font.Color = clWebWHITE
@@ -442,9 +535,9 @@ object su_FormRole: Tsu_FormRole
             DoSubmitValidation = False
             FriendlyName = 'IWLink1'
             OnClick = DistribLnkClick
-            TabOrder = 9
+            TabOrder = 4
             RawText = False
-            Caption = '&nbsp;DISTRIBUTION'
+            Caption = 'DISTRIBUTION'
           end
         end
       end
@@ -456,6 +549,7 @@ object su_FormRole: Tsu_FormRole
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
+        RenderInvisibleControls = False
         TabOrder = 6
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -479,12 +573,18 @@ object su_FormRole: Tsu_FormRole
           ShowHint = True
           ZIndex = 0
           RenderSize = True
-          AutoSize = False
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderOptions.Color = clNone
           BorderOptions.Width = 0
           DoSubmitValidation = True
           ScriptEvents = <>
-          TabOrder = 2
+          TabOrder = -1
           UseSize = True
           Cacheable = True
           FriendlyName = 'IWImageFile1'
@@ -498,6 +598,7 @@ object su_FormRole: Tsu_FormRole
           Cursor = crAuto
           HorzScrollBar.Visible = False
           VertScrollBar.Visible = False
+          RenderInvisibleControls = False
           BorderOptions.NumericWidth = 1
           BorderOptions.BorderWidth = cbwNumeric
           BorderOptions.Style = cbsNone
@@ -520,6 +621,13 @@ object su_FormRole: Tsu_FormRole
             ShowHint = True
             ZIndex = 0
             RenderSize = False
+            StyleRenderOptions.RenderSize = False
+            StyleRenderOptions.RenderPosition = True
+            StyleRenderOptions.RenderFont = True
+            StyleRenderOptions.RenderZIndex = True
+            StyleRenderOptions.RenderVisibility = True
+            StyleRenderOptions.RenderStatus = True
+            StyleRenderOptions.RenderAbsolute = True
             Alignment = taLeftJustify
             Color = clMenuText
             Font.Color = clWebWHITE
@@ -539,9 +647,9 @@ object su_FormRole: Tsu_FormRole
               end>
             DoSubmitValidation = False
             FriendlyName = 'IWLink1'
-            TabOrder = 13
+            TabOrder = 8
             RawText = False
-            Caption = '&nbsp;INSTALLATION'
+            Caption = 'INSTALLATION'
           end
         end
       end
@@ -553,6 +661,7 @@ object su_FormRole: Tsu_FormRole
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
+        RenderInvisibleControls = False
         TabOrder = 6
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -575,12 +684,18 @@ object su_FormRole: Tsu_FormRole
           ShowHint = True
           ZIndex = 0
           RenderSize = True
-          AutoSize = False
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderOptions.Color = clNone
           BorderOptions.Width = 0
           DoSubmitValidation = True
           ScriptEvents = <>
-          TabOrder = 3
+          TabOrder = -1
           UseSize = True
           OnClick = IWAdminClick
           Cacheable = True
@@ -595,6 +710,7 @@ object su_FormRole: Tsu_FormRole
           Cursor = crAuto
           HorzScrollBar.Visible = False
           VertScrollBar.Visible = False
+          RenderInvisibleControls = False
           BorderOptions.NumericWidth = 1
           BorderOptions.BorderWidth = cbwNumeric
           BorderOptions.Style = cbsNone
@@ -616,6 +732,13 @@ object su_FormRole: Tsu_FormRole
             ShowHint = True
             ZIndex = 0
             RenderSize = False
+            StyleRenderOptions.RenderSize = False
+            StyleRenderOptions.RenderPosition = True
+            StyleRenderOptions.RenderFont = True
+            StyleRenderOptions.RenderZIndex = True
+            StyleRenderOptions.RenderVisibility = True
+            StyleRenderOptions.RenderStatus = True
+            StyleRenderOptions.RenderAbsolute = True
             Alignment = taLeftJustify
             Color = clMenuText
             Font.Color = clWebWHITE
@@ -636,9 +759,9 @@ object su_FormRole: Tsu_FormRole
             DoSubmitValidation = False
             FriendlyName = 'IWLink1'
             OnClick = IWAdminClick
-            TabOrder = 12
+            TabOrder = 7
             RawText = False
-            Caption = '&nbsp;ADMINISTRATION'
+            Caption = 'ADMINISTRATION'
           end
         end
       end
@@ -650,6 +773,7 @@ object su_FormRole: Tsu_FormRole
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
+        RenderInvisibleControls = False
         TabOrder = 6
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -672,12 +796,18 @@ object su_FormRole: Tsu_FormRole
           ShowHint = True
           ZIndex = 0
           RenderSize = True
-          AutoSize = False
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderOptions.Color = clNone
           BorderOptions.Width = 0
           DoSubmitValidation = True
           ScriptEvents = <>
-          TabOrder = 7
+          TabOrder = -1
           UseSize = True
           OnClick = IWAdminClick
           Cacheable = True
@@ -692,6 +822,7 @@ object su_FormRole: Tsu_FormRole
           Cursor = crAuto
           HorzScrollBar.Visible = False
           VertScrollBar.Visible = False
+          RenderInvisibleControls = False
           BorderOptions.NumericWidth = 1
           BorderOptions.BorderWidth = cbwNumeric
           BorderOptions.Style = cbsNone
@@ -713,6 +844,13 @@ object su_FormRole: Tsu_FormRole
             ShowHint = True
             ZIndex = 0
             RenderSize = False
+            StyleRenderOptions.RenderSize = False
+            StyleRenderOptions.RenderPosition = True
+            StyleRenderOptions.RenderFont = True
+            StyleRenderOptions.RenderZIndex = True
+            StyleRenderOptions.RenderVisibility = True
+            StyleRenderOptions.RenderStatus = True
+            StyleRenderOptions.RenderAbsolute = True
             Alignment = taLeftJustify
             Color = clMenuText
             Font.Color = clWebWHITE
@@ -733,9 +871,9 @@ object su_FormRole: Tsu_FormRole
             DoSubmitValidation = False
             FriendlyName = 'StatLnk'
             OnClick = StatLnkClick
-            TabOrder = 10
+            TabOrder = 5
             RawText = False
-            Caption = '&nbsp;REPORTS'
+            Caption = 'REPORTS'
           end
         end
       end
@@ -753,7 +891,7 @@ object su_FormRole: Tsu_FormRole
     inherited IWFrameRegion: TIWRegion
       Width = 1014
       Height = 118
-      TabOrder = 8
+      TabOrder = 3
       inherited titleimage: TIWImageFile
         Width = 125
         ImageFile.Filename = 'E:\delphi\delphi_web\files\role.GIF'
@@ -768,14 +906,14 @@ object su_FormRole: Tsu_FormRole
       inherited IWImageFile3: TIWImageFile
         Left = 679
       end
-      inherited TitleLabel: TIWLabel
-        Width = 129
-        Caption = 'role'
-      end
       inherited HideBox: TIWImageFile
         Top = 100
         Width = 12
         Height = 14
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 129
+        Caption = 'role'
       end
     end
   end
@@ -790,7 +928,7 @@ object su_FormRole: Tsu_FormRole
     inherited IWRegion1: TIWRegion
       Width = 1014
       Height = 29
-      TabOrder = 5
+      TabOrder = 1
       inherited IWRectangle1: TIWRectangle
         Left = 598
         Width = 417

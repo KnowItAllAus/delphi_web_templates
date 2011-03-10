@@ -8,7 +8,7 @@ uses
   IWExtCtrls, IWContainer, IWRegion, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   siComp, siLngLnk, IWHTMLControls, IWSiLink, IWCompRectangle,
-  IWHTMLContainer, footer_user, baretitle;
+  IWHTMLContainer, footer_user, baretitle, IWHTML40Container;
 
 type
   TFormPasswd = class(TIWAppForm)

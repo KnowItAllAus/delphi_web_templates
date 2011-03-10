@@ -7,7 +7,7 @@ uses
   Classes,
   DataMod, AdminDM,
   IWServerControllerBase, IWAppForm, IWBaseForm, IWApplication,
-  IWModuleController,IWProducer,HTTPApp,SysUtils, GpTimezone, ReferredClass;
+  {IWModuleController,IWProducer,}HTTPApp,SysUtils, GpTimezone, ReferredClass;
 
   //Windows, Messages, SysUtils, Classes,
 
@@ -34,10 +34,10 @@ type
     procedure IWServerControllerBaseCreate(Sender: TObject);
     procedure IWServerControllerBaseNewSession(ASession: TIWApplication;
       var VMainForm: TIWBaseForm);
-    procedure IWServerControllerBaseException(AApplication: TIWApplication;
-      AException: Exception);
     procedure IWServerControllerBaseInvalidCommand(ARequest: TWebRequest;
       AResponse: TWebResponse; AMsg: String);
+    procedure IWServerControllerBaseException(AApplication: TIWApplication;
+      AException: Exception; var Handled: Boolean);
   private
   public
     procedure log_error (msg : string);
@@ -218,8 +218,8 @@ end;
 procedure TRcWebController.IWServerControllerBaseCreate(Sender: TObject);
 begin
    Port:=getPort;
-   ExecCmd:=getPrefix+'EXEC';
-   StartCmd:=getPrefix;
+   //ExecCmd:=getPrefix+'EXEC';
+   //StartCmd:=getPrefix;
    FormIWMain.Log ('DB="'+GetDBName+'"');
    FormIWMain.Log ('Prefix="'+getPrefix+'"');
    FormIWMain.Log ('PrnDir="'+PrinterDir+'"');
@@ -229,7 +229,7 @@ begin
    URLBase:=GetUrlBase;
    FormIWMain.Log ('BaseURL="'+GetURLBase+'"');
    FormIWMain.Log ('Translatedir="'+GetTransBase+'"');
-   SessionTimeoutURL.URL:=GetExitURL;
+   //SessionTimeoutURL.URL:=GetExitURL;
 end;
 
 function getrunparam (name : string; s : TStrings) : string;
@@ -304,16 +304,17 @@ begin
   closefile (f);
 end;
 
-procedure TRcWebController.IWServerControllerBaseException(
-  AApplication: TIWApplication; AException: Exception);
-begin
-  log_error ('Exception: '+AException.Message);
-end;
-
 procedure TRcWebController.IWServerControllerBaseInvalidCommand(
   ARequest: TWebRequest; AResponse: TWebResponse; AMsg: String);
 begin
   log_error ('Invalid Cmd: '+AMsg);
+end;
+
+procedure TRcWebController.IWServerControllerBaseException(
+  AApplication: TIWApplication; AException: Exception;
+  var Handled: Boolean);
+begin
+  log_error ('Exception: '+AException.Message);
 end;
 
 initialization

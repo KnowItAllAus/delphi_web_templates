@@ -9,7 +9,7 @@ uses
   IWHTMLControls, IWContainer, IWRegion, IWExtCtrls, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWSiLink, siComp, siLngLnk, footer_user, baretitle, IWHTMLContainer,
-  ReferredClass;
+  ReferredClass, IWHTML40Container;
 
 type
   TformGrpStore = class(TIWAppForm)

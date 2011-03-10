@@ -5,11 +5,12 @@ object formSend: TformSend
   Height = 575
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -17,8 +18,8 @@ object formSend: TformSend
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 154
-  DesignTop = 335
+  DesignLeft = 60
+  DesignTop = 183
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -71,6 +72,7 @@ object formSend: TformSend
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
+      Width = 1016
       Height = 29
       TabOrder = 5
       inherited Cancel: TIWButton
@@ -95,6 +97,7 @@ object formSend: TformSend
     Width = 1016
     Height = 432
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -114,6 +117,7 @@ object formSend: TformSend
       Width = 540
       Height = 223
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -136,6 +140,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -158,6 +169,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -179,6 +197,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -186,6 +211,7 @@ object formSend: TformSend
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'RequestLabel'
         Caption = 'Publish Current Configuration ?'
@@ -202,6 +228,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -209,6 +242,7 @@ object formSend: TformSend
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'CompanyLabel'
         Caption = 'CompanyLabel'
@@ -225,6 +259,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -242,6 +283,7 @@ object formSend: TformSend
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         ItemIndex = -1
         Sorted = False
@@ -258,6 +300,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Publish - Prod.'
         Confirmation = 'Update Live Sites?'
         DoSubmitValidation = True
@@ -280,7 +329,14 @@ object formSend: TformSend
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -306,6 +362,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Publish - Test'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -328,6 +391,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -345,6 +415,7 @@ object formSend: TformSend
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         ItemIndex = -1
         Sorted = False
@@ -360,7 +431,14 @@ object formSend: TformSend
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -378,6 +456,7 @@ object formSend: TformSend
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 7
         ItemIndex = 0
         Items.Strings = (
@@ -420,6 +499,13 @@ object formSend: TformSend
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -427,6 +513,7 @@ object formSend: TformSend
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'RequestLabel'
         Caption = 'When :'

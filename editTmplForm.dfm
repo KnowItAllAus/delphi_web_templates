@@ -3,11 +3,12 @@ object formEditTmpl: TformEditTmpl
   Top = 0
   Width = 1021
   Height = 725
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -23,6 +24,7 @@ object formEditTmpl: TformEditTmpl
     Width = 1021
     Height = 578
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -42,6 +44,7 @@ object formEditTmpl: TformEditTmpl
       Width = 911
       Height = 543
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -66,6 +69,13 @@ object formEditTmpl: TformEditTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -74,6 +84,7 @@ object formEditTmpl: TformEditTmpl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'TmplLabel'
         Caption = 'Template Job :'
@@ -90,7 +101,14 @@ object formEditTmpl: TformEditTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -111,8 +129,8 @@ object formEditTmpl: TformEditTmpl
         ColumnCount = 4
         OnCellClick = TmplGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWSiLink1: TIWSiLink
@@ -125,7 +143,14 @@ object formEditTmpl: TformEditTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -152,6 +177,13 @@ object formEditTmpl: TformEditTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -174,6 +206,13 @@ object formEditTmpl: TformEditTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -195,6 +234,13 @@ object formEditTmpl: TformEditTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -203,6 +249,7 @@ object formEditTmpl: TformEditTmpl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'TmplLabel'
         Caption = 'Template Name'
@@ -219,6 +266,13 @@ object formEditTmpl: TformEditTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Edit'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -301,10 +355,6 @@ object formEditTmpl: TformEditTmpl
       inherited IWImageFile3: TIWImageFile
         Left = 686
       end
-      inherited TitleLabel: TIWLabel
-        Width = 387
-        Caption = 'distribution'
-      end
       inherited langlink: TIWSiLink
         Left = 615
       end
@@ -317,6 +367,10 @@ object formEditTmpl: TformEditTmpl
         Top = 99
         Width = 12
         Height = 14
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 387
+        Caption = 'distribution'
       end
     end
   end

@@ -8,7 +8,7 @@ uses
   IWGrids, IWCompEdit, IWCompLabel, IWCompRectangle, siComp, siLngLnk,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
-  IWHTMLContainer, IWRegion, IWCompMemo;
+  IWHTMLContainer, IWRegion, IWCompMemo, IWHTML40Container;
 
 type
   Tformdistribdtl = class(TIWAppForm)

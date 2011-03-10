@@ -7,7 +7,8 @@ uses
   IWCompEdit, IWHTMLControls, IWExtCtrls, IWCompLabel, IWCompRectangle,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
-  Controls, Forms, promotitle, siComp, siLngLnk, IWCompButton;
+  Controls, Forms, promotitle, siComp, siLngLnk, IWCompButton,
+  IWHTML40Container;
 
 type
   TformJobs = class(TIWAppForm)

@@ -7,7 +7,7 @@ uses
   siLngLnk, IWCompRectangle, IWHTMLControls, IWSiLink, IWGrids,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompLabel, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  footer_user, Controls, Forms, distribtitle;
+  footer_user, Controls, Forms, distribtitle, IWHTML40Container;
 
 type
   TFormDistrib = class(TIWAppForm)

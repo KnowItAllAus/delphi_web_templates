@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, baretitle,
-  IWCompListbox, IWCompRadioButton, IWCompCheckbox;
+  IWCompListbox, IWCompRadioButton, IWCompCheckbox, IWHTML40Container;
 
 type
   TFormJobDtl = class(TIWAppForm)

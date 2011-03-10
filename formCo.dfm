@@ -2,12 +2,13 @@ object su_coForm: Tsu_coForm
   Left = 0
   Top = 0
   Width = 1024
-  Height = 774
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -15,11 +16,11 @@ object su_coForm: Tsu_coForm
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 204
-  DesignTop = 130
+  DesignLeft = -35
+  DesignTop = 136
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 745
+    Top = 717
     Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
@@ -82,8 +83,9 @@ object su_coForm: Tsu_coForm
     Left = 0
     Top = 115
     Width = 1024
-    Height = 630
+    Height = 602
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -96,13 +98,14 @@ object su_coForm: Tsu_coForm
     Splitter = False
     DesignSize = (
       1024
-      630)
+      602)
     object IWRegion2: TIWRegion
       Left = 185
       Top = 23
       Width = 671
-      Height = 594
+      Height = 566
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -115,7 +118,7 @@ object su_coForm: Tsu_coForm
       Splitter = False
       DesignSize = (
         671
-        594)
+        566)
       object IWLabel1: TIWLabel
         Left = 159
         Top = 24
@@ -128,6 +131,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -136,6 +146,7 @@ object su_coForm: Tsu_coForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Company Administration'
@@ -151,7 +162,14 @@ object su_coForm: Tsu_coForm
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -178,6 +196,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -192,7 +217,7 @@ object su_coForm: Tsu_coForm
         Left = 0
         Top = 3
         Width = 3
-        Height = 591
+        Height = 563
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -200,6 +225,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -221,6 +253,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -235,6 +274,7 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
         Text = 'VEdit'
@@ -250,6 +290,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -257,6 +304,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Journal Vend.'
@@ -266,14 +314,21 @@ object su_coForm: Tsu_coForm
         Left = 162
         Top = 195
         Width = 390
-        Height = 301
+        Height = 273
         Cursor = crAuto
         Anchors = [akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -294,8 +349,8 @@ object su_coForm: Tsu_coForm
         ColumnCount = 4
         OnCellClick = UserGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWLabel8: TIWLabel
@@ -309,6 +364,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -316,6 +378,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Journal Prod.'
@@ -332,6 +395,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -346,6 +416,7 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 6
         PasswordPrompt = False
         Text = 'PEdit'
@@ -361,6 +432,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -375,6 +453,7 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
         Text = 'CoEdit'
@@ -390,6 +469,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -397,6 +483,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Company'
@@ -413,6 +500,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -420,6 +514,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'ID'
@@ -436,6 +531,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clBtnFace
         FocusColor = clNone
@@ -450,13 +552,14 @@ object su_coForm: Tsu_coForm
         ReadOnly = True
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = False
         Text = 'IdEdit'
       end
       object IWLabel6: TIWLabel
         Left = 27
-        Top = 532
+        Top = 504
         Width = 72
         Height = 21
         Cursor = crAuto
@@ -466,6 +569,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -473,6 +583,7 @@ object su_coForm: Tsu_coForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
         Caption = 'New User'
@@ -480,7 +591,7 @@ object su_coForm: Tsu_coForm
       end
       object IWLabel4: TIWLabel
         Left = 115
-        Top = 532
+        Top = 504
         Width = 41
         Height = 21
         Cursor = crAuto
@@ -490,6 +601,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -497,6 +615,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
         Caption = 'Name'
@@ -504,7 +623,7 @@ object su_coForm: Tsu_coForm
       end
       object unameedit: TIWEdit
         Left = 162
-        Top = 532
+        Top = 504
         Width = 97
         Height = 21
         Cursor = crAuto
@@ -514,6 +633,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -528,12 +654,13 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 7
         PasswordPrompt = False
       end
       object IWLabel5: TIWLabel
         Left = 275
-        Top = 532
+        Top = 504
         Width = 171
         Height = 21
         Cursor = crAuto
@@ -543,6 +670,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -550,6 +684,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
         Caption = 'Password (new users only)'
@@ -557,7 +692,7 @@ object su_coForm: Tsu_coForm
       end
       object pwdedit: TIWEdit
         Left = 452
-        Top = 532
+        Top = 504
         Width = 89
         Height = 21
         Cursor = crAuto
@@ -567,6 +702,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -581,12 +723,13 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 8
         PasswordPrompt = True
       end
       object CreateUserBtn: TIWButton
         Left = 552
-        Top = 531
+        Top = 503
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -596,6 +739,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Create'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -618,6 +768,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -625,6 +782,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel3'
         Caption = 'Users'
@@ -641,6 +799,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -648,6 +813,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Time Offset'
@@ -664,6 +830,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -678,6 +851,7 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 2
         PasswordPrompt = False
         Text = 'Time'
@@ -693,6 +867,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -700,6 +881,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Alias'
@@ -716,6 +898,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -730,13 +919,14 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 4
         PasswordPrompt = False
         Text = 'AliasEdit'
       end
       object IWLabel12: TIWLabel
         Left = 24
-        Top = 563
+        Top = 535
         Width = 121
         Height = 21
         Cursor = crAuto
@@ -746,6 +936,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -753,6 +950,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Notify status email'
@@ -760,7 +958,7 @@ object su_coForm: Tsu_coForm
       end
       object NotifyEdit: TIWEdit
         Left = 160
-        Top = 563
+        Top = 535
         Width = 377
         Height = 21
         Cursor = crAuto
@@ -770,6 +968,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -784,6 +989,7 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 10
         PasswordPrompt = False
         Text = 'NotifyEdit'
@@ -800,6 +1006,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -817,6 +1030,7 @@ object su_coForm: Tsu_coForm
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 12
         ItemIndex = -1
         Sorted = True
@@ -833,6 +1047,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -840,6 +1061,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Notify Class'
@@ -856,6 +1078,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -873,6 +1102,7 @@ object su_coForm: Tsu_coForm
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 13
         ItemIndex = 0
         Items.Strings = (
@@ -900,12 +1130,20 @@ object su_coForm: Tsu_coForm
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Strict Change Control'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -923,12 +1161,20 @@ object su_coForm: Tsu_coForm
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New Transaction DB'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -938,7 +1184,7 @@ object su_coForm: Tsu_coForm
       end
       object IWLabel14: TIWLabel
         Left = 27
-        Top = 507
+        Top = 479
         Width = 72
         Height = 21
         Cursor = crAuto
@@ -948,6 +1194,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -955,6 +1208,7 @@ object su_coForm: Tsu_coForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
         Caption = 'Add User'
@@ -962,7 +1216,7 @@ object su_coForm: Tsu_coForm
       end
       object IWLabel15: TIWLabel
         Left = 115
-        Top = 507
+        Top = 479
         Width = 41
         Height = 21
         Cursor = crAuto
@@ -972,6 +1226,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -979,6 +1240,7 @@ object su_coForm: Tsu_coForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel4'
         Caption = 'Name'
@@ -986,7 +1248,7 @@ object su_coForm: Tsu_coForm
       end
       object AddEdit: TIWEdit
         Left = 162
-        Top = 505
+        Top = 477
         Width = 97
         Height = 21
         Cursor = crAuto
@@ -996,6 +1258,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -1010,12 +1279,13 @@ object su_coForm: Tsu_coForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 17
         PasswordPrompt = False
       end
       object AddBtn: TIWButton
         Left = 277
-        Top = 504
+        Top = 476
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -1025,6 +1295,13 @@ object su_coForm: Tsu_coForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Add'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -1065,10 +1342,6 @@ object su_coForm: Tsu_coForm
       inherited IWImageFile3: TIWImageFile
         Left = 689
       end
-      inherited TitleLabel: TIWLabel
-        Width = 486
-        Caption = 'administration'
-      end
       inherited langlink: TIWSiLink
         Left = 625
       end
@@ -1077,6 +1350,10 @@ object su_coForm: Tsu_coForm
       end
       inherited HideBox: TIWImageFile
         Left = 1008
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 486
+        Caption = 'administration'
       end
     end
     inherited silink: TsiLangLinked

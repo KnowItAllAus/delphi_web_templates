@@ -1,14 +1,15 @@
 object FormVoucher: TFormVoucher
   Left = 0
   Top = 0
-  Width = 1045
-  Height = 834
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
   Title = 'Recast Control'
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,89 +22,90 @@ object FormVoucher: TFormVoucher
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1045
+    Width = 1028
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1045
+      Width = 1028
       Height = 118
+      TabOrder = 9
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1045
+        Width = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 710
+        Left = 693
+      end
+      inherited langlink: TIWSiLink
+        Left = 737
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 909
+        Top = 101
+      end
+      inherited HideBox: TIWImageFile
+        Left = 1011
+        Top = 100
       end
       inherited TitleLabel: TIWLabel
         Width = 387
         Caption = 'promotions'
       end
-      inherited langlink: TIWSiLink
-        Left = 754
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 926
-        Top = 101
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1028
-        Top = 100
-      end
     end
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 805
-    Width = 1045
+    Top = 717
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1045
+      Width = 1028
       Height = 29
-      TabOrder = 9
       inherited IWRectangle1: TIWRectangle
-        Left = 629
+        Left = 612
         Width = 416
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1661
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 587
+        Width = 570
       end
       inherited Cancel: TIWButton
-        Left = 959
+        Left = 942
         Caption = 'Back'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 871
+        Left = 854
       end
       inherited Extra2: TIWButton
-        Left = 783
+        Left = 766
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 713
+        Left = 696
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1045
-    Height = 687
+    Width = 1028
+    Height = 599
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -115,8 +117,8 @@ object FormVoucher: TFormVoucher
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1045
-      687)
+      1028
+      599)
     object IWSiLink1: TIWSiLink
       Left = 1
       Top = 1
@@ -127,7 +129,14 @@ object FormVoucher: TFormVoucher
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -145,9 +154,10 @@ object FormVoucher: TFormVoucher
     object BodyRegion: TIWRegion
       Left = 29
       Top = 10
-      Width = 992
-      Height = 668
+      Width = 975
+      Height = 580
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -159,12 +169,12 @@ object FormVoucher: TFormVoucher
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        992
-        668)
+        975
+        580)
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 992
+        Width = 975
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -173,6 +183,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -187,7 +204,7 @@ object FormVoucher: TFormVoucher
         Left = 0
         Top = 3
         Width = 3
-        Height = 665
+        Height = 577
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -195,6 +212,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -209,14 +233,21 @@ object FormVoucher: TFormVoucher
         Left = 9
         Top = 120
         Width = 470
-        Height = 542
+        Height = 454
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -237,8 +268,8 @@ object FormVoucher: TFormVoucher
         ColumnCount = 2
         OnCellClick = VoucherGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object InsertBtn: TIWButton
@@ -252,6 +283,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -274,6 +312,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -282,6 +327,7 @@ object FormVoucher: TFormVoucher
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
         Caption = 'Job'
@@ -297,7 +343,14 @@ object FormVoucher: TFormVoucher
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -305,6 +358,7 @@ object FormVoucher: TFormVoucher
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = 'Note'
         RawText = False
@@ -320,6 +374,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clGrayText
         FocusColor = clNone
@@ -334,6 +395,7 @@ object FormVoucher: TFormVoucher
         ReadOnly = True
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
         Text = 'NoteEdit'
@@ -349,6 +411,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Edit'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -363,15 +432,22 @@ object FormVoucher: TFormVoucher
       object ImageGrid: TIWGrid
         Left = 488
         Top = 120
-        Width = 493
-        Height = 541
+        Width = 476
+        Height = 453
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -392,8 +468,8 @@ object FormVoucher: TFormVoucher
         ColumnCount = 5
         OnCellClick = ImageGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWLabel3: TIWLabel
@@ -407,6 +483,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -414,6 +497,7 @@ object FormVoucher: TFormVoucher
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Rules'
@@ -430,6 +514,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -437,13 +528,14 @@ object FormVoucher: TFormVoucher
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Images'
         RawText = False
       end
       object ImageBtn: TIWButton
-        Left = 907
+        Left = 890
         Top = 88
         Width = 75
         Height = 25
@@ -454,6 +546,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -475,12 +574,20 @@ object FormVoucher: TFormVoucher
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Authorised / Read Only'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -499,12 +606,20 @@ object FormVoucher: TFormVoucher
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Production'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -523,12 +638,20 @@ object FormVoucher: TFormVoucher
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Test'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -548,12 +671,20 @@ object FormVoucher: TFormVoucher
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New Format'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -574,6 +705,13 @@ object FormVoucher: TFormVoucher
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebRED
@@ -581,6 +719,7 @@ object FormVoucher: TFormVoucher
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'templatelbl'
         Caption = 'TEMPLATE'

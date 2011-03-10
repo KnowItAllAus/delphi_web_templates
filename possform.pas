@@ -8,7 +8,7 @@ uses
   IWExtCtrls, IWContainer, IWRegion, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWHTMLControls, IWSiLink, siComp, siLngLnk, IWCompRectangle,
-  IWHTMLContainer, footer_user, admintitle;
+  IWHTMLContainer, footer_user, admintitle, IWHTML40Container;
 
 type
   TformPoss = class(TIWAppForm)

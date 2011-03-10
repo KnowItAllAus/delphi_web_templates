@@ -8,7 +8,7 @@ uses
   IWBaseHTMLControl, IWControl, IWCompEdit, Controls, Forms, 
   IWHTMLControls, IWExtCtrls, IWCompListbox, IWCompRectangle, IWSiLink,
   footer_user, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  baretitle;
+  baretitle, IWHTML40Container;
 
 type
   TCopyform = class(TIWAppForm)

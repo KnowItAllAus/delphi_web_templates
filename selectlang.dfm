@@ -1,12 +1,13 @@
 object FormLanguage: TFormLanguage
   Left = 0
   Top = 0
-  Width = 1088
+  Width = 1028
   Height = 594
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -19,14 +20,14 @@ object FormLanguage: TFormLanguage
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1088
+    Width = 1028
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1088
+      Width = 1028
       Height = 118
       TabOrder = 2
       inherited titleimage: TIWImageFile
@@ -35,39 +36,40 @@ object FormLanguage: TFormLanguage
       end
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1088
+        Width = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 753
+        Left = 693
+      end
+      inherited langlink: TIWSiLink
+        Left = 629
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 909
+        Top = 100
+      end
+      inherited HideBox: TIWImageFile
+        Left = 1012
+        Top = 101
+        Width = 12
+        Height = 14
       end
       inherited TitleLabel: TIWLabel
         Width = 310
         Caption = 'language'
-      end
-      inherited langlink: TIWSiLink
-        Left = 689
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 969
-        Top = 100
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1072
-        Top = 101
-        Width = 12
-        Height = 14
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1088
+    Width = 1028
     Height = 447
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 1
     BorderOptions.BorderWidth = cbwNumeric
@@ -79,7 +81,7 @@ object FormLanguage: TFormLanguage
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1088
+      1028
       447)
     object IWSiLink1: TIWSiLink
       Left = 1
@@ -91,7 +93,14 @@ object FormLanguage: TFormLanguage
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -107,11 +116,12 @@ object FormLanguage: TFormLanguage
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
-      Left = 322
+      Left = 292
       Top = 95
       Width = 440
       Height = 167
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = []
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -134,6 +144,13 @@ object FormLanguage: TFormLanguage
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -156,6 +173,13 @@ object FormLanguage: TFormLanguage
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -177,6 +201,13 @@ object FormLanguage: TFormLanguage
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -194,6 +225,7 @@ object FormLanguage: TFormLanguage
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         ItemIndex = -1
         Sorted = False
@@ -210,12 +242,18 @@ object FormLanguage: TFormLanguage
         ShowHint = True
         ZIndex = 0
         RenderSize = True
-        AutoSize = False
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderOptions.Color = clNone
         BorderOptions.Width = 0
         DoSubmitValidation = True
         ScriptEvents = <>
-        TabOrder = 3
+        TabOrder = -1
         UseSize = True
         Picture.Data = {
           07544269746D617036030000424D360300000000000036000000280000001000
@@ -264,6 +302,13 @@ object FormLanguage: TFormLanguage
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -271,6 +316,7 @@ object FormLanguage: TFormLanguage
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'CompanyLabel'
         Caption = 'Select Language'
@@ -281,43 +327,43 @@ object FormLanguage: TFormLanguage
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 565
-    Width = 1088
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1088
+      Width = 1028
       Height = 29
-      TabOrder = 4
+      TabOrder = 3
       DesignSize = (
-        1088
+        1028
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 672
+        Left = 612
         Width = 416
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1704
+        Width = 1644
       end
       inherited IWImage1: TIWImage
         Visible = False
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 630
+        Width = 570
       end
       inherited Cancel: TIWButton
-        Left = 1000
+        Left = 940
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 912
+        Left = 852
       end
       inherited Extra2: TIWButton
-        Left = 824
+        Left = 764
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 784
+        Left = 724
       end
     end
   end

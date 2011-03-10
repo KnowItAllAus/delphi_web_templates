@@ -8,7 +8,8 @@ uses
   IWControl, IWExtCtrls, Controls, Forms, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, IWCompButton, IWGrids,
   IWCompEdit, IWHTMLControls, IWSiLink, siComp, siLngLnk, baretitle,
-  footer_user, IWCompRectangle, IWCompListbox, admintitle;
+  footer_user, IWCompRectangle, IWCompListbox, admintitle,
+  IWHTML40Container;
 
 type
   Tsu_FormMain = class(TIWAppForm)

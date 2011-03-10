@@ -5,10 +5,11 @@ object formJobs: TformJobs
   Height = 734
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -29,6 +30,7 @@ object formJobs: TformJobs
     inherited IWRegion1: TIWRegion
       Width = 1024
       Height = 29
+      TabOrder = 3
       DesignSize = (
         1024
         29)
@@ -45,16 +47,16 @@ object formJobs: TformJobs
       inherited Cancel: TIWButton
         Left = 938
         Caption = 'Menu'
-        TabOrder = 3
+        TabOrder = 2
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
         Left = 762
-        TabOrder = 1
+        TabOrder = 0
       end
       inherited Extra2: TIWButton
         Left = 850
-        TabOrder = 2
+        TabOrder = 1
       end
       inherited fiwSiLink1: TIWSiLink
         Left = 391
@@ -73,6 +75,7 @@ object formJobs: TformJobs
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -96,7 +99,14 @@ object formJobs: TformJobs
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -105,7 +115,7 @@ object formJobs: TformJobs
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 1
+      TabOrder = 0
       RawText = False
       SiLangLinked = silink
       LangFile = 'jobs.sil'
@@ -119,6 +129,7 @@ object formJobs: TformJobs
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -144,6 +155,13 @@ object formJobs: TformJobs
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -166,6 +184,13 @@ object formJobs: TformJobs
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -187,6 +212,13 @@ object formJobs: TformJobs
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -194,6 +226,7 @@ object formJobs: TformJobs
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'JobsLabel'
         Caption = 'Jobs'
@@ -211,6 +244,13 @@ object formJobs: TformJobs
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -225,7 +265,8 @@ object formJobs: TformJobs
         ReadOnly = False
         Required = False
         ScriptEvents = <>
-        TabOrder = 2
+        SubmitOnAsyncEvent = True
+        TabOrder = 1
         PasswordPrompt = False
       end
       object JobGrid: TIWGrid
@@ -239,7 +280,14 @@ object formJobs: TformJobs
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -260,8 +308,8 @@ object formJobs: TformJobs
         ColumnCount = 7
         OnCellClick = JobGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object CreateBtn: TIWButton
@@ -276,6 +324,13 @@ object formJobs: TformJobs
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Create'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -284,7 +339,7 @@ object formJobs: TformJobs
         Font.Style = []
         FriendlyName = 'CreateBtn'
         ScriptEvents = <>
-        TabOrder = 3
+        TabOrder = 2
         OnClick = CreateBtnClick
       end
     end
@@ -301,6 +356,14 @@ object formJobs: TformJobs
     inherited IWFrameRegion: TIWRegion
       Width = 1024
       TabOrder = 4
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited IWImageFile2: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Top = 93
         Width = 2625
@@ -314,6 +377,8 @@ object formJobs: TformJobs
       inherited IWImageFile3: TIWImageFile
         Left = 689
         Top = 0
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 680
@@ -323,6 +388,8 @@ object formJobs: TformJobs
       end
       inherited HideBox: TIWImageFile
         Left = 1008
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
     end
   end

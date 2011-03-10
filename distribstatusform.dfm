@@ -3,10 +3,11 @@ object formDistribStatus: TformDistribStatus
   Top = 0
   Width = 1017
   Height = 540
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -28,7 +29,14 @@ object formDistribStatus: TformDistribStatus
     inherited IWFrameRegion: TIWRegion
       Width = 1017
       Height = 114
-      TabOrder = 3
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited titleimage: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Left = 608
         Width = 422
@@ -41,12 +49,16 @@ object formDistribStatus: TformDistribStatus
       end
       inherited IWImageFile3: TIWImageFile
         Left = 679
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 619
       end
       inherited HideBox: TIWImageFile
         Left = 1003
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
         Left = 878
@@ -102,6 +114,7 @@ object formDistribStatus: TformDistribStatus
     Width = 1017
     Height = 397
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -121,6 +134,7 @@ object formDistribStatus: TformDistribStatus
       Width = 946
       Height = 343
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -145,7 +159,14 @@ object formDistribStatus: TformDistribStatus
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -165,8 +186,8 @@ object formDistribStatus: TformDistribStatus
         FriendlyName = 'StoreGrid'
         ColumnCount = 10
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object StoreLabel: TIWLabel
@@ -180,6 +201,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -188,6 +216,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
         Caption = 'Store Status'
@@ -203,7 +232,14 @@ object formDistribStatus: TformDistribStatus
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -212,7 +248,7 @@ object formDistribStatus: TformDistribStatus
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 0
+        TabOrder = 1
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'diststat.sil'
@@ -230,6 +266,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Refresh'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -238,7 +281,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 2
         OnClick = RefreshBtnClick
       end
       object IWLabel1: TIWLabel
@@ -253,6 +296,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -260,6 +310,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Yellow=Update Pending '
@@ -277,6 +328,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -284,6 +342,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Red=Offline >'
@@ -301,6 +360,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -318,7 +384,8 @@ object formDistribStatus: TformDistribStatus
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 2
+        SubmitOnAsyncEvent = True
+        TabOrder = 3
         ItemIndex = 0
         Items.Strings = (
           '120'
@@ -340,6 +407,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -347,6 +421,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'minutes'
@@ -364,6 +439,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -386,6 +468,13 @@ object formDistribStatus: TformDistribStatus
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []

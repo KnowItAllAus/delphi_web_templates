@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
   IWHTMLControls, IWCompRectangle, IWCompButton, IWCompLabel, IWSiLink,
-  siComp, siLngLnk;
+  siComp, siLngLnk, IWHTML40Container;
 
 type
   TStatsFrameTitle = class(TFrame)

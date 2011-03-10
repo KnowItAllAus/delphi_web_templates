@@ -1,13 +1,14 @@
 object FormExport: TFormExport
   Left = 0
   Top = 0
-  Width = 1029
+  Width = 1028
   Height = 692
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -20,49 +21,49 @@ object FormExport: TFormExport
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 663
-    Width = 1029
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 0
     inherited IWRegion1: TIWRegion
-      Width = 1029
+      Width = 1028
       Height = 29
-      TabOrder = 4
       DesignSize = (
-        1029
+        1028
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 653
+        Left = 652
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1645
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 611
+        Width = 610
       end
       inherited Cancel: TIWButton
-        Left = 942
+        Left = 941
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 854
+        Left = 853
       end
       inherited Extra2: TIWButton
-        Left = 766
+        Left = 765
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 694
+        Left = 693
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1029
+    Width = 1028
     Height = 549
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -74,7 +75,7 @@ object FormExport: TFormExport
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1029
+      1028
       549)
     object IWRegion2: TIWRegion
       Left = 215
@@ -82,6 +83,7 @@ object FormExport: TFormExport
       Width = 593
       Height = 491
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -106,6 +108,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -114,6 +123,7 @@ object FormExport: TFormExport
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'GrpLabel'
         Caption = 'Job Exports'
@@ -130,7 +140,14 @@ object FormExport: TFormExport
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -151,8 +168,8 @@ object FormExport: TFormExport
         ColumnCount = 5
         OnCellClick = JobGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWSiLink1: TIWSiLink
@@ -165,7 +182,14 @@ object FormExport: TFormExport
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -174,7 +198,7 @@ object FormExport: TFormExport
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 0
+        TabOrder = 1
         RawText = False
         SiLangLinked = silink_footer
         LangFile = 'JobExport.sil'
@@ -192,6 +216,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -214,6 +245,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -236,6 +274,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -253,7 +298,8 @@ object FormExport: TFormExport
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 2
+        SubmitOnAsyncEvent = True
+        TabOrder = 3
         ItemIndex = -1
         Items.Strings = (
           'Jobs'
@@ -280,6 +326,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -288,6 +341,7 @@ object FormExport: TFormExport
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'GrpLabel'
         Caption = 'Job'
@@ -305,6 +359,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -313,6 +374,7 @@ object FormExport: TFormExport
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'GrpLabel'
         Caption = 'Export To'
@@ -330,6 +392,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -347,7 +416,8 @@ object FormExport: TFormExport
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 3
+        SubmitOnAsyncEvent = True
+        TabOrder = 4
         ItemIndex = -1
         Items.Strings = (
           'Jobs'
@@ -374,6 +444,13 @@ object FormExport: TFormExport
         ShowHint = True
         ZIndex = 2
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Export'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -390,41 +467,52 @@ object FormExport: TFormExport
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
-    Width = 1029
+    Width = 1028
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1029
+      Width = 1028
       Height = 114
-      TabOrder = 1
+      TabOrder = 2
       DesignSize = (
-        1029
+        1028
         114)
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited titleimage: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Left = 760
-        Width = 958
+        Width = 957
       end
       inherited IWRectangle2: TIWRectangle
         Left = 760
         Width = 4
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 2026
+        Width = 2025
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 691
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
-        Left = 765
+        Left = 764
       end
       inherited HideBox: TIWImageFile
-        Left = 1015
+        Left = 1014
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
-        Left = 920
+        Left = 919
         Width = 93
       end
       inherited JobRegn: TIWRegion

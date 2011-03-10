@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
   IWHTMLControls, IWCompRectangle, IWCompButton, IWSiLink, siComp,
-  siLngLnk, IWCompLabel, StdCtrls, IWCompCheckbox;
+  siLngLnk, IWCompLabel, StdCtrls, IWCompCheckbox, IWHTML40Container;
 
 type
   TFrameBareTitle = class(TFrame)

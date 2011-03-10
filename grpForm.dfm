@@ -3,11 +3,12 @@ object formGrp: TformGrp
   Top = 0
   Width = 1014
   Height = 635
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -29,7 +30,14 @@ object formGrp: TformGrp
     inherited IWFrameRegion: TIWRegion
       Width = 1014
       Height = 114
-      TabOrder = 2
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited titleimage: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Left = 152
         Width = 2463
@@ -42,12 +50,16 @@ object formGrp: TformGrp
       end
       inherited IWImageFile3: TIWImageFile
         Left = 676
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 613
       end
       inherited HideBox: TIWImageFile
         Left = 1000
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
         Left = 875
@@ -76,7 +88,7 @@ object formGrp: TformGrp
     inherited IWRegion1: TIWRegion
       Width = 1014
       Height = 29
-      TabOrder = 1
+      TabOrder = 2
       DesignSize = (
         1014
         29)
@@ -111,6 +123,7 @@ object formGrp: TformGrp
     Width = 1014
     Height = 492
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -134,7 +147,14 @@ object formGrp: TformGrp
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -155,6 +175,7 @@ object formGrp: TformGrp
       Width = 729
       Height = 447
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -180,6 +201,13 @@ object formGrp: TformGrp
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -202,6 +230,13 @@ object formGrp: TformGrp
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -223,6 +258,13 @@ object formGrp: TformGrp
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -231,6 +273,7 @@ object formGrp: TformGrp
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'PrinterLabel'
         Caption = 'Groups'
@@ -247,6 +290,13 @@ object formGrp: TformGrp
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -255,7 +305,7 @@ object formGrp: TformGrp
         Font.Style = []
         FriendlyName = 'NewBtn'
         ScriptEvents = <>
-        TabOrder = 0
+        TabOrder = 1
         OnClick = NewBtnClick
       end
       object IWRegion3: TIWRegion
@@ -264,6 +314,7 @@ object formGrp: TformGrp
         Width = 497
         Height = 393
         Cursor = crAuto
+        RenderInvisibleControls = False
         Anchors = [akLeft, akTop, akBottom]
         BorderOptions.NumericWidth = 0
         BorderOptions.BorderWidth = cbwNumeric
@@ -288,7 +339,14 @@ object formGrp: TformGrp
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BorderColors.Color = clNone
           BorderColors.Light = clNone
           BorderColors.Dark = clNone
@@ -309,8 +367,8 @@ object formGrp: TformGrp
           ColumnCount = 2
           OnCellClick = GroupGridCellClick
           RowCount = 1
-          TabOrder = -1
           ShowEmptyCells = True
+          ShowInvisibleRows = True
           ScrollToCurrentRow = False
         end
       end

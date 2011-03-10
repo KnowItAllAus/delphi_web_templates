@@ -1,13 +1,14 @@
 object formImages: TformImages
   Left = 0
   Top = 0
-  Width = 1084
-  Height = 928
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -20,34 +21,46 @@ object formImages: TformImages
   inline PromoFrameTitle1: TPromoFrameTitle
     Left = 0
     Top = 0
-    Width = 1084
+    Width = 1028
     Height = 119
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1084
-      TabOrder = 2
       DesignSize = (
-        1084
+        1028
         119)
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited IWImageFile2: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Left = 152
-        Width = 2533
+        Width = 2477
       end
       inherited IWRectangle2: TIWRectangle
         Left = 152
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 1600
+        Width = 1544
       end
       inherited IWImageFile3: TIWImageFile
         Top = 0
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
-        Left = 682
+        Left = 626
         Top = 65
+      end
+      inherited HideBox: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited JobReg: TIWRegion
         Color = 10526880
@@ -60,9 +73,10 @@ object formImages: TformImages
   object IWRegion1: TIWRegion
     Left = 0
     Top = 119
-    Width = 1084
-    Height = 780
+    Width = 1028
+    Height = 598
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -74,8 +88,8 @@ object formImages: TformImages
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1084
-      780)
+      1028
+      598)
     object IWSiLink1: TIWSiLink
       Left = 8
       Top = 2
@@ -86,7 +100,14 @@ object formImages: TformImages
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -95,7 +116,7 @@ object formImages: TformImages
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'IWSiLink1'
-      TabOrder = 0
+      TabOrder = 1
       RawText = False
       SiLangLinked = siLangLinked1
       LangFile = 'images.sil'
@@ -104,9 +125,10 @@ object formImages: TformImages
     object BodyRegion: TIWRegion
       Left = 104
       Top = 21
-      Width = 870
-      Height = 740
+      Width = 814
+      Height = 558
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -118,12 +140,12 @@ object formImages: TformImages
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        870
-        740)
+        814
+        558)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 868
+        Width = 812
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -132,6 +154,13 @@ object formImages: TformImages
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -146,7 +175,7 @@ object formImages: TformImages
         Left = 1
         Top = 4
         Width = 3
-        Height = 735
+        Height = 553
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -154,6 +183,13 @@ object formImages: TformImages
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -175,6 +211,13 @@ object formImages: TformImages
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -183,6 +226,7 @@ object formImages: TformImages
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ImageLabel'
         Caption = 'Printer Images and Text Content'
@@ -191,15 +235,22 @@ object formImages: TformImages
       object ImageGrid: TIWGrid
         Left = 25
         Top = 41
-        Width = 806
-        Height = 667
+        Width = 750
+        Height = 485
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -220,13 +271,13 @@ object formImages: TformImages
         ColumnCount = 5
         OnCellClick = ImageGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object InsertBtn: TIWButton
-        Left = 747
-        Top = 714
+        Left = 691
+        Top = 532
         Width = 83
         Height = 21
         Cursor = crAuto
@@ -236,6 +287,13 @@ object formImages: TformImages
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Insert'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -251,39 +309,39 @@ object formImages: TformImages
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 899
-    Width = 1084
+    Top = 717
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1084
+      Width = 1028
       Height = 29
-      TabOrder = 1
+      TabOrder = 2
       inherited IWRectangle1: TIWRectangle
-        Left = 668
+        Left = 612
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1700
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 626
+        Width = 570
       end
       inherited Cancel: TIWButton
-        Left = 999
+        Left = 943
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 911
+        Left = 855
       end
       inherited Extra2: TIWButton
-        Left = 823
+        Left = 767
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 727
+        Left = 671
       end
     end
   end

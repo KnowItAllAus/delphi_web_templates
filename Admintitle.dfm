@@ -1,7 +1,7 @@
 object AdminFrameTitle: TAdminFrameTitle
   Left = 0
   Top = 0
-  Width = 1082
+  Width = 1028
   Height = 112
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,11 +10,12 @@ object AdminFrameTitle: TAdminFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1082
+    Width = 1028
     Height = 112
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -28,7 +29,7 @@ object AdminFrameTitle: TAdminFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1082
+      1028
       112)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -41,11 +42,18 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile1'
@@ -61,13 +69,20 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 1
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'titleimage'
@@ -76,7 +91,7 @@ object AdminFrameTitle: TAdminFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 86
-      Width = 2683
+      Width = 2629
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -85,6 +100,13 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -107,6 +129,13 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -120,7 +149,7 @@ object AdminFrameTitle: TAdminFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 608
       Top = 91
-      Width = 476
+      Width = 422
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -129,6 +158,13 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -140,7 +176,7 @@ object AdminFrameTitle: TAdminFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 748
+      Left = 694
       Top = 0
       Width = 300
       Height = 81
@@ -149,14 +185,20 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 1
       RenderSize = False
-      AutoSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
@@ -174,6 +216,13 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clWebWHITE
       Font.Color = clWebBLACK
@@ -182,13 +231,14 @@ object AdminFrameTitle: TAdminFrameTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       AutoSize = False
       FriendlyName = 'TitleLabel'
       Caption = 'administration'
       RawText = False
     end
     object langlink: TIWSiLink
-      Left = 637
+      Left = 583
       Top = 1
       Width = 65
       Height = 17
@@ -198,7 +248,14 @@ object AdminFrameTitle: TAdminFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -207,14 +264,14 @@ object AdminFrameTitle: TAdminFrameTitle
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 7
+      TabOrder = 4
       RawText = False
       SiLangLinked = silink
       LangFile = 'adminttl.sil'
       LangControl = RcDataMod.LangEditControl1
     end
     object Smalltitle: TIWLabel
-      Left = 942
+      Left = 888
       Top = 93
       Width = 122
       Height = 19
@@ -226,6 +283,13 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taRightJustify
       BGColor = 10526880
       Font.Color = clWebBLACK
@@ -234,13 +298,14 @@ object AdminFrameTitle: TAdminFrameTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       AutoSize = False
       FriendlyName = 'TitleLabel'
       Caption = '[default]'
       RawText = False
     end
     object HideBox: TIWImageFile
-      Left = 1068
+      Left = 1014
       Top = 93
       Width = 13
       Height = 17
@@ -251,11 +316,18 @@ object AdminFrameTitle: TAdminFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 8
+      TabOrder = -1
       UseSize = False
       OnClick = HideBoxClick
       Cacheable = True
@@ -270,6 +342,7 @@ object AdminFrameTitle: TAdminFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -292,6 +365,13 @@ object AdminFrameTitle: TAdminFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -312,7 +392,7 @@ object AdminFrameTitle: TAdminFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'SysLink'
         OnClick = SysLinkClick
-        TabOrder = 3
+        TabOrder = 0
         RawText = False
         Caption = 'SYSTEM'
       end
@@ -325,6 +405,7 @@ object AdminFrameTitle: TAdminFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -347,6 +428,13 @@ object AdminFrameTitle: TAdminFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -367,7 +455,7 @@ object AdminFrameTitle: TAdminFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = StoreLinkClick
-        TabOrder = 4
+        TabOrder = 1
         RawText = False
         Caption = 'STORES'
       end
@@ -380,6 +468,7 @@ object AdminFrameTitle: TAdminFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -402,6 +491,13 @@ object AdminFrameTitle: TAdminFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -422,7 +518,7 @@ object AdminFrameTitle: TAdminFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = POSLinkClick
-        TabOrder = 5
+        TabOrder = 2
         RawText = False
         Caption = 'POS'
       end
@@ -435,6 +531,7 @@ object AdminFrameTitle: TAdminFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -457,6 +554,13 @@ object AdminFrameTitle: TAdminFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -477,7 +581,7 @@ object AdminFrameTitle: TAdminFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = CompanyLinkClick
-        TabOrder = 6
+        TabOrder = 3
         RawText = False
         Caption = 'COMPANY'
       end

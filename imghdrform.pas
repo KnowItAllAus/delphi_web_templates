@@ -8,7 +8,7 @@ uses
   IWCompCheckbox, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompEdit, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWRegion, footer_user, Controls, Forms, baretitle, IWCompListbox,
-  IWCompButton;
+  IWCompButton, IWHTML40Container;
 
 type
   TFormImgHdr = class(TIWAppForm)

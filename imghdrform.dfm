@@ -1,14 +1,15 @@
 object FormImgHdr: TFormImgHdr
   Left = 0
   Top = 0
-  Width = 1086
+  Width = 1028
   Height = 656
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,68 +22,68 @@ object FormImgHdr: TFormImgHdr
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 1028
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1086
+      Width = 1028
       TabOrder = 6
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
       inherited IWRectangle1: TIWRectangle
-        Width = 1086
+        Width = 1028
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 751
+        Left = 693
+      end
+      inherited langlink: TIWSiLink
+        Left = 630
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 910
+      end
+      inherited HideBox: TIWImageFile
+        Left = 1014
+        Width = 12
+        Height = 14
       end
       inherited TitleLabel: TIWLabel
         Width = 387
         Caption = 'promotions'
-      end
-      inherited langlink: TIWSiLink
-        Left = 688
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 968
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1072
-        Width = 12
-        Height = 14
       end
     end
   end
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 627
-    Width = 1086
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1086
+      Width = 1028
       Height = 29
       TabOrder = 7
       inherited IWRectangle1: TIWRectangle
-        Left = 710
+        Left = 652
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1702
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 668
+        Width = 610
       end
       inherited Cancel: TIWButton
-        Left = 999
+        Left = 941
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 912
+        Left = 854
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
@@ -90,13 +91,13 @@ object FormImgHdr: TFormImgHdr
         OnClick = DelBtnClick
       end
       inherited Extra2: TIWButton
-        Left = 824
+        Left = 766
         Visible = True
         Caption = 'Save'
         OnClick = userfooter1Extra1Click
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 751
+        Left = 693
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -106,9 +107,10 @@ object FormImgHdr: TFormImgHdr
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1086
+    Width = 1028
     Height = 513
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -120,14 +122,15 @@ object FormImgHdr: TFormImgHdr
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1086
+      1028
       513)
     object IWRegion2: TIWRegion
-      Left = 257
+      Left = 228
       Top = 50
       Width = 585
       Height = 215
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -149,6 +152,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -163,6 +173,7 @@ object FormImgHdr: TFormImgHdr
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 0
         PasswordPrompt = False
         Text = 'NewTagEdit'
@@ -177,12 +188,20 @@ object FormImgHdr: TFormImgHdr
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Suppress On Test'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -201,6 +220,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -208,6 +234,7 @@ object FormImgHdr: TFormImgHdr
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel3'
         Caption = 'Tag'
@@ -224,6 +251,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -231,6 +265,7 @@ object FormImgHdr: TFormImgHdr
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Name'
@@ -247,6 +282,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -261,6 +303,7 @@ object FormImgHdr: TFormImgHdr
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 2
         PasswordPrompt = False
         Text = 'NewNameEdit'
@@ -276,6 +319,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -283,6 +333,7 @@ object FormImgHdr: TFormImgHdr
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
         Caption = 'ID'
@@ -299,6 +350,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clBtnFace
         FocusColor = clNone
@@ -313,6 +371,7 @@ object FormImgHdr: TFormImgHdr
         ReadOnly = True
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
         Text = 'NewIDEdit'
@@ -327,7 +386,14 @@ object FormImgHdr: TFormImgHdr
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -354,6 +420,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -376,6 +449,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -397,6 +477,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -404,6 +491,7 @@ object FormImgHdr: TFormImgHdr
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel3'
         Caption = 'Description'
@@ -420,6 +508,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -434,6 +529,7 @@ object FormImgHdr: TFormImgHdr
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
         Text = 'NewDescEdit'
@@ -448,12 +544,20 @@ object FormImgHdr: TFormImgHdr
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Template Object'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -473,6 +577,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -490,6 +601,7 @@ object FormImgHdr: TFormImgHdr
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = False
+        SubmitOnAsyncEvent = True
         TabOrder = 9
         ItemIndex = 0
         Items.Strings = (
@@ -507,7 +619,14 @@ object FormImgHdr: TFormImgHdr
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -515,6 +634,7 @@ object FormImgHdr: TFormImgHdr
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'ParamLbl'
         Caption = 'Parameter'
         RawText = False
@@ -530,6 +650,13 @@ object FormImgHdr: TFormImgHdr
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Set Name'
         DoSubmitValidation = True
         Color = clBtnFace

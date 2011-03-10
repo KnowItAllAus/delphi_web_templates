@@ -10,7 +10,7 @@ uses
   IWCompCheckbox, IWCompListbox, IWCompMemo, IWBaseControl,
   IWVCLBaseContainer, IWVCLBaseControl, jpeg, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, IWSiLink, siComp, siLngLnk, baretitle,
-  footer_user, ReferredClass, IWTypes, GraphicEx;
+  footer_user, ReferredClass, IWTypes, GraphicEx, IWHTML40Container;
 
 type
   TFormImageUpTmpl = class(TIWAppForm)

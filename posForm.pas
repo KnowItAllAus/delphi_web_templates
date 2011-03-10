@@ -9,7 +9,7 @@ uses
   IWContainer, IWRegion, IWCompMemo, IWGrids, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWCompCheckbox, IWAppForm,
   IWHTMLContainer, IWBaseHTMLControl, siComp, siLngLnk, IWSiLink,
-  baretitle, footer_user, IWCompRadioButton;
+  baretitle, footer_user, IWCompRadioButton, IWHTML40Container;
 
 type
   TFormPOS = class(TIWAppForm)

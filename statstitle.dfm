@@ -1,7 +1,7 @@
 object StatsFrameTitle: TStatsFrameTitle
   Left = 0
   Top = 0
-  Width = 1086
+  Width = 1028
   Height = 114
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,11 +10,12 @@ object StatsFrameTitle: TStatsFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 1028
     Height = 114
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -28,7 +29,7 @@ object StatsFrameTitle: TStatsFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1086
+      1028
       114)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -40,12 +41,19 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile1'
@@ -62,12 +70,19 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile2'
@@ -76,7 +91,7 @@ object StatsFrameTitle: TStatsFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 87
-      Width = 2687
+      Width = 2629
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -85,6 +100,13 @@ object StatsFrameTitle: TStatsFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -107,6 +129,13 @@ object StatsFrameTitle: TStatsFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -120,7 +149,7 @@ object StatsFrameTitle: TStatsFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 152
       Top = 92
-      Width = 2415
+      Width = 2357
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -129,6 +158,13 @@ object StatsFrameTitle: TStatsFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -140,7 +176,7 @@ object StatsFrameTitle: TStatsFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 752
+      Left = 694
       Top = 0
       Width = 300
       Height = 86
@@ -150,20 +186,26 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
-      AutoSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
     end
     object langlink: TIWSiLink
-      Left = 681
+      Left = 623
       Top = 65
       Width = 65
       Height = 17
@@ -173,7 +215,14 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -182,7 +231,7 @@ object StatsFrameTitle: TStatsFrameTitle
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 5
+      TabOrder = 2
       RawText = False
       SiLangLinked = silink
       LangFile = 'statsttl.sil'
@@ -199,7 +248,14 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clWebWHITE
       Font.Color = clWebBLACK
@@ -208,6 +264,7 @@ object StatsFrameTitle: TStatsFrameTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       FriendlyName = 'TitleLabel'
       Caption = 'statistics'
       RawText = False
@@ -220,6 +277,7 @@ object StatsFrameTitle: TStatsFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -241,6 +299,13 @@ object StatsFrameTitle: TStatsFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -260,7 +325,7 @@ object StatsFrameTitle: TStatsFrameTitle
           end>
         DoSubmitValidation = False
         FriendlyName = 'JournalLink'
-        TabOrder = 3
+        TabOrder = 0
         RawText = False
         Caption = 'JOURNAL'
       end
@@ -273,6 +338,7 @@ object StatsFrameTitle: TStatsFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -295,6 +361,13 @@ object StatsFrameTitle: TStatsFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Enabled = False
         Color = clNone
@@ -315,7 +388,7 @@ object StatsFrameTitle: TStatsFrameTitle
           end>
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
-        TabOrder = 4
+        TabOrder = 1
         RawText = False
         Caption = 'ACTIVITY'
       end

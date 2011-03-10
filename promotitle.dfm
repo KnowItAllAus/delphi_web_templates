@@ -1,7 +1,7 @@
 object PromoFrameTitle: TPromoFrameTitle
   Left = 0
   Top = 0
-  Width = 1086
+  Width = 1028
   Height = 119
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,11 +10,12 @@ object PromoFrameTitle: TPromoFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 1028
     Height = 119
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -28,7 +29,7 @@ object PromoFrameTitle: TPromoFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1086
+      1028
       119)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -41,11 +42,18 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile1'
@@ -63,11 +71,18 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile2'
@@ -76,7 +91,7 @@ object PromoFrameTitle: TPromoFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 92
-      Width = 2687
+      Width = 2629
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -85,6 +100,13 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -107,6 +129,13 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -120,7 +149,7 @@ object PromoFrameTitle: TPromoFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 305
       Top = 97
-      Width = 2257
+      Width = 2199
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -129,6 +158,13 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -140,7 +176,7 @@ object PromoFrameTitle: TPromoFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 752
+      Left = 694
       Top = 3
       Width = 300
       Height = 86
@@ -149,21 +185,27 @@ object PromoFrameTitle: TPromoFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 1
       RenderSize = False
-      AutoSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
     end
     object langlink: TIWSiLink
-      Left = 643
+      Left = 585
       Top = 73
       Width = 65
       Height = 17
@@ -173,7 +215,14 @@ object PromoFrameTitle: TPromoFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -182,7 +231,7 @@ object PromoFrameTitle: TPromoFrameTitle
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'langlink'
-      TabOrder = 5
+      TabOrder = 2
       RawText = False
       SiLangLinked = silink
       LangFile = 'promottl.sil'
@@ -199,7 +248,14 @@ object PromoFrameTitle: TPromoFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clWebWHITE
       Font.Color = clWebBLACK
@@ -208,12 +264,13 @@ object PromoFrameTitle: TPromoFrameTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       FriendlyName = 'TitleLabel'
       Caption = 'promotions'
       RawText = False
     end
     object Smalltitle: TIWLabel
-      Left = 944
+      Left = 886
       Top = 98
       Width = 122
       Height = 19
@@ -225,6 +282,13 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taRightJustify
       BGColor = 10526880
       Font.Color = clWebBLACK
@@ -233,13 +297,14 @@ object PromoFrameTitle: TPromoFrameTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       AutoSize = False
       FriendlyName = 'TitleLabel'
       Caption = '[default]'
       RawText = False
     end
     object HideBox: TIWImageFile
-      Left = 1070
+      Left = 1012
       Top = 99
       Width = 13
       Height = 17
@@ -250,11 +315,18 @@ object PromoFrameTitle: TPromoFrameTitle
       ShowHint = True
       ZIndex = 1
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 6
+      TabOrder = -1
       UseSize = False
       OnClick = HideBoxClick
       Cacheable = True
@@ -269,6 +341,7 @@ object PromoFrameTitle: TPromoFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -291,6 +364,13 @@ object PromoFrameTitle: TPromoFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -311,7 +391,7 @@ object PromoFrameTitle: TPromoFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'ActivityLink'
         OnClick = ActivityLinkClick
-        TabOrder = 3
+        TabOrder = 0
         RawText = False
         Caption = 'JOBS'
       end
@@ -324,6 +404,7 @@ object PromoFrameTitle: TPromoFrameTitle
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       Anchors = [akLeft, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -346,6 +427,13 @@ object PromoFrameTitle: TPromoFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -366,7 +454,7 @@ object PromoFrameTitle: TPromoFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = JournalLinkClick
-        TabOrder = 4
+        TabOrder = 1
         RawText = False
         Caption = 'LIBRARY'
       end

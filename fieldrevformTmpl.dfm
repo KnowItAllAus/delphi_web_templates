@@ -1,12 +1,13 @@
 object formFieldVersionsTmpl: TformFieldVersionsTmpl
   Left = 0
   Top = 0
-  Width = 1107
-  Height = 800
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -19,14 +20,14 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1107
+    Width = 1028
     Height = 116
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1107
+      Width = 1028
       Height = 116
       TabOrder = 4
       inherited titleimage: TIWImageFile
@@ -34,64 +35,64 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       end
       inherited IWRectangle1: TIWRectangle
         Top = 91
-        Width = 1107
+        Width = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 96
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 772
+        Left = 693
+      end
+      inherited langlink: TIWSiLink
+        Left = 628
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 908
+      end
+      inherited HideBox: TIWImageFile
+        Left = 1013
+        Top = 99
       end
       inherited TitleLabel: TIWLabel
         Width = 387
         Caption = 'promotions'
       end
-      inherited langlink: TIWSiLink
-        Left = 707
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 987
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1092
-        Top = 99
-      end
     end
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 771
-    Width = 1107
+    Top = 717
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1107
+      Width = 1028
       Height = 29
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
-        Left = 731
+        Left = 652
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1723
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 689
+        Width = 610
       end
       inherited Cancel: TIWButton
-        Left = 1018
+        Left = 939
         Caption = 'Back'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 930
+        Left = 851
       end
       inherited Extra2: TIWButton
-        Left = 842
+        Left = 763
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 770
+        Left = 691
       end
     end
     inherited silink_footer: TsiLangLinked
@@ -104,9 +105,10 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 116
-    Width = 1107
-    Height = 655
+    Width = 1028
+    Height = 601
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -118,14 +120,15 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1107
-      655)
+      1028
+      601)
     object BodyRegion: TIWRegion
-      Left = 267
+      Left = 229
       Top = 18
       Width = 539
-      Height = 627
+      Height = 573
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -138,7 +141,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       Splitter = False
       DesignSize = (
         539
-        627)
+        573)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -151,6 +154,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -165,7 +175,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Left = 1
         Top = 4
         Width = 3
-        Height = 622
+        Height = 568
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -173,6 +183,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -194,6 +211,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -202,6 +226,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ImageLabel'
         Caption = 'Revisions of'
@@ -211,14 +236,21 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Left = 18
         Top = 90
         Width = 503
-        Height = 526
+        Height = 472
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -239,8 +271,8 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ColumnCount = 5
         OnCellClick = ImageGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWSiLink1: TIWSiLink
@@ -253,7 +285,14 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -279,6 +318,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = 14202786
         FocusColor = clNone
@@ -294,6 +340,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ReadOnly = True
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = False
         Text = 'NameEdit'
@@ -309,6 +356,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Save'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -331,6 +385,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -345,6 +406,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
         Text = 'ValueEdit'
@@ -359,7 +421,14 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -367,6 +436,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = 'New Field Value'
         RawText = False

@@ -8,7 +8,7 @@ uses
   IWBaseControl, IWBaseHTMLControl, IWControl, IWCompButton, IWCompCheckbox,
   IWCompRectangle, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWRegion, footer_user, baretitle, IWHTMLControls, IWSiLink, siComp,
-  siLngLnk;
+  siLngLnk, IWHTML40Container;
 
 type
   Tsupwdform = class(TIWAppForm)

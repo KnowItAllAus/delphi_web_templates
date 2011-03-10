@@ -7,7 +7,8 @@ uses
   siLngLnk, IWCompRectangle, IWHTMLControls, IWSiLink, IWGrids,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompLabel, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  footer_user, Controls, Forms, distribtitle, IWCompButton, IWCompListbox;
+  footer_user, Controls, Forms, distribtitle, IWCompButton, IWCompListbox,
+  IWHTML40Container;
 
 type
   TFormExport = class(TIWAppForm)

@@ -3,10 +3,11 @@ object supwdform: Tsupwdform
   Top = 0
   Width = 1017
   Height = 650
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -14,8 +15,8 @@ object supwdform: Tsupwdform
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 675
-  DesignTop = 382
+  DesignLeft = -24
+  DesignTop = 157
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -26,6 +27,7 @@ object supwdform: Tsupwdform
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
+      Width = 1017
       Height = 111
       TabOrder = 7
       inherited titleimage: TIWImageFile
@@ -38,10 +40,6 @@ object supwdform: Tsupwdform
       inherited IWRectangle3: TIWRectangle
         Top = 91
       end
-      inherited TitleLabel: TIWLabel
-        Width = 486
-        Caption = 'administration'
-      end
       inherited langlink: TIWSiLink
         Left = 692
       end
@@ -52,6 +50,10 @@ object supwdform: Tsupwdform
       inherited HideBox: TIWImageFile
         Width = 12
         Height = 14
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 486
+        Caption = 'administration'
       end
     end
   end
@@ -98,6 +100,7 @@ object supwdform: Tsupwdform
     Width = 1017
     Height = 507
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -121,7 +124,14 @@ object supwdform: Tsupwdform
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -142,6 +152,7 @@ object supwdform: Tsupwdform
       Width = 465
       Height = 319
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -163,6 +174,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -170,6 +188,7 @@ object supwdform: Tsupwdform
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Privileges'
@@ -186,6 +205,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -193,6 +219,7 @@ object supwdform: Tsupwdform
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Confirm'
@@ -209,6 +236,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -216,6 +250,7 @@ object supwdform: Tsupwdform
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel3'
         Caption = 'New Password'
@@ -232,6 +267,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -246,6 +288,7 @@ object supwdform: Tsupwdform
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 0
         PasswordPrompt = True
       end
@@ -260,6 +303,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -274,6 +324,7 @@ object supwdform: Tsupwdform
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = True
       end
@@ -288,6 +339,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Update Password'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -309,12 +367,20 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Language Editor'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -333,6 +399,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Update Privilege'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -354,7 +427,14 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -362,6 +442,7 @@ object supwdform: Tsupwdform
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'CoLabel'
         Caption = 'Co'
         RawText = False
@@ -376,7 +457,14 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -385,6 +473,7 @@ object supwdform: Tsupwdform
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'UserLabel'
         Caption = 'User'
         RawText = False
@@ -401,6 +490,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -423,6 +519,13 @@ object supwdform: Tsupwdform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -443,12 +546,20 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Administrator'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -466,12 +577,20 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Live Content'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -489,12 +608,20 @@ object supwdform: Tsupwdform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Edit Content'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal

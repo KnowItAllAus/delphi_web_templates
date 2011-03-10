@@ -6,7 +6,7 @@ uses
   SysUtils, Classes, Controls, Forms,
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
-  IWHTMLControls, IWCompRectangle, IWCompButton;
+  IWHTMLControls, IWCompRectangle, IWCompButton, IWHTML40Container;
 
 type
   TFrameTitle = class(TFrame)

@@ -8,7 +8,7 @@ uses
   IWGrids, IWCompLabel, IWExtCtrls, IWHTMLControls, IWContainer, IWRegion,
   IWBaseControl, IWVCLBaseControl, IWVCLBaseContainer, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, IWSiLink, siComp, siLngLnk, footer_user,
-  IWCompRectangle, statstitle;
+  IWCompRectangle, statstitle, IWHTML40Container;
 
 type
   TformStats = class(TIWAppForm)

@@ -1,7 +1,7 @@
 object userfooter: Tuserfooter
   Left = 0
   Top = 0
-  Width = 1016
+  Width = 716
   Height = 28
   HorzScrollBar.Visible = False
   Anchors = [akLeft, akRight, akBottom]
@@ -9,11 +9,12 @@ object userfooter: Tuserfooter
   object IWRegion1: TIWRegion
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 716
     Height = 28
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -27,10 +28,10 @@ object userfooter: Tuserfooter
     OnCreate = IWRegion1Create
     Splitter = False
     DesignSize = (
-      1016
+      716
       28)
     object IWRectangle1: TIWRectangle
-      Left = 640
+      Left = 340
       Top = 0
       Width = 377
       Height = 23
@@ -41,6 +42,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -54,7 +62,7 @@ object userfooter: Tuserfooter
     object IWRectangle4: TIWRectangle
       Left = 0
       Top = 24
-      Width = 1632
+      Width = 1332
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -63,6 +71,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -84,6 +99,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -105,12 +127,18 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 1
       RenderSize = True
-      AutoSize = False
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = True
       OnClick = IWImage1Click
       Picture.Data = {
@@ -152,7 +180,7 @@ object userfooter: Tuserfooter
     object IWRectangle6: TIWRectangle
       Left = 40
       Top = 0
-      Width = 598
+      Width = 298
       Height = 23
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -161,6 +189,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -181,7 +216,14 @@ object userfooter: Tuserfooter
       ParentShowHint = False
       ShowHint = True
       ZIndex = 100
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clNone
       Font.Color = clWebWHITE
@@ -190,12 +232,13 @@ object userfooter: Tuserfooter
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       FriendlyName = 'User'
       Caption = 'USER'
       RawText = False
     end
     object Cancel: TIWButton
-      Left = 930
+      Left = 630
       Top = 2
       Width = 83
       Height = 21
@@ -206,6 +249,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 2
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Caption = 'Cancel'
       DoSubmitValidation = True
       Color = clBtnFace
@@ -214,10 +264,10 @@ object userfooter: Tuserfooter
       Font.Style = []
       FriendlyName = 'Cancel'
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = 0
     end
     object Extra1: TIWButton
-      Left = 842
+      Left = 542
       Top = 2
       Width = 83
       Height = 21
@@ -229,6 +279,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 2
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Caption = 'Extra1'
       DoSubmitValidation = True
       Color = clBtnFace
@@ -237,10 +294,10 @@ object userfooter: Tuserfooter
       Font.Style = []
       FriendlyName = 'Extra1'
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = 1
     end
     object Extra2: TIWButton
-      Left = 754
+      Left = 454
       Top = 2
       Width = 83
       Height = 21
@@ -252,6 +309,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 2
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Caption = 'Extra2'
       DoSubmitValidation = True
       Color = clBtnFace
@@ -260,10 +324,10 @@ object userfooter: Tuserfooter
       Font.Style = []
       FriendlyName = 'Extra2'
       ScriptEvents = <>
-      TabOrder = 3
+      TabOrder = 2
     end
     object fiwSiLink1: TIWSiLink
-      Left = 386
+      Left = 86
       Top = 9
       Width = 65
       Height = 17
@@ -273,7 +337,14 @@ object userfooter: Tuserfooter
       ParentShowHint = False
       ShowHint = True
       ZIndex = 2
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -282,7 +353,7 @@ object userfooter: Tuserfooter
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'fiwSiLink1'
-      TabOrder = 4
+      TabOrder = 3
       RawText = False
       SiLangLinked = silink_footer
       LangFile = 'footer.sil'
@@ -299,6 +370,13 @@ object userfooter: Tuserfooter
       ShowHint = True
       ZIndex = 1
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BGColor = clNone
       Font.Color = clNone
       Font.Size = 10
@@ -317,7 +395,8 @@ object userfooter: Tuserfooter
       DoSubmitValidation = True
       Editable = True
       NonEditableAsLabel = True
-      TabOrder = 5
+      SubmitOnAsyncEvent = True
+      TabOrder = 4
       ItemIndex = -1
       Items.Strings = (
         'Jobs'

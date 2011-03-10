@@ -3,10 +3,11 @@ object FormJobRevDtl: TFormJobRevDtl
   Top = 0
   Width = 1016
   Height = 659
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -22,6 +23,7 @@ object FormJobRevDtl: TFormJobRevDtl
     Width = 1016
     Height = 513
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -45,7 +47,14 @@ object FormJobRevDtl: TFormJobRevDtl
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -66,6 +75,7 @@ object FormJobRevDtl: TFormJobRevDtl
       Width = 657
       Height = 167
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -88,6 +98,13 @@ object FormJobRevDtl: TFormJobRevDtl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -110,6 +127,13 @@ object FormJobRevDtl: TFormJobRevDtl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -131,6 +155,13 @@ object FormJobRevDtl: TFormJobRevDtl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -139,6 +170,7 @@ object FormJobRevDtl: TFormJobRevDtl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
         Caption = 'Revision Details'
@@ -155,6 +187,13 @@ object FormJobRevDtl: TFormJobRevDtl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -169,6 +208,7 @@ object FormJobRevDtl: TFormJobRevDtl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = False
         Text = 'NoteEdit'
@@ -183,7 +223,14 @@ object FormJobRevDtl: TFormJobRevDtl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -191,6 +238,7 @@ object FormJobRevDtl: TFormJobRevDtl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = 'Note'
         RawText = False
@@ -206,6 +254,13 @@ object FormJobRevDtl: TFormJobRevDtl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Delete Revision'
         Confirmation = 'Delete Record?'
         DoSubmitValidation = True
@@ -246,10 +301,6 @@ object FormJobRevDtl: TFormJobRevDtl
       inherited IWImageFile3: TIWImageFile
         Left = 681
       end
-      inherited TitleLabel: TIWLabel
-        Width = 387
-        Caption = 'promotions'
-      end
       inherited langlink: TIWSiLink
         Left = 610
       end
@@ -259,6 +310,10 @@ object FormJobRevDtl: TFormJobRevDtl
       inherited HideBox: TIWImageFile
         Left = 999
         Top = 100
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 387
+        Caption = 'promotions'
       end
     end
   end
@@ -271,6 +326,7 @@ object FormJobRevDtl: TFormJobRevDtl
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
+      Width = 1016
       TabOrder = 3
       inherited Cancel: TIWButton
         OnClick = userfooter1CancelClick

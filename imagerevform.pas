@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, baretitle, siComp, siLngLnk, IWCompMemo,
-  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes;
+  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container;
 
 type
   TformImageVersions = class(TIWAppForm)

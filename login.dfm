@@ -1,12 +1,13 @@
 object form_login: Tform_login
   Left = 0
   Top = 0
-  Width = 1087
-  Height = 777
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brUnknown, brIE, brNetscape7, brOpera, brNetscape6]
+  SupportedBrowsers = [brUnknown, brNetscape7, brIE, brOpera, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -19,9 +20,10 @@ object form_login: Tform_login
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1087
-    Height = 663
+    Width = 1028
+    Height = 632
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 1
     BorderOptions.BorderWidth = cbwNumeric
@@ -33,8 +35,8 @@ object form_login: Tform_login
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1087
-      663)
+      1028
+      632)
     object IWSiLink1: TIWSiLink
       Left = 1
       Top = 1
@@ -45,7 +47,14 @@ object form_login: Tform_login
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -61,11 +70,12 @@ object form_login: Tform_login
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
-      Left = 312
+      Left = 283
       Top = 133
       Width = 440
       Height = 223
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -88,6 +98,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -110,6 +127,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -131,6 +155,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -145,6 +176,7 @@ object form_login: Tform_login
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
       end
@@ -159,6 +191,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -173,6 +212,7 @@ object form_login: Tform_login
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 4
         OnSubmit = LoginBtnClick
         PasswordPrompt = True
@@ -188,6 +228,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Text = 'Username'
         Font.Color = clWebWHITE
         Font.FontName = 'Arial'
@@ -211,6 +258,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Text = 'Password'
         Font.Color = clWebWHITE
         Font.FontName = 'Arial'
@@ -234,6 +288,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Login'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -257,6 +318,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'dummy'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -280,6 +348,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'dummy'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -303,6 +378,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'dummy'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -317,12 +399,13 @@ object form_login: Tform_login
     end
     object IWRegion2: TIWRegion
       Left = 0
-      Top = 628
-      Width = 1087
+      Top = 597
+      Width = 1028
       Height = 35
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
+      RenderInvisibleControls = False
       TabOrder = 201
       Align = alBottom
       BorderOptions.NumericWidth = 0
@@ -335,12 +418,12 @@ object form_login: Tform_login
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        1087
+        1028
         35)
       object IWRectangle3: TIWRectangle
         Left = 0
         Top = 29
-        Width = 2564
+        Width = 2505
         Height = 3
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight]
@@ -349,6 +432,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -362,7 +452,7 @@ object form_login: Tform_login
       object IWRectangle4: TIWRectangle
         Left = 0
         Top = 0
-        Width = 2564
+        Width = 2505
         Height = 26
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight]
@@ -371,6 +461,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -392,6 +489,13 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -410,6 +514,7 @@ object form_login: Tform_login
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 6
         ItemIndex = -1
         Sorted = False
@@ -426,12 +531,18 @@ object form_login: Tform_login
         ShowHint = True
         ZIndex = 1
         RenderSize = True
-        AutoSize = False
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderOptions.Color = clNone
         BorderOptions.Width = 0
         DoSubmitValidation = True
         ScriptEvents = <>
-        TabOrder = 8
+        TabOrder = -1
         UseSize = True
         Picture.Data = {
           07544269746D617036030000424D360300000000000036000000280000001000
@@ -474,11 +585,12 @@ object form_login: Tform_login
   object IWRegion3: TIWRegion
     Left = 0
     Top = 0
-    Width = 1087
+    Width = 1028
     Height = 114
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     Align = alTop
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -490,12 +602,40 @@ object form_login: Tform_login
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1087
+      1028
       114)
+    object IWImageFile1: TIWImageFile
+      Left = 0
+      Top = 24
+      Width = 1600
+      Height = 37
+      Cursor = crAuto
+      IW50Hint = False
+      ParentShowHint = False
+      ShowHint = True
+      ZIndex = 0
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
+      BorderOptions.Color = clNone
+      BorderOptions.Width = 0
+      DoSubmitValidation = True
+      ScriptEvents = <>
+      TabOrder = -1
+      UseSize = False
+      Cacheable = True
+      FriendlyName = 'IWImageFile1'
+      ImageFile.Filename = 'E:\delphi\delphi_web\Files\Dots Graphic.GIF'
+    end
     object IWRectangle5: TIWRectangle
       Left = 0
       Top = 94
-      Width = 1580
+      Width = 1521
       Height = 20
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -504,6 +644,13 @@ object form_login: Tform_login
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -517,7 +664,7 @@ object form_login: Tform_login
     object IWRectangle6: TIWRectangle
       Left = 0
       Top = 88
-      Width = 1580
+      Width = 1521
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight]
@@ -526,6 +673,13 @@ object form_login: Tform_login
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -536,29 +690,8 @@ object form_login: Tform_login
       Alignment = taLeftJustify
       VAlign = vaMiddle
     end
-    object IWImageFile1: TIWImageFile
-      Left = 0
-      Top = 24
-      Width = 1600
-      Height = 37
-      Cursor = crAuto
-      IW50Hint = False
-      ParentShowHint = False
-      ShowHint = True
-      ZIndex = 0
-      RenderSize = False
-      BorderOptions.Color = clNone
-      BorderOptions.Width = 0
-      DoSubmitValidation = True
-      ScriptEvents = <>
-      TabOrder = 9
-      UseSize = False
-      Cacheable = True
-      FriendlyName = 'IWImageFile1'
-      ImageFile.Filename = 'E:\delphi\delphi_web\Files\Dots Graphic.GIF'
-    end
     object IWImageFile3: TIWImageFile
-      Left = 752
+      Left = 693
       Top = 0
       Width = 300
       Height = 86
@@ -567,15 +700,21 @@ object form_login: Tform_login
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
-      RenderSize = False
-      AutoSize = False
+      ZIndex = 2
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       Enabled = False
       ScriptEvents = <>
-      TabOrder = 10
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
@@ -583,7 +722,7 @@ object form_login: Tform_login
     end
     object titleimage: TIWImageFile
       Left = 36
-      Top = 11
+      Top = 3
       Width = 149
       Height = 77
       Cursor = crAuto
@@ -591,15 +730,21 @@ object form_login: Tform_login
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
-      RenderSize = False
-      AutoSize = False
+      ZIndex = 2
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       Enabled = False
       ScriptEvents = <>
-      TabOrder = 11
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'titleimage'
@@ -616,7 +761,14 @@ object form_login: Tform_login
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clWebWHITE
       Font.Color = clWebBLACK
@@ -625,6 +777,7 @@ object form_login: Tform_login
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       FriendlyName = 'TitleLabel'
       Caption = 'login'
       RawText = False

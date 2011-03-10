@@ -8,7 +8,7 @@ uses
   IWBaseControl, IWBaseHTMLControl, IWHTMLControls, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, promotitle, siComp, siLngLnk, distribtitle, IWCompButton,
-  IWCompListbox, IWCompRadioButton;
+  IWCompListbox, IWCompRadioButton, IWHTML40Container;
 
 type
   TFormOverview = class(TIWAppForm)

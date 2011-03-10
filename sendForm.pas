@@ -8,7 +8,7 @@ uses
   IWExtCtrls, IWContainer, IWRegion, IWBaseControl, IWVCLBaseControl, IWAppForm,
   IWVCLBaseContainer, IWBaseHTMLControl, IWHTMLControls, IWSiLink, siComp,
   siLngLnk, IWCompListbox, IWCompRectangle, IWHTMLContainer, footer_user,
-  distribtitle, IWCompEdit, IWCompTimeEdit;
+  distribtitle, IWCompEdit, IWCompTimeEdit, IWHTML40Container;
 
 type
   TformSend = class(TIWAppForm)

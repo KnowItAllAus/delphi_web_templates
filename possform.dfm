@@ -1,12 +1,13 @@
 object formPoss: TformPoss
   Left = 0
   Top = 0
-  Width = 1086
-  Height = 829
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -19,9 +20,10 @@ object formPoss: TformPoss
   object IWRegion1: TIWRegion
     Left = 0
     Top = 110
-    Width = 1086
-    Height = 690
+    Width = 1028
+    Height = 607
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -33,14 +35,15 @@ object formPoss: TformPoss
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1086
-      690)
+      1028
+      607)
     object IWRegion2: TIWRegion
       Left = 138
       Top = 24
-      Width = 818
-      Height = 646
+      Width = 760
+      Height = 563
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -52,8 +55,8 @@ object formPoss: TformPoss
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        818
-        646)
+        760
+        563)
       object PosLabel: TIWLabel
         Left = 48
         Top = 26
@@ -65,6 +68,13 @@ object formPoss: TformPoss
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -73,13 +83,14 @@ object formPoss: TformPoss
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'PosLabel'
         Caption = 'POS'
         RawText = False
       end
       object IWSiLink1: TIWSiLink
-        Left = 617
+        Left = 559
         Top = 24
         Width = 65
         Height = 17
@@ -89,7 +100,14 @@ object formPoss: TformPoss
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -105,7 +123,7 @@ object formPoss: TformPoss
         LangControl = RcDataMod.LangEditControl1
       end
       object InsertBtn: TIWButton
-        Left = 695
+        Left = 637
         Top = 16
         Width = 75
         Height = 25
@@ -116,6 +134,13 @@ object formPoss: TformPoss
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'New'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -130,15 +155,22 @@ object formPoss: TformPoss
       object PosGrid: TIWGrid
         Left = 48
         Top = 57
-        Width = 720
-        Height = 558
+        Width = 662
+        Height = 475
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -159,14 +191,14 @@ object formPoss: TformPoss
         ColumnCount = 3
         OnCellClick = PosGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 818
+        Width = 760
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -175,6 +207,13 @@ object formPoss: TformPoss
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -189,7 +228,7 @@ object formPoss: TformPoss
         Left = 0
         Top = 3
         Width = 3
-        Height = 643
+        Height = 560
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -197,6 +236,13 @@ object formPoss: TformPoss
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -211,60 +257,86 @@ object formPoss: TformPoss
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 800
-    Width = 1086
+    Top = 717
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1086
+      Width = 1028
       Height = 29
       TabOrder = 2
       inherited IWRectangle1: TIWRectangle
-        Left = 710
+        Left = 652
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1702
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 668
+        Width = 610
       end
       inherited Cancel: TIWButton
-        Left = 1000
+        Left = 942
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 912
+        Left = 854
       end
       inherited Extra2: TIWButton
-        Left = 824
+        Left = 766
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 738
+        Left = 680
       end
     end
   end
   inline AdminFrameTitle1: TAdminFrameTitle
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 1028
     Height = 110
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1086
       Height = 110
       TabOrder = 3
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited titleimage: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited IWRectangle1: TIWRectangle
         Left = 304
-        Width = 2383
+        Width = 2325
       end
       inherited IWRectangle2: TIWRectangle
         Left = 304
+      end
+      inherited IWRectangle3: TIWRectangle
+        Width = 364
+      end
+      inherited IWImageFile3: TIWImageFile
+        Left = 636
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
+      inherited langlink: TIWSiLink
+        Left = 525
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 830
+      end
+      inherited HideBox: TIWImageFile
+        Left = 956
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited SysReg: TIWRegion
         Color = 10526880

@@ -8,7 +8,8 @@ uses
   IWBaseHTMLControl, IWControl, IWCompLabel, Controls, Forms,
   IWCompRectangle, IWHTMLControls, IWSiLink, IWVCLBaseContainer,
   IWContainer, IWHTMLContainer, IWRegion, footer_user, baretitle, siComp,
-  siLngLnk, admintitle, IWCompListbox, GpTimeZone, IWCompCheckbox;
+  siLngLnk, admintitle, IWCompListbox, GpTimeZone, IWCompCheckbox,
+  IWHTML40Container;
 
 type
   Tsu_coForm = class(TIWAppForm)

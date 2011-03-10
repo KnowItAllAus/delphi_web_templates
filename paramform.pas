@@ -8,7 +8,7 @@ uses
   IWGrids, IWCompRectangle, IWVCLBaseControl, IWBaseControl,
   IWBaseHTMLControl, IWControl, IWHTMLControls, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, Controls,
-  Forms, baretitle, siComp, siLngLnk, IWCompListbox;
+  Forms, baretitle, siComp, siLngLnk, IWCompListbox, IWHTML40Container;
 
 type
   TParamForm = class(TIWAppForm)

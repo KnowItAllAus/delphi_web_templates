@@ -8,7 +8,8 @@ uses
   IWBaseHTMLControl, IWControl, IWCompLabel, Controls, Forms,
   IWCompEdit, IWHTMLControls, IWSiLink, siComp, siLngLnk, IWCompRectangle,
   footer_user, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass;
+  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass,
+  IWHTML40Container;
 
 type
   TFormGrpDtl = class(TIWAppForm)

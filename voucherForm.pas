@@ -9,7 +9,7 @@ uses
   IWExtCtrls, IWDBExtCtrls, IWContainer, IWRegion,
   IWBaseControl, IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl,
   IWAppForm, IWSiLink, siComp, siLngLnk, IWHTMLContainer, footer_user,
-  baretitle, IWCompCheckbox;
+  baretitle, IWCompCheckbox, IWHTML40Container;
 
 type
   TFormVoucher = class(TIWAppForm)

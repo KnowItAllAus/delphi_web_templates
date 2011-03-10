@@ -7,7 +7,8 @@ uses
   Forms, footer_user, siComp, siLngLnk, IWCompEdit, IWCompLabel,
   IWCompRectangle, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWHTMLControls, IWSiLink, Controls, IWVCLBaseContainer,
-  IWContainer, IWHTMLContainer, IWRegion, IWCompButton, IWCompRadioButton;
+  IWContainer, IWHTMLContainer, IWRegion, IWCompButton, IWCompRadioButton,
+  IWHTML40Container;
 
 type
   TFormParamCreate = class(TIWAppForm)

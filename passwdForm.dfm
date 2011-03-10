@@ -1,13 +1,14 @@
 object FormPasswd: TFormPasswd
   Left = 0
   Top = 0
-  Width = 1086
+  Width = 1028
   Height = 675
   HorzScrollBar.Visible = False
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,14 +22,14 @@ object FormPasswd: TFormPasswd
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 1028
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1086
+      Width = 1028
       Height = 118
       TabOrder = 5
       inherited titleimage: TIWImageFile
@@ -37,27 +38,27 @@ object FormPasswd: TFormPasswd
       end
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1086
+        Width = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 751
+        Left = 693
+      end
+      inherited langlink: TIWSiLink
+        Left = 686
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 908
+      end
+      inherited HideBox: TIWImageFile
+        Left = 1012
+        Top = 100
       end
       inherited TitleLabel: TIWLabel
         Width = 486
         Caption = 'administration'
-      end
-      inherited langlink: TIWSiLink
-        Left = 744
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 966
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1070
-        Top = 100
       end
     end
     inherited silink: TsiLangLinked
@@ -67,46 +68,47 @@ object FormPasswd: TFormPasswd
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 643
-    Width = 1086
+    Width = 1028
     Height = 32
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1086
+      Width = 1028
       Height = 32
       TabOrder = 4
       inherited IWRectangle1: TIWRectangle
-        Left = 670
+        Left = 612
         Width = 416
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1702
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 628
+        Width = 570
       end
       inherited Cancel: TIWButton
-        Left = 999
+        Left = 941
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 911
+        Left = 853
       end
       inherited Extra2: TIWButton
-        Left = 823
+        Left = 765
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 743
+        Left = 685
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1086
+    Width = 1028
     Height = 525
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -118,14 +120,15 @@ object FormPasswd: TFormPasswd
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1086
+      1028
       525)
     object IWRegion2: TIWRegion
-      Left = 334
+      Left = 305
       Top = 68
       Width = 401
       Height = 273
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = []
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -150,6 +153,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -157,6 +167,7 @@ object FormPasswd: TFormPasswd
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Current Password'
@@ -172,7 +183,14 @@ object FormPasswd: TFormPasswd
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -198,6 +216,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -206,6 +231,7 @@ object FormPasswd: TFormPasswd
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
         Caption = 'Change Password'
@@ -222,6 +248,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -236,6 +269,7 @@ object FormPasswd: TFormPasswd
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = True
       end
@@ -250,6 +284,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -257,6 +298,7 @@ object FormPasswd: TFormPasswd
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel3'
         Caption = 'New Password'
@@ -273,6 +315,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -287,6 +336,7 @@ object FormPasswd: TFormPasswd
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 2
         PasswordPrompt = True
       end
@@ -301,6 +351,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebBLACK
@@ -308,6 +365,7 @@ object FormPasswd: TFormPasswd
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Confirm'
@@ -324,6 +382,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -338,6 +403,7 @@ object FormPasswd: TFormPasswd
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = True
       end
@@ -353,6 +419,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -375,6 +448,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -397,6 +477,13 @@ object FormPasswd: TFormPasswd
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Update'
         DoSubmitValidation = True
         Color = clBtnFace

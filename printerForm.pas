@@ -8,7 +8,7 @@ uses
   IWCompRectangle, IWContainer, IWRegion, IWExtCtrls,
   IWBaseControl, IWVCLBaseControl, IWBaseHTMLControl, IWAppForm,
   IWHTMLControls, IWSiLink, siComp, siLngLnk, IWVCLBaseContainer,
-  IWHTMLContainer, footer_user, baretitle, ReferredClass;
+  IWHTMLContainer, footer_user, baretitle, ReferredClass, IWHTML40Container;
 
 type
   TformPrinter = class(TIWAppForm)

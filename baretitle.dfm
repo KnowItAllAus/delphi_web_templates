@@ -1,7 +1,7 @@
 object FrameBareTitle: TFrameBareTitle
   Left = 0
   Top = 0
-  Width = 1017
+  Width = 1024
   Height = 114
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,11 +10,12 @@ object FrameBareTitle: TFrameBareTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1017
+    Width = 1024
     Height = 114
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -28,7 +29,7 @@ object FrameBareTitle: TFrameBareTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1017
+      1024
       114)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -39,13 +40,20 @@ object FrameBareTitle: TFrameBareTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 2
       RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile1'
@@ -63,13 +71,19 @@ object FrameBareTitle: TFrameBareTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = False
-      AutoSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       Enabled = False
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'titleimage'
@@ -78,7 +92,7 @@ object FrameBareTitle: TFrameBareTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 89
-      Width = 1530
+      Width = 1537
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -87,6 +101,13 @@ object FrameBareTitle: TFrameBareTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -109,6 +130,13 @@ object FrameBareTitle: TFrameBareTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -120,7 +148,7 @@ object FrameBareTitle: TFrameBareTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 682
+      Left = 689
       Top = 0
       Width = 300
       Height = 86
@@ -129,19 +157,122 @@ object FrameBareTitle: TFrameBareTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 3
       RenderSize = False
-      AutoSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       Enabled = False
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
+    end
+    object langlink: TIWSiLink
+      Left = 618
+      Top = 65
+      Width = 65
+      Height = 17
+      Cursor = crAuto
+      Anchors = [akTop, akRight]
+      IW50Hint = False
+      ParentShowHint = False
+      ShowHint = True
+      ZIndex = 0
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
+      Alignment = taLeftJustify
+      Color = clNone
+      Font.Color = clNone
+      Font.Size = 10
+      Font.Style = [fsUnderline]
+      ScriptEvents = <>
+      DoSubmitValidation = False
+      FriendlyName = 'langlink'
+      TabOrder = 0
+      RawText = False
+      SiLangLinked = silink
+      LangFile = 'barettl.sil'
+      LangControl = RcDataMod.LangEditControl1
+    end
+    object Smalltitle: TIWLabel
+      Left = 904
+      Top = 98
+      Width = 97
+      Height = 16
+      Cursor = crAuto
+      Visible = False
+      Anchors = [akRight, akBottom]
+      IW50Hint = False
+      ParentShowHint = False
+      ShowHint = True
+      ZIndex = 1
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
+      Alignment = taRightJustify
+      BGColor = 10526880
+      Font.Color = clWebBLACK
+      Font.FontName = 'Arial'
+      Font.Size = 10
+      Font.Style = [fsBold]
+      NoWrap = False
+      ConvertSpaces = False
+      HasTabOrder = False
+      AutoSize = False
+      FriendlyName = 'TitleLabel'
+      Caption = '[default]'
+      RawText = False
+    end
+    object HideBox: TIWImageFile
+      Left = 1007
+      Top = 95
+      Width = 13
+      Height = 17
+      Cursor = crAuto
+      Anchors = [akRight, akBottom]
+      IW50Hint = False
+      ParentShowHint = False
+      ShowHint = True
+      ZIndex = 1
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
+      BorderOptions.Color = clNone
+      BorderOptions.Width = 0
+      DoSubmitValidation = True
+      ScriptEvents = <>
+      TabOrder = -1
+      UseSize = False
+      OnClick = HideBoxClick
+      Cacheable = True
+      FriendlyName = 'HideBox'
+      ImageFile.Filename = 'F:\delphi\delphi_web_ext\Files\X.bmp'
     end
     object TitleLabel: TIWLabel
       Left = 32
@@ -154,7 +285,14 @@ object FrameBareTitle: TFrameBareTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       BGColor = clWebWHITE
       Font.Color = clWebBLACK
@@ -163,84 +301,10 @@ object FrameBareTitle: TFrameBareTitle
       Font.Style = [fsBold]
       NoWrap = False
       ConvertSpaces = False
+      HasTabOrder = False
       FriendlyName = 'TitleLabel'
       Caption = '[default]'
       RawText = False
-    end
-    object langlink: TIWSiLink
-      Left = 611
-      Top = 65
-      Width = 65
-      Height = 17
-      Cursor = crAuto
-      Anchors = [akTop, akRight]
-      IW50Hint = False
-      ParentShowHint = False
-      ShowHint = True
-      ZIndex = 0
-      RenderSize = False
-      Alignment = taLeftJustify
-      Color = clNone
-      Font.Color = clNone
-      Font.Size = 10
-      Font.Style = [fsUnderline]
-      ScriptEvents = <>
-      DoSubmitValidation = False
-      FriendlyName = 'langlink'
-      TabOrder = 3
-      RawText = False
-      SiLangLinked = silink
-      LangFile = 'barettl.sil'
-      LangControl = RcDataMod.LangEditControl1
-    end
-    object Smalltitle: TIWLabel
-      Left = 897
-      Top = 98
-      Width = 97
-      Height = 16
-      Cursor = crAuto
-      Visible = False
-      Anchors = [akRight, akBottom]
-      IW50Hint = False
-      ParentShowHint = False
-      ShowHint = True
-      ZIndex = 1
-      RenderSize = True
-      Alignment = taRightJustify
-      BGColor = 10526880
-      Font.Color = clWebBLACK
-      Font.FontName = 'Arial'
-      Font.Size = 10
-      Font.Style = [fsBold]
-      NoWrap = False
-      ConvertSpaces = False
-      AutoSize = False
-      FriendlyName = 'TitleLabel'
-      Caption = '[default]'
-      RawText = False
-    end
-    object HideBox: TIWImageFile
-      Left = 1000
-      Top = 95
-      Width = 13
-      Height = 17
-      Cursor = crAuto
-      Anchors = [akRight, akBottom]
-      IW50Hint = False
-      ParentShowHint = False
-      ShowHint = True
-      ZIndex = 1
-      RenderSize = False
-      BorderOptions.Color = clNone
-      BorderOptions.Width = 0
-      DoSubmitValidation = True
-      ScriptEvents = <>
-      TabOrder = 4
-      UseSize = False
-      OnClick = HideBoxClick
-      Cacheable = True
-      FriendlyName = 'HideBox'
-      ImageFile.Filename = 'F:\delphi\delphi_web_ext\Files\X.bmp'
     end
   end
   object silink: TsiLangLinked

@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWCompRectangle,
   Graphics, IWExtCtrls, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWCompListbox, IWHTMLContainer, siComp, siLngLnk,
-  IWHTMLControls, IWSiLink;
+  IWHTMLControls, IWSiLink, IWHTML40Container;
 
 type
   Tlangfooter = class(TFrame)

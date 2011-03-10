@@ -3,11 +3,12 @@ object Copyform: TCopyform
   Top = 0
   Width = 1024
   Height = 587
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -29,6 +30,7 @@ object Copyform: TCopyform
     inherited IWFrameRegion: TIWRegion
       Width = 1024
       Height = 115
+      TabOrder = 3
       inherited titleimage: TIWImageFile
         Width = 453
         ImageFile.Filename = 'E:\delphi\delphi_web\files\admin.GIF'
@@ -43,12 +45,12 @@ object Copyform: TCopyform
       inherited IWImageFile3: TIWImageFile
         Left = 689
       end
+      inherited langlink: TIWSiLink
+        Left = 625
+      end
       inherited TitleLabel: TIWLabel
         Width = 486
         Caption = 'administration'
-      end
-      inherited langlink: TIWSiLink
-        Left = 625
       end
     end
   end
@@ -58,6 +60,7 @@ object Copyform: TCopyform
     Width = 1024
     Height = 435
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -77,6 +80,7 @@ object Copyform: TCopyform
       Width = 579
       Height = 260
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = []
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -102,6 +106,13 @@ object Copyform: TCopyform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
@@ -110,6 +121,7 @@ object Copyform: TCopyform
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Company Copy'
@@ -125,7 +137,14 @@ object Copyform: TCopyform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -134,7 +153,7 @@ object Copyform: TCopyform
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = userfooter1.silink_footer
         LangFile = 'coadmin.sil'
@@ -152,6 +171,13 @@ object Copyform: TCopyform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -174,6 +200,13 @@ object Copyform: TCopyform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -195,6 +228,13 @@ object Copyform: TCopyform
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -212,7 +252,8 @@ object Copyform: TCopyform
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
-        TabOrder = 2
+        SubmitOnAsyncEvent = True
+        TabOrder = 1
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'CompanyCombo'
@@ -228,7 +269,14 @@ object Copyform: TCopyform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -236,6 +284,7 @@ object Copyform: TCopyform
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel2'
         Caption = 'To Company'
         RawText = False
@@ -251,7 +300,14 @@ object Copyform: TCopyform
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -259,6 +315,7 @@ object Copyform: TCopyform
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel2'
         Caption = 'From Company'
         RawText = False
@@ -275,6 +332,13 @@ object Copyform: TCopyform
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Copy'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -292,6 +356,7 @@ object Copyform: TCopyform
         Width = 225
         Height = 25
         Cursor = crAuto
+        RenderInvisibleControls = False
         BorderOptions.NumericWidth = 0
         BorderOptions.BorderWidth = cbwNumeric
         BorderOptions.Style = cbsNone
@@ -311,7 +376,14 @@ object Copyform: TCopyform
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clWebWHITE
@@ -320,6 +392,7 @@ object Copyform: TCopyform
           Font.Style = [fsBold]
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           FriendlyName = 'FromLabel'
           Caption = 'FromLabel'
           RawText = False
@@ -338,7 +411,7 @@ object Copyform: TCopyform
     inherited IWRegion1: TIWRegion
       Width = 1024
       Height = 37
-      TabOrder = 3
+      TabOrder = 2
       inherited navcombo: TIWComboBox
         Visible = False
       end

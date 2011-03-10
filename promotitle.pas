@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
   IWHTMLControls, IWCompRectangle, IWCompButton, IWCompLabel, IWSiLink,
-  siComp, siLngLnk, StdCtrls, IWCompListbox;
+  siComp, siLngLnk, StdCtrls, IWCompListbox, IWHTML40Container;
 
 type
   TPromoFrameTitle = class(TFrame)

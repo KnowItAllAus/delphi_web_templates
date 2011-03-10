@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, promotitle,
-  IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox;
+  IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox, IWHTML40Container;
 
 type
   TFormJobRev = class(TIWAppForm)

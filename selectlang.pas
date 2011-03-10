@@ -8,7 +8,7 @@ uses
   IWCompListbox, IWCompRectangle, IWVCLBaseControl, IWBaseControl,
   IWBaseHTMLControl, IWControl, IWHTMLControls, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, Controls,
-  Forms, baretitle;
+  Forms, baretitle, IWHTML40Container;
 
 type
   referrer_class = class of TIWAppForm;

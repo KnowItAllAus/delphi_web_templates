@@ -7,7 +7,8 @@ uses
   IWCompRectangle, IWCompListbox, IWCompButton, IWHTMLControls, IWSiLink,
   IWCompLabel, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWGrids, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
-  IWRegion, footer_user, Controls, Forms, distribtitle, siComp, siLngLnk;
+  IWRegion, footer_user, Controls, Forms, distribtitle, siComp, siLngLnk,
+  IWHTML40Container;
 
 type
   TformDistribStatus = class(TIWAppForm)

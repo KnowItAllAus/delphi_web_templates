@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompRectangle, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWRegion, langfooter, siComp, siLngLnk, IWSiLink, footer_nav, IWCompLabel,
-  footer_user;
+  footer_user, IWHTML40Container;
 
 type
   Tsu_FormRole = class(TIWAppForm)

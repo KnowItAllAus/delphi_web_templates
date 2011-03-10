@@ -3,10 +3,11 @@ object ParamForm: TParamForm
   Top = 0
   Width = 983
   Height = 721
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -14,8 +15,8 @@ object ParamForm: TParamForm
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 63
-  DesignTop = 133
+  DesignLeft = 2
+  DesignTop = 135
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -42,10 +43,6 @@ object ParamForm: TParamForm
       inherited IWImageFile3: TIWImageFile
         Left = 648
       end
-      inherited TitleLabel: TIWLabel
-        Width = 387
-        Caption = 'promotions'
-      end
       inherited langlink: TIWSiLink
         Left = 577
       end
@@ -57,6 +54,10 @@ object ParamForm: TParamForm
         Left = 966
         Top = 99
       end
+      inherited TitleLabel: TIWLabel
+        Width = 387
+        Caption = 'promotions'
+      end
     end
   end
   object IWRegion1: TIWRegion
@@ -65,6 +66,7 @@ object ParamForm: TParamForm
     Width = 983
     Height = 574
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -88,7 +90,14 @@ object ParamForm: TParamForm
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -109,6 +118,7 @@ object ParamForm: TParamForm
       Width = 647
       Height = 361
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = []
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -131,6 +141,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -153,6 +170,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -174,6 +198,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -182,6 +213,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
         Caption = 'Job'
@@ -198,6 +230,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -205,6 +244,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Overrides'
@@ -221,6 +261,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clWebRED
@@ -228,6 +275,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'templatelbl'
         Caption = 'TEMPLATE'
@@ -244,6 +292,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -251,6 +306,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActiveHLbl'
         Caption = 'Active Hours'
@@ -267,6 +323,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -274,6 +337,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActiveHLblFrom'
         Caption = 'From'
@@ -290,6 +354,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -304,6 +375,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
         Text = 'FromEdit'
@@ -319,6 +391,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -333,6 +412,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 9
         PasswordPrompt = False
         Text = 'ToEdit'
@@ -348,6 +428,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -355,6 +442,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActiveHLblTo'
         Caption = 'To'
@@ -371,6 +459,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -378,6 +473,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActivePeriodLbl'
         Caption = 'Active Period'
@@ -394,6 +490,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -401,6 +504,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActivePeriodLblFrom'
         Caption = 'Start'
@@ -417,6 +521,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -431,6 +542,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 7
         PasswordPrompt = False
         Text = 'PeriodStartEdit'
@@ -446,6 +558,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -460,6 +579,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 11
         PasswordPrompt = False
         Text = 'PeriodEndEdit'
@@ -475,6 +595,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -482,6 +609,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'ActivePeriodLblTo'
         Caption = 'Finish'
@@ -498,6 +626,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -505,6 +640,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel8'
         Caption = 'Text'
@@ -521,6 +657,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -528,6 +671,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel5'
         Caption = 'Trigger Text'
@@ -544,6 +688,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -551,6 +702,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel5'
         Caption = 'Template Field Name References'
@@ -567,6 +719,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -574,6 +733,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel17'
         Caption = 'Active Days'
@@ -590,6 +750,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -597,6 +764,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel18'
         Caption = 'Days'
@@ -613,6 +781,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -627,6 +802,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
         Text = 'DaysEdit'
@@ -642,6 +818,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -656,6 +839,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 13
         PasswordPrompt = False
         Text = 'VStartEdit'
@@ -671,6 +855,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -685,6 +876,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 15
         PasswordPrompt = False
         Text = 'VEndEdit'
@@ -700,6 +892,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -707,6 +906,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel13'
         Caption = 'From'
@@ -723,6 +923,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -730,6 +937,7 @@ object ParamForm: TParamForm
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel14'
         Caption = 'To'
@@ -746,6 +954,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -753,6 +968,7 @@ object ParamForm: TParamForm
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel5'
         Caption = 'Value'
@@ -769,6 +985,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clWebSILVER
         FocusColor = clNone
@@ -783,6 +1006,7 @@ object ParamForm: TParamForm
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = False
         Text = 'NewTrigEdit'
@@ -799,6 +1023,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -822,6 +1053,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -845,6 +1083,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -868,6 +1113,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -891,6 +1143,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -914,6 +1173,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -937,6 +1203,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -960,6 +1233,13 @@ object ParamForm: TParamForm
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '...'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -978,6 +1258,7 @@ object ParamForm: TParamForm
         Height = 101
         Cursor = crAuto
         Visible = False
+        RenderInvisibleControls = False
         BorderOptions.NumericWidth = 2
         BorderOptions.BorderWidth = cbwNumeric
         BorderOptions.Style = cbsSolid
@@ -998,6 +1279,13 @@ object ParamForm: TParamForm
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1015,6 +1303,7 @@ object ParamForm: TParamForm
           DoSubmitValidation = True
           Editable = True
           NonEditableAsLabel = False
+          SubmitOnAsyncEvent = True
           TabOrder = 17
           ItemIndex = 0
           Items.Strings = (
@@ -1032,7 +1321,14 @@ object ParamForm: TParamForm
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1040,6 +1336,7 @@ object ParamForm: TParamForm
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           FriendlyName = 'IWLabel11'
           Caption = 'Select Parameter'
           RawText = False
@@ -1055,6 +1352,13 @@ object ParamForm: TParamForm
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Modify'
           DoSubmitValidation = True
           Color = clBtnFace
@@ -1076,7 +1380,14 @@ object ParamForm: TParamForm
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1084,6 +1395,7 @@ object ParamForm: TParamForm
           Font.Style = [fsBold]
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           FriendlyName = 'IWLabel11'
           Caption = 'Parameter Name'
           RawText = False
@@ -1099,6 +1411,13 @@ object ParamForm: TParamForm
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Cancel'
           DoSubmitValidation = True
           Color = clBtnFace

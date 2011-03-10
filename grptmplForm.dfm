@@ -1,13 +1,14 @@
 object formGrpTmpl: TformGrpTmpl
   Left = 0
   Top = 0
-  Width = 1021
-  Height = 725
+  Width = 714
+  Height = 490
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -15,14 +16,15 @@ object formGrpTmpl: TformGrpTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 195
-  DesignTop = 196
+  DesignLeft = 49
+  DesignTop = 214
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1021
-    Height = 578
+    Width = 714
+    Height = 343
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -34,14 +36,15 @@ object formGrpTmpl: TformGrpTmpl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1021
-      578)
+      714
+      343)
     object IWRegion2: TIWRegion
-      Left = 140
+      Left = 0
       Top = 14
       Width = 716
-      Height = 543
+      Height = 308
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -54,7 +57,7 @@ object formGrpTmpl: TformGrpTmpl
       Splitter = False
       DesignSize = (
         716
-        543)
+        308)
       object TmplLabel: TIWLabel
         Left = 8
         Top = 8
@@ -66,6 +69,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -74,6 +84,7 @@ object formGrpTmpl: TformGrpTmpl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'TmplLabel'
         Caption = 'Template Usage'
@@ -83,14 +94,21 @@ object formGrpTmpl: TformGrpTmpl
         Left = 20
         Top = 100
         Width = 676
-        Height = 426
+        Height = 191
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -111,8 +129,8 @@ object formGrpTmpl: TformGrpTmpl
         ColumnCount = 4
         OnCellClick = TmplGridCellClick
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object TemplateCombo: TIWComboBox
@@ -126,6 +144,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -143,6 +168,7 @@ object formGrpTmpl: TformGrpTmpl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         ItemIndex = -1
         Sorted = False
@@ -159,6 +185,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -166,6 +199,7 @@ object formGrpTmpl: TformGrpTmpl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel5'
         Caption = 'Available Templates'
@@ -182,6 +216,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Add'
         DoSubmitValidation = True
         Color = clBtnFace
@@ -203,7 +244,14 @@ object formGrpTmpl: TformGrpTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -222,7 +270,7 @@ object formGrpTmpl: TformGrpTmpl
         Left = 0
         Top = 3
         Width = 3
-        Height = 540
+        Height = 305
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -230,6 +278,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -252,6 +307,13 @@ object formGrpTmpl: TformGrpTmpl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -272,12 +334,20 @@ object formGrpTmpl: TformGrpTmpl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Selected'
         Editable = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
+        SubmitOnAsyncEvent = True
         ScriptEvents = <>
         DoSubmitValidation = True
         Style = stNormal
@@ -290,43 +360,43 @@ object formGrpTmpl: TformGrpTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 696
-    Width = 1021
+    Top = 461
+    Width = 714
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1021
+      Width = 714
       Height = 29
       TabOrder = 3
       DesignSize = (
-        1021
+        714
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 645
+        Left = 338
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1637
+        Width = 1330
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 603
+        Width = 296
       end
       inherited Cancel: TIWButton
-        Left = 935
+        Left = 628
         Caption = 'Back'
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 847
+        Left = 540
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
       end
       inherited Extra2: TIWButton
-        Left = 759
+        Left = 452
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 687
+        Left = 380
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -336,42 +406,42 @@ object formGrpTmpl: TformGrpTmpl
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1021
+    Width = 714
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1021
+      Width = 714
       Height = 118
       TabOrder = 4
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1534
+        Width = 1227
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 686
+        Left = 379
+      end
+      inherited langlink: TIWSiLink
+        Left = 308
+      end
+      inherited Smalltitle: TIWLabel
+        Left = 594
+        Top = 102
+      end
+      inherited HideBox: TIWImageFile
+        Left = 697
+        Top = 99
+        Width = 12
+        Height = 14
       end
       inherited TitleLabel: TIWLabel
         Width = 387
         Caption = 'distribution'
-      end
-      inherited langlink: TIWSiLink
-        Left = 615
-      end
-      inherited Smalltitle: TIWLabel
-        Left = 901
-        Top = 102
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1004
-        Top = 99
-        Width = 12
-        Height = 14
       end
     end
   end

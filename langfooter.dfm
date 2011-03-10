@@ -1,7 +1,7 @@
 object langfooter: Tlangfooter
   Left = 0
   Top = 0
-  Width = 793
+  Width = 443
   Height = 35
   HorzScrollBar.Visible = False
   Align = alBottom
@@ -9,11 +9,12 @@ object langfooter: Tlangfooter
   object IWRegion1: TIWRegion
     Left = 0
     Top = 0
-    Width = 793
+    Width = 443
     Height = 35
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 201
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -27,7 +28,7 @@ object langfooter: Tlangfooter
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      793
+      443
       35)
     object IWRectangle2: TIWRectangle
       Left = 0
@@ -41,6 +42,13 @@ object langfooter: Tlangfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -63,6 +71,13 @@ object langfooter: Tlangfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -84,6 +99,13 @@ object langfooter: Tlangfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BGColor = clNone
       Font.Color = clNone
       Font.Size = 10
@@ -102,7 +124,8 @@ object langfooter: Tlangfooter
       DoSubmitValidation = True
       Editable = True
       NonEditableAsLabel = True
-      TabOrder = 2
+      SubmitOnAsyncEvent = True
+      TabOrder = 1
       ItemIndex = -1
       Sorted = False
       FriendlyName = 'langcombo'
@@ -117,7 +140,14 @@ object langfooter: Tlangfooter
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -143,12 +173,18 @@ object langfooter: Tlangfooter
       ShowHint = True
       ZIndex = 0
       RenderSize = True
-      AutoSize = False
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = True
       Picture.Data = {
         07544269746D617036030000424D360300000000000036000000280000001000

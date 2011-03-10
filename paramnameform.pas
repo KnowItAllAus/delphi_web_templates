@@ -7,7 +7,7 @@ uses
   Forms, footer_user, siComp, siLngLnk, IWCompEdit, IWCompLabel,
   IWCompRectangle, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWHTMLControls, IWSiLink, Controls, IWVCLBaseContainer,
-  IWContainer, IWHTMLContainer, IWRegion, IWCompButton;
+  IWContainer, IWHTMLContainer, IWRegion, IWCompButton, IWHTML40Container;
 
 type
   TFormParamnameEdit = class(TIWAppForm)

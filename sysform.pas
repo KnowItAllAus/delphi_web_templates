@@ -8,7 +8,7 @@ uses
   IWBaseControl, IWBaseHTMLControl, IWControl, IWGrids, Graphics,
   IWCompListbox, siComp, siLngLnk, IWHTMLControls, IWSiLink,
   IWCompRectangle, footer_user, IWVCLBaseContainer, IWContainer,
-  IWHTMLContainer, IWRegion, admintitle;
+  IWHTMLContainer, IWRegion, admintitle, IWHTML40Container;
 
 type
   TFormSys = class(TIWAppForm)

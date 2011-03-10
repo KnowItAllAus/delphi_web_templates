@@ -8,7 +8,7 @@ uses
   IWCompRectangle, IWContainer, IWRegion, IWExtCtrls,
   IWBaseControl, IWVCLBaseControl, IWBaseHTMLControl, IWAppForm,
   IWCompListbox, siComp, siLngLnk, IWHTMLControls, IWSiLink, admintitle,
-  IWVCLBaseContainer, IWHTMLContainer, footer_user;
+  IWVCLBaseContainer, IWHTMLContainer, footer_user, IWHTML40Container;
 
 type
   TformStores = class(TIWAppForm)

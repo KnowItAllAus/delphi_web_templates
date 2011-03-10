@@ -1,16 +1,17 @@
 object NavFooter: TNavFooter
   Left = 0
   Top = 0
-  Width = 1086
+  Width = 443
   Height = 33
   Align = alBottom
   TabOrder = 0
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1086
+    Width = 443
     Height = 33
     Cursor = crAuto
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 1
@@ -23,7 +24,7 @@ object NavFooter: TNavFooter
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1086
+      443
       33)
     object IWRectangle3: TIWRectangle
       Left = 670
@@ -37,6 +38,13 @@ object NavFooter: TNavFooter
       ShowHint = True
       ZIndex = 1000
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -59,6 +67,13 @@ object NavFooter: TNavFooter
       ShowHint = True
       ZIndex = 1000
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -75,6 +90,7 @@ object NavFooter: TNavFooter
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akRight]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -97,6 +113,13 @@ object NavFooter: TNavFooter
         ShowHint = True
         ZIndex = 1000
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -127,6 +150,7 @@ object NavFooter: TNavFooter
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akRight]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -149,6 +173,13 @@ object NavFooter: TNavFooter
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -179,6 +210,7 @@ object NavFooter: TNavFooter
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akRight]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -201,6 +233,13 @@ object NavFooter: TNavFooter
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -231,6 +270,7 @@ object NavFooter: TNavFooter
       Width = 188
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -251,6 +291,13 @@ object NavFooter: TNavFooter
         ShowHint = True
         ZIndex = 1
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -268,6 +315,7 @@ object NavFooter: TNavFooter
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         ItemIndex = -1
         Sorted = False
@@ -283,13 +331,19 @@ object NavFooter: TNavFooter
         ParentShowHint = False
         ShowHint = True
         ZIndex = 1000
-        RenderSize = False
-        AutoSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderOptions.Color = clNone
         BorderOptions.Width = 0
         DoSubmitValidation = True
         ScriptEvents = <>
-        TabOrder = 4
+        TabOrder = -1
         UseSize = False
         Picture.Data = {
           07544269746D6170F6000000424DF60000000000000076000000280000001000
@@ -316,6 +370,7 @@ object NavFooter: TNavFooter
       Width = 475
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -336,6 +391,13 @@ object NavFooter: TNavFooter
         ShowHint = True
         ZIndex = 1000
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clWebWHITE
@@ -355,7 +417,7 @@ object NavFooter: TNavFooter
           end>
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
-        TabOrder = 5
+        TabOrder = 4
         RawText = False
         Caption = 'USER: X. XXXX'
       end

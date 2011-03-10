@@ -10,7 +10,7 @@ uses
   IWBaseControl, IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl,
   IWBaseComponent, IWBaseHTMLComponent, siComp, siLngLnk,
   IWCompListbox, IWHTMLContainer, baretitle, langfooter,
-  IWSiLink;
+  IWSiLink, IWBaseHTML40Component, IWHTML40Container;
 
 type
   Tform_login = class(TIWAppForm)

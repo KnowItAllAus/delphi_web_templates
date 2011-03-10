@@ -1,13 +1,14 @@
 object FormPOS: TFormPOS
   Left = 0
   Top = 0
-  Width = 1087
-  Height = 755
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,9 +22,10 @@ object FormPOS: TFormPOS
   object IWRegion1: TIWRegion
     Left = 0
     Top = 115
-    Width = 1087
-    Height = 611
+    Width = 1028
+    Height = 602
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -35,8 +37,8 @@ object FormPOS: TFormPOS
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1087
-      611)
+      1028
+      602)
     object IWSiLink1: TIWSiLink
       Left = 0
       Top = -1
@@ -47,7 +49,14 @@ object FormPOS: TFormPOS
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -63,11 +72,12 @@ object FormPOS: TFormPOS
       LangControl = RcDataMod.LangEditControl1
     end
     object RuleRegn: TIWRegion
-      Left = 150
+      Left = 121
       Top = 18
       Width = 777
-      Height = 577
+      Height = 568
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -89,6 +99,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -96,6 +113,7 @@ object FormPOS: TFormPOS
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel11'
         Caption = 'Scanner'
@@ -112,6 +130,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -119,6 +144,7 @@ object FormPOS: TFormPOS
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel11'
         Caption = 'Content'
@@ -135,6 +161,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -142,6 +175,7 @@ object FormPOS: TFormPOS
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
         Caption = 'Item Format'
@@ -158,6 +192,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
@@ -165,6 +206,7 @@ object FormPOS: TFormPOS
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Name'
@@ -181,6 +223,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -195,6 +244,7 @@ object FormPOS: TFormPOS
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 6
         PasswordPrompt = False
         Text = 'NewNameEdit'
@@ -210,6 +260,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -218,6 +275,7 @@ object FormPOS: TFormPOS
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'PosLabel'
         Caption = 'POS Characteristics'
@@ -234,6 +292,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -241,6 +306,7 @@ object FormPOS: TFormPOS
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel5'
         Caption = 'ID'
@@ -257,6 +323,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clBtnFace
         FocusColor = clNone
@@ -271,6 +344,7 @@ object FormPOS: TFormPOS
         ReadOnly = True
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 7
         PasswordPrompt = False
         Text = 'NewIDEdit'
@@ -287,6 +361,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -301,7 +382,7 @@ object FormPOS: TFormPOS
         Left = 0
         Top = 3
         Width = 3
-        Height = 574
+        Height = 565
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -309,6 +390,13 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -325,6 +413,7 @@ object FormPOS: TFormPOS
         Width = 609
         Height = 59
         Cursor = crAuto
+        RenderInvisibleControls = False
         TabOrder = 0
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -346,6 +435,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -353,6 +449,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel12'
           Caption = 'Input Patterns'
@@ -369,6 +466,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -383,6 +487,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 34
           PasswordPrompt = False
         end
@@ -397,6 +502,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -404,6 +516,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel12'
           Caption = 'Output Prefix'
@@ -420,6 +533,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -434,6 +554,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 35
           PasswordPrompt = False
         end
@@ -444,6 +565,7 @@ object FormPOS: TFormPOS
         Width = 609
         Height = 362
         Cursor = crAuto
+        RenderInvisibleControls = False
         TabOrder = 8
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -465,6 +587,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -479,6 +608,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 12
           PasswordPrompt = False
         end
@@ -493,6 +623,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -500,6 +637,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel12'
           Caption = 'Duplicate Ind.'
@@ -516,6 +654,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -523,6 +668,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel13'
           Caption = 'Required'
@@ -539,6 +685,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -553,6 +706,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 13
           PasswordPrompt = False
         end
@@ -567,6 +721,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -574,6 +735,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Excluded'
@@ -590,6 +752,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -604,6 +773,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 14
           PasswordPrompt = False
         end
@@ -618,6 +788,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -625,6 +802,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel15'
           Caption = 'Merchant copy'
@@ -641,6 +819,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -655,6 +840,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 22
           PasswordPrompt = False
         end
@@ -669,6 +855,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -676,6 +869,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel16'
           Caption = 'End'
@@ -692,6 +886,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -706,6 +907,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 16
           PasswordPrompt = False
         end
@@ -720,6 +922,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -734,6 +943,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 15
           PasswordPrompt = False
         end
@@ -748,6 +958,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -755,6 +972,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel17'
           Caption = 'Product'
@@ -770,7 +988,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -788,6 +1013,7 @@ object FormPOS: TFormPOS
           DoSubmitValidation = True
           Editable = True
           NonEditableAsLabel = True
+          SubmitOnAsyncEvent = True
           TabOrder = 17
           ItemIndex = 2
           Items.Strings = (
@@ -809,6 +1035,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -816,6 +1049,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel21'
           Caption = 'End Follows'
@@ -832,6 +1066,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -839,6 +1080,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel22'
           Caption = 'Start'
@@ -855,6 +1097,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -869,6 +1118,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 23
           PasswordPrompt = False
         end
@@ -883,6 +1133,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -890,6 +1147,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel15'
           Caption = 'Logo Point'
@@ -906,6 +1164,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -920,6 +1185,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 24
           PasswordPrompt = False
         end
@@ -934,6 +1200,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -941,6 +1214,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel15'
           Caption = 'Voucher Point'
@@ -957,6 +1231,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -964,6 +1245,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel13'
           Caption = 'Doc Start'
@@ -980,6 +1262,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -994,6 +1283,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 18
           PasswordPrompt = False
         end
@@ -1008,6 +1298,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1015,6 +1312,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Doc End'
@@ -1031,6 +1329,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1045,6 +1350,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 19
           PasswordPrompt = False
         end
@@ -1059,6 +1365,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1066,6 +1379,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Void'
@@ -1082,6 +1396,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1096,6 +1417,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 30
           PasswordPrompt = False
         end
@@ -1110,6 +1432,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1117,6 +1446,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Cancel'
@@ -1133,6 +1463,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1147,6 +1484,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 32
           PasswordPrompt = False
         end
@@ -1161,6 +1499,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1168,6 +1513,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Except when '
@@ -1184,6 +1530,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1198,6 +1551,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 31
           PasswordPrompt = False
         end
@@ -1212,6 +1566,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1219,6 +1580,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel15'
           Caption = 'Offset'
@@ -1235,6 +1597,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1249,6 +1618,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 25
           PasswordPrompt = False
         end
@@ -1262,12 +1632,20 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'EOP'
           Editable = True
           Font.Color = clNone
           Font.Size = 10
           Font.Style = []
+          SubmitOnAsyncEvent = True
           ScriptEvents = <>
           DoSubmitValidation = True
           Style = stNormal
@@ -1286,6 +1664,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1293,6 +1678,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'No Suppression'
@@ -1309,6 +1695,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1323,6 +1716,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 20
           PasswordPrompt = False
         end
@@ -1336,7 +1730,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Timeout'
           Editable = True
           Font.Color = clNone
@@ -1349,6 +1750,7 @@ object FormPOS: TFormPOS
           Group = 'no group'
           Value = 'TimeoutBtn'
           FriendlyName = 'TimeoutBtn'
+          SubmitOnAsyncEvent = True
         end
         object SmartCutBtn: TIWRadioButton
           Left = 520
@@ -1360,7 +1762,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Smart Cut'
           Editable = True
           Font.Color = clNone
@@ -1373,6 +1782,7 @@ object FormPOS: TFormPOS
           Group = 'no group'
           Value = 'SmartCutBtn'
           FriendlyName = 'Smart Cut'
+          SubmitOnAsyncEvent = True
         end
         object Extralabel: TIWLabel
           Left = 10
@@ -1385,6 +1795,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1392,6 +1809,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Extra Triggers'
@@ -1408,6 +1826,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1422,6 +1847,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 21
           PasswordPrompt = False
         end
@@ -1435,7 +1861,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Normal'
           Editable = True
           Font.Color = clNone
@@ -1448,6 +1881,7 @@ object FormPOS: TFormPOS
           Group = 'no group'
           Value = 'NormBtn'
           FriendlyName = 'NormBtn'
+          SubmitOnAsyncEvent = True
         end
         object SCTextLbl: TIWLabel
           Left = 325
@@ -1461,6 +1895,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1468,6 +1909,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = #39'Smart Cut Text'#39
@@ -1485,6 +1927,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1499,6 +1948,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 27
           PasswordPrompt = False
         end
@@ -1514,6 +1964,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1521,6 +1978,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel15'
           Caption = 'Min doc lines'
@@ -1538,6 +1996,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1552,6 +2017,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 28
           PasswordPrompt = False
         end
@@ -1566,12 +2032,20 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Incremental'
           Editable = True
           Font.Color = clNone
           Font.Size = 10
           Font.Style = []
+          SubmitOnAsyncEvent = True
           ScriptEvents = <>
           DoSubmitValidation = True
           Style = stNormal
@@ -1590,6 +2064,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1597,6 +2078,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Cut'
@@ -1613,6 +2095,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1620,6 +2109,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Params'
@@ -1636,6 +2126,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1650,6 +2147,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 39
           PasswordPrompt = False
         end
@@ -1664,6 +2162,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1671,6 +2176,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Tran ID'
@@ -1687,6 +2193,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1701,6 +2214,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 40
           PasswordPrompt = False
         end
@@ -1714,12 +2228,20 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Keep Asynch'
           Editable = True
           Font.Color = clNone
           Font.Size = 10
           Font.Style = []
+          SubmitOnAsyncEvent = True
           ScriptEvents = <>
           DoSubmitValidation = True
           Style = stNormal
@@ -1738,6 +2260,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1745,6 +2274,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel14'
           Caption = 'Printer Errata'
@@ -1762,6 +2292,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1776,6 +2313,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 33
           PasswordPrompt = False
         end
@@ -1786,6 +2324,7 @@ object FormPOS: TFormPOS
         Width = 609
         Height = 81
         Cursor = crAuto
+        RenderInvisibleControls = False
         TabOrder = 1
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
@@ -1807,6 +2346,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1814,6 +2360,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel9'
           Caption = 'Decimal Point'
@@ -1830,6 +2377,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1845,6 +2399,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 8
           PasswordPrompt = False
           Text = '.'
@@ -1860,6 +2415,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1867,6 +2429,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel10'
           Caption = 'Thousands Separator'
@@ -1883,6 +2446,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1898,6 +2468,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 9
           PasswordPrompt = False
           Text = ','
@@ -1913,6 +2484,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 1
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1920,6 +2498,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           AutoSize = False
           FriendlyName = 'IWLabel12'
           Caption = 'Product Formats'
@@ -1936,6 +2515,13 @@ object FormPOS: TFormPOS
           ShowHint = True
           ZIndex = 0
           RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           FocusColor = clNone
@@ -1950,6 +2536,7 @@ object FormPOS: TFormPOS
           ReadOnly = False
           Required = False
           ScriptEvents = <>
+          SubmitOnAsyncEvent = True
           TabOrder = 10
           PasswordPrompt = False
         end
@@ -1963,12 +2550,20 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Force Signs'
           Editable = True
           Font.Color = clNone
           Font.Size = 10
           Font.Style = []
+          SubmitOnAsyncEvent = True
           ScriptEvents = <>
           DoSubmitValidation = True
           Style = stNormal
@@ -1986,7 +2581,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Alignment = taLeftJustify
           BGColor = clNone
           Font.Color = clNone
@@ -1994,6 +2596,7 @@ object FormPOS: TFormPOS
           Font.Style = []
           NoWrap = False
           ConvertSpaces = False
+          HasTabOrder = False
           FriendlyName = 'IWLabel28'
           Caption = 'First Copy'
           RawText = False
@@ -2008,7 +2611,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Detect'
           Editable = True
           Font.Color = clNone
@@ -2020,6 +2630,7 @@ object FormPOS: TFormPOS
           Group = 'first'
           Value = 'DetectBtn'
           FriendlyName = 'DetectBtn'
+          SubmitOnAsyncEvent = True
         end
         object SuppressBtn: TIWRadioButton
           Left = 480
@@ -2031,7 +2642,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Suppress'
           Editable = True
           Font.Color = clNone
@@ -2043,6 +2661,7 @@ object FormPOS: TFormPOS
           Group = 'first'
           Value = 'SuppressBtn'
           FriendlyName = 'SuppressBtn'
+          SubmitOnAsyncEvent = True
         end
         object AssumeBtn: TIWRadioButton
           Left = 480
@@ -2054,7 +2673,14 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = False
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
           Caption = 'Always Assume'
           Editable = True
           Font.Color = clNone
@@ -2066,50 +2692,51 @@ object FormPOS: TFormPOS
           Group = 'first'
           Value = 'AssumeBtn'
           FriendlyName = 'AssumeBtn'
+          SubmitOnAsyncEvent = True
         end
       end
     end
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 726
-    Width = 1087
+    Top = 717
+    Width = 1028
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1087
+      Width = 1028
       Height = 29
       TabOrder = 36
       inherited IWRectangle1: TIWRectangle
-        Left = 711
+        Left = 652
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1703
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 669
+        Width = 610
       end
       inherited Cancel: TIWButton
-        Left = 996
+        Left = 937
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 820
+        Left = 761
         Visible = True
         Caption = 'Save'
         OnClick = PostButtonClick
       end
       inherited Extra2: TIWButton
-        Left = 908
+        Left = 849
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
         OnClick = DelBtnClick
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 740
+        Left = 681
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -2119,14 +2746,14 @@ object FormPOS: TFormPOS
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1087
+    Width = 1028
     Height = 115
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1087
+      Width = 1028
       Height = 115
       TabOrder = 37
       inherited titleimage: TIWImageFile
@@ -2135,26 +2762,29 @@ object FormPOS: TFormPOS
       end
       inherited IWRectangle1: TIWRectangle
         Top = 90
-        Width = 1087
+        Width = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 95
       end
-      inherited TitleLabel: TIWLabel
-        Width = 486
-        Caption = 'administration'
+      inherited IWImageFile3: TIWImageFile
+        Left = 322
       end
       inherited langlink: TIWSiLink
-        Left = 685
+        Left = 626
       end
       inherited Smalltitle: TIWLabel
-        Left = 970
+        Left = 911
       end
       inherited HideBox: TIWImageFile
-        Left = 1072
+        Left = 1013
         Top = 98
         Width = 12
         Height = 14
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 486
+        Caption = 'administration'
       end
     end
     inherited silink: TsiLangLinked

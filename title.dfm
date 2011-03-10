@@ -1,7 +1,7 @@
 object FrameTitle: TFrameTitle
   Left = 0
   Top = 0
-  Width = 1158
+  Width = 1028
   Height = 120
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,11 +10,12 @@ object FrameTitle: TFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1158
+    Width = 1028
     Height = 120
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
+    RenderInvisibleControls = False
     TabOrder = 0
     Align = alClient
     BorderOptions.NumericWidth = 0
@@ -25,8 +26,9 @@ object FrameTitle: TFrameTitle
     ParentShowHint = False
     ShowHint = True
     ZIndex = 1000
+    Splitter = False
     DesignSize = (
-      1158
+      1028
       120)
     object IWImageFile1: TIWImageFile
       Left = 176
@@ -38,12 +40,19 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 0
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile1'
@@ -59,12 +68,19 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 1
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile2'
@@ -73,7 +89,7 @@ object FrameTitle: TFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 89
-      Width = 2759
+      Width = 2629
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -82,6 +98,13 @@ object FrameTitle: TFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -103,6 +126,13 @@ object FrameTitle: TFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -116,7 +146,7 @@ object FrameTitle: TFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 608
       Top = 98
-      Width = 2026
+      Width = 1896
       Height = 20
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -125,6 +155,13 @@ object FrameTitle: TFrameTitle
       ShowHint = True
       ZIndex = 0
       RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Font.Color = clNone
       Font.Size = 10
       Font.Style = []
@@ -136,7 +173,7 @@ object FrameTitle: TFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 822
+      Left = 692
       Top = 3
       Width = 341
       Height = 86
@@ -146,13 +183,19 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
-      AutoSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       BorderOptions.Color = clNone
       BorderOptions.Width = 0
       DoSubmitValidation = True
       ScriptEvents = <>
-      TabOrder = 2
+      TabOrder = -1
       UseSize = False
       Cacheable = True
       FriendlyName = 'IWImageFile3'
@@ -164,6 +207,7 @@ object FrameTitle: TFrameTitle
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -172,11 +216,12 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1000
+      Splitter = False
       object HomeLink: TIWLink
-        Left = 1
-        Top = 1
-        Width = 148
-        Height = 20
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 22
         Cursor = crAuto
         Align = alClient
         IW50Hint = False
@@ -184,6 +229,13 @@ object FrameTitle: TFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -204,7 +256,7 @@ object FrameTitle: TFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = HomeLinkClick
-        TabOrder = 6
+        TabOrder = 0
         RawText = False
         Caption = 'GROUPS'
       end
@@ -215,6 +267,7 @@ object FrameTitle: TFrameTitle
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -223,11 +276,12 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1000
+      Splitter = False
       object PromoLink: TIWLink
-        Left = 1
-        Top = 1
-        Width = 148
-        Height = 20
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 22
         Cursor = crAuto
         Align = alClient
         IW50Hint = False
@@ -235,6 +289,13 @@ object FrameTitle: TFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -255,7 +316,7 @@ object FrameTitle: TFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = HomeLinkClick
-        TabOrder = 7
+        TabOrder = 1
         RawText = False
         Caption = 'PROMOTIONS'
       end
@@ -266,6 +327,7 @@ object FrameTitle: TFrameTitle
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -274,11 +336,12 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1000
+      Splitter = False
       object IWLink2: TIWLink
-        Left = 1
-        Top = 1
-        Width = 148
-        Height = 20
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 22
         Cursor = crAuto
         Align = alClient
         IW50Hint = False
@@ -286,6 +349,13 @@ object FrameTitle: TFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -306,7 +376,7 @@ object FrameTitle: TFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = HomeLinkClick
-        TabOrder = 8
+        TabOrder = 2
         RawText = False
         Caption = 'SITES'
       end
@@ -317,6 +387,7 @@ object FrameTitle: TFrameTitle
       Width = 150
       Height = 22
       Cursor = crAuto
+      RenderInvisibleControls = False
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -325,11 +396,12 @@ object FrameTitle: TFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 1000
+      Splitter = False
       object IWLink3: TIWLink
-        Left = 1
-        Top = 1
-        Width = 148
-        Height = 20
+        Left = 0
+        Top = 0
+        Width = 150
+        Height = 22
         Cursor = crAuto
         Align = alClient
         IW50Hint = False
@@ -337,6 +409,13 @@ object FrameTitle: TFrameTitle
         ShowHint = True
         ZIndex = 1
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taCenter
         Color = clNone
         Font.Color = clWebWHITE
@@ -357,7 +436,7 @@ object FrameTitle: TFrameTitle
         DoSubmitValidation = False
         FriendlyName = 'HomeLink'
         OnClick = HomeLinkClick
-        TabOrder = 9
+        TabOrder = 3
         RawText = False
         Caption = 'LOGOUT'
       end

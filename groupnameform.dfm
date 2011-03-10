@@ -3,9 +3,10 @@ object FormGroupnameEdit: TFormGroupnameEdit
   Top = 0
   Width = 1016
   Height = 659
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
-  BrowserSecurityCheck = True
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,6 +22,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
     Width = 1016
     Height = 513
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -44,7 +46,14 @@ object FormGroupnameEdit: TFormGroupnameEdit
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = False
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
+      StyleRenderOptions.RenderPosition = True
+      StyleRenderOptions.RenderFont = True
+      StyleRenderOptions.RenderZIndex = True
+      StyleRenderOptions.RenderVisibility = True
+      StyleRenderOptions.RenderStatus = True
+      StyleRenderOptions.RenderAbsolute = True
       Alignment = taLeftJustify
       Color = clNone
       Font.Color = clNone
@@ -65,6 +74,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
       Width = 657
       Height = 167
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akTop]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
@@ -87,6 +97,13 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -109,6 +126,13 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -130,6 +154,13 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -138,6 +169,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'StoreLabel'
         Caption = 'Group Name'
@@ -154,6 +186,13 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -168,6 +207,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         PasswordPrompt = False
         Text = 'NameEdit'
@@ -182,7 +222,14 @@ object FormGroupnameEdit: TFormGroupnameEdit
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -190,6 +237,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = 'Name'
         RawText = False
@@ -222,10 +270,6 @@ object FormGroupnameEdit: TFormGroupnameEdit
       inherited IWImageFile3: TIWImageFile
         Left = 681
       end
-      inherited TitleLabel: TIWLabel
-        Width = 387
-        Caption = 'distribution'
-      end
       inherited langlink: TIWSiLink
         Left = 610
       end
@@ -235,6 +279,10 @@ object FormGroupnameEdit: TFormGroupnameEdit
       inherited HideBox: TIWImageFile
         Left = 999
         Top = 100
+      end
+      inherited TitleLabel: TIWLabel
+        Width = 387
+        Caption = 'distribution'
       end
     end
   end
@@ -247,6 +295,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
+      Width = 1016
       TabOrder = 3
       inherited Cancel: TIWButton
         OnClick = userfooter1CancelClick

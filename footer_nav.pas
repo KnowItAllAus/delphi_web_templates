@@ -6,7 +6,8 @@ uses
   SysUtils, Classes, Controls, Forms,
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWCompRectangle,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
-  IWHTMLControls, IWHTMLContainer, Graphics, IWExtCtrls, IWCompListbox;
+  IWHTMLControls, IWHTMLContainer, Graphics, IWExtCtrls, IWCompListbox,
+  IWHTML40Container;
 
 type
   TNavFooter = class(TFrame)
