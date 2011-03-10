@@ -26,8 +26,8 @@ type
     IWSiLink1: TIWSiLink;
     TestBtn: TIWButton;
     TestGroups: TIWComboBox;
-    TimeEdit: TIWEdit;
-    IWLabel1: TIWLabel;
+    WhenCombo: TIWComboBox;
+    WhenLabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
@@ -37,7 +37,11 @@ type
     { Private declarations }
     TList : TStringList;
     LList : TStringList;
-    procedure PublishToGroup (g : string; buildtime : TDateTime);
+    function current_offset (fn : string) : integer;
+    procedure PublishToGroup (g : string);
+    procedure PublishToAll;
+    procedure update_store (company : string; store : integer; publishat : TDateTime);
+    procedure PublishToGroupDeferred (groupid : string; targettime : integer);
   public
     { Public declarations }
   end;
@@ -48,18 +52,18 @@ var
 implementation
 
 uses
-  ServerController, datamod, IWInit, IWTypes, RoleForm, cfgtypes;
+  ServerController, datamod, IWInit, IWTypes, RoleForm, cfgtypes, global, dateutils;
 
 {$R *.DFM}
 
-procedure TformSend.PublishToGroup (g : string; buildtime : TDateTime);
+procedure TformSend.PublishToGroup (g : string);
 begin
     with RcDataModule.RequestUpdateGroupX do begin
       try
         Transaction.Active:=False;
         Transaction.StartTransaction;
         ParamByName('COMPANY').AsString:=UserSession.Company;
-        ParamByName('PUBTIME').AsDateTime:=buildtime;
+        ParamByName('PUBTIME').clear; //AsDateTime:=buildtime;
         ParamByName('GROUPID').AsString:=g;
         ExecSQL;
         Transaction.Commit;
@@ -69,21 +73,6 @@ begin
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
       end;
     end;
-(*    with RcDataModule.RequestUpdateGroup do begin
-      try
-        Transaction.Active:=False;
-        Transaction.StartTransaction;
-        ParamByName('COMPANY').AsString:=UserSession.Company;
-        ParamByName('BUILDTIME').AsDateTime:=buildtime;
-        ParamByName('GROUP').AsString:=g;
-        ExecSQL;
-        Transaction.Commit;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
-      except
-        Transaction.Active:=False;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
-      end;
-    end;*)
 end;
 
 procedure TformSend.IWAppFormCreate(Sender: TObject);
@@ -117,7 +106,7 @@ begin
   RcDataModule.Trans.Active:=False;
   IWSiLink1.InitForm;
   CompanyLabel.Caption:=UserSession.CompanyName;
-  TimeEdit.Text:=DateTimeToStr (now);
+  WhenCombo.itemindex:=1;
 end;
 
 procedure TformSend.IWAppFormDestroy(Sender: TObject);
@@ -132,23 +121,89 @@ begin
    Tsu_FormRole.Create (WebApplication).show;
 end;
 
-procedure TformSend.AllBtnClick(Sender: TObject);
+function TformSend.current_offset (fn : string) : integer;
 var
-    ptime : TDateTime;
+  f : file;
+  offset : word;
+  dst : word;
+  b : byte;
+  i,j : integer;
+  zname : array [1..40] of char;
+  startdate, enddate : TDatetime;
+  dst_active : boolean;
 begin
+    result:=600; { default to Oz }
+    Assignfile (f,fn);
+    reset (f,1);
     try
-      ptime:=StrToDateTime (TimeEdit.Text);
+      dst_active:=false;
+      blockread (f,b,sizeof(b));
+      if b<>0 then raise exception.create('Bad file format');
+      blockread (f,zname,sizeof(zname));
+      blockread (f,offset,sizeof(offset));
+      blockread (f,dst,sizeof(dst));
+      blockread (f,b,sizeof(b));
+      for j:=1 to b do begin
+         try
+           blockread (f,i,sizeof(i));
+           startdate:=rtctime(i);
+           blockread (f,i,sizeof(i));
+           enddate:=rtctime(i);
+           if (now>startdate) and (now<enddate) then dst_active:=true;
+         except
+         end;
+      end;
+      if dst_active then
+         result:=offset + dst
+      else
+         result:=offset;
     except
-      WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('InvalidTime'), smAlert);
-      exit;
+      closefile (f);
     end;
-    if LiveGroups.ItemIndex>0 then begin
-      PublishToGroup (LList.Strings[LiveGroups.ItemIndex],ptime);
-    end else with RcDataModule.RequestUpdate do begin
+end;
+
+function LocalToUTC(LocalTime: TDateTime): TDateTime;
+var TimeZoneInformation: TTimeZoneInformation;
+    Bias: integer;
+begin
+   Bias := 0;
+   case GetTimeZoneInformation(TimeZoneInformation) of
+    TIME_ZONE_ID_STANDARD: Bias := TimeZoneInformation.Bias + TimeZoneInformation.StandardBias;
+    TIME_ZONE_ID_DAYLIGHT: Bias := TimeZoneInformation.Bias + TimeZoneInformation.DaylightBias;
+   end;
+   result := incminute(Localtime, Bias);
+end;
+
+procedure TFormSend.update_store (company : string; store : integer; publishat : TDateTime);
+begin
+  with RcDataModule.SQLEx do begin
+     SQL.Clear;
+     SQL.Add('update STORES set BUILDTIME=:BUILDTIME, CONFIGUPDATE=1');
+     SQL.Add('where COMPANY=:COMPANY and ID=:STOREID');
+     ParamByName ('COMPANY').AsString:=UserSession.Company;
+     ParamByName ('STOREID').AsInteger:=store;
+     ParamByName ('BUILDTIME').AsDateTime:=publishat;
+     ExecQuery;
+  end;
+end;
+
+procedure TFormSend.PublishToAll;
+var
+  tzfile : string;
+  utcoffset : integer;
+  now_utc : tdatetime;
+  now_hour, now_min, now_sec, now_msec : word;
+  publish_offset : word;
+  targettime : word;
+  publishtime : tdatetime;
+  now_offset : word;
+begin
+  if whencombo.itemindex=0 then begin
+    with RcDataModule.RequestUpdate do begin
       try
         Transaction.Active:=False;
         Transaction.StartTransaction;
-        ParamByName('BUILDTIME').AsDateTime:=ptime;
+        ParamByName('BUILDTIME').Clear; // Immediate. Should really be the local time now at site
         ParamByName('COMPANY').AsString:=UserSession.Company;
         ExecSQL;
         Transaction.Commit;
@@ -158,26 +213,133 @@ begin
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
       end;
     end;
+    exit;
+  end;
+
+  try
+    with RcDataModule.SQLQry do begin
+       SQL.Clear;
+       SQL.Add('select storedata.* from STORES join STOREDATA on STOREDATA.ID=STORES.ID');
+       SQL.Add('where STORES.COMPANY=:COMPANY');
+       SQL.Add('and STOREDATA.ENABLED=1');
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       Transaction.Active:=false;
+       Open;
+
+       while not RcDataModule.SQLQry.EOF do begin
+         tzfile:=FieldByName ('TIMEZONE').AsString;
+         if tzfile='' then begin
+            utcoffset:=FieldByName ('TIMEOFFSET').AsInteger;
+         end else begin
+            tzfile:=zonedir+tzfile+'.dst';
+            utcoffset:=current_offset (tzfile);
+         end;
+         targettime:=(whencombo.itemindex-1) * 60;
+         publish_offset:=(utcoffset+targettime) mod (24*60);
+         //
+         // This is the time every day in UTC time we prefer to publish.
+         // If it is later than this time then we publish for 'tomorrow',
+         // else publish for 'today'.
+         now_utc:=LocalToUTC(Now);
+         DecodeTime(now_utc, now_Hour, now_Min, now_Sec, now_MSec);
+         now_offset:=60*now_hour + now_min;
+         if publish_offset<now_offset then begin
+            // Do it tomorrow
+            publish_offset:=publish_offset + 24*60;
+         end;
+         publishtime:=incminute(int(now_utc),publish_offset);
+         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
+         next;
+       end;
+       RcDataModule.SQLQry.Transaction.Commit;
+       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+    end;
+  except
+    WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+  end;
+end;
+
+procedure TFormSend.PublishToGroupDeferred (groupid : string; targettime : integer);
+var
+  tzfile : string;
+  utcoffset : integer;
+  now_utc : tdatetime;
+  now_hour, now_min, now_sec, now_msec : word;
+  publish_offset : word;
+  publishtime : tdatetime;
+  now_offset : word;
+begin
+  try
+    with RcDataModule.SQLQry do begin
+       SQL.Clear;
+       SQL.Add('select * from P_STORES_IN_GROUP (:COMPANY, :GROUPID)');
+       SQL.Add('join STOREDATA on STOREDATA.ID=STOREID');
+       SQL.Add('where STOREDATA.COMPANY=:COMPANY');
+       SQL.Add('and STOREDATA.ENABLED=1');
+       ParamByName ('COMPANY').AsInteger:=strtoint(UserSession.Company);
+       ParamByName ('GROUPID').AsInteger:=strtoint(groupid);
+       Transaction.Active:=false;
+       Open;
+
+       while not RcDataModule.SQLQry.EOF do begin
+         tzfile:=FieldByName ('TIMEZONE').AsString;
+         if tzfile='' then begin
+            utcoffset:=0;
+            if not FieldByName ('TIMEOFFSET').IsNull then
+               utcoffset:=FieldByName ('TIMEOFFSET').AsInteger;
+         end else begin
+            tzfile:=zonedir+tzfile+'.dst';
+            utcoffset:=current_offset (tzfile);
+         end;
+         targettime:=(whencombo.itemindex-1) * 60;
+         publish_offset:=(utcoffset+targettime) mod (24*60);
+         //
+         // This is the time every day in UTC time we prefer to publish.
+         // If it is later than this time then we publish for 'tomorrow',
+         // else publish for 'today'.
+         now_utc:=LocalToUTC(Now);
+         DecodeTime(now_utc, now_Hour, now_Min, now_Sec, now_MSec);
+         now_offset:=60*now_hour + now_min;
+         if publish_offset<now_offset then begin
+            // Do it tomorrow
+            publish_offset:=publish_offset + 24*60;
+         end;
+         publishtime:=incminute(int(now_utc),publish_offset);
+         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
+         next;
+       end;
+       RcDataModule.SQLQry.Transaction.Commit;
+       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+    end;
+  except
+    WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+  end;
+end;
+
+
+procedure TformSend.AllBtnClick(Sender: TObject);
+begin
+    if LiveGroups.ItemIndex>0 then begin
+      if (Whencombo.Itemindex=0) then begin
+         PublishToGroup (LList.Strings[LiveGroups.ItemIndex]);
+      end else begin
+         PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60);
+      end;
+    end else begin
+      PublishToAll;
+    end;
 end;
 
 procedure TformSend.TestBtnClick(Sender: TObject);
-var
-    ptime : TDateTime;
 begin
-    try
-      ptime:=StrToDateTime (TimeEdit.Text);
-    except
-      WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('InvalidTime'), smAlert);
-      exit;
-    end;
     if TestGroups.ItemIndex>0 then begin
-      PublishToGroup (TList.Strings[TestGroups.ItemIndex],ptime);
+      PublishToGroup (TList.Strings[TestGroups.ItemIndex]);
     end else with RcDataModule.RequestTestUpdqry do begin
       try
         Transaction.Active:=False;
         Transaction.StartTransaction;
         ParamByName('COMPANY').AsString:=UserSession.Company;
-        ParamByName('BUILDTIME').AsDateTime:=ptime;
+        ParamByName('BUILDTIME').clear; //AsDateTime:=ptime;
         ExecSQL;
         Transaction.Commit;
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);

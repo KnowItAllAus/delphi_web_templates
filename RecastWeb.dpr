@@ -57,7 +57,7 @@ uses
   tmplnameform in 'tmplnameform.pas' {FormTmplnameEdit: TIWAppForm},
   storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
   imageupForm in 'imageupForm.pas' {FormImageUp: TIWAppForm},
-  newparamform in 'C:\Program Files\Borland\Delphi7\Lib\newparamform.pas' {FormParamCreate: TIWAppForm},
+  newparamform in 'newparamform.pas' {FormParamCreate: TIWAppForm},
   TmplRevPropform in 'TmplRevPropform.pas' {FormTmplRevProp: TIWAppForm},
   imagerevform in 'imagerevform.pas' {formImageVersions: TIWAppForm},
   groupnameform in 'groupnameform.pas' {FormGroupnameEdit: TIWAppForm},

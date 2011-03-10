@@ -109,6 +109,7 @@ begin
         Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
         Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
         Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+        Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
     end else begin
         Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
         Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
@@ -120,6 +121,7 @@ begin
         Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
         Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
         Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+        Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
     end;
     RcDataModule.Log('Refresh iterate');
     while not RcDataModule.StoreQuery.Eof do begin
@@ -163,6 +165,9 @@ begin
           with Cell[i, 10] do begin
             Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
           end;
+          with Cell[i, 11] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
+          end;
       end else begin
           with Cell[i, 0] do begin
             Clickable := True;
@@ -197,6 +202,9 @@ begin
           end;
           with Cell[i, 9] do begin
             Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+          end;
+          with Cell[i, 10] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
           end;
       end;
       SRO:=SRObj.create;
