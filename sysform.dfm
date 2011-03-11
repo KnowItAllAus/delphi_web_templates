@@ -15,8 +15,8 @@ object FormSys: TFormSys
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -202
-  DesignTop = 104
+  DesignLeft = 7
+  DesignTop = 370
   object IWRegion1: TIWRegion
     Left = 0
     Top = 111

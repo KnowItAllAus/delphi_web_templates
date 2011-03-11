@@ -40,7 +40,7 @@ object FrameBareTitle: TFrameBareTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 2
+      ZIndex = 1
       RenderSize = False
       StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
@@ -69,7 +69,7 @@ object FrameBareTitle: TFrameBareTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 2
       RenderSize = False
       StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
@@ -284,7 +284,7 @@ object FrameBareTitle: TFrameBareTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 1
+      ZIndex = 2
       RenderSize = True
       StyleRenderOptions.RenderSize = True
       StyleRenderOptions.RenderPosition = True

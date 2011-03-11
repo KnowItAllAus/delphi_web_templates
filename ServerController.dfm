@@ -15,7 +15,7 @@ object RcWebController: TRcWebController
   EnableImageToolbar = False
   ExceptionDisplayMode = smAlert
   HistoryEnabled = False
-  InternalFilesURL = '/'
+  InternalFilesURL = '/xyz'
   JavascriptDebug = False
   PageTransitions = True
   Port = 80

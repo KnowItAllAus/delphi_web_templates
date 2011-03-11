@@ -16,8 +16,8 @@ object FormOverview: TFormOverview
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 108
-  DesignTop = 234
+  DesignLeft = -37
+  DesignTop = 99
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 596
@@ -340,14 +340,8 @@ object FormOverview: TFormOverview
       Width = 1028
       Height = 117
       TabOrder = 4
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
       inherited titleimage: TIWImageFile
         Left = 41
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited IWRectangle1: TIWRectangle
         Top = 92
@@ -358,13 +352,12 @@ object FormOverview: TFormOverview
         Width = 4
       end
       inherited IWRectangle3: TIWRectangle
+        Left = 889
         Top = 97
         Width = 1984
       end
       inherited IWImageFile3: TIWImageFile
         Left = 642
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 631
@@ -372,8 +365,6 @@ object FormOverview: TFormOverview
       inherited HideBox: TIWImageFile
         Left = 1014
         Top = 97
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
         Left = 889
@@ -393,6 +384,13 @@ object FormOverview: TFormOverview
       end
       inherited statusregn: TIWRegion
         Top = 97
+      end
+      inherited IWRegion1: TIWRegion
+        Top = 97
+        Width = 127
+        inherited Exportlink: TIWLink
+          Width = 127
+        end
       end
     end
     inherited silink: TsiLangLinked

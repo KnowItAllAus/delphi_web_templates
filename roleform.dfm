@@ -15,8 +15,8 @@ object su_FormRole: Tsu_FormRole
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 63
-  DesignTop = 11
+  DesignLeft = 26
+  DesignTop = 26
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
@@ -905,6 +905,7 @@ object su_FormRole: Tsu_FormRole
       end
       inherited IWImageFile3: TIWImageFile
         Left = 679
+        ZIndex = 2
       end
       inherited HideBox: TIWImageFile
         Top = 100

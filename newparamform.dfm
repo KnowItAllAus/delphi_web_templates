@@ -15,8 +15,8 @@ object FormParamCreate: TFormParamCreate
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 132
-  DesignTop = 149
+  DesignLeft = 104
+  DesignTop = 310
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118

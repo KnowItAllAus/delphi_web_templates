@@ -40,7 +40,7 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 0
+      ZIndex = 1
       RenderSize = False
       StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
@@ -61,7 +61,7 @@ object AdminFrameTitle: TAdminFrameTitle
     end
     object titleimage: TIWImageFile
       Left = 33
-      Top = 13
+      Top = 10
       Width = 458
       Height = 73
       Cursor = crAuto
@@ -69,9 +69,9 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 1
-      RenderSize = False
-      StyleRenderOptions.RenderSize = False
+      ZIndex = 2
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -83,7 +83,7 @@ object AdminFrameTitle: TAdminFrameTitle
       DoSubmitValidation = True
       ScriptEvents = <>
       TabOrder = -1
-      UseSize = False
+      UseSize = True
       Cacheable = True
       FriendlyName = 'titleimage'
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\admin.GIF'
@@ -185,9 +185,9 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 1
-      RenderSize = False
-      StyleRenderOptions.RenderSize = False
+      ZIndex = 2
+      RenderSize = True
+      StyleRenderOptions.RenderSize = True
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -199,7 +199,7 @@ object AdminFrameTitle: TAdminFrameTitle
       DoSubmitValidation = True
       ScriptEvents = <>
       TabOrder = -1
-      UseSize = False
+      UseSize = True
       Cacheable = True
       FriendlyName = 'IWImageFile3'
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
@@ -214,7 +214,7 @@ object AdminFrameTitle: TAdminFrameTitle
       IW50Hint = False
       ParentShowHint = False
       ShowHint = True
-      ZIndex = 1
+      ZIndex = 2
       RenderSize = True
       StyleRenderOptions.RenderSize = True
       StyleRenderOptions.RenderPosition = True

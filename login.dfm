@@ -614,8 +614,8 @@ object form_login: Tform_login
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -701,8 +701,8 @@ object form_login: Tform_login
       ParentShowHint = False
       ShowHint = True
       ZIndex = 2
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -722,7 +722,7 @@ object form_login: Tform_login
     end
     object titleimage: TIWImageFile
       Left = 36
-      Top = 3
+      Top = 6
       Width = 149
       Height = 77
       Cursor = crAuto
@@ -731,8 +731,8 @@ object form_login: Tform_login
       ParentShowHint = False
       ShowHint = True
       ZIndex = 2
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
