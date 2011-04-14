@@ -7,7 +7,7 @@ uses
   IWVCLBaseContainer, IWColor, IWContainer, IWRegion, IWHTMLContainer,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWExtCtrls,
   IWHTMLControls, IWCompRectangle, IWCompButton, IWSiLink, siComp,
-  siLngLnk, IWCompLabel, IWHTML40Container;
+  siLngLnk, IWCompLabel;
 
 type
   TDistribFrameTitle = class(TFrame)
@@ -55,7 +55,8 @@ type
 implementation
 
 uses PossForm, IWAppForm, StoresForm, SysForm, Servercontroller, datamod, IBQuery,
-     db, exportfrm, grpform, roleform, IWInit, su_main, distrib, overviewForm, sendForm, distribstatusform;
+     db, exportfrm, grpform, roleform, IWInit, su_main, distrib, overviewForm,
+     sendForm, distribstatusform, cfgtypes;
 
 {$R *.dfm}
 
@@ -117,6 +118,13 @@ end;
 procedure TDistribFrameTitle.IWFrameRegionCreate(Sender: TObject);
 begin
    langlink.InitForm;
+   if ((usersession.privilege and PRIV_EDIT)=0) then begin
+       SendLink.enabled:=false;
+       Grouplink.enabled:=false;
+       JobLink.enabled:=false;
+       Overviewlink.enabled:=false;
+       ExportLink.enabled:=false;
+   end;
    if comparetext(titlelabel.Caption,'distribution')=0 then begin
       titleimage.Visible:=true;
    end else begin

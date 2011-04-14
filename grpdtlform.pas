@@ -8,8 +8,7 @@ uses
   IWBaseHTMLControl, IWControl, IWCompLabel, Controls, Forms,
   IWCompEdit, IWHTMLControls, IWSiLink, siComp, siLngLnk, IWCompRectangle,
   footer_user, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass,
-  IWHTML40Container;
+  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass;
 
 type
   TFormGrpDtl = class(TIWAppForm)
@@ -472,6 +471,11 @@ begin
       DelBtn.visible:=false;
       nameedit.enabled:=false;
       nameedit.BGColor:=clbtnhighlight;
+      newtmplRevBtn.Visible:=false;
+      AddJobBtn.Enabled:=false;
+      AddGroupButton.enabled:=false;
+      AddChildButton.enabled:=false;
+      AddStoreBtn.enabled:=false;
    end else if (UserSession.privilege and PRIV_LIVE)=0 then begin // No live privilege
       testbox.Enabled:=false;
       DelBtn.visible:=testbox.Checked;

@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompRectangle, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWRegion, langfooter, siComp, siLngLnk, IWSiLink, footer_nav, IWCompLabel,
-  footer_user, IWHTML40Container;
+  footer_user;
 
 type
   Tsu_FormRole = class(TIWAppForm)
@@ -187,7 +187,7 @@ begin
       TFormSys.Create(WebApplication).Show;
     end;
     4: begin
-      if (UserSession.Company='0') then exit;
+      if ((usersession.privilege and PRIV_EDIT)=0) or (UserSession.Company='0') then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
       TFormOverview.Create(WebApplication).Show;

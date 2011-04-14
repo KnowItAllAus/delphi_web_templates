@@ -7,8 +7,7 @@ uses
   IWCompRectangle, IWCompListbox, IWCompButton, IWHTMLControls, IWSiLink,
   IWCompLabel, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWGrids, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
-  IWRegion, footer_user, Controls, Forms, distribtitle, siComp, siLngLnk,
-  IWHTML40Container;
+  IWRegion, footer_user, Controls, Forms, distribtitle, siComp, siLngLnk;
 
 type
   TformDistribStatus = class(TIWAppForm)
@@ -132,12 +131,6 @@ begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   RefreshGrid;
-  if ((usersession.privilege and PRIV_EDIT)=0) then begin
-     distribFrameTitle1.SendLink.enabled:=false;
-     distribFrameTitle1.Grouplink.enabled:=false;
-     distribFrameTitle1.JobLink.enabled:=false;
-     distribFrameTitle1.Overviewlink.enabled:=false;
-  end;
 end;
 
 procedure TformDistribStatus.RefreshBtnClick(Sender: TObject);

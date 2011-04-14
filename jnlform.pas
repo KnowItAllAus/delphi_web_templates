@@ -9,7 +9,7 @@ uses
   IWBaseControl, IWVCLBaseContainer, IWVCLBaseControl, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, AbBase, AbBrowse, AbZBrows, AbZipper,
   IWSiLink, siComp, siLngLnk, IWCompRectangle, footer_user, statstitle,
-  IWCompListbox, IWCompCheckbox, IWHTML40Container;
+  IWCompListbox, IWCompCheckbox;
 
 type
   TformJnl = class(TIWAppForm)
@@ -37,8 +37,8 @@ type
     StartTime: TIWEdit;
     IWLabel4: TIWLabel;
     EndTime: TIWEdit;
-    UTCBox: TIWCheckBox;
     ExptCombo: TIWComboBox;
+    utccombo: TIWComboBox;
     procedure TranGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -124,7 +124,7 @@ var
   f : TField;
 begin
   recs:=0;
-  if UTCBox.Checked then timeoffset:=UserSession.TimeOffset else timeoffset:=0;
+  timeoffset:=(utccombo.itemindex-12)*60/1440;
   RcDataModule.Trans.Active:=False;
   RcDataModule.Trans2.Active:=False;
   with TranGrid do begin
@@ -258,6 +258,8 @@ begin
   StoreIDList.Add('0');
   StoreCombo.Items.Add (siLangLinked1.GetTextOrDefault('All Stores'));
   StoreCombo.ItemIndex:=0;
+  utccombo.itemindex:=trunc(usersession.timeoffset * 1440 / 60) + 12;
+
   RcDataModule.Trans2.Active:=False;
   with RcDataModule.StoreQuery do begin
      ParamByName ('Company').AsString:=UserSession.Company;
@@ -270,12 +272,6 @@ begin
   end;
   DisplayGrid;
   RcDataModule.Trans2.Active:=False;
-  if (Usersession.TimeOffset<0) then begin
-     UTCBox.Caption:='UTC-'
-  end else begin
-     UTCBox.Caption:='UTC+'
-  end;
-  UTCBox.Caption:=UTCBox.caption+FormatDateTime('hh:mm',ABS(UserSession.TimeOffset));
 end;
 
 procedure TformJnl.DisplayBtnClick(Sender: TObject);
@@ -399,7 +395,7 @@ var
 begin
   RcDataModule.Trans2.Active:=False;
   recs:=0;
-  if UTCBox.Checked then timeoffset:=UserSession.TimeOffset else timeoffset:=0;
+  timeoffset:=(utccombo.itemindex-12)*60/1440;
   try
     with RcDataModule.TranExptQry do begin
       Close;
