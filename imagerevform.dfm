@@ -15,8 +15,8 @@ object formImageVersions: TformImageVersions
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 96
-  DesignTop = 79
+  DesignLeft = 126
+  DesignTop = 2
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -29,7 +29,7 @@ object formImageVersions: TformImageVersions
     inherited IWFrameRegion: TIWRegion
       Width = 1028
       Height = 116
-      TabOrder = 15
+      TabOrder = 14
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
@@ -70,6 +70,7 @@ object formImageVersions: TformImageVersions
     inherited IWRegion1: TIWRegion
       Width = 1028
       Height = 29
+      TabOrder = 15
       inherited IWRectangle1: TIWRectangle
         Left = 652
       end
@@ -301,7 +302,7 @@ object formImageVersions: TformImageVersions
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 4
+        TabOrder = 3
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'imagesver.sil'
@@ -340,7 +341,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 2
+        TabOrder = 1
         PasswordPrompt = False
         Text = 'NewVendEdit'
       end
@@ -439,7 +440,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 3
+        TabOrder = 2
         PasswordPrompt = False
         Text = 'NewProdEdit'
       end
@@ -508,7 +509,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 1
+        TabOrder = 0
         PasswordPrompt = False
         Text = 'IDEdit'
       end
@@ -576,7 +577,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 6
+        TabOrder = 5
         PasswordPrompt = False
         Text = 'DescEdit'
       end
@@ -614,7 +615,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 7
+        TabOrder = 6
         PasswordPrompt = False
         Text = 'NameEdit'
       end
@@ -644,7 +645,7 @@ object formImageVersions: TformImageVersions
         Font.Style = []
         FriendlyName = 'TestBtn'
         ScriptEvents = <>
-        TabOrder = 8
+        TabOrder = 7
         OnClick = TestBtnClick
       end
       object ProdBtn: TIWButton
@@ -674,7 +675,7 @@ object formImageVersions: TformImageVersions
         Font.Style = []
         FriendlyName = 'ProdBtn'
         ScriptEvents = <>
-        TabOrder = 9
+        TabOrder = 8
         OnClick = ProdBtnClick
       end
       object NewBtn: TIWButton
@@ -704,7 +705,7 @@ object formImageVersions: TformImageVersions
         Font.Style = []
         FriendlyName = 'ProdBtn'
         ScriptEvents = <>
-        TabOrder = 11
+        TabOrder = 10
         OnClick = NewBtnClick
       end
       object DelBtn: TIWButton
@@ -735,7 +736,7 @@ object formImageVersions: TformImageVersions
         Font.Style = []
         FriendlyName = 'ProdBtn'
         ScriptEvents = <>
-        TabOrder = 12
+        TabOrder = 11
         OnClick = DelBtnClick
       end
       object ModeLbl: TIWLabel
@@ -802,7 +803,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 13
+        TabOrder = 12
         PasswordPrompt = False
         Text = 'Modename'
       end
@@ -833,7 +834,7 @@ object formImageVersions: TformImageVersions
         Font.Style = []
         FriendlyName = 'ProdBtn'
         ScriptEvents = <>
-        TabOrder = 10
+        TabOrder = 9
         OnClick = CpyBtnClick
       end
       object NameLbl: TIWLabel
@@ -900,7 +901,7 @@ object formImageVersions: TformImageVersions
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 14
+        TabOrder = 13
         PasswordPrompt = False
         Text = 'Filename'
       end
@@ -1022,7 +1023,7 @@ object formImageVersions: TformImageVersions
           HorizScrollBar = False
           VertScrollBar = True
           Required = False
-          TabOrder = 5
+          TabOrder = 4
           SubmitOnAsyncEvent = True
           FriendlyName = 'Memo'
         end

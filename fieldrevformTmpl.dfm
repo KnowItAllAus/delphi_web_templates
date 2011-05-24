@@ -1,8 +1,8 @@
 object formFieldVersionsTmpl: TformFieldVersionsTmpl
   Left = 0
   Top = 0
-  Width = 1028
-  Height = 746
+  Width = 1024
+  Height = 479
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -15,19 +15,19 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 108
-  DesignTop = 10
+  DesignLeft = -16
+  DesignTop = 113
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 1024
     Height = 116
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1028
+      Width = 1024
       Height = 116
       TabOrder = 4
       inherited titleimage: TIWImageFile
@@ -35,22 +35,22 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       end
       inherited IWRectangle1: TIWRectangle
         Top = 91
-        Width = 1028
+        Width = 1024
       end
       inherited IWRectangle3: TIWRectangle
         Top = 96
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 693
+        Left = 689
       end
       inherited langlink: TIWSiLink
-        Left = 628
+        Left = 624
       end
       inherited Smalltitle: TIWLabel
-        Left = 908
+        Left = 904
       end
       inherited HideBox: TIWImageFile
-        Left = 1013
+        Left = 1009
         Top = 99
       end
       inherited TitleLabel: TIWLabel
@@ -61,38 +61,38 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 717
-    Width = 1028
+    Top = 450
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 1024
       Height = 29
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
-        Left = 652
+        Left = 648
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 610
+        Width = 606
       end
       inherited Cancel: TIWButton
-        Left = 939
+        Left = 935
         Caption = 'Back'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 851
+        Left = 847
       end
       inherited Extra2: TIWButton
-        Left = 763
+        Left = 759
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 691
+        Left = 687
       end
     end
     inherited silink_footer: TsiLangLinked
@@ -105,8 +105,8 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 116
-    Width = 1028
-    Height = 601
+    Width = 1024
+    Height = 334
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -120,13 +120,13 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
-      601)
+      1024
+      334)
     object BodyRegion: TIWRegion
-      Left = 229
+      Left = 227
       Top = 18
       Width = 539
-      Height = 573
+      Height = 306
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -141,7 +141,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       Splitter = False
       DesignSize = (
         539
-        573)
+        306)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -175,7 +175,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Left = 1
         Top = 4
         Width = 3
-        Height = 568
+        Height = 301
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -234,9 +234,9 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       end
       object ImageGrid: TIWGrid
         Left = 18
-        Top = 90
+        Top = 112
         Width = 503
-        Height = 472
+        Height = 183
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -439,6 +439,36 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = 'New Field Value'
+        RawText = False
+      end
+      object FieldTypeLbl: TIWLabel
+        Left = 12
+        Top = 81
+        Width = 15
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel1'
+        Caption = '??'
         RawText = False
       end
     end

@@ -38,8 +38,8 @@ type
       AResponse: TWebResponse; AMsg: String);
     procedure IWServerControllerBaseException(AApplication: TIWApplication;
       AException: Exception; var Handled: Boolean);
-  private
   public
+    constructor create (owner : TComponent); override;
     procedure log_error (msg : string);
   end;
 
@@ -99,6 +99,12 @@ implementation
 
 uses
   IWInit, Inifiles, global, IWMain, cfgtypes, windows;
+
+constructor TRcWebController.create (owner : TComponent);
+begin
+  //CacheDir:='c:\temp\';
+  inherited create (owner);
+end;
 
 function UserSession: TUserSession;
 begin
@@ -226,9 +232,12 @@ begin
    FormIWMain.Log ('ZoneDir="'+ZoneDir+'"');
    FormIWMain.Log ('LangDir="'+LangDir+'"');
    FormIWMain.Log ('ExitURL="'+GetExitURL+'"');
+   FormIWMain.Log ('CacheDir="'+GetCacheDir+'"');
    URLBase:=GetUrlBase;
    FormIWMain.Log ('BaseURL="'+GetURLBase+'"');
+   FormIWMain.Log ('InternalFilesURL="'+GetAppBase+'"');
    FormIWMain.Log ('Translatedir="'+GetTransBase+'"');
+   //InternalFilesURL:=GetAppBase;
    //SessionTimeoutURL.URL:=GetExitURL;
 end;
 

@@ -26,6 +26,7 @@ type
     NewBtn: TIWButton;
     ValueEdit: TIWEdit;
     IWLabel1: TIWLabel;
+    FieldTypeLbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure ImageGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -113,6 +114,7 @@ begin
      ValueEdit.enabled:=false;
   end;
   ValueEdit.Text:='';
+  FieldTypeLbl.caption:=RcDataModule.GetValue ('edittmpltype','???');
 end;
 
 procedure TformFieldVersionsTmpl.ImageGridRenderCell(ACell: TIWGridCell;
@@ -163,7 +165,7 @@ end;
 procedure TformFieldVersionsTmpl.userfooter1CancelClick(Sender: TObject);
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
-   if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+   if (RcDataModule.GetValue ('JobInstance','N')='INSTANCE') then
       TFormEditTmpl.Create(WebApplication).Show
    else
       TformGrpTmpl.Create(WebApplication).Show;

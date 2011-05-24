@@ -15,8 +15,8 @@ object FormLanguage: TFormLanguage
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 273
-  DesignTop = 385
+  DesignLeft = -17
+  DesignTop = 184
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0

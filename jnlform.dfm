@@ -1,13 +1,14 @@
 object formJnl: TformJnl
   Left = 0
   Top = 0
-  Width = 1087
-  Height = 750
+  Width = 1028
+  Height = 746
+  RenderInvisibleControls = False
+  AllowPageAccess = True
   ConnectionMode = cmAny
-  SupportedBrowsers = [brIE, brNetscape7, brOpera, brSafari, brNetscape6]
+  SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
   OnDestroy = IWAppFormDestroy
-  BrowserSecurityCheck = True
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True
@@ -21,23 +22,28 @@ object formJnl: TformJnl
   inline StatsFrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0
-    Width = 1087
+    Width = 1028
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1087
       TabOrder = 12
       DesignSize = (
-        1087
+        1028
         114)
+      inherited IWRectangle1: TIWRectangle
+        Width = 2570
+      end
       inherited IWRectangle3: TIWRectangle
-        Width = 2259
+        Width = 2200
+      end
+      inherited IWImageFile3: TIWImageFile
+        Left = 635
       end
       inherited langlink: TIWSiLink
-        Left = 647
+        Left = 588
       end
       inherited PromoReg: TIWRegion
         inherited ActivityLink: TIWLink
@@ -49,9 +55,10 @@ object formJnl: TformJnl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1087
-    Height = 608
+    Width = 1028
+    Height = 604
     Cursor = crAuto
+    RenderInvisibleControls = False
     Align = alClient
     BorderOptions.NumericWidth = 0
     BorderOptions.BorderWidth = cbwNumeric
@@ -63,14 +70,15 @@ object formJnl: TformJnl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1087
-      608)
+      1028
+      604)
     object IWRegion2: TIWRegion
       Left = 32
       Top = 8
-      Width = 1022
-      Height = 590
+      Width = 963
+      Height = 586
       Cursor = crAuto
+      RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
@@ -82,8 +90,8 @@ object formJnl: TformJnl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        1022
-        590)
+        963
+        586)
       object VoucherLabel: TIWLabel
         Left = 16
         Top = 8
@@ -95,6 +103,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -103,6 +118,7 @@ object formJnl: TformJnl
         Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'VoucherLabel'
         Caption = 'View Journal'
@@ -119,6 +135,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -126,6 +149,7 @@ object formJnl: TformJnl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Start Date'
@@ -142,6 +166,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -156,6 +187,7 @@ object formJnl: TformJnl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 2
         PasswordPrompt = False
         Text = 'StartEdit'
@@ -171,6 +203,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -178,6 +217,7 @@ object formJnl: TformJnl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
         Caption = 'End Date'
@@ -194,6 +234,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -208,6 +255,7 @@ object formJnl: TformJnl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 3
         PasswordPrompt = False
         Text = 'EndEdit'
@@ -223,6 +271,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -246,7 +301,14 @@ object formJnl: TformJnl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         Color = clNone
         Font.Color = clNone
@@ -272,6 +334,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Update'
         DoSubmitValidation = True
         Color = clWebSILVER
@@ -284,8 +353,8 @@ object formJnl: TformJnl
         OnClick = DisplayBtnClick
       end
       object PrevBtn: TIWButton
-        Left = 861
-        Top = 557
+        Left = 802
+        Top = 553
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -295,6 +364,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = '<< Prev'
         DoSubmitValidation = True
         Color = clWebCORNFLOWERBLUE
@@ -307,8 +383,8 @@ object formJnl: TformJnl
         OnClick = PrevLinkClick
       end
       object NextBtn: TIWButton
-        Left = 931
-        Top = 557
+        Left = 872
+        Top = 553
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -318,6 +394,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Next >>'
         DoSubmitValidation = True
         Color = clWebCORNFLOWERBLUE
@@ -331,7 +414,7 @@ object formJnl: TformJnl
       end
       object DelJnlBtn: TIWButton
         Left = 18
-        Top = 559
+        Top = 555
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -342,6 +425,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Caption = 'Delete All'
         Confirmation = 'Delete Entire Journal?'
         DoSubmitValidation = True
@@ -358,7 +448,7 @@ object formJnl: TformJnl
         Left = 1
         Top = 4
         Width = 3
-        Height = 585
+        Height = 581
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -366,6 +456,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -379,7 +476,7 @@ object formJnl: TformJnl
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 1020
+        Width = 961
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -388,6 +485,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Font.Color = clNone
         Font.Size = 10
         Font.Style = []
@@ -401,15 +505,22 @@ object formJnl: TformJnl
       object TranGrid: TIWGrid
         Left = 17
         Top = 65
-        Width = 988
-        Height = 488
+        Width = 929
+        Height = 484
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
@@ -429,8 +540,8 @@ object formJnl: TformJnl
         FriendlyName = 'TranGrid'
         ColumnCount = 8
         RowCount = 1
-        TabOrder = -1
         ShowEmptyCells = True
+        ShowInvisibleRows = True
         ScrollToCurrentRow = False
       end
       object StoreCombo: TIWComboBox
@@ -444,6 +555,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -461,6 +579,7 @@ object formJnl: TformJnl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 1
         ItemIndex = -1
         Sorted = False
@@ -477,6 +596,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -484,6 +610,7 @@ object formJnl: TformJnl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel1'
         Caption = 'Start Time'
@@ -500,6 +627,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -514,6 +648,7 @@ object formJnl: TformJnl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 4
         PasswordPrompt = False
         Text = 'StartEdit'
@@ -529,6 +664,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
@@ -536,6 +678,7 @@ object formJnl: TformJnl
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
+        HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
         Caption = 'End Time'
@@ -552,6 +695,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         Alignment = taLeftJustify
         BGColor = clNone
         FocusColor = clNone
@@ -566,6 +716,7 @@ object formJnl: TformJnl
         ReadOnly = False
         Required = False
         ScriptEvents = <>
+        SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
         Text = 'EndEdit'
@@ -581,6 +732,13 @@ object formJnl: TformJnl
         ShowHint = True
         ZIndex = 0
         RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -598,6 +756,7 @@ object formJnl: TformJnl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 13
         ItemIndex = 0
         Items.Strings = (
@@ -617,7 +776,14 @@ object formJnl: TformJnl
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = False
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -635,6 +801,7 @@ object formJnl: TformJnl
         DoSubmitValidation = True
         Editable = True
         NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
         TabOrder = 14
         ItemIndex = 12
         Items.Strings = (
@@ -671,38 +838,38 @@ object formJnl: TformJnl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 722
-    Width = 1087
+    Top = 718
+    Width = 1028
     Height = 28
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1087
+      Width = 1028
       TabOrder = 11
       inherited IWRectangle1: TIWRectangle
-        Left = 671
+        Left = 612
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1703
+        Width = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 629
+        Width = 570
       end
       inherited Cancel: TIWButton
-        Left = 1001
+        Left = 942
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 913
+        Left = 854
       end
       inherited Extra2: TIWButton
-        Left = 825
+        Left = 766
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 758
+        Left = 699
       end
     end
   end

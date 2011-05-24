@@ -36,6 +36,7 @@ type
     CpyBtn: TIWButton;
     ColourEdit: TIWEdit;
     Limitlabel: TIWLabel;
+    Baselabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure ImageGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -146,6 +147,7 @@ begin
      newbtn.enabled:=false;
      delbtn.enabled:=false;
   end;
+  Baselabel.Caption:=RcDataModule.GetValue('edittmpltype','unknown');
 end;
 
 procedure TformImageVersionsTmpl.ImageGridRenderCell(ACell: TIWGridCell;
@@ -327,7 +329,7 @@ end;
 procedure TformImageVersionsTmpl.userfooter1CancelClick(Sender: TObject);
 begin
     TIWAppForm(WebApplication.ActiveForm).Release;
-    if (RcDataModule.GetValue ('JobInstance','N')='Y') then
+    if (RcDataModule.GetValue ('JobInstance','N')='INSTANCE') then
       TFormEditTmpl.Create(WebApplication).Show
     else
       TformGrpTmpl.Create (WebApplication).show;

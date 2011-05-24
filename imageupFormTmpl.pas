@@ -60,6 +60,11 @@ type
     procedure FormatComboChange(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure AdjBtnClick(Sender: TObject);
+    procedure PreferLabelAsyncMouseOut(Sender: TObject;
+      EventParams: TStringList);
+    procedure PreferLabelAsyncMouseOver(Sender: TObject;
+      EventParams: TStringList);
+    procedure MemoAsyncKeyPress(Sender: TObject; EventParams: TStringList);
   private
     { Private declarations }
     function showImage(ms: TStream): boolean;
@@ -743,6 +748,25 @@ begin
       end;
       L:=P;
     end;
+end;
+
+procedure TFormImageUpTmpl.PreferLabelAsyncMouseOut(Sender: TObject;
+  EventParams: TStringList);
+begin
+voucherlabel.Color:=clRed;
+end;
+
+procedure TFormImageUpTmpl.PreferLabelAsyncMouseOver(Sender: TObject;
+  EventParams: TStringList);
+begin
+  voucherlabel.color:=clGreen;
+
+end;
+
+procedure TFormImageUpTmpl.MemoAsyncKeyPress(Sender: TObject;
+  EventParams: TStringList);
+begin
+  // nothing much to do, just causes session timer to reset
 end;
 
 end.

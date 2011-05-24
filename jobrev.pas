@@ -38,6 +38,10 @@ type
     AddParamBtn: TIWButton;
     TypeCombo: TIWComboBox;
     TypeLbl: TIWLabel;
+    lenlabel: TIWLabel;
+    LengthEdit: TIWEdit;
+    Heightlabel: TIWLabel;
+    heightedit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -52,6 +56,8 @@ type
     procedure ParamGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure IWAppFormDestroy(Sender: TObject);
+    procedure TypeComboAsyncChange(Sender: TObject;
+      EventParams: TStringList);
   public
     procedure RefreshGrid;
   end;
@@ -64,7 +70,7 @@ implementation
 
 uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit;
 
-const paramtypes : array [1..5] of string = ('Object','Text','Date','Time','Integer');
+const paramtypes : array [1..7] of string = ('Object','Text','Date','Time','Integer', 'Image', 'Text Block');
 
 type tag_obj = class
   s : string;
@@ -191,10 +197,11 @@ begin
     Open;
     with ParamGrid do begin
       RowCount:=1;
-      if (UserSession.privilege and PRIV_LIVE)=0 then ParamGrid.ColumnCount:=2 else ParamGrid.ColumnCount:=3;
+      if (UserSession.privilege and PRIV_LIVE)=0 then ParamGrid.ColumnCount:=3 else ParamGrid.ColumnCount:=4;
       Cell[0, 0].Text := SiLink.GetTextOrDefault('Grid.Parameter');
       Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Type');
-      if (UserSession.privilege and PRIV_LIVE)<>0 then Cell[0, 2].Text := '';
+      Cell[0, 2].Text := SiLink.GetTextOrDefault('Grid.Constraints');
+      if (UserSession.privilege and PRIV_LIVE)<>0 then Cell[0, 3].Text := '';
       i:=1;
       while not Eof do begin
         RowCount:=RowCount+1;
@@ -210,8 +217,15 @@ begin
           except
           end;
         end;
+        with Cell[i, 2] do begin
+          try
+            Text := FieldByName('MAXWIDTH').AsString+'/'+FieldByName('MAXHEIGHT').AsString;
+            if Text='/' then text:='';
+          except
+          end;
+        end;
         if (UserSession.privilege and PRIV_LIVE)<>0 then
-           with Cell[i, 2] do begin
+           with Cell[i, 3] do begin
              Text := SiLink.GetTextOrDefault('Grid.Delete');
              Clickable:=true;
            end;
@@ -319,6 +333,8 @@ begin
 end;
 
 procedure TFormJobRev.AddParamBtnClick(Sender: TObject);
+var
+  x : integer;
 begin
   if NameEdit.Text<>'' then try
     with RcDataModule.SQLQry do begin
@@ -326,18 +342,34 @@ begin
       Transaction.Active:=True;
       Close;
       SQL.Clear;
-      SQL.Add ('insert into JOBPARAMS (COMPANY,JOBID,ID,PARAMNAME,PARAMTYPE) Values (:COMPANY,:JOBID,:ID,:NAME,:TYPE)');
+      SQL.Add ('insert into JOBPARAMS (COMPANY,JOBID,ID,PARAMNAME,PARAMTYPE,MAXWIDTH,MAXHEIGHT) Values (:COMPANY,:JOBID,:ID,:NAME,:TYPE,:MAXWIDTH,:MAXHEIGHT)');
       ParamByName('COMPANY').AsString:=UserSession.Company;
       ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
       ParamByName('ID').AsInteger:=RcDataModule.NextId;
       ParamByName('NAME').AsString:=NameEdit.Text;
       ParamByName('TYPE').AsString:=ParamTypes[TypeCombo.ItemIndex+1];
+      try
+        x:=strtoint(lengthedit.text);
+        if x>0 then ParamByName('MAXWIDTH').AsInteger:=x
+           else ParamByName('MAXWIDTH').Clear;
+      except
+        ParamByName('MAXWIDTH').Clear;
+      end;
+      try
+        x:=strtoint(heightedit.text);
+        if x>0 then ParamByName('MAXHEIGHT').AsInteger:=x
+           else ParamByName('MAXHEIGHT').Clear;
+      except
+        ParamByName('MAXHEIGHT').Clear;
+      end;
       ExecSQL;
       Transaction.Commit;
     end;
   except
   end;
   NameEdit.Text:='';
+  lengthedit.Text:='0';
+  heightedit.Text:='0';
   RefreshGrid;
 end;
 
@@ -391,6 +423,27 @@ var
 begin
   for r:=1 to Paramgrid.RowCount-1 do
     Paramgrid.Cell[r,0].Tag.Free;
+end;
+
+procedure TFormJobRev.TypeComboAsyncChange(Sender: TObject;
+  EventParams: TStringList);
+var
+  hassize : boolean;
+begin
+  hassize:=typecombo.ItemIndex in [5,6];
+  lengthedit.enabled:=hassize;
+  heightedit.enabled:=hassize;
+  if hassize then begin
+    lengthedit.font.Color:=clblack;
+    lengthedit.BGColor:=clwhite;
+    heightedit.font.Color:=clblack;
+    heightedit.BGColor:=clwhite;
+  end else begin
+    lengthedit.Color:=clgray;
+    lengthedit.BGColor:=$00EBDAD0;
+    heightedit.Color:=clgray;
+    heightedit.BGColor:=$00EBDAD0;
+  end;
 end;
 
 end.

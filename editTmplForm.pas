@@ -53,8 +53,11 @@ uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, overv
 
 type tag_obj = class
   param : boolean;
+  ptype : string;
   paramtype : string;
   s : string;
+  width : integer;
+  height : integer;
 end;
 
 procedure GoParent(referedby : referer_class);
@@ -97,6 +100,7 @@ var
   celltag : tag_obj;
   lasttmpl: string;
   tmplid : integer;
+  refjobid : integer;
 begin
   lasttmpl:='';
   for r:=0 to Tmplgrid.RowCount-1 do
@@ -113,6 +117,7 @@ begin
       SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
       SQLQry.Open;
       tmplid:=SQLQry.FieldByName ('PARAMTMPLID').AsInteger;
+      refjobid:=SQLQry.FieldByName ('REFERJOB').AsInteger;
       NameLbl.Caption:=SQLQry.FieldByName ('NAME').AsString;
       SQLQry.Close;
     end;
@@ -127,12 +132,14 @@ begin
       SQLQry.Transaction.Active:=false;
       SQLQry.Transaction.Active:=true;
       SQLQry.SQL.Add('select GROUPPARAMTMPL.*, GROUPOBJHDR.ID as OBJID, '+
-                     'GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PARAMTYPE, '+
-                     'GROUPOBJHDR.NAME from GROUPPARAMTMPL '+
+                     'GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PTYPE, '+
+                     'GROUPOBJHDR.NAME, JOBPARAMS.* from GROUPPARAMTMPL '+
                      'left join GROUPOBJHDR on GROUPOBJHDR.GROUPPARAMTMPLID=GROUPPARAMTMPL.ID '+
+                     'left join JOBPARAMS on JOBPARAMS.JOBID=:JOBID and JOBPARAMS.PARAMNAME=GROUPOBJHDR.NAME '+
                      'where GROUPPARAMTMPL.COMPANY=:COMPANY and GROUPPARAMTMPL.ID=:TMPLID '+
                      'order by GROUPPARAMTMPL.ID');
       SQLQry.ParamByName ('TMPLID').AsInteger:=tmplid;
+      SQLQry.ParamByName ('JOBID').AsInteger:=refjobid;
       SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
       SQLQry.Open;
       with TmplGrid do begin
@@ -159,6 +166,13 @@ begin
               Cell[i, 5].text:=htmlquote(SQLQry.FieldByName('NOTE').AsString);
               celltag:=tag_obj.create;
               celltag.param:=false;
+              celltag.paramtype:=SQLQry.FieldByName('PARAMTYPE').AsString;
+              celltag.width:=0;
+              if not SQLQry.FieldByName('MAXWIDTH').IsNull then
+                 celltag.width:=SQLQry.FieldByName('MAXWIDTH').AsInteger;
+              celltag.height:=0;
+              if not SQLQry.FieldByName('MAXHEIGHT').IsNull then
+                 celltag.height:=SQLQry.FieldByName('MAXHEIGHT').AsInteger;
               celltag.s:=SQLQry.FieldByName('ID').AsString;
               Cell[i, 0].Tag:=celltag;
               inc (i);
@@ -174,12 +188,13 @@ begin
               Cell[i, 1].clickable:=true;
               Cell[i, 5].text:='';
               Cell[i, 4].text:=SQLQry.FieldByName('GUID').AsString;
-              if SQLQry.FieldByName('PARAMTYPE').AsString='F' then
+              if SQLQry.FieldByName('PTYPE').AsString='F' then
                  Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')
                  else
                  Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Object');
               celltag:=tag_obj.create;
               celltag.param:=true;
+              celltag.ptype:=SQLQry.FieldByName('PTYPE').AsString;
               celltag.paramtype:=SQLQry.FieldByName('PARAMTYPE').AsString;
               celltag.s:=SQLQry.FieldByName('OBJID').AsString;
               Cell[i, 0].Tag:=celltag;
@@ -206,7 +221,8 @@ begin
       RcDataModule.SaveValue ('editparam',t.s);
       if AColumn=1 then begin
           TIWAppForm(WebApplication.ActiveForm).Release;
-          if t.paramtype='F' then begin
+          RcDataModule.SaveValue ('edittmpltype',t.paramtype);
+          if t.ptype='F' then begin
              TformFieldVersionsTmpl.create(WebApplication).show;
           end else begin
              TformImageVersionsTmpl.create(WebApplication).show;

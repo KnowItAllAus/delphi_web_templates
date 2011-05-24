@@ -2,7 +2,7 @@ object formJobs: TformJobs
   Left = 0
   Top = 0
   Width = 1024
-  Height = 734
+  Height = 479
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   RenderInvisibleControls = False
@@ -17,11 +17,11 @@ object formJobs: TformJobs
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 225
-  DesignTop = 131
+  DesignLeft = 49
+  DesignTop = 97
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 705
+    Top = 450
     Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
@@ -71,7 +71,7 @@ object formJobs: TformJobs
     Left = 0
     Top = 119
     Width = 1024
-    Height = 586
+    Height = 331
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
@@ -88,7 +88,7 @@ object formJobs: TformJobs
     Splitter = False
     DesignSize = (
       1024
-      586)
+      331)
     object langlink: TIWSiLink
       Left = 1
       Top = 1
@@ -125,7 +125,7 @@ object formJobs: TformJobs
       Left = 105
       Top = 21
       Width = 821
-      Height = 547
+      Height = 292
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
@@ -142,7 +142,7 @@ object formJobs: TformJobs
       Splitter = False
       DesignSize = (
         821
-        547)
+        292)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -176,7 +176,7 @@ object formJobs: TformJobs
         Left = 1
         Top = 4
         Width = 3
-        Height = 542
+        Height = 287
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -234,7 +234,7 @@ object formJobs: TformJobs
       end
       object NewJobEdit: TIWEdit
         Left = 152
-        Top = 515
+        Top = 260
         Width = 429
         Height = 21
         Cursor = crAuto
@@ -273,7 +273,7 @@ object formJobs: TformJobs
         Left = 16
         Top = 40
         Width = 790
-        Height = 459
+        Height = 204
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -314,7 +314,7 @@ object formJobs: TformJobs
       end
       object CreateBtn: TIWButton
         Left = 600
-        Top = 512
+        Top = 257
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -356,14 +356,9 @@ object formJobs: TformJobs
     inherited IWFrameRegion: TIWRegion
       Width = 1024
       TabOrder = 4
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
-      inherited IWImageFile2: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
+      DesignSize = (
+        1024
+        119)
       inherited IWRectangle1: TIWRectangle
         Top = 93
         Width = 2625
@@ -377,8 +372,6 @@ object formJobs: TformJobs
       inherited IWImageFile3: TIWImageFile
         Left = 689
         Top = 0
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 680
@@ -388,8 +381,6 @@ object formJobs: TformJobs
       end
       inherited HideBox: TIWImageFile
         Left = 1008
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
     end
   end

@@ -339,7 +339,10 @@ begin
         SQLEx.ParamByName ('HDR').AsInteger:=newinstanceid;
         SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
         SQLEx.ParamByName ('NAME').AsString:=SQLQry.FieldByName('PARAMNAME').AsString;
-        if SQLQry.FieldByName ('PARAMTYPE').AsString='Object' then
+        if (SQLQry.FieldByName ('PARAMTYPE').AsString='Object') or
+           (SQLQry.FieldByName ('PARAMTYPE').AsString='Image') or
+           (SQLQry.FieldByName ('PARAMTYPE').AsString='Text Block')
+           then
            SQLEx.ParamByName ('PARAMTYPE').AsString:='O'
         else
            SQLEx.ParamByName ('PARAMTYPE').AsString:='F';

@@ -16,8 +16,8 @@ object su_FormMain: Tsu_FormMain
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -26
-  DesignTop = 198
+  DesignLeft = 142
+  DesignTop = 32
   object IWRegion1: TIWRegion
     Left = 0
     Top = 111
@@ -570,10 +570,6 @@ object su_FormMain: Tsu_FormMain
       DesignSize = (
         1025
         111)
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
       inherited titleimage: TIWImageFile
         RenderSize = False
         StyleRenderOptions.RenderSize = False
@@ -607,8 +603,6 @@ object su_FormMain: Tsu_FormMain
       end
       inherited HideBox: TIWImageFile
         Left = 1012
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited SysReg: TIWRegion
         Color = 10526880

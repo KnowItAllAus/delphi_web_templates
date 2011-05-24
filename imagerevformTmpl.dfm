@@ -1,8 +1,8 @@
 object formImageVersionsTmpl: TformImageVersionsTmpl
   Left = 0
   Top = 0
-  Width = 1028
-  Height = 746
+  Width = 1024
+  Height = 479
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -15,19 +15,19 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 177
-  DesignTop = 65
+  DesignLeft = 9
+  DesignTop = 79
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 1024
     Height = 116
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1028
+      Width = 1024
       Height = 116
       TabOrder = 10
       inherited titleimage: TIWImageFile
@@ -35,22 +35,22 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
       end
       inherited IWRectangle1: TIWRectangle
         Top = 91
-        Width = 1028
+        Width = 1024
       end
       inherited IWRectangle3: TIWRectangle
         Top = 96
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 693
+        Left = 689
       end
       inherited langlink: TIWSiLink
-        Left = 628
+        Left = 624
       end
       inherited Smalltitle: TIWLabel
-        Left = 908
+        Left = 904
       end
       inherited HideBox: TIWImageFile
-        Left = 1013
+        Left = 1009
         Top = 99
       end
       inherited TitleLabel: TIWLabel
@@ -61,38 +61,38 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 717
-    Width = 1028
+    Top = 450
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 1024
       Height = 29
       TabOrder = 9
       inherited IWRectangle1: TIWRectangle
-        Left = 652
+        Left = 648
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 610
+        Width = 606
       end
       inherited Cancel: TIWButton
-        Left = 939
+        Left = 935
         Caption = 'Back'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 851
+        Left = 847
       end
       inherited Extra2: TIWButton
-        Left = 763
+        Left = 759
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 691
+        Left = 687
       end
     end
     inherited silink_footer: TsiLangLinked
@@ -105,8 +105,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 116
-    Width = 1028
-    Height = 601
+    Width = 1024
+    Height = 334
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -120,13 +120,13 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
-      601)
+      1024
+      334)
     object BodyRegion: TIWRegion
       Left = 6
       Top = 13
-      Width = 996
-      Height = 573
+      Width = 992
+      Height = 306
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -140,8 +140,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        996
-        573)
+        992
+        306)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -175,7 +175,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Left = 1
         Top = 4
         Width = 3
-        Height = 568
+        Height = 301
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -236,7 +236,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Left = 23
         Top = 72
         Width = 344
-        Height = 494
+        Height = 227
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -276,7 +276,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         ScrollToCurrentRow = False
       end
       object IWSiLink1: TIWSiLink
-        Left = 768
+        Left = 764
         Top = 77
         Width = 65
         Height = 17
@@ -415,7 +415,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Text = 'NameEdit'
       end
       object ProdBtn: TIWButton
-        Left = 851
+        Left = 847
         Top = 74
         Width = 131
         Height = 21
@@ -445,7 +445,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         OnClick = ProdBtnClick
       end
       object NewBtn: TIWButton
-        Left = 907
+        Left = 903
         Top = 18
         Width = 75
         Height = 21
@@ -475,7 +475,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         OnClick = NewBtnClick
       end
       object DelBtn: TIWButton
-        Left = 907
+        Left = 903
         Top = 45
         Width = 75
         Height = 21
@@ -574,7 +574,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Text = 'Modename'
       end
       object CpyBtn: TIWButton
-        Left = 819
+        Left = 815
         Top = 18
         Width = 75
         Height = 21
@@ -671,11 +671,42 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Caption = 'X'
         RawText = False
       end
+      object Baselabel: TIWLabel
+        Left = 375
+        Top = 70
+        Width = 50
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'ModeLabel'
+        Caption = '??'
+        RawText = False
+      end
       object ImageRegion: TIWRegion
         Left = 376
         Top = 100
-        Width = 606
-        Height = 465
+        Width = 602
+        Height = 198
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
@@ -694,8 +725,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         object Memo: TIWMemo
           Left = 2
           Top = 2
-          Width = 602
-          Height = 461
+          Width = 598
+          Height = 194
           Cursor = crAuto
           Visible = False
           Align = alClient

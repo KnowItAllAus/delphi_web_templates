@@ -41,6 +41,7 @@ type
     IWImageFile1: TIWImageFile;
     IWImageFile3: TIWImageFile;
     titleimage: TIWImageFile;
+    IWButton4: TIWButton;
     procedure LoginBtnClick(Sender: TObject);
     procedure IWAppFormDefaultAction(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
@@ -48,6 +49,7 @@ type
     procedure langfooter1Click(Sender: TObject);
     procedure langcomboChange(Sender: TObject);
     function newtrandb (co_id : integer) : boolean;
+    procedure IWButton4Click(Sender: TObject);
   public
     function findcompanyid (s : string) : integer;
   end;
@@ -56,7 +58,8 @@ implementation
 {$R *.dfm}
 
 uses
-  ServerController, dialogs, datamod, sysutils, IWInit, global, su_main, RoleForm;
+  ServerController, dialogs, datamod, sysutils, IWInit, global, su_main, RoleForm,
+  textedit, textblockfrm;
 
 function Tform_login.findcompanyid (s : string) : integer;
 begin
@@ -227,6 +230,12 @@ begin
   end else begin
      titlelabel.Visible:=true;
   end;
+end;
+
+procedure Tform_login.IWButton4Click(Sender: TObject);
+begin
+  TformTextBlockEdit.Create(WebApplication).Show;
+
 end;
 
 initialization

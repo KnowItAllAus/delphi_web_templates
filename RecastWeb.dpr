@@ -65,7 +65,9 @@ uses
   paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
   parse_utils in '..\common\parse_utils.pas',
   grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
-  paramform in 'paramform.pas' {ParamForm: TIWAppForm};
+  paramform in 'paramform.pas' {ParamForm: TIWAppForm},
+  textedit in 'textedit.pas' {editform: TIWAppForm},
+  textblockfrm in 'Files\textblockfrm.pas' {formTextBlockEdit: TIWAppForm};
 
 {$R *.res}
 

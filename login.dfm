@@ -15,8 +15,8 @@ object form_login: Tform_login
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 151
-  DesignTop = 176
+  DesignLeft = 139
+  DesignTop = 2
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -395,6 +395,35 @@ object form_login: Tform_login
         ScriptEvents = <>
         TabOrder = 2
         OnClick = LoginBtnClick
+      end
+      object IWButton4: TIWButton
+        Left = 32
+        Top = 192
+        Width = 75
+        Height = 25
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 1
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'New Stuff'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'LoginBtn'
+        ScriptEvents = <>
+        TabOrder = 8
+        OnClick = IWButton4Click
       end
     end
     object IWRegion2: TIWRegion

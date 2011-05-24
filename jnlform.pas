@@ -9,7 +9,7 @@ uses
   IWBaseControl, IWVCLBaseContainer, IWVCLBaseControl, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, AbBase, AbBrowse, AbZBrows, AbZipper,
   IWSiLink, siComp, siLngLnk, IWCompRectangle, footer_user, statstitle,
-  IWCompListbox, IWCompCheckbox;
+  IWCompListbox, IWCompCheckbox, IWHTML40Container;
 
 type
   TformJnl = class(TIWAppForm)

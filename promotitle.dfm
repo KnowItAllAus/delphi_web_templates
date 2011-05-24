@@ -1,7 +1,7 @@
 object PromoFrameTitle: TPromoFrameTitle
   Left = 0
   Top = 0
-  Width = 1028
+  Width = 716
   Height = 119
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,7 +10,7 @@ object PromoFrameTitle: TPromoFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 716
     Height = 119
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -29,7 +29,7 @@ object PromoFrameTitle: TPromoFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1028
+      716
       119)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -91,7 +91,7 @@ object PromoFrameTitle: TPromoFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 92
-      Width = 2629
+      Width = 2317
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -149,7 +149,7 @@ object PromoFrameTitle: TPromoFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 305
       Top = 97
-      Width = 2199
+      Width = 1887
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -176,7 +176,7 @@ object PromoFrameTitle: TPromoFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 694
+      Left = 382
       Top = 3
       Width = 300
       Height = 86
@@ -205,7 +205,7 @@ object PromoFrameTitle: TPromoFrameTitle
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
     end
     object langlink: TIWSiLink
-      Left = 585
+      Left = 273
       Top = 73
       Width = 65
       Height = 17
@@ -270,7 +270,7 @@ object PromoFrameTitle: TPromoFrameTitle
       RawText = False
     end
     object Smalltitle: TIWLabel
-      Left = 886
+      Left = 574
       Top = 98
       Width = 122
       Height = 19
@@ -304,7 +304,7 @@ object PromoFrameTitle: TPromoFrameTitle
       RawText = False
     end
     object HideBox: TIWImageFile
-      Left = 1012
+      Left = 700
       Top = 99
       Width = 13
       Height = 17

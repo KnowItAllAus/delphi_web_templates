@@ -1,8 +1,8 @@
 object formEditTmpl: TformEditTmpl
   Left = 0
   Top = 0
-  Width = 1021
-  Height = 725
+  Width = 1024
+  Height = 479
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -16,13 +16,13 @@ object formEditTmpl: TformEditTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 232
-  DesignTop = 215
+  DesignLeft = -21
+  DesignTop = 201
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1021
-    Height = 578
+    Width = 1024
+    Height = 332
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -36,13 +36,13 @@ object formEditTmpl: TformEditTmpl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1021
-      578)
+      1024
+      332)
     object IWRegion2: TIWRegion
-      Left = 65
+      Left = 67
       Top = 14
       Width = 911
-      Height = 543
+      Height = 297
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -57,7 +57,7 @@ object formEditTmpl: TformEditTmpl
       Splitter = False
       DesignSize = (
         911
-        543)
+        297)
       object TmplLabel: TIWLabel
         Left = 8
         Top = 8
@@ -94,7 +94,7 @@ object formEditTmpl: TformEditTmpl
         Left = 20
         Top = 40
         Width = 871
-        Height = 486
+        Height = 240
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -169,7 +169,7 @@ object formEditTmpl: TformEditTmpl
         Left = 0
         Top = 3
         Width = 3
-        Height = 540
+        Height = 294
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -288,44 +288,44 @@ object formEditTmpl: TformEditTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 696
-    Width = 1021
+    Top = 450
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1021
+      Width = 1024
       Height = 29
       TabOrder = 1
       DesignSize = (
-        1021
+        1024
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 645
+        Left = 648
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1637
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 603
+        Width = 606
       end
       inherited Cancel: TIWButton
-        Left = 935
+        Left = 938
         Caption = 'Back'
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 847
+        Left = 850
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
         OnClick = userfooter1Extra1Click
       end
       inherited Extra2: TIWButton
-        Left = 759
+        Left = 762
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 687
+        Left = 690
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -335,35 +335,35 @@ object formEditTmpl: TformEditTmpl
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1021
+    Width = 1024
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1021
+      Width = 1024
       Height = 118
       TabOrder = 2
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1534
+        Width = 1537
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 686
+        Left = 689
       end
       inherited langlink: TIWSiLink
-        Left = 615
+        Left = 618
       end
       inherited Smalltitle: TIWLabel
-        Left = 901
+        Left = 904
         Top = 102
       end
       inherited HideBox: TIWImageFile
-        Left = 1004
+        Left = 1007
         Top = 99
         Width = 12
         Height = 14

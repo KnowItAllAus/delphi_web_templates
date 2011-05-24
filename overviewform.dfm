@@ -1,7 +1,7 @@
 object FormOverview: TFormOverview
   Left = 0
   Top = 0
-  Width = 1028
+  Width = 1014
   Height = 625
   RenderInvisibleControls = False
   AllowPageAccess = True
@@ -16,50 +16,50 @@ object FormOverview: TFormOverview
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -37
-  DesignTop = 99
+  DesignLeft = 6
+  DesignTop = 406
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 596
-    Width = 1028
+    Width = 1014
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 0
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 1014
       Height = 29
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
-        Left = 652
+        Left = 638
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1630
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 610
+        Width = 596
       end
       inherited Cancel: TIWButton
-        Left = 945
+        Left = 931
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 859
+        Left = 845
       end
       inherited Extra2: TIWButton
-        Left = 774
+        Left = 760
         FriendlyName = 'Create'
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 694
+        Left = 680
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 117
-    Width = 1028
+    Width = 1014
     Height = 479
     Cursor = crAuto
     RenderInvisibleControls = False
@@ -74,7 +74,7 @@ object FormOverview: TFormOverview
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
+      1014
       479)
     object IWSiLink1: TIWSiLink
       Left = 8
@@ -111,7 +111,7 @@ object FormOverview: TFormOverview
     object BodyRegion: TIWRegion
       Left = 104
       Top = 21
-      Width = 814
+      Width = 800
       Height = 439
       Cursor = crAuto
       RenderInvisibleControls = False
@@ -126,12 +126,12 @@ object FormOverview: TFormOverview
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        814
+        800
         439)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 812
+        Width = 798
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -221,7 +221,7 @@ object FormOverview: TFormOverview
       object OverGrid: TIWGrid
         Left = 30
         Top = 33
-        Width = 766
+        Width = 752
         Height = 388
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -330,22 +330,28 @@ object FormOverview: TFormOverview
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 1014
     Height = 117
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1028
+      Width = 1014
       Height = 117
       TabOrder = 4
+      inherited IWImageFile1: TIWImageFile
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+      end
       inherited titleimage: TIWImageFile
         Left = 41
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited IWRectangle1: TIWRectangle
         Top = 92
-        Width = 2629
+        Width = 2615
       end
       inherited IWRectangle2: TIWRectangle
         Top = 93
@@ -354,20 +360,24 @@ object FormOverview: TFormOverview
       inherited IWRectangle3: TIWRectangle
         Left = 889
         Top = 97
-        Width = 1984
+        Width = 1970
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 642
+        Left = 676
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
-        Left = 631
+        Left = 617
       end
       inherited HideBox: TIWImageFile
-        Left = 1014
+        Left = 1000
         Top = 97
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
-        Left = 889
+        Left = 875
         Top = 97
       end
       inherited JobRegn: TIWRegion

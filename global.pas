@@ -10,6 +10,7 @@ function GetTransDBName: string;
 function GetPrefix: string;
 function GetExitURL: string;
 function GetURLBase: string;
+function GetAppBase: string;
 function GetTransBase: string;
 function GetPort: integer;
 function debug : boolean;
@@ -29,11 +30,23 @@ var
   port : integer;
   debugmode : boolean;
   URLBase : string;
+  CacheDir : string;
+  appBase : string;
   TransBase : string;
 
 function getURLBase: string;
 begin
   result := URLBase;
+end;
+
+function getCacheDir: string;
+begin
+  result := CacheDir;
+end;
+
+function getappBase: string;
+begin
+  result := appBase;
 end;
 
 function getTransBase: string;
@@ -107,6 +120,7 @@ begin
     ini.free;
     for i := 1 to ParamCount do begin
       if (copy(paramstr(i), 1, 3) = '-P=') then Port := strtoint(copy(paramstr(i), 4, length(paramstr(i)) - 3));
+      if (copy(paramstr(i), 1, 3) = '-C=') then CacheDir := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-B=') then Basedirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-F=') then Prefix := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-X=') then ExitURL := copy(paramstr(i), 4, length(paramstr(i)) - 3);
@@ -116,6 +130,7 @@ begin
       if (copy(paramstr(i), 1, 3) = '-Z=') then ZoneDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-L=') then LangDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-U=') then URLBase := copy(paramstr(i), 4, length(paramstr(i)) - 3);
+      if (copy(paramstr(i), 1, 3) = '-A=') then AppBase := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-T=') then TransBase := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 6) = '-DEBUG') then debugmode:=true;
     end;

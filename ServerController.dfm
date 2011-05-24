@@ -26,11 +26,11 @@ object RcWebController: TRcWebController
   SSLOptions.NonSSLRequest = nsAccept
   SSLOptions.Port = 0
   SSLOptions.SSLVersion = sslv3
-  Version = '11.0.34'
+  Version = '11.0.38'
   OnException = IWServerControllerBaseException
   OnNewSession = IWServerControllerBaseNewSession
-  Left = 467
-  Top = 152
+  Left = 474
+  Top = 149
   Height = 310
   Width = 342
 end

@@ -16,8 +16,8 @@ object formGrp: TformGrp
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 200
-  DesignTop = 298
+  DesignLeft = 20
+  DesignTop = 103
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -30,6 +30,7 @@ object formGrp: TformGrp
     inherited IWFrameRegion: TIWRegion
       Width = 1014
       Height = 114
+      TabOrder = 2
       inherited IWImageFile1: TIWImageFile
         RenderSize = False
         StyleRenderOptions.RenderSize = False
@@ -88,7 +89,7 @@ object formGrp: TformGrp
     inherited IWRegion1: TIWRegion
       Width = 1014
       Height = 29
-      TabOrder = 2
+      TabOrder = 1
       DesignSize = (
         1014
         29)
@@ -305,7 +306,7 @@ object formGrp: TformGrp
         Font.Style = []
         FriendlyName = 'NewBtn'
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 0
         OnClick = NewBtnClick
       end
       object IWRegion3: TIWRegion

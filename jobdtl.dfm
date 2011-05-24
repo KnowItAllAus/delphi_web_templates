@@ -16,7 +16,7 @@ object FormJobDtl: TFormJobDtl
   ShowHint = True
   XPTheme = True
   DesignLeft = 62
-  DesignTop = 305
+  DesignTop = 114
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -29,7 +29,6 @@ object FormJobDtl: TFormJobDtl
     inherited IWFrameRegion: TIWRegion
       Width = 1028
       Height = 116
-      TabOrder = 9
       DesignSize = (
         1028
         116)
@@ -154,7 +153,7 @@ object FormJobDtl: TFormJobDtl
       ScriptEvents = <>
       DoSubmitValidation = False
       FriendlyName = 'IWSiLink1'
-      TabOrder = 5
+      TabOrder = 6
       RawText = False
       SiLangLinked = silanglinked1
       LangFile = 'job.sil'
@@ -360,7 +359,7 @@ object FormJobDtl: TFormJobDtl
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 6
+        TabOrder = 7
         PasswordPrompt = False
         Text = 'DescEdit'
       end
@@ -397,7 +396,7 @@ object FormJobDtl: TFormJobDtl
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 7
+        TabOrder = 8
         PasswordPrompt = False
         Text = 'NameEdit'
       end
@@ -617,7 +616,7 @@ object FormJobDtl: TFormJobDtl
         Font.Style = []
         FriendlyName = 'DelJobRevBtn'
         ScriptEvents = <>
-        TabOrder = 8
+        TabOrder = 9
         OnClick = DelJobRevBtnClick
       end
       object TemplateBox: TIWCheckBox
