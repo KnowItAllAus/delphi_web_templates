@@ -3,6 +3,7 @@ object RcWebController: TRcWebController
   OnCreate = IWServerControllerBaseCreate
   AuthBeforeNewSession = False
   AppName = 'Recast'
+  CacheDir = 'c:\tmp\'
   CharSet = 'utf-8'
   CacheExpiry = 2
   ComInitialization = ciNone

@@ -67,7 +67,7 @@ uses
   grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
   paramform in 'paramform.pas' {ParamForm: TIWAppForm},
   textedit in 'textedit.pas' {editform: TIWAppForm},
-  textblockfrm in 'Files\textblockfrm.pas' {formTextBlockEdit: TIWAppForm};
+  textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm};
 
 {$R *.res}
 

@@ -100,11 +100,17 @@ implementation
 uses
   IWInit, Inifiles, global, IWMain, cfgtypes, windows;
 
-constructor TRcWebController.create (owner : TComponent);
+constructor TRcWebController.Create(owner: TComponent);
 begin
-  //CacheDir:='c:\temp\';
-  inherited create (owner);
+  //CacheDir := 'c:\tmp\';
+  inherited;
 end;
+
+//constructor TRcWebController.create (owner : TComponent);
+//begin
+  //CacheDir:='c:\temp\';
+//  inherited create (owner);
+//end;
 
 function UserSession: TUserSession;
 begin

@@ -18,8 +18,8 @@ object formTextBlockEdit: TformTextBlockEdit
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 143
-  DesignTop = 107
+  DesignLeft = 150
+  DesignTop = 150
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -307,7 +307,7 @@ object formTextBlockEdit: TformTextBlockEdit
         UseFrame = True
         UseSize = True
         FriendlyName = 'PreviewGrid'
-        ColumnCount = 3
+        ColumnCount = 4
         OnCellClick = PreviewGridCellClick
         RowCount = 0
         ShowEmptyCells = True
@@ -357,6 +357,7 @@ object formTextBlockEdit: TformTextBlockEdit
           end>
         SubmitOnAsyncEvent = True
         TabOrder = 1
+        OnSubmit = texteditSubmit
         OnAsyncKeyPress = texteditAsyncKeyPress
         PasswordPrompt = False
       end

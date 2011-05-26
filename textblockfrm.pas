@@ -8,7 +8,8 @@ uses
   IWSiLink, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompLabel, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWHTML40Container, IWRegion, footer_user, Controls, Forms, baretitle,
-  IWExtCtrls, IWGrids, Graphics, Types, IWCompMemo;
+  IWExtCtrls, IWGrids, Graphics, Types, IWCompMemo, IWBaseComponent,
+  IWBaseHTMLComponent, IWBaseHTML40Component;
 
 type
   TformTextBlockEdit = class(TIWAppForm)
@@ -51,6 +52,7 @@ type
     procedure NoBtnAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure YesBtnClick(Sender: TObject);
     procedure IWButton1Click(Sender: TObject);
+    procedure texteditSubmit(Sender: TObject);
   private
     _textflags : integer;
     lines : TStringlist;
@@ -58,8 +60,11 @@ type
     procedure EditLineClickAsync(Sender: TObject; EventParams: TStringList);
     procedure EditLineClick(Sender: TObject);
     procedure SetTextFlags(Value: Integer);
+    procedure addline (s : string; flags : integer; index : integer);
     property textflags : integer read _textflags write SetTextFlags;
     function Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+    procedure DeleteLineClick(Sender: TObject);
+    procedure AddLineClick(Sender: TObject);
     procedure checkeditlen;
   public
   end;
@@ -176,6 +181,73 @@ begin
   result:=bm2;
 end;
 
+procedure TformTextBlockEdit.addline (s : string; flags : integer; index : integer);
+var
+  r,c : integer;
+  bm : tbitmap;
+begin
+  lines.InsertObject(index,s,TObject(flags));
+
+  with previewgrid do begin
+     RowCount := RowCount + 1;
+     for c:=0 to columncount-1 do begin
+       for r:=Rowcount-1 downto index+1 do
+         Cell[r,c].Control:=Cell[r-1,c].Control;
+       Cell[index,c].Control:=nil;
+     end;
+
+     with Cell[index, 3] do begin
+        Control := TIWImageButton.Create(Self);
+        with TIWImageButton(Control) do begin
+          ImageFile.Filename := 'minus.bmp';
+          Width := 15;
+          Height := 15;
+          OnClick:=deletelineclick;
+          Tag:=0;
+          UseSize:=false;
+          Hint:='Delete line';
+          ZIndex:=100;
+        end;
+     end;
+     with Cell[index, 2] do begin
+        Control := TIWImageButton.Create(Self);
+        with TIWImageButton(Control) do begin
+          ImageFile.Filename := 'plus.bmp';
+          Width := 15;
+          Height := 15;
+          OnClick:=addlineclick;
+          Tag:=0;
+          UseSize:=false;
+          Hint:='Insert blank line here';
+          ZIndex:=100;
+        end;
+     end;
+     with Cell[index, 1] do begin
+        Control := TIWImageButton.Create(Self);
+        with TIWImageButton(Control) do begin
+          ImageFile.Filename := 'edit.bmp';
+          Width := 15;
+          Height := 15;
+          OnClick:=editlineclick;
+          Tag:=0;
+          UseSize:=false;
+          Hint:='Edit';
+          ZIndex:=100;
+       end;
+     end;
+     with Cell[index, 0] do begin
+        Control := TIWImage.Create(Self);
+        with TIWImage(Control) do begin
+          Control.Height:=18;
+          Control.Width:=PAPERPIX+5;
+          Bm := DrawText (s,flags,false);
+          Picture.Bitmap.Assign(bm);
+          bm.free;
+        end;
+     end;
+  end;
+end;
+
 procedure TformTextBlockEdit.UpdateClick(Sender: TObject);
 var
   bm : TBitmap;
@@ -190,40 +262,10 @@ begin
      textedit.Text:=copy (textEdit.Text,1,42 div mag);
   end;
   if editline=-1 then begin
-    lines.AddObject(textedit.Text,TObject(textflags));
-    with previewgrid do begin
-       RowCount := RowCount + 1;
-        with Cell[Rowcount-1, 2] do begin
-           Text := 'Edit';
-           Clickable:=true;
-        end;
-        with Cell[Rowcount-1, 1] do begin
-          Control := TIWImageButton.Create(Self);
-          with TIWImageButton(Control) do begin
-            ImageFile.Filename := 'edit.bmp';
-            Width := 15;
-            Height := 15;
-            OnClick:=editlineclick;
-            Tag:=0;
-            UseSize:=false;
-            Hint:='Edit';
-            ZIndex:=100;
-          end;
-        end;
-        with Cell[Rowcount-1, 0] do begin
-          Control := TIWImage.Create(Self);
-          with TIWImage(Control) do begin
-            Control.Height:=18;
-            Control.Width:=PAPERPIX+5;
-            Bm := DrawText (textedit.Text,textflags,false);
-            Picture.Bitmap.Assign(bm);
-            bm.free;
-            textedit.Text:='';
-            checkeditlen;
-            textedit.SetFocus;
-          end;
-       end;
-    end;
+    addline (textedit.text,textflags,previewgrid.RowCount);
+    textedit.Text:='';
+    checkeditlen;
+    textedit.SetFocus;
   end else begin
     lines[editline]:=textedit.Text;
     lines.Objects[editline]:=TObject(textflags);
@@ -327,6 +369,48 @@ begin
   end;
 end;
 
+procedure TformTextBlockEdit.AddLineClick(Sender: TObject);
+var
+  row : integer;
+begin
+  row:=0;
+  while row<previewgrid.RowCount do begin
+    if previewgrid.Cell[row,2].Control=Sender then begin
+       addline ('',textflags,row);
+       textedit.Text:='';
+       checkeditlen;
+       textedit.SetFocus;
+       exit;
+    end;
+    row:=row+1;
+  end;
+end;
+
+procedure TformTextBlockEdit.DeleteLineClick(Sender: TObject);
+var
+  row : integer;
+begin
+  row:=0;
+  while row<previewgrid.RowCount do begin
+    if previewgrid.Cell[row,3].Control=Sender then begin
+       previewgrid.DeleteRow(row);
+       lines.Delete(row);
+       if editline=row then begin
+          editline:=-1;
+          textedit.Clear;
+          textedit.SetFocus;
+       end;
+       if lines.count>0 then begin
+          textflags:=integer(lines.objects[lines.count-1]);
+       end else textflags:=0;
+       checkeditlen;
+       exit;
+    end;
+    row:=row+1;
+  end;
+end;
+
+
 procedure TformTextBlockEdit.EditLineClick(Sender: TObject);
 var
   row : integer;
@@ -378,7 +462,7 @@ procedure TformTextBlockEdit.texteditAsyncKeyPress(Sender: TObject;
 begin
   checkeditlen;
   if EventParams.IndexOf('which=13')<>-1 then begin
-     UpdateClick(Sender);
+    //Updateclick (Sender);
   end;
 end;
 
@@ -424,15 +508,6 @@ procedure TformTextBlockEdit.NoBtnAsyncClick(Sender: TObject;
 begin
   textedit.Clear;
   textedit.SetFocus;
-  if editline<>-1 then begin
-     previewgrid.DeleteRow(editline);
-     lines.Delete(editline);
-     editline:=-1;
-     if lines.count>0 then begin
-       textflags:=integer(lines.objects[lines.count-1]);
-     end else textflags:=0;
-  end;
-  checkeditlen;
 end;
 
 procedure TformTextBlockEdit.YesBtnClick(Sender: TObject);
@@ -448,6 +523,11 @@ begin
   textedit.Text:='12345678901234567890123456789012345678901234567890123456';
   _textflags:=SMALLFONT;
   UpdateClick (sender);
+end;
+
+procedure TformTextBlockEdit.texteditSubmit(Sender: TObject);
+begin
+  Updateclick (Sender);
 end;
 
 end.
