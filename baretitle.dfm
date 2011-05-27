@@ -1,7 +1,7 @@
 object FrameBareTitle: TFrameBareTitle
   Left = 0
   Top = 0
-  Width = 716
+  Width = 632
   Height = 114
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,7 +10,7 @@ object FrameBareTitle: TFrameBareTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 716
+    Width = 632
     Height = 114
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -29,7 +29,7 @@ object FrameBareTitle: TFrameBareTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      716
+      632
       114)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -92,7 +92,7 @@ object FrameBareTitle: TFrameBareTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 89
-      Width = 1229
+      Width = 1145
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -148,7 +148,7 @@ object FrameBareTitle: TFrameBareTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 381
+      Left = 297
       Top = 0
       Width = 300
       Height = 86
@@ -178,7 +178,7 @@ object FrameBareTitle: TFrameBareTitle
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
     end
     object langlink: TIWSiLink
-      Left = 310
+      Left = 226
       Top = 65
       Width = 65
       Height = 17
@@ -211,7 +211,7 @@ object FrameBareTitle: TFrameBareTitle
       LangControl = RcDataMod.LangEditControl1
     end
     object Smalltitle: TIWLabel
-      Left = 596
+      Left = 512
       Top = 98
       Width = 97
       Height = 16
@@ -245,7 +245,7 @@ object FrameBareTitle: TFrameBareTitle
       RawText = False
     end
     object HideBox: TIWImageFile
-      Left = 699
+      Left = 615
       Top = 95
       Width = 13
       Height = 17

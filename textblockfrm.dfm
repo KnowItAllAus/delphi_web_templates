@@ -1,8 +1,8 @@
 object formTextBlockEdit: TformTextBlockEdit
   Left = 0
   Top = 0
-  Width = 1024
-  Height = 609
+  Width = 1023
+  Height = 675
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -18,46 +18,46 @@ object formTextBlockEdit: TformTextBlockEdit
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 150
-  DesignTop = 150
+  DesignLeft = 85
+  DesignTop = 115
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1024
+    Width = 1023
     Height = 116
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1024
+      Width = 1023
       Height = 116
       TabOrder = 2
       DesignSize = (
-        1024
+        1023
         116)
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
       inherited IWRectangle1: TIWRectangle
         Top = 91
-        Width = 1537
+        Width = 1536
       end
       inherited IWRectangle3: TIWRectangle
         Top = 96
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 689
+        Left = 688
       end
       inherited langlink: TIWSiLink
-        Left = 618
+        Left = 617
       end
       inherited Smalltitle: TIWLabel
-        Left = 904
+        Left = 903
         Top = 100
       end
       inherited HideBox: TIWImageFile
-        Left = 1007
+        Left = 1006
         Top = 97
       end
       inherited TitleLabel: TIWLabel
@@ -68,42 +68,42 @@ object formTextBlockEdit: TformTextBlockEdit
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 580
-    Width = 1024
+    Top = 646
+    Width = 1023
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1024
+      Width = 1023
       Height = 29
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
-        Left = 648
+        Left = 647
         Width = 416
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1640
+        Width = 1639
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 606
+        Width = 605
       end
       inherited Cancel: TIWButton
-        Left = 938
+        Left = 937
       end
       inherited Extra1: TIWButton
-        Left = 850
+        Left = 849
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
       end
       inherited Extra2: TIWButton
-        Left = 762
+        Left = 761
         Visible = True
         Caption = 'Save'
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 394
+        Left = 393
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -113,8 +113,8 @@ object formTextBlockEdit: TformTextBlockEdit
   object IWRegion1: TIWRegion
     Left = 0
     Top = 116
-    Width = 1024
-    Height = 464
+    Width = 1023
+    Height = 530
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -128,13 +128,13 @@ object formTextBlockEdit: TformTextBlockEdit
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1024
-      464)
+      1023
+      530)
     object IWRegion2: TIWRegion
       Left = 136
       Top = 16
-      Width = 729
-      Height = 433
+      Width = 728
+      Height = 499
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -148,8 +148,8 @@ object formTextBlockEdit: TformTextBlockEdit
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        729
-        433)
+        728
+        499)
       object VoucherLabel: TIWLabel
         Left = 16
         Top = 16
@@ -216,7 +216,7 @@ object formTextBlockEdit: TformTextBlockEdit
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 729
+        Width = 728
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -246,7 +246,7 @@ object formTextBlockEdit: TformTextBlockEdit
         Left = 0
         Top = 3
         Width = 3
-        Height = 430
+        Height = 496
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -275,7 +275,7 @@ object formTextBlockEdit: TformTextBlockEdit
         Left = 97
         Top = 112
         Width = 480
-        Height = 305
+        Height = 371
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -308,7 +308,6 @@ object formTextBlockEdit: TformTextBlockEdit
         UseSize = True
         FriendlyName = 'PreviewGrid'
         ColumnCount = 4
-        OnCellClick = PreviewGridCellClick
         RowCount = 0
         ShowEmptyCells = True
         ShowInvisibleRows = True

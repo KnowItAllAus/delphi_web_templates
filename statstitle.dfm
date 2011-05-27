@@ -1,7 +1,7 @@
 object StatsFrameTitle: TStatsFrameTitle
   Left = 0
   Top = 0
-  Width = 1028
+  Width = 632
   Height = 114
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,7 +10,7 @@ object StatsFrameTitle: TStatsFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 632
     Height = 114
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -29,7 +29,7 @@ object StatsFrameTitle: TStatsFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1028
+      632
       114)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -41,8 +41,8 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -70,8 +70,8 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -91,7 +91,7 @@ object StatsFrameTitle: TStatsFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 87
-      Width = 2629
+      Width = 2233
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -149,7 +149,7 @@ object StatsFrameTitle: TStatsFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 152
       Top = 92
-      Width = 2357
+      Width = 1961
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -176,7 +176,7 @@ object StatsFrameTitle: TStatsFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 694
+      Left = 298
       Top = 0
       Width = 300
       Height = 86
@@ -186,8 +186,8 @@ object StatsFrameTitle: TStatsFrameTitle
       ParentShowHint = False
       ShowHint = True
       ZIndex = 0
-      RenderSize = True
-      StyleRenderOptions.RenderSize = True
+      RenderSize = False
+      StyleRenderOptions.RenderSize = False
       StyleRenderOptions.RenderPosition = True
       StyleRenderOptions.RenderFont = True
       StyleRenderOptions.RenderZIndex = True
@@ -205,7 +205,7 @@ object StatsFrameTitle: TStatsFrameTitle
       ImageFile.Filename = 'E:\delphi\delphi_web\Files\recast logo.gif'
     end
     object langlink: TIWSiLink
-      Left = 623
+      Left = 227
       Top = 65
       Width = 65
       Height = 17

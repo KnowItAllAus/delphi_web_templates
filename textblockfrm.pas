@@ -126,7 +126,7 @@ begin
   checkeditlen;
 end;
 
-function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+(*function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
 var
   bm, bm2 : TBitmap;
   r : TRect;
@@ -148,7 +148,7 @@ begin
   if (flags and BOLDFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsBold];
   if (flags and ULFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsUnderline];
   Bm.Canvas.Font.Pitch:=fpFixed;
-  w:=Bm.Canvas.TextWidth(textedit.Text);
+  w:=Bm.Canvas.TextWidth(s);
   case (flags and JUSTMASK) of
     JUSTLEFT : x:=0;
     JUSTCENTRE : begin
@@ -166,7 +166,7 @@ begin
        if x<0 then x:=0;
     end;
   end;
-  Bm.Canvas.TextOut(x,0,textedit.Text);
+  Bm.Canvas.TextOut(x,0,s);
   bm2:=TBitmap.Create;
   bm2.Width:=bm.Width;
   bm2.Height:=bm.Height;
@@ -180,6 +180,94 @@ begin
   bm.free;
   result:=bm2;
 end;
+*)
+
+function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+var
+  bm, bm2 : TBitmap;
+  r : TRect;
+  w, h, x : integer;
+  charpitch : integer;
+  i : integer;
+  maxchar : integer;
+begin
+  Bm := TBitmap.Create;
+  bm.Width:=PAPERPIX;
+  bm.Height:=18;
+  Bm.Canvas.Font.Height:=17;
+  maxchar:=42;
+  if (flags and SMALLFONT)<>0 then begin
+     Bm.Canvas.Font.Height:=13;
+     Bm.height:=15;
+     maxchar:=56;
+  end;
+  if (flags and X2WIDTH)<>0 then begin
+     maxchar:=maxchar div 2;
+  end;
+
+  if ((flags and X2HEIGHT)<>0) or ((flags and X2WIDTH)<>0) then begin
+     Bm.Canvas.Font.Height:=Bm.Canvas.Font.Height*2;
+     bm.Height:=bm.height*2;
+  end;
+
+  Bm.Canvas.Font.Name:='Bitstream Vera Sans Mono';
+  Bm.Canvas.Font.color:=clBlack;
+  Bm.Canvas.Font.Style:=[];
+  bm2:=TBitmap.create;
+  if selected then begin
+    Bm.Canvas.Brush.Color:=clYellow;
+    Bm.Canvas.FillRect(Bm.Canvas.ClipRect);
+    Bm2.Canvas.Brush.Color:=clYellow;
+  end;
+  if (flags and BOLDFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsBold];
+  if (flags and ULFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsUnderline];
+  Bm.Canvas.Font.Pitch:=fpFixed;
+  charpitch:=Bm.Canvas.TextWidth('X');
+  if ((flags and X2HEIGHT)<>0) and ((flags and X2WIDTH)=0) then
+    charpitch:=charpitch div 2;
+  w:=(PAPERPIX * length(s)) div maxchar;
+  case (flags and JUSTMASK) of
+    JUSTLEFT : x:=0;
+    JUSTCENTRE : begin
+       x:=(bm.width div 2) - (w div 2);
+       if x<0 then x:=0;
+    end;
+    JUSTRIGHT : begin
+       x:=bm.width-w;
+       if x<0 then x:=0;
+    end;
+  end;
+
+  bm2.Width:=charpitch*2;
+  bm2.Height:=bm.Height;
+  bm2.Canvas.Font.Name:=bm.Canvas.Font.Name;
+  bm2.Canvas.font.height:=bm.Canvas.font.height;
+  for i:=1 to length (s) do begin
+    r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
+    bm2.Canvas.FillRect(r);
+    if (((flags and X2HEIGHT)<>0) and ((flags and X2WIDTH)=0)) then begin
+       bm2.Canvas.textOut(0,0,copy (s,i,1));
+       r.Left:=x+(((i-1)*PAPERPIX) div maxchar); r.Top:=0;
+       r.Bottom:=bm2.height; r.Right:=x+((i*PAPERPIX) div maxchar);
+       Bm.canvas.StretchDraw(r,bm2);
+    end else begin
+       Bm.Canvas.TextOut(x+(((i-1)*PAPERPIX) div maxchar),0,copy (s,i,1));
+    end;
+  end;
+
+  bm2.Width:=bm.Width;
+  bm2.Height:=bm.Height;
+  r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
+  bm2.Canvas.FillRect(r);
+  if ((flags and X2HEIGHT)=0) and ((flags and X2WIDTH)<>0) then
+      bm2.height:=bm2.height div 2;
+  r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
+  bm2.canvas.StretchDraw(r,bm);
+  bm2.width:=PAPERPIX;
+  bm.free;
+  result:=bm2;
+end;
+
 
 procedure TformTextBlockEdit.addline (s : string; flags : integer; index : integer);
 var
@@ -373,12 +461,14 @@ procedure TformTextBlockEdit.AddLineClick(Sender: TObject);
 var
   row : integer;
 begin
+  if (editline<>-1) then
+    NoBtnAsyncClick (Sender, nil);
   row:=0;
   while row<previewgrid.RowCount do begin
     if previewgrid.Cell[row,2].Control=Sender then begin
        addline ('',textflags,row);
        textedit.Text:='';
-       checkeditlen;
+       PreviewGridCellClick(sender,row,0);
        textedit.SetFocus;
        exit;
     end;
@@ -471,7 +561,7 @@ procedure TformTextBlockEdit.PreviewGridCellClick(ASender: TObject;
 var
   bm : TBitmap;
 begin
-  with previewgrid.Cell[Arow,AColumn-1].Control as TIWImageButton do begin
+  with previewgrid.Cell[Arow,1].Control as TIWImageButton do begin
     if editline<>-1 then begin
       TIWImageButton(previewgrid.Cell[editline,1].Control).imageFile.Filename:='edit.bmp';
       with PreviewGrid.Cell[editline, 0] do begin
@@ -505,9 +595,26 @@ end;
 
 procedure TformTextBlockEdit.NoBtnAsyncClick(Sender: TObject;
   EventParams: TStringList);
+var
+  bm : TBitmap;
 begin
   textedit.Clear;
   textedit.SetFocus;
+  if editline<>-1 then with previewgrid do begin
+     with Cell[editline, 1] do begin
+        with TIWImageButton(Control) do begin
+          ImageFile.Filename := 'edit.bmp';
+       end;
+     end;
+     with Cell[editline, 0] do begin
+        with TIWImage(Control) do begin
+          Bm := DrawText (self.lines[editline],integer(self.lines.Objects[editline]),false);
+          Picture.Bitmap.Assign(bm);
+          bm.free;
+        end;
+     end;
+     editline:=-1;
+  end;
 end;
 
 procedure TformTextBlockEdit.YesBtnClick(Sender: TObject);

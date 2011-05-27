@@ -1,7 +1,7 @@
 object AdminFrameTitle: TAdminFrameTitle
   Left = 0
   Top = 0
-  Width = 1028
+  Width = 632
   Height = 112
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -10,7 +10,7 @@ object AdminFrameTitle: TAdminFrameTitle
   object IWFrameRegion: TIWRegion
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 632
     Height = 112
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -29,7 +29,7 @@ object AdminFrameTitle: TAdminFrameTitle
     OnCreate = IWFrameRegionCreate
     Splitter = False
     DesignSize = (
-      1028
+      632
       112)
     object IWImageFile1: TIWImageFile
       Left = 0
@@ -91,7 +91,7 @@ object AdminFrameTitle: TAdminFrameTitle
     object IWRectangle1: TIWRectangle
       Left = 0
       Top = 86
-      Width = 2629
+      Width = 2233
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -149,7 +149,7 @@ object AdminFrameTitle: TAdminFrameTitle
     object IWRectangle3: TIWRectangle
       Left = 608
       Top = 91
-      Width = 422
+      Width = 26
       Height = 22
       Cursor = crAuto
       Anchors = [akLeft, akRight, akBottom]
@@ -176,7 +176,7 @@ object AdminFrameTitle: TAdminFrameTitle
       VAlign = vaMiddle
     end
     object IWImageFile3: TIWImageFile
-      Left = 694
+      Left = 298
       Top = 0
       Width = 300
       Height = 81
@@ -238,7 +238,7 @@ object AdminFrameTitle: TAdminFrameTitle
       RawText = False
     end
     object langlink: TIWSiLink
-      Left = 583
+      Left = 187
       Top = 1
       Width = 65
       Height = 17
@@ -271,7 +271,7 @@ object AdminFrameTitle: TAdminFrameTitle
       LangControl = RcDataMod.LangEditControl1
     end
     object Smalltitle: TIWLabel
-      Left = 888
+      Left = 492
       Top = 93
       Width = 122
       Height = 19
@@ -305,7 +305,7 @@ object AdminFrameTitle: TAdminFrameTitle
       RawText = False
     end
     object HideBox: TIWImageFile
-      Left = 1014
+      Left = 618
       Top = 93
       Width = 13
       Height = 17

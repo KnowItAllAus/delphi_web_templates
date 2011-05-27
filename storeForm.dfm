@@ -1,8 +1,8 @@
 object formStore: TformStore
   Left = 0
   Top = 0
-  Width = 1020
-  Height = 725
+  Width = 849
+  Height = 744
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -17,13 +17,13 @@ object formStore: TformStore
   ShowHint = True
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
-  DesignLeft = 173
-  DesignTop = 163
+  DesignLeft = 948
+  DesignTop = 291
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1020
-    Height = 582
+    Width = 849
+    Height = 601
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -37,13 +37,13 @@ object formStore: TformStore
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1020
-      582)
+      849
+      601)
     object IWRegion2: TIWRegion
-      Left = 152
+      Left = 67
       Top = 24
       Width = 716
-      Height = 547
+      Height = 566
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -58,7 +58,7 @@ object formStore: TformStore
       Splitter = False
       DesignSize = (
         716
-        547)
+        566)
       object StoreLabel: TIWLabel
         Left = 8
         Top = 8
@@ -268,8 +268,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -312,8 +312,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -418,8 +418,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -859,7 +859,7 @@ object formStore: TformStore
         Left = 104
         Top = 395
         Width = 577
-        Height = 149
+        Height = 168
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -1022,8 +1022,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -1151,7 +1151,7 @@ object formStore: TformStore
         Left = 0
         Top = 3
         Width = 3
-        Height = 544
+        Height = 563
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -1515,8 +1515,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -1559,8 +1559,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -1752,35 +1752,35 @@ object formStore: TformStore
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1020
+    Width = 849
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 1
     inherited IWFrameRegion: TIWRegion
-      Width = 1020
+      Width = 849
       TabOrder = 19
       DesignSize = (
-        1020
+        849
         114)
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\admin.GIF'
       end
       inherited IWRectangle1: TIWRectangle
-        Width = 1020
+        Width = 849
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 685
+        Left = 514
       end
       inherited langlink: TIWSiLink
-        Left = 623
+        Left = 452
       end
       inherited Smalltitle: TIWLabel
-        Left = 900
+        Left = 729
       end
       inherited HideBox: TIWImageFile
-        Left = 1003
+        Left = 832
       end
       inherited TitleLabel: TIWLabel
         Width = 486
@@ -1790,47 +1790,47 @@ object formStore: TformStore
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 696
-    Width = 1020
+    Top = 715
+    Width = 849
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1020
+      Width = 849
       Height = 29
       TabOrder = 20
       DesignSize = (
-        1020
+        849
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 644
+        Left = 473
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1636
+        Width = 1465
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 602
+        Width = 431
       end
       inherited Cancel: TIWButton
-        Left = 934
+        Left = 763
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 846
+        Left = 675
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
         OnClick = DelBtnClick
       end
       inherited Extra2: TIWButton
-        Left = 758
+        Left = 587
         Visible = True
         Caption = 'Save'
         OnClick = PostButtonClick
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 686
+        Left = 515
       end
       inherited navcombo: TIWComboBox
         Visible = False

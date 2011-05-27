@@ -1,8 +1,8 @@
 object formJnl: TformJnl
   Left = 0
   Top = 0
-  Width = 1028
-  Height = 746
+  Width = 630
+  Height = 444
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -17,33 +17,34 @@ object formJnl: TformJnl
   ShowHint = True
   OnDefaultAction = DisplayBtnClick
   XPTheme = True
-  DesignLeft = 140
-  DesignTop = 167
+  DesignLeft = 3
+  DesignTop = 2
   inline StatsFrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 630
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
+      Width = 630
       TabOrder = 12
       DesignSize = (
-        1028
+        630
         114)
       inherited IWRectangle1: TIWRectangle
-        Width = 2570
+        Width = 2172
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 2200
+        Width = 1802
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 635
+        Left = 237
       end
       inherited langlink: TIWSiLink
-        Left = 588
+        Left = 190
       end
       inherited PromoReg: TIWRegion
         inherited ActivityLink: TIWLink
@@ -55,8 +56,8 @@ object formJnl: TformJnl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1028
-    Height = 604
+    Width = 630
+    Height = 302
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -70,13 +71,13 @@ object formJnl: TformJnl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
-      604)
+      630
+      302)
     object IWRegion2: TIWRegion
       Left = 32
       Top = 8
-      Width = 963
-      Height = 586
+      Width = 565
+      Height = 284
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -90,8 +91,8 @@ object formJnl: TformJnl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        963
-        586)
+        565
+        284)
       object VoucherLabel: TIWLabel
         Left = 16
         Top = 8
@@ -353,8 +354,8 @@ object formJnl: TformJnl
         OnClick = DisplayBtnClick
       end
       object PrevBtn: TIWButton
-        Left = 802
-        Top = 553
+        Left = 404
+        Top = 251
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -383,8 +384,8 @@ object formJnl: TformJnl
         OnClick = PrevLinkClick
       end
       object NextBtn: TIWButton
-        Left = 872
-        Top = 553
+        Left = 474
+        Top = 251
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -414,7 +415,7 @@ object formJnl: TformJnl
       end
       object DelJnlBtn: TIWButton
         Left = 18
-        Top = 555
+        Top = 253
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -448,7 +449,7 @@ object formJnl: TformJnl
         Left = 1
         Top = 4
         Width = 3
-        Height = 581
+        Height = 279
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -476,7 +477,7 @@ object formJnl: TformJnl
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 961
+        Width = 767
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -505,8 +506,8 @@ object formJnl: TformJnl
       object TranGrid: TIWGrid
         Left = 17
         Top = 65
-        Width = 929
-        Height = 484
+        Width = 531
+        Height = 182
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -838,38 +839,41 @@ object formJnl: TformJnl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 718
-    Width = 1028
+    Top = 416
+    Width = 630
     Height = 28
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 630
       TabOrder = 11
+      DesignSize = (
+        630
+        28)
       inherited IWRectangle1: TIWRectangle
-        Left = 612
+        Left = 214
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1246
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 570
+        Width = 172
       end
       inherited Cancel: TIWButton
-        Left = 942
+        Left = 544
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 854
+        Left = 456
       end
       inherited Extra2: TIWButton
-        Left = 766
+        Left = 368
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 699
+        Left = 301
       end
     end
   end

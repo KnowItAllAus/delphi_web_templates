@@ -1,7 +1,7 @@
 object userfooter: Tuserfooter
   Left = 0
   Top = 0
-  Width = 716
+  Width = 632
   Height = 28
   HorzScrollBar.Visible = False
   Anchors = [akLeft, akRight, akBottom]
@@ -9,7 +9,7 @@ object userfooter: Tuserfooter
   object IWRegion1: TIWRegion
     Left = 0
     Top = 0
-    Width = 716
+    Width = 632
     Height = 28
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -28,10 +28,10 @@ object userfooter: Tuserfooter
     OnCreate = IWRegion1Create
     Splitter = False
     DesignSize = (
-      716
+      632
       28)
     object IWRectangle1: TIWRectangle
-      Left = 340
+      Left = 256
       Top = 0
       Width = 377
       Height = 23
@@ -62,7 +62,7 @@ object userfooter: Tuserfooter
     object IWRectangle4: TIWRectangle
       Left = 0
       Top = 24
-      Width = 1332
+      Width = 1248
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -180,7 +180,7 @@ object userfooter: Tuserfooter
     object IWRectangle6: TIWRectangle
       Left = 40
       Top = 0
-      Width = 298
+      Width = 214
       Height = 23
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -238,7 +238,7 @@ object userfooter: Tuserfooter
       RawText = False
     end
     object Cancel: TIWButton
-      Left = 630
+      Left = 546
       Top = 2
       Width = 83
       Height = 21
@@ -267,7 +267,7 @@ object userfooter: Tuserfooter
       TabOrder = 0
     end
     object Extra1: TIWButton
-      Left = 542
+      Left = 458
       Top = 2
       Width = 83
       Height = 21
@@ -297,7 +297,7 @@ object userfooter: Tuserfooter
       TabOrder = 1
     end
     object Extra2: TIWButton
-      Left = 454
+      Left = 370
       Top = 2
       Width = 83
       Height = 21
@@ -327,7 +327,7 @@ object userfooter: Tuserfooter
       TabOrder = 2
     end
     object fiwSiLink1: TIWSiLink
-      Left = 86
+      Left = 2
       Top = 9
       Width = 65
       Height = 17
