@@ -18,8 +18,8 @@ object formTextBlockEdit: TformTextBlockEdit
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 85
-  DesignTop = 115
+  DesignLeft = 448
+  DesignTop = 336
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -86,6 +86,8 @@ object formTextBlockEdit: TformTextBlockEdit
         Width = 1639
       end
       inherited IWRectangle6: TIWRectangle
+        Left = -72
+        Top = -8
         Width = 605
       end
       inherited Cancel: TIWButton
@@ -274,7 +276,7 @@ object formTextBlockEdit: TformTextBlockEdit
       object PreviewGrid: TIWGrid
         Left = 97
         Top = 112
-        Width = 480
+        Width = 512
         Height = 371
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
@@ -293,11 +295,11 @@ object formTextBlockEdit: TformTextBlockEdit
         BorderColors.Color = clNone
         BorderColors.Light = clNone
         BorderColors.Dark = clNone
-        BGColor = clWebGRAY
+        BGColor = clWebLIGHTGRAY
         BorderSize = 0
         BorderStyle = tfDefault
         CellPadding = 1
-        CellSpacing = 1
+        CellSpacing = 0
         Font.Color = clNone
         Font.FontName = 'Arial'
         Font.Size = 10

@@ -88,7 +88,7 @@ const
   JUSTRIGHT = $40;
   JUSTMASK = $60;
 
-  PAPERPIX = 390;
+  PAPERPIX = 450;
 
 procedure TformTextBlockEdit.SetTextFlags(Value: Integer);
 begin
@@ -210,7 +210,7 @@ begin
      bm.Height:=bm.height*2;
   end;
 
-  Bm.Canvas.Font.Name:='Bitstream Vera Sans Mono';
+  Bm.Canvas.Font.Name:='Lucida Console'; //'Bitstream Vera Sans Mono';
   Bm.Canvas.Font.color:=clBlack;
   Bm.Canvas.Font.Style:=[];
   bm2:=TBitmap.create;
@@ -242,6 +242,7 @@ begin
   bm2.Height:=bm.Height;
   bm2.Canvas.Font.Name:=bm.Canvas.Font.Name;
   bm2.Canvas.font.height:=bm.Canvas.font.height;
+  bm2.Canvas.Font.Style:=bm.Canvas.Font.Style;
   for i:=1 to length (s) do begin
     r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
     bm2.Canvas.FillRect(r);
@@ -532,6 +533,8 @@ begin
   end;
   textedit.SetFocus;
 end;
+
+//function flags_to_attr
 
 procedure TformTextBlockEdit.checkeditlen;
 var
