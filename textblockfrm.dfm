@@ -31,7 +31,6 @@ object formTextBlockEdit: TformTextBlockEdit
     inherited IWFrameRegion: TIWRegion
       Width = 1136
       Height = 116
-      TabOrder = 1
       DesignSize = (
         1136
         116)
@@ -134,7 +133,7 @@ object formTextBlockEdit: TformTextBlockEdit
     object IWRegion2: TIWRegion
       Left = 231
       Top = 16
-      Width = 658
+      Width = 690
       Height = 545
       Cursor = crAuto
       RenderInvisibleControls = False
@@ -149,7 +148,7 @@ object formTextBlockEdit: TformTextBlockEdit
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        658
+        690
         545)
       object VoucherLabel: TIWLabel
         Left = 16
@@ -209,7 +208,7 @@ object formTextBlockEdit: TformTextBlockEdit
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 0
+        TabOrder = 1
         RawText = False
         LangFile = 'textblock.sil'
         LangControl = RcDataMod.LangEditControl1
@@ -217,7 +216,7 @@ object formTextBlockEdit: TformTextBlockEdit
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 658
+        Width = 690
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -273,9 +272,9 @@ object formTextBlockEdit: TformTextBlockEdit
         VAlign = vaMiddle
       end
       object ViewControl: TIWTabControl
-        Left = 49
+        Left = 48
         Top = 48
-        Width = 584
+        Width = 601
         Height = 484
         Cursor = crAuto
         RenderInvisibleControls = False
@@ -302,12 +301,12 @@ object formTextBlockEdit: TformTextBlockEdit
         ClipRegion = False
         ZIndex = 1000
         DesignSize = (
-          584
+          601
           484)
         object IWTabControl1Page1: TIWTabPage
           Left = 0
           Top = 20
-          Width = 584
+          Width = 601
           Height = 464
           RenderInvisibleControls = False
           TabOrder = 1
@@ -320,7 +319,7 @@ object formTextBlockEdit: TformTextBlockEdit
           object memo: TIWMemo
             Left = 0
             Top = 0
-            Width = 584
+            Width = 601
             Height = 464
             Cursor = crAuto
             Align = alClient
@@ -354,7 +353,7 @@ object formTextBlockEdit: TformTextBlockEdit
         object IWTabControl1Page0: TIWTabPage
           Left = 0
           Top = 20
-          Width = 584
+          Width = 601
           Height = 464
           RenderInvisibleControls = False
           TabOrder = 0
@@ -365,12 +364,12 @@ object formTextBlockEdit: TformTextBlockEdit
           BorderOptions.Color = clNone
           Color = clWebLIGHTGRAY
           DesignSize = (
-            584
+            601
             464)
           object PreviewGrid: TIWGrid
             Left = 0
             Top = 89
-            Width = 584
+            Width = 601
             Height = 375
             Cursor = crAuto
             Anchors = [akTop, akBottom]
@@ -407,7 +406,7 @@ object formTextBlockEdit: TformTextBlockEdit
             RowCount = 0
             ShowEmptyCells = True
             ShowInvisibleRows = True
-            ScrollToCurrentRow = False
+            ScrollToCurrentRow = True
           end
           object NoBtn: TIWImage
             Left = 419

@@ -65,10 +65,11 @@ type
     procedure SetTextFlags(Value: Integer);
     procedure addline (s : string; flags : integer; index : integer);
     property textflags : integer read _textflags write SetTextFlags;
-    function Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+    function Drawtext (insert : string; s : string; flags : integer; selected : boolean) : TBitmap;
     procedure DeleteLineClick(Sender: TObject);
     procedure AddLineClick(Sender: TObject);
     procedure checkeditlen;
+    function Widthoftext (s : string; flags : integer) : integer;
   public
   end;
 
@@ -241,6 +242,10 @@ var
 begin
   result:='';
   if s[i]<>'{' then exit;
+  if copy(s,i,2)='{{' then begin
+     result:='{';
+     exit;
+  end;
   for j:=i+1 to length (s) do begin
      if s[j]='}' then begin
         result:=copy (s,i+1,j-i-1);
@@ -253,13 +258,72 @@ end;
 procedure adjust_flags_for_token (var flags : integer; token : string);
 var
   reset : boolean;
+  i : integer;
 begin
   reset:=copy (token,1,1)='/';
   if reset then delete (token,1,1);
-  adjust_flags (flags,token,not reset);
+  for i:=1 to length(token) do
+     adjust_flags (flags,token[i],not reset);
 end;
 
-function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+function TformtextBlockEdit.Widthoftext (s : string; flags : integer) : integer;
+var
+  charpitch : integer;
+  i : integer;
+  pix_used : integer;
+  dispchar : char;
+  insert : string;
+  sampleindex: integer;
+  token : string;
+begin
+  pix_used := 0;
+  charpitch:=12;
+  if (flags and SMALLFONT)<>0 then begin
+     charpitch:=9;
+  end;
+  if (flags and X2WIDTH)<>0 then charpitch:=charpitch * 2;
+
+  i:=1;
+  while (i<=length (s)) or (length(insert)>0) do begin
+    if insert<>'' then begin
+       delete (insert,1,1);
+    end else begin
+       if copy (s,i,1)='{' then begin
+          token:=get_token (s,i);
+          if token='{' then begin
+            insert:='{';   // Just an escaped '{', print a single bracket in black
+          end else if token='DATE' then begin
+            insert:=FormatDateTime ('dd/mm/yy',now);
+          end else if token='TIME' then begin
+            insert:=FormatDateTime ('hh:nn',now);
+          end else if copy (token,1,1)='$' then begin
+            sampleindex:=pos('=',token);
+            if sampleindex>0 then
+              insert:=copy (token,sampleindex+1,length(token))
+            else
+              insert:='['+token+']';
+          end else begin
+            // Must be a format token, adjust font as necessary
+            adjust_flags_for_token (flags,token);
+            charpitch:=12;
+            if (flags and SMALLFONT)<>0 then begin
+               charpitch:=9;
+            end;
+            if (flags and X2WIDTH)<>0 then charpitch:=charpitch * 2;
+          end;
+          i:=i+2+length(token);
+          continue;
+       end else begin
+          inc (i);
+       end;
+    end;
+    pix_used:=pix_used+charpitch;
+  end;
+  result:=pix_used;
+end;
+
+
+function TformtextBlockEdit.Drawtext (insert : string; s : string; flags : integer; selected : boolean) : TBitmap;
 var
   bm, bm2 : TBitmap;
   r, r2 : TRect;
@@ -268,12 +332,15 @@ var
   pix_used : integer;
   tallest : integer;
   dispchar : char;
-  insert : string;
   sampleindex: integer;
   token : string;
   correction : integer;
+  overflow : string;
+  end_of_insert : boolean;
 begin
+  end_of_insert:=false;
   pix_used := 0;
+  overflow:='';
   Bm := TBitmap.Create;
   bm2:=TBitmap.create;
   bm.Width:=PAPERPIX;
@@ -309,23 +376,29 @@ begin
   bm2.Canvas.Font.Name:=bm.Canvas.Font.Name;
   bm2.Canvas.font.height:=bm.Canvas.font.height;
   bm2.Canvas.Font.Style:=bm.Canvas.Font.Style;
+  if insert<>'' then bm2.canvas.font.color:=clAqua else bm2.canvas.font.color:=clBlack;
 
   i:=1;
   while (i<=length (s)) or (length(insert)>0) do begin
     r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
     bm2.Canvas.FillRect(r);
     bm2.width:=charpitch;
-    bm2.canvas.font.color:=clBlack;
+    if end_of_insert then bm2.canvas.font.color:=clBlack;
+    end_of_insert:=false;
     if insert<>'' then begin
        dispchar:=insert[1];
-       bm2.canvas.font.color:=clAqua;
        delete (insert,1,1);
+       end_of_insert:=insert=''; // Just a flag to set font back to black before next char.
     end else begin
        dispchar:=s[i]; //copy (s,i,1);
        if copy (s,i,1)='{' then begin
           token:=get_token (s,i);
-
-          if token='DATE' then begin
+          if token='{' then begin
+            insert:='{';   // Just an escaped '{', print a single bracket in black
+            bm2.canvas.font.color:=clBlack;
+            i:=i+2;
+            continue;
+          end else if token='DATE' then begin
             insert:=FormatDateTime ('dd/mm/yy',now);
           end else if token='TIME' then begin
             insert:=FormatDateTime ('hh:nn',now);
@@ -354,6 +427,8 @@ begin
                 else Bm2.Canvas.Font.Style:=Bm2.Canvas.Font.Style-[fsUnderline];
           end;
           i:=i+2+length(token);
+          if insert<>'' then bm2.canvas.font.color:=clAqua;
+
           continue;
        end else begin
           inc (i);
@@ -372,7 +447,7 @@ begin
          correction:=5;
     end;
     if (flags and SMALLFONT)<>0 then begin
-         correction:=correction+2;
+         correction:=correction+1;
     end;
     bm2.Canvas.textOut(0,bm2.Height-bm2.Canvas.Font.height-correction,dispchar);
     if (((flags and X2HEIGHT)=0) and ((flags and X2WIDTH)<>0)) then begin
@@ -383,12 +458,10 @@ begin
 
     Bm.canvas.StretchDraw(r,bm2);
     pix_used:=pix_used+charpitch;
-    if pix_used>=503 then break; // no more space on this line for even the smallest font.
+    if pix_used>=512-charpitch then break; // no more space on this line for the current font.
   end;
 
-  // bm has the rendered text in it now.
-
-  //bm.SaveToFile('x.bmp');
+  overflow:=copy (s,i,length(s));
 
   bm2.Width:=PAPERPIX;
   bm2.Height:=tallest;
@@ -396,9 +469,34 @@ begin
   bm2.Canvas.FillRect(r);
 
   r.Left:=0; r.Top:=bm.Height-tallest; r.Bottom:=bm.height; r.Right:=pix_used;
-  r2.Left:=0; r2.Top:=0; r2.Bottom:=tallest; r2.Right:=pix_used;
+  case (flags and JUSTMASK) of
+    JUSTLEFT :
+      begin
+        r2.Left:=0; r2.Top:=0; r2.Bottom:=tallest; r2.Right:=pix_used;
+      end;
+
+    JUSTCENTRE :
+      begin
+        r2.Left:=(bm2.Width-pix_used) div 2; r2.Top:=0; r2.Bottom:=tallest; r2.Right:=r2.Left+pix_used;
+      end;
+
+    JUSTRIGHT : begin
+      begin
+        r2.Left:=bm2.Width-pix_used; r2.Top:=0; r2.Bottom:=tallest; r2.Right:=bm2.width;
+      end;
+    end;
+  end;
   bm2.canvas.copyrect (r2,bm.Canvas,r);
   bm.free;
+
+  if overflow<>'' then begin
+     bm:=DrawText (insert,overflow,flags,selected);
+     bm2.Height:=bm2.Height+bm.Height;
+     r.Left:=0; r.Top:=0; r.Bottom:=bm.height; r.Right:=bm.width;
+     r2.Left:=0; r2.Top:=bm2.Height-bm.height; r2.Bottom:=bm2.height; r2.Right:=bm2.width;
+     bm2.canvas.copyrect (r2,bm.Canvas,r);
+  end;
+
   result:=bm2;
 end;
 
@@ -459,12 +557,12 @@ begin
      with Cell[index, 0] do begin
         Control := TIWImage.Create(Self);
         with TIWImage(Control) do begin
+          //OnClick:=editlineclick;
           Control.Height:=18;
           Control.Width:=PAPERPIX+5;
-          Bm := DrawText (s,flags,false);
+          Bm := DrawText ('',s,flags,false);
           Picture.Bitmap.Assign(bm);
           bm.free;
-          OnClick:=editlineclick;
         end;
      end;
   end;
@@ -473,20 +571,13 @@ end;
 procedure TformTextBlockEdit.UpdateClick(Sender: TObject);
 var
   bm : TBitmap;
-  mag : integer;
 begin
-  mag:=1;
-  if (textflags and X2WIDTH)<>0 then mag:=2;
-  if (textflags and SMALLFONT)<>0 then begin
-     textedit.Text:=copy (textEdit.Text,1,56 div mag);
-  end else begin
-     textedit.Text:=copy (textEdit.Text,1,42 div mag);
-  end;
   if editline=-1 then begin
     addline (textedit.text,textflags,previewgrid.RowCount);
     textedit.Text:='';
     checkeditlen;
     textedit.SetFocus;
+    previewgrid.CurrentRow:=previewgrid.RowCount-1;
   end else begin
     lines[editline]:=textedit.Text;
     lines.Objects[editline]:=TObject(textflags);
@@ -501,7 +592,7 @@ begin
           with TIWImage(Control) do begin
             Control.Height:=18;
             Control.Width:=PAPERPIX+5;
-            Bm := DrawText (textedit.Text,textflags,false);
+            Bm := DrawText ('',textedit.Text,textflags,false);
             Picture.Bitmap.Assign(bm);
             bm.free;
             textedit.Text:='';
@@ -509,6 +600,7 @@ begin
           end;
        end;
     end;
+    previewgrid.CurrentRow:=editline;
     editline:=-1;
   end;
   if lines.count>0 then begin
@@ -687,44 +779,11 @@ begin
 end;
 
 procedure TformTextBlockEdit.checkeditlen;
-var
-  pix_char : integer;
-  pix_consumed : integer;
-  name : string;
-  flags : integer;
-  sense : boolean;
-  s : string;
-  i, index : integer;
 begin
-  flags:=textflags;
-  pix_char:=pix_per_char(textflags);
-  s:=textedit.text;
-  i:=1;
-  pix_consumed:=0;
-  while i<=length(s) do begin
-    if copy (s,i,1)='{' then begin
-       index:=i+1;
-       sense:=true;
-       if copy (s,index,1)='/' then begin
-         sense:=false;
-         inc(index);
-       end;
-       name:=copy (s,index,1);
-       if (copy (s,index+1,1)='}') and
-          ((name='S') or (name='B') or (name='W') or (name='H') or(name='U')) then begin
-          adjust_flags (flags, name, sense);
-          pix_char:=pix_per_char(flags);
-          i:=index+1;
-       end else begin
-          pix_consumed:=pix_consumed+pix_char;
-       end;
-    end else begin
-       pix_consumed:=pix_consumed+pix_char;
-    end;
-    inc (i);
-  end;
-  textedit.bgColor:=clWhite;
-  if pix_consumed>512 then textedit.bgColor:=clRed;
+  if widthoftext(textedit.Text,textflags)>512 then 
+     textedit.bgColor:=clRed
+  else
+     textedit.bgColor:=clWhite;
 end;
 
 procedure TformTextBlockEdit.texteditAsyncKeyPress(Sender: TObject;
@@ -749,7 +808,7 @@ begin
         with TIWImage(Control) do begin
           Control.Height:=18;
           Control.Width:=PAPERPIX+5;
-          Bm := DrawText (textedit.Text,textflags,false);
+          Bm := DrawText ('',textedit.Text,textflags,false);
           Picture.Bitmap.Assign(bm);
           bm.free;
         end;
@@ -764,7 +823,7 @@ begin
       with TIWImage(Control) do begin
         Control.Height:=18;
         Control.Width:=PAPERPIX+5;
-        Bm := DrawText (textedit.Text,textflags,true);
+        Bm := DrawText ('',textedit.Text,textflags,true);
         Picture.Bitmap.Assign(bm);
         bm.free;
       end;
@@ -788,13 +847,16 @@ begin
      end;
      with Cell[editline, 0] do begin
         with TIWImage(Control) do begin
-          Bm := DrawText (self.lines[editline],integer(self.lines.Objects[editline]),false);
+          Bm := DrawText ('',self.lines[editline],integer(self.lines.Objects[editline]),false);
           Picture.Bitmap.Assign(bm);
           bm.free;
         end;
      end;
      editline:=-1;
   end;
+  if lines.count>0 then begin
+     textflags:=integer(lines.objects[lines.count-1]);
+  end else textflags:=0;
 end;
 
 procedure TformTextBlockEdit.YesBtnClick(Sender: TObject);
