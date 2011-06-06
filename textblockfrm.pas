@@ -9,7 +9,7 @@ uses
   IWCompLabel, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWHTML40Container, IWRegion, footer_user, Controls, Forms, baretitle,
   IWExtCtrls, IWGrids, Graphics, Types, IWCompMemo, IWBaseComponent,
-  IWBaseHTMLComponent, IWBaseHTML40Component;
+  IWBaseHTMLComponent, IWBaseHTML40Component, IWCompTabControl;
 
 type
   TformTextBlockEdit = class(TIWAppForm)
@@ -21,18 +21,21 @@ type
     IWSiLink1: TIWSiLink;
     IWRectangle2: TIWRectangle;
     IWRectangle1: TIWRectangle;
+    ViewControl: TIWTabControl;
+    IWTabControl1Page0: TIWTabPage;
     PreviewGrid: TIWGrid;
-    textedit: TIWEdit;
-    IWLabel1: TIWLabel;
-    IWLabel3: TIWLabel;
-    YesBtn: TIWImage;
+    IWTabControl1Page1: TIWTabPage;
     NoBtn: TIWImage;
+    textedit: TIWEdit;
+    YesBtn: TIWImage;
     FontBtn: TIWImageFile;
     boldbtn: TIWImageFile;
     heightbtn: TIWImageFile;
     WidthBtn: TIWImageFile;
     underlinebtn: TIWImageFile;
     positionBtn: TIWImageFile;
+    IWLabel1: TIWLabel;
+    memo: TIWMemo;
     procedure UpdateClick(Sender: TObject);
     procedure PositionBtnAsyncClick(Sender: TObject;
       EventParams: TStringList);
@@ -51,8 +54,8 @@ type
       AColumn: Integer);
     procedure NoBtnAsyncClick(Sender: TObject; EventParams: TStringList);
     procedure YesBtnClick(Sender: TObject);
-    procedure IWButton1Click(Sender: TObject);
     procedure texteditSubmit(Sender: TObject);
+    procedure ViewControlChange(Sender: TObject);
   private
     _textflags : integer;
     lines : TStringlist;
@@ -88,7 +91,20 @@ const
   JUSTRIGHT = $40;
   JUSTMASK = $60;
 
-  PAPERPIX = 450;
+  PAPERPIX = 512;
+
+procedure adjust_flags (var flags : integer; name : string; sense : boolean);
+var
+  f : integer;
+begin
+  f := 0;
+  if name='S' then f:=SMALLFONT
+  else if name='W' then f:=X2WIDTH
+  else if name='H' then f:=X2HEIGHT
+  else if name='B' then f:=BOLDFONT
+  else if name='U' then f:=ULFONT;
+  if sense then flags:=flags or f else flags:=flags and not f;
+end;
 
 procedure TformTextBlockEdit.SetTextFlags(Value: Integer);
 begin
@@ -127,62 +143,6 @@ begin
 end;
 
 (*function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
-var
-  bm, bm2 : TBitmap;
-  r : TRect;
-  w, h, x : integer;
-begin
-  Bm := TBitmap.Create;
-  bm.Width:=PAPERPIX+5;
-  bm.Height:=18;
-  Bm.Canvas.Font.Height:=17;
-  if (flags and SMALLFONT)<>0 then
-     Bm.Canvas.Font.Height:=13;
-  Bm.Canvas.Font.Name:='Bitstream Vera Sans Mono';
-  Bm.Canvas.Font.color:=clBlack;
-  Bm.Canvas.Font.Style:=[];
-  if selected then begin
-    Bm.Canvas.Brush.Color:=clYellow;
-    Bm.Canvas.FillRect(Bm.Canvas.ClipRect);
-  end;
-  if (flags and BOLDFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsBold];
-  if (flags and ULFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsUnderline];
-  Bm.Canvas.Font.Pitch:=fpFixed;
-  w:=Bm.Canvas.TextWidth(s);
-  case (flags and JUSTMASK) of
-    JUSTLEFT : x:=0;
-    JUSTCENTRE : begin
-       if (flags and X2WIDTH)<>0 then begin
-          x:=(PAPERPIX div 4) - (w div 2);
-       end else
-          x:=(PAPERPIX div 2) - (w div 2);
-       if x<0 then x:=0;
-    end;
-    JUSTRIGHT : begin
-       if (flags and X2WIDTH)<>0 then begin
-          x:=(PAPERPIX div 2)-w;
-       end else
-          x:=PAPERPIX-w;
-       if x<0 then x:=0;
-    end;
-  end;
-  Bm.Canvas.TextOut(x,0,s);
-  bm2:=TBitmap.Create;
-  bm2.Width:=bm.Width;
-  bm2.Height:=bm.Height;
-  if (flags and X2HEIGHT)<>0 then
-      bm2.height:=bm2.height*2;
-  if (flags and X2WIDTH)<>0 then
-      bm2.width:=bm2.width*2;
-  r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
-  bm2.canvas.StretchDraw(r,bm);
-  bm2.width:=PAPERPIX+5;
-  bm.free;
-  result:=bm2;
-end;
-*)
-
-function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
 var
   bm, bm2 : TBitmap;
   r : TRect;
@@ -268,7 +228,179 @@ begin
   bm.free;
   result:=bm2;
 end;
+*)
 
+function scalex (x : integer) : integer;
+begin
+  result:=(x*PAPERPIX) div 512;
+end;
+
+function get_token (s : string; i : integer) : string;
+var
+  j : integer;
+begin
+  result:='';
+  if s[i]<>'{' then exit;
+  for j:=i+1 to length (s) do begin
+     if s[j]='}' then begin
+        result:=copy (s,i+1,j-i-1);
+        exit;
+     end;
+  end;
+  result:='';
+end;
+
+procedure adjust_flags_for_token (var flags : integer; token : string);
+var
+  reset : boolean;
+begin
+  reset:=copy (token,1,1)='/';
+  if reset then delete (token,1,1);
+  adjust_flags (flags,token,not reset);
+end;
+
+function TformtextBlockEdit.Drawtext (s : string; flags : integer; selected : boolean) : TBitmap;
+var
+  bm, bm2 : TBitmap;
+  r, r2 : TRect;
+  charpitch : integer;
+  i : integer;
+  pix_used : integer;
+  tallest : integer;
+  dispchar : char;
+  insert : string;
+  sampleindex: integer;
+  token : string;
+  correction : integer;
+begin
+  pix_used := 0;
+  Bm := TBitmap.Create;
+  bm2:=TBitmap.create;
+  bm.Width:=PAPERPIX;
+  bm.Height:=18 * 2; // Allow for biggest
+  Bm.Canvas.Font.Height:=17;
+  charpitch:=12;
+  if (flags and SMALLFONT)<>0 then begin
+     Bm.Canvas.Font.Height:=13;
+     charpitch:=9;
+  end;
+  if (flags and X2WIDTH)<>0 then charpitch:=charpitch * 2;
+  if ((flags and X2HEIGHT)<>0) or ((flags and X2WIDTH)<>0) then
+     Bm.Canvas.Font.Height:=Bm.Canvas.Font.Height*2;
+
+  Bm.Canvas.Font.Name:='Lucida Console'; //'Bitstream Vera Sans Mono';
+  Bm.Canvas.Font.color:=clBlack;
+  Bm.Canvas.Font.Style:=[];
+
+  tallest:=Bm.Canvas.Font.Height;
+  if ((flags and X2HEIGHT)=0) and ((flags and X2WIDTH)<>0) then
+     tallest:=tallest div 2;  // The font will be shrunk
+
+  if selected then begin
+    Bm.Canvas.Brush.Color:=clYellow;
+    Bm.Canvas.FillRect(Bm.Canvas.ClipRect);
+    Bm2.Canvas.Brush.Color:=clYellow;
+  end;
+  if (flags and BOLDFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsBold];
+  if (flags and ULFONT)<>0 then Bm.Canvas.Font.Style:=Bm.Canvas.Font.Style+[fsUnderline];
+  Bm.Canvas.Font.Pitch:=fpFixed;
+
+  bm2.Height:=bm.Height;
+  bm2.Canvas.Font.Name:=bm.Canvas.Font.Name;
+  bm2.Canvas.font.height:=bm.Canvas.font.height;
+  bm2.Canvas.Font.Style:=bm.Canvas.Font.Style;
+
+  i:=1;
+  while (i<=length (s)) or (length(insert)>0) do begin
+    r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
+    bm2.Canvas.FillRect(r);
+    bm2.width:=charpitch;
+    bm2.canvas.font.color:=clBlack;
+    if insert<>'' then begin
+       dispchar:=insert[1];
+       bm2.canvas.font.color:=clAqua;
+       delete (insert,1,1);
+    end else begin
+       dispchar:=s[i]; //copy (s,i,1);
+       if copy (s,i,1)='{' then begin
+          token:=get_token (s,i);
+
+          if token='DATE' then begin
+            insert:=FormatDateTime ('dd/mm/yy',now);
+          end else if token='TIME' then begin
+            insert:=FormatDateTime ('hh:nn',now);
+          end else if copy (token,1,1)='$' then begin
+            sampleindex:=pos('=',token);
+            if sampleindex>0 then
+              insert:=copy (token,sampleindex+1,length(token))
+            else
+              insert:='['+token+']';
+          end else begin
+            // Must be a format token, adjust font as necessary
+            adjust_flags_for_token (flags,token);
+
+            Bm2.Canvas.Font.Height:=17;
+            charpitch:=12;
+            if (flags and SMALLFONT)<>0 then begin
+               Bm2.Canvas.Font.Height:=13;
+               charpitch:=9;
+            end;
+            if (flags and X2WIDTH)<>0 then charpitch:=charpitch * 2;
+            if ((flags and X2HEIGHT)<>0) or ((flags and X2WIDTH)<>0) then
+                Bm2.Canvas.Font.Height:=Bm2.Canvas.Font.Height*2;
+            if (flags and BOLDFONT)<>0 then Bm2.Canvas.Font.Style:=Bm2.Canvas.Font.Style+[fsBold]
+                else Bm2.Canvas.Font.Style:=Bm2.Canvas.Font.Style-[fsBold];
+            if (flags and ULFONT)<>0 then Bm2.Canvas.Font.Style:=Bm2.Canvas.Font.Style+[fsUnderline]
+                else Bm2.Canvas.Font.Style:=Bm2.Canvas.Font.Style-[fsUnderline];
+          end;
+          i:=i+2+length(token);
+          continue;
+       end else begin
+          inc (i);
+       end;
+    end;
+    r.Left:=scalex(pix_used); r.Top:=0;
+    r.Bottom:=bm2.height; r.Right:=scalex(pix_used+charpitch);
+    if (((flags and X2HEIGHT)<>0) and ((flags and X2WIDTH)=0)) then begin
+       bm2.width:=charpitch*2;
+    end;
+    correction:=0;
+    if (flags and X2Height)=0 then begin
+       if (flags and X2Width)=0 then
+         correction:=3
+       else
+         correction:=5;
+    end;
+    if (flags and SMALLFONT)<>0 then begin
+         correction:=correction+2;
+    end;
+    bm2.Canvas.textOut(0,bm2.Height-bm2.Canvas.Font.height-correction,dispchar);
+    if (((flags and X2HEIGHT)=0) and ((flags and X2WIDTH)<>0)) then begin
+      r.Top:=bm2.Height div 2;
+      if (bm2.canvas.font.height+correction) div 2>tallest then tallest:=(bm2.canvas.font.height+correction) div 2;
+    end else
+      if bm2.canvas.font.height+correction>tallest then tallest:=bm2.canvas.font.height+correction;
+
+    Bm.canvas.StretchDraw(r,bm2);
+    pix_used:=pix_used+charpitch;
+    if pix_used>=503 then break; // no more space on this line for even the smallest font.
+  end;
+
+  // bm has the rendered text in it now.
+
+  //bm.SaveToFile('x.bmp');
+
+  bm2.Width:=PAPERPIX;
+  bm2.Height:=tallest;
+  r.Left:=0; r.Top:=0; r.Bottom:=bm2.height; r.Right:=bm2.Width;
+  bm2.Canvas.FillRect(r);
+
+  r.Left:=0; r.Top:=bm.Height-tallest; r.Bottom:=bm.height; r.Right:=pix_used;
+  r2.Left:=0; r2.Top:=0; r2.Bottom:=tallest; r2.Right:=pix_used;
+  bm2.canvas.copyrect (r2,bm.Canvas,r);
+  bm.free;
+  result:=bm2;
+end;
 
 procedure TformTextBlockEdit.addline (s : string; flags : integer; index : integer);
 var
@@ -332,6 +464,7 @@ begin
           Bm := DrawText (s,flags,false);
           Picture.Bitmap.Assign(bm);
           bm.free;
+          OnClick:=editlineclick;
         end;
      end;
   end;
@@ -340,7 +473,6 @@ end;
 procedure TformTextBlockEdit.UpdateClick(Sender: TObject);
 var
   bm : TBitmap;
-  r : TRect;
   mag : integer;
 begin
   mag:=1;
@@ -512,6 +644,10 @@ begin
        PreviewGridCellClick(Sender,row, 2);
        exit;
     end;
+    if previewgrid.Cell[row,0].Control=Sender then begin
+       PreviewGridCellClick(Sender,row, 2);
+       exit;
+    end;
     row:=row+1;
   end;
 end;
@@ -536,18 +672,59 @@ end;
 
 //function flags_to_attr
 
+function pix_per_char (flags : integer) : integer;
+var
+  pix : integer;
+begin
+  if (flags and SMALLFONT)<>0 then
+    pix:=9
+    else
+    pix:=12;
+
+  if (flags and X2WIDTH)<>0 then
+    pix:=pix * 2;
+  result:=pix;
+end;
+
 procedure TformTextBlockEdit.checkeditlen;
 var
-  mag : integer;
+  pix_char : integer;
+  pix_consumed : integer;
+  name : string;
+  flags : integer;
+  sense : boolean;
+  s : string;
+  i, index : integer;
 begin
-  mag:=1;
-  if (textflags and X2WIDTH)<>0 then mag:=2;
-  textedit.bgColor:=clWhite;
-  if (textflags and SMALLFONT)<>0 then begin
-     if (length(textedit.Text)>(56 div mag)) then textedit.bgColor:=clRed;
-  end else begin
-     if (length(textedit.Text)>(42 div mag)) then textedit.bgColor:=clRed;
+  flags:=textflags;
+  pix_char:=pix_per_char(textflags);
+  s:=textedit.text;
+  i:=1;
+  pix_consumed:=0;
+  while i<=length(s) do begin
+    if copy (s,i,1)='{' then begin
+       index:=i+1;
+       sense:=true;
+       if copy (s,index,1)='/' then begin
+         sense:=false;
+         inc(index);
+       end;
+       name:=copy (s,index,1);
+       if (copy (s,index+1,1)='}') and
+          ((name='S') or (name='B') or (name='W') or (name='H') or(name='U')) then begin
+          adjust_flags (flags, name, sense);
+          pix_char:=pix_per_char(flags);
+          i:=index+1;
+       end else begin
+          pix_consumed:=pix_consumed+pix_char;
+       end;
+    end else begin
+       pix_consumed:=pix_consumed+pix_char;
+    end;
+    inc (i);
   end;
+  textedit.bgColor:=clWhite;
+  if pix_consumed>512 then textedit.bgColor:=clRed;
 end;
 
 procedure TformTextBlockEdit.texteditAsyncKeyPress(Sender: TObject;
@@ -625,19 +802,48 @@ begin
   UpdateClick (sender);
 end;
 
-procedure TformTextBlockEdit.IWButton1Click(Sender: TObject);
-begin
-  textedit.Text:='123456789012345678901234567890123456789012';
-  _textflags:=0;
-  UpdateClick (sender);
-  textedit.Text:='12345678901234567890123456789012345678901234567890123456';
-  _textflags:=SMALLFONT;
-  UpdateClick (sender);
-end;
-
 procedure TformTextBlockEdit.texteditSubmit(Sender: TObject);
 begin
   Updateclick (Sender);
+end;
+
+procedure TformTextBlockEdit.ViewControlChange(Sender: TObject);
+var
+  i : integer;
+  flags, prev, f : integer;
+  flagname : string;
+  s : string;
+begin
+  if viewcontrol.activepage=1 then begin
+     memo.lines.Clear;
+     memo.lines.Assign(lines);
+     prev:=0;
+     for i:=0 to lines.count-1 do begin
+       flags:=integer(lines.objects[i]);
+       f:=1;
+       s:='';
+       while f<=$10 do begin
+         if (flags and f)<>(prev and f) then begin
+            case f of
+              SMALLFONT : flagname:='S';
+              X2WIDTH : flagname:='W';
+              X2HEIGHT : flagname:='H';
+              BOLDFONT : flagname:='B';
+              ULFONT : flagname:='U';
+            end;
+            if (flags and f) > 0 then begin
+               s:=s+'{'+flagname+'}';
+            end else begin
+               s:=s+'{/'+flagname+'}';
+            end;
+         end; { if }
+         f:=f*2;
+       end; { while }
+       prev:=flags;
+       memo.lines[i]:=s+memo.lines[i];
+     end; { for }
+  end else begin
+  end;
 end;
 
 end.

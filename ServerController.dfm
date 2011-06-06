@@ -3,9 +3,7 @@ object RcWebController: TRcWebController
   OnCreate = IWServerControllerBaseCreate
   AuthBeforeNewSession = False
   AppName = 'Recast'
-  CacheDir = 'c:\tmp\'
-  CharSet = 'utf-8'
-  CacheExpiry = 2
+  CacheExpiry = 120
   ComInitialization = ciNone
   Compression.Enabled = False
   Compression.Level = 6
@@ -28,6 +26,7 @@ object RcWebController: TRcWebController
   SSLOptions.Port = 0
   SSLOptions.SSLVersion = sslv3
   Version = '11.0.38'
+  AllowMultipleSessionsPerUser = True
   OnException = IWServerControllerBaseException
   OnNewSession = IWServerControllerBaseNewSession
   Left = 474

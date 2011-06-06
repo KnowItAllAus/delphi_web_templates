@@ -51,6 +51,8 @@ type
     Widthguide3: TIWRectangle;
     ColLabel: TIWLabel;
     ColCombo: TIWComboBox;
+    WrapBox: TIWCheckBox;
+    SortBtn: TIWButton;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -65,6 +67,8 @@ type
     procedure PreferLabelAsyncMouseOver(Sender: TObject;
       EventParams: TStringList);
     procedure MemoAsyncKeyPress(Sender: TObject; EventParams: TStringList);
+    procedure SortBtnClick(Sender: TObject);
+    procedure WrapBoxClick(Sender: TObject);
   private
     { Private declarations }
     function showImage(ms: TStream): boolean;
@@ -349,6 +353,8 @@ end;
 procedure TFormImageUpTmpl.ModeComboChange(Sender: TObject);
 
 begin
+  WrapBox.Visible:=false;
+  SortBtn.Visible:=false;
   FormatCombo.Visible:=False;
   MemBox.Visible:=False;
   ColCombo.Visible:=False;
@@ -412,6 +418,10 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         gettextfromdb;
+        if datamodes(ModeCombo.ItemIndex)=dmText then begin
+           wrapbox.Visible:=true;
+           SortBtn.Visible:=true;
+        end;
       end;
     dmRandom:
       begin
@@ -767,6 +777,22 @@ procedure TFormImageUpTmpl.MemoAsyncKeyPress(Sender: TObject;
   EventParams: TStringList);
 begin
   // nothing much to do, just causes session timer to reset
+end;
+
+procedure TFormImageUpTmpl.SortBtnClick(Sender: TObject);
+var
+  i : integer;
+begin
+  memo.Lines.CaseSensitive:=true;
+  for i:=0 to Memo.Lines.Count-1 do begin
+     Memo.Lines[i]:=fixformat(Memo.Lines[i]);
+  end;
+  memo.Lines.Sort;
+end;
+
+procedure TFormImageUpTmpl.WrapBoxClick(Sender: TObject);
+begin
+  memo.HorizScrollBar:=not wrapbox.Checked;
 end;
 
 end.
