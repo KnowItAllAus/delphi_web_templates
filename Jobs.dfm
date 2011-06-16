@@ -17,8 +17,8 @@ object formJobs: TformJobs
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 49
-  DesignTop = 97
+  DesignLeft = 635
+  DesignTop = 555
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 450
@@ -372,6 +372,7 @@ object formJobs: TformJobs
       inherited IWImageFile3: TIWImageFile
         Left = 689
         Top = 0
+        ZIndex = 3
       end
       inherited langlink: TIWSiLink
         Left = 680

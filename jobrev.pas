@@ -261,6 +261,10 @@ begin
         NameLbl.Visible:=true;
         NameEdit.Visible:=true;
         TypeCombo.Visible:=true;
+        lengthedit.Visible:=false;
+        heightedit.Visible:=false;
+        lenlabel.Visible:=false;
+        heightlabel.Visible:=false;
      end;
      Transaction.Active:=false;
    end;
@@ -271,6 +275,10 @@ begin
       NameLbl.Visible:=false;
       NameEdit.Visible:=false;
       EditJobBtn.Visible:=false;
+      lengthedit.Visible:=false;
+      heightedit.Visible:=false;
+      lenlabel.Visible:=false;
+      heightlabel.Visible:=false;
    end;
 end;
 

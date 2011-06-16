@@ -615,7 +615,7 @@ object FormPOS: TFormPOS
         object IWLabel12: TIWLabel
           Left = 10
           Top = 7
-          Width = 89
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -646,7 +646,7 @@ object FormPOS: TFormPOS
         object IWLabel13: TIWLabel
           Left = 10
           Top = 31
-          Width = 61
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -713,7 +713,7 @@ object FormPOS: TFormPOS
         object IWLabel14: TIWLabel
           Left = 10
           Top = 56
-          Width = 61
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -847,7 +847,7 @@ object FormPOS: TFormPOS
         object IWLabel16: TIWLabel
           Left = 82
           Top = 130
-          Width = 26
+          Width = 39
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -950,7 +950,7 @@ object FormPOS: TFormPOS
         object IWLabel17: TIWLabel
           Left = 10
           Top = 103
-          Width = 50
+          Width = 55
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -988,8 +988,8 @@ object FormPOS: TFormPOS
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1027,7 +1027,7 @@ object FormPOS: TFormPOS
         object IWLabel21: TIWLabel
           Left = 67
           Top = 156
-          Width = 80
+          Width = 94
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1058,7 +1058,7 @@ object FormPOS: TFormPOS
         object IWLabel22: TIWLabel
           Left = 82
           Top = 103
-          Width = 29
+          Width = 39
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1223,7 +1223,7 @@ object FormPOS: TFormPOS
         object IWLabel7: TIWLabel
           Left = 10
           Top = 186
-          Width = 61
+          Width = 103
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1290,7 +1290,7 @@ object FormPOS: TFormPOS
         object IWLabel8: TIWLabel
           Left = 10
           Top = 218
-          Width = 61
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1355,7 +1355,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel18: TIWLabel
-          Left = 359
+          Left = 327
           Top = 174
           Width = 61
           Height = 16
@@ -1422,9 +1422,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel19: TIWLabel
-          Left = 354
+          Left = 328
           Top = 226
-          Width = 61
+          Width = 87
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1489,9 +1489,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel23: TIWLabel
-          Left = 370
+          Left = 360
           Top = 200
-          Width = 79
+          Width = 97
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1656,7 +1656,7 @@ object FormPOS: TFormPOS
         object IWLabel32: TIWLabel
           Left = 10
           Top = 248
-          Width = 103
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -1721,9 +1721,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object TimeoutBtn: TIWRadioButton
-          Left = 435
+          Left = 424
           Top = 104
-          Width = 76
+          Width = 87
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -1753,9 +1753,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SmartCutBtn: TIWRadioButton
-          Left = 520
+          Left = 512
           Top = 104
-          Width = 86
+          Width = 94
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -1852,9 +1852,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object NormBtn: TIWRadioButton
-          Left = 350
+          Left = 344
           Top = 104
-          Width = 76
+          Width = 82
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -1884,9 +1884,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SCTextLbl: TIWLabel
-          Left = 325
+          Left = 304
           Top = 126
-          Width = 96
+          Width = 117
           Height = 16
           Cursor = crAuto
           Visible = False
@@ -1953,9 +1953,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object DocLinesLbl: TIWLabel
-          Left = 335
+          Left = 328
           Top = 150
-          Width = 86
+          Width = 101
           Height = 16
           Cursor = crAuto
           Visible = False
@@ -2024,7 +2024,7 @@ object FormPOS: TFormPOS
         object IncBox: TIWCheckBox
           Left = 488
           Top = 151
-          Width = 92
+          Width = 105
           Height = 21
           Cursor = crAuto
           Visible = False
@@ -2054,9 +2054,9 @@ object FormPOS: TFormPOS
           FriendlyName = 'EopBox'
         end
         object CutLbl: TIWLabel
-          Left = 314
+          Left = 306
           Top = 104
-          Width = 32
+          Width = 39
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -2152,9 +2152,9 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object TranIDLbl: TIWLabel
-          Left = 354
+          Left = 328
           Top = 251
-          Width = 61
+          Width = 87
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -2338,7 +2338,7 @@ object FormPOS: TFormPOS
         object IWLabel9: TIWLabel
           Left = 10
           Top = 10
-          Width = 91
+          Width = 119
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -2405,9 +2405,9 @@ object FormPOS: TFormPOS
           Text = '.'
         end
         object IWLabel10: TIWLabel
-          Left = 194
+          Left = 168
           Top = 10
-          Width = 144
+          Width = 170
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -2476,7 +2476,7 @@ object FormPOS: TFormPOS
         object IWLabel3: TIWLabel
           Left = 10
           Top = 39
-          Width = 103
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -2622,7 +2622,7 @@ object FormPOS: TFormPOS
           Caption = 'Detect'
           Editable = True
           Font.Color = clNone
-          Font.Size = 10
+          Font.Size = 9
           Font.Style = []
           ScriptEvents = <>
           DoSubmitValidation = True
@@ -2634,8 +2634,8 @@ object FormPOS: TFormPOS
         end
         object SuppressBtn: TIWRadioButton
           Left = 480
-          Top = 22
-          Width = 121
+          Top = 30
+          Width = 129
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2653,7 +2653,7 @@ object FormPOS: TFormPOS
           Caption = 'Suppress'
           Editable = True
           Font.Color = clNone
-          Font.Size = 10
+          Font.Size = 9
           Font.Style = []
           ScriptEvents = <>
           DoSubmitValidation = True
@@ -2665,8 +2665,8 @@ object FormPOS: TFormPOS
         end
         object AssumeBtn: TIWRadioButton
           Left = 480
-          Top = 40
-          Width = 121
+          Top = 56
+          Width = 129
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2684,7 +2684,7 @@ object FormPOS: TFormPOS
           Caption = 'Always Assume'
           Editable = True
           Font.Color = clNone
-          Font.Size = 10
+          Font.Size = 9
           Font.Style = []
           ScriptEvents = <>
           DoSubmitValidation = True

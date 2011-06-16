@@ -15,13 +15,13 @@ object form_login: Tform_login
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 139
-  DesignTop = 2
+  DesignLeft = 260
+  DesignTop = 185
   object IWRegion1: TIWRegion
     Left = 0
-    Top = 114
+    Top = 121
     Width = 1028
-    Height = 632
+    Height = 625
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -36,7 +36,7 @@ object form_login: Tform_login
     Splitter = False
     DesignSize = (
       1028
-      632)
+      625)
     object IWSiLink1: TIWSiLink
       Left = 1
       Top = 1
@@ -428,7 +428,7 @@ object form_login: Tform_login
     end
     object IWRegion2: TIWRegion
       Left = 0
-      Top = 597
+      Top = 590
       Width = 1028
       Height = 35
       Cursor = crAuto
@@ -615,7 +615,7 @@ object form_login: Tform_login
     Left = 0
     Top = 0
     Width = 1028
-    Height = 114
+    Height = 121
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
@@ -632,7 +632,7 @@ object form_login: Tform_login
     Splitter = False
     DesignSize = (
       1028
-      114)
+      121)
     object IWImageFile1: TIWImageFile
       Left = 0
       Top = 24
@@ -663,7 +663,7 @@ object form_login: Tform_login
     end
     object IWRectangle5: TIWRectangle
       Left = 0
-      Top = 94
+      Top = 102
       Width = 1521
       Height = 20
       Cursor = crAuto
@@ -692,7 +692,7 @@ object form_login: Tform_login
     end
     object IWRectangle6: TIWRectangle
       Left = 0
-      Top = 88
+      Top = 97
       Width = 1521
       Height = 3
       Cursor = crAuto

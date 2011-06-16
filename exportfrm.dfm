@@ -1,8 +1,8 @@
 object FormExport: TFormExport
   Left = 0
   Top = 0
-  Width = 1028
-  Height = 692
+  Width = 1025
+  Height = 445
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -16,52 +16,53 @@ object FormExport: TFormExport
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 206
-  DesignTop = 215
+  DesignLeft = 207
+  DesignTop = 501
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 663
-    Width = 1028
+    Top = 416
+    Width = 1025
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 0
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 1025
       Height = 29
+      TabOrder = 4
       DesignSize = (
-        1028
+        1025
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 652
+        Left = 649
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1641
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 610
+        Width = 607
       end
       inherited Cancel: TIWButton
-        Left = 941
+        Left = 938
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 853
+        Left = 850
       end
       inherited Extra2: TIWButton
-        Left = 765
+        Left = 762
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 693
+        Left = 690
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1028
-    Height = 549
+    Width = 1025
+    Height = 302
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -75,13 +76,13 @@ object FormExport: TFormExport
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
-      549)
+      1025
+      302)
     object IWRegion2: TIWRegion
-      Left = 215
+      Left = 214
       Top = 32
       Width = 593
-      Height = 491
+      Height = 244
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -96,7 +97,7 @@ object FormExport: TFormExport
       Splitter = False
       DesignSize = (
         593
-        491)
+        244)
       object GrpLabel: TIWLabel
         Left = 8
         Top = 8
@@ -133,7 +134,7 @@ object FormExport: TFormExport
         Left = 16
         Top = 40
         Width = 561
-        Height = 346
+        Height = 99
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -198,7 +199,7 @@ object FormExport: TFormExport
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = silink_footer
         LangFile = 'JobExport.sil'
@@ -208,7 +209,7 @@ object FormExport: TFormExport
         Left = 0
         Top = 3
         Width = 3
-        Height = 488
+        Height = 241
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -264,7 +265,125 @@ object FormExport: TFormExport
       end
       object JobCombo: TIWComboBox
         Left = 116
-        Top = 397
+        Top = 150
+        Width = 215
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 1
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- Go to ... --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = True
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 2
+        ItemIndex = -1
+        Items.Strings = (
+          'Jobs'
+          'Job Distribution'
+          'Journal'
+          'System'
+          'Overview'
+          'Publish'
+          'Status'
+          '- - - - - - -'
+          'Logout')
+        Sorted = False
+        FriendlyName = 'JobCombo'
+      end
+      object IWLabel1: TIWLabel
+        Left = 28
+        Top = 151
+        Width = 83
+        Height = 19
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.FontName = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'GrpLabel'
+        Caption = 'Job'
+        RawText = False
+      end
+      object IWLabel2: TIWLabel
+        Left = 28
+        Top = 181
+        Width = 83
+        Height = 19
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.FontName = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'GrpLabel'
+        Caption = 'Export To'
+        RawText = False
+      end
+      object CoCombo: TIWComboBox
+        Left = 116
+        Top = 180
         Width = 215
         Height = 21
         Cursor = crAuto
@@ -312,129 +431,11 @@ object FormExport: TFormExport
           '- - - - - - -'
           'Logout')
         Sorted = False
-        FriendlyName = 'JobCombo'
-      end
-      object IWLabel1: TIWLabel
-        Left = 28
-        Top = 398
-        Width = 83
-        Height = 19
-        Cursor = crAuto
-        Anchors = [akLeft, akBottom]
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.FontName = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        NoWrap = False
-        ConvertSpaces = False
-        HasTabOrder = False
-        AutoSize = False
-        FriendlyName = 'GrpLabel'
-        Caption = 'Job'
-        RawText = False
-      end
-      object IWLabel2: TIWLabel
-        Left = 28
-        Top = 428
-        Width = 83
-        Height = 19
-        Cursor = crAuto
-        Anchors = [akLeft, akBottom]
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.FontName = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        NoWrap = False
-        ConvertSpaces = False
-        HasTabOrder = False
-        AutoSize = False
-        FriendlyName = 'GrpLabel'
-        Caption = 'Export To'
-        RawText = False
-      end
-      object CoCombo: TIWComboBox
-        Left = 116
-        Top = 427
-        Width = 215
-        Height = 21
-        Cursor = crAuto
-        Anchors = [akLeft, akBottom]
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 1
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FocusColor = clNone
-        AutoHideOnMenuActivation = False
-        ItemsHaveValues = False
-        NoSelectionText = '-- Go to ... --'
-        Required = False
-        RequireSelection = True
-        ScriptEvents = <>
-        UseSize = True
-        Style = stNormal
-        ButtonColor = clBtnFace
-        DoSubmitValidation = True
-        Editable = True
-        NonEditableAsLabel = True
-        SubmitOnAsyncEvent = True
-        TabOrder = 4
-        ItemIndex = -1
-        Items.Strings = (
-          'Jobs'
-          'Job Distribution'
-          'Journal'
-          'System'
-          'Overview'
-          'Publish'
-          'Status'
-          '- - - - - - -'
-          'Logout')
-        Sorted = False
         FriendlyName = 'navcombo'
       end
       object ExportBtn: TIWButton
         Left = 115
-        Top = 455
+        Top = 208
         Width = 83
         Height = 23
         Cursor = crAuto
@@ -467,52 +468,38 @@ object FormExport: TFormExport
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 1025
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 1028
+      Width = 1025
       Height = 114
-      TabOrder = 2
+      TabOrder = 1
       DesignSize = (
-        1028
+        1025
         114)
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
-      inherited titleimage: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
       inherited IWRectangle1: TIWRectangle
         Left = 760
-        Width = 957
+        Width = 954
       end
       inherited IWRectangle2: TIWRectangle
         Left = 760
         Width = 4
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 2025
+        Width = 2022
       end
       inherited IWImageFile3: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
+        Left = 695
       end
       inherited langlink: TIWSiLink
-        Left = 764
-      end
-      inherited HideBox: TIWImageFile
-        Left = 1014
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
+        Left = 761
       end
       inherited Smalltitle: TIWLabel
-        Left = 919
+        Left = 916
         Width = 93
       end
       inherited JobRegn: TIWRegion
