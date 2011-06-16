@@ -25,7 +25,7 @@ object RcWebController: TRcWebController
   SSLOptions.NonSSLRequest = nsAccept
   SSLOptions.Port = 0
   SSLOptions.SSLVersion = sslv3
-  Version = '11.0.38'
+  Version = '11.0.42'
   AllowMultipleSessionsPerUser = True
   OnException = IWServerControllerBaseException
   OnNewSession = IWServerControllerBaseNewSession

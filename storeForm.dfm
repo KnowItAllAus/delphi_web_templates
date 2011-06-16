@@ -553,7 +553,7 @@ object formStore: TformStore
       object IWLabel11: TIWLabel
         Left = 216
         Top = 214
-        Width = 209
+        Width = 193
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -571,7 +571,7 @@ object formStore: TformStore
         Alignment = taLeftJustify
         BGColor = clNone
         Font.Color = clNone
-        Font.Size = 10
+        Font.Size = 8
         Font.Style = []
         NoWrap = False
         ConvertSpaces = False
@@ -940,9 +940,9 @@ object formStore: TformStore
         FriendlyName = 'zonecombo'
       end
       object IWLabel13: TIWLabel
-        Left = 70
+        Left = 22
         Top = 293
-        Width = 61
+        Width = 107
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1596,7 +1596,7 @@ object formStore: TformStore
       object IWLabel19: TIWLabel
         Left = 22
         Top = 137
-        Width = 113
+        Width = 131
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1627,7 +1627,7 @@ object formStore: TformStore
       object auxpromolbl: TIWLabel
         Left = 22
         Top = 165
-        Width = 113
+        Width = 131
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1719,7 +1719,7 @@ object formStore: TformStore
       object AutoBox: TIWCheckBox
         Left = 416
         Top = 19
-        Width = 136
+        Width = 185
         Height = 21
         Cursor = crAuto
         IW50Hint = False

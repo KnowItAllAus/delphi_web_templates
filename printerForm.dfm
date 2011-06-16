@@ -595,7 +595,7 @@ object formPrinter: TformPrinter
       object IWLabel7: TIWLabel
         Left = 48
         Top = 257
-        Width = 89
+        Width = 105
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -626,7 +626,7 @@ object formPrinter: TformPrinter
       object IWLabel3: TIWLabel
         Left = 48
         Top = 233
-        Width = 81
+        Width = 105
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -657,7 +657,7 @@ object formPrinter: TformPrinter
       object IWLabel2: TIWLabel
         Left = 48
         Top = 209
-        Width = 65
+        Width = 105
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -688,7 +688,7 @@ object formPrinter: TformPrinter
       object IWLabel1: TIWLabel
         Left = 48
         Top = 185
-        Width = 65
+        Width = 105
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -719,7 +719,7 @@ object formPrinter: TformPrinter
       object IWLabel8: TIWLabel
         Left = 360
         Top = 185
-        Width = 73
+        Width = 81
         Height = 16
         Cursor = crAuto
         IW50Hint = False

@@ -762,8 +762,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -852,8 +852,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1066,7 +1066,7 @@ object FormVoucherEdit: TFormVoucherEdit
         object DupBox: TIWCheckBox
           Left = 552
           Top = 40
-          Width = 129
+          Width = 137
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -1097,7 +1097,7 @@ object FormVoucherEdit: TFormVoucherEdit
         object PassthroughBox: TIWCheckBox
           Left = 552
           Top = 11
-          Width = 97
+          Width = 137
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -1166,8 +1166,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1344,8 +1344,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1416,8 +1416,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1627,8 +1627,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -1728,8 +1728,8 @@ object FormVoucherEdit: TFormVoucherEdit
           ParentShowHint = False
           ShowHint = True
           ZIndex = 0
-          RenderSize = True
-          StyleRenderOptions.RenderSize = True
+          RenderSize = False
+          StyleRenderOptions.RenderSize = False
           StyleRenderOptions.RenderPosition = True
           StyleRenderOptions.RenderFont = True
           StyleRenderOptions.RenderZIndex = True
@@ -2231,9 +2231,9 @@ object FormVoucherEdit: TFormVoucherEdit
           RawText = False
         end
         object monbox: TIWCheckBox
-          Left = 472
+          Left = 456
           Top = 12
-          Width = 49
+          Width = 65
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2264,7 +2264,7 @@ object FormVoucherEdit: TFormVoucherEdit
         object tuebox: TIWCheckBox
           Left = 535
           Top = 12
-          Width = 49
+          Width = 66
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2293,9 +2293,9 @@ object FormVoucherEdit: TFormVoucherEdit
           FriendlyName = 'tuebox'
         end
         object wedbox: TIWCheckBox
-          Left = 597
+          Left = 621
           Top = 12
-          Width = 49
+          Width = 60
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2324,9 +2324,9 @@ object FormVoucherEdit: TFormVoucherEdit
           FriendlyName = 'wedbox'
         end
         object thubox: TIWCheckBox
-          Left = 471
+          Left = 455
           Top = 36
-          Width = 49
+          Width = 66
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2357,7 +2357,7 @@ object FormVoucherEdit: TFormVoucherEdit
         object fribox: TIWCheckBox
           Left = 534
           Top = 36
-          Width = 49
+          Width = 67
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2386,9 +2386,9 @@ object FormVoucherEdit: TFormVoucherEdit
           FriendlyName = 'fribox'
         end
         object satbox: TIWCheckBox
-          Left = 596
+          Left = 620
           Top = 36
-          Width = 49
+          Width = 61
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2417,9 +2417,9 @@ object FormVoucherEdit: TFormVoucherEdit
           FriendlyName = 'satbox'
         end
         object sunbox: TIWCheckBox
-          Left = 470
+          Left = 454
           Top = 60
-          Width = 49
+          Width = 67
           Height = 21
           Cursor = crAuto
           IW50Hint = False
