@@ -1,7 +1,7 @@
 object formStats: TformStats
   Left = 0
   Top = 0
-  Width = 1028
+  Width = 1024
   Height = 746
   RenderInvisibleControls = False
   AllowPageAccess = True
@@ -21,38 +21,30 @@ object formStats: TformStats
   inline FrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 1024
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
-      inherited IWImageFile2: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
+      Width = 1024
+      TabOrder = 7
       inherited IWRectangle1: TIWRectangle
         Left = 152
-        Width = 2477
+        Width = 2473
       end
       inherited IWRectangle2: TIWRectangle
         Left = 152
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 1896
+        Width = 1892
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 692
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
+        Left = 688
       end
       inherited langlink: TIWSiLink
-        Left = 622
+        Left = 618
       end
       inherited IWRegion1: TIWRegion
         Color = 10526880
@@ -68,7 +60,7 @@ object formStats: TformStats
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 1028
+    Width = 1024
     Height = 603
     Cursor = crAuto
     RenderInvisibleControls = False
@@ -83,12 +75,12 @@ object formStats: TformStats
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
+      1024
       603)
     object IWRegion2: TIWRegion
       Left = 40
       Top = 16
-      Width = 946
+      Width = 942
       Height = 567
       Cursor = crAuto
       HorzScrollBar.Visible = False
@@ -105,12 +97,12 @@ object formStats: TformStats
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        946
+        942
         567)
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 946
+        Width = 942
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -261,7 +253,7 @@ object formStats: TformStats
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 1
+        TabOrder = 0
         PasswordPrompt = False
         Text = 'StartEdit'
       end
@@ -329,7 +321,7 @@ object formStats: TformStats
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 2
+        TabOrder = 1
         PasswordPrompt = False
         Text = 'EndEdit'
       end
@@ -365,7 +357,7 @@ object formStats: TformStats
           '4 hour')
         Layout = glVertical
         ScriptEvents = <>
-        TabOrder = 3
+        TabOrder = 2
       end
       object DisplayBtn: TIWButton
         Left = 568
@@ -393,7 +385,7 @@ object formStats: TformStats
         Font.Style = []
         FriendlyName = 'DisplayBtn'
         ScriptEvents = <>
-        TabOrder = 4
+        TabOrder = 3
         OnClick = DisplayBtnClick
       end
       object IWSiLink1: TIWSiLink
@@ -422,14 +414,14 @@ object formStats: TformStats
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 5
+        TabOrder = 4
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'stats.sil'
         LangControl = RcDataMod.LangEditControl1
       end
       object NextLink: TIWLink
-        Left = 845
+        Left = 841
         Top = 548
         Width = 65
         Height = 17
@@ -456,12 +448,12 @@ object formStats: TformStats
         DoSubmitValidation = False
         FriendlyName = 'NextLink'
         OnClick = NextLinkClick
-        TabOrder = 6
+        TabOrder = 5
         RawText = False
         Caption = 'Next >>'
       end
       object PrevLink: TIWLink
-        Left = 765
+        Left = 761
         Top = 548
         Width = 65
         Height = 17
@@ -488,14 +480,14 @@ object formStats: TformStats
         DoSubmitValidation = False
         FriendlyName = 'PrevLink'
         OnClick = PrevLinkClick
-        TabOrder = 7
+        TabOrder = 6
         RawText = False
         Caption = '<< Prev'
       end
       object StatGrid: TIWGrid
         Left = 33
         Top = 81
-        Width = 880
+        Width = 876
         Height = 461
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -539,38 +531,38 @@ object formStats: TformStats
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 717
-    Width = 1028
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 1024
       Height = 29
       TabOrder = 8
       inherited IWRectangle1: TIWRectangle
-        Left = 612
+        Left = 608
         Width = 418
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 570
+        Width = 566
       end
       inherited Cancel: TIWButton
-        Left = 941
+        Left = 937
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 853
+        Left = 849
       end
       inherited Extra2: TIWButton
-        Left = 765
+        Left = 761
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 693
+        Left = 689
       end
     end
   end

@@ -132,7 +132,7 @@ begin
   with RcDataModule.SQLQry do begin
      Transaction.active:=false;
      SQL.Clear;
-     SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID and PARAMTYPE<>"Object"');
+     SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID and PARAMTYPE<>''Object''');
      ParamByName ('COMPANY').AsString:=UserSession.Company;
      ParamByName ('JOBID').AsString:=RcDataModule.GetValue('EditJob','');
      Open;

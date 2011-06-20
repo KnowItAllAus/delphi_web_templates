@@ -1,8 +1,8 @@
 object formStores: TformStores
   Left = 0
   Top = 0
-  Width = 630
-  Height = 444
+  Width = 1024
+  Height = 656
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -16,13 +16,13 @@ object formStores: TformStores
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 3
-  DesignTop = 2
+  DesignLeft = 654
+  DesignTop = 395
   object IWRegion1: TIWRegion
     Left = 0
     Top = 111
-    Width = 630
-    Height = 305
+    Width = 1024
+    Height = 517
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -36,8 +36,8 @@ object formStores: TformStores
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      630
-      305)
+      1024
+      517)
     object IWSiLink1: TIWSiLink
       Left = 0
       Top = 0
@@ -73,8 +73,8 @@ object formStores: TformStores
     object IWRegion2: TIWRegion
       Left = 48
       Top = 24
-      Width = 559
-      Height = 251
+      Width = 953
+      Height = 463
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -88,13 +88,13 @@ object formStores: TformStores
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        559
-        251)
+        953
+        463)
       object StoreGrid: TIWGrid
         Left = 56
         Top = 56
-        Width = 455
-        Height = 147
+        Width = 849
+        Height = 359
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -166,7 +166,7 @@ object formStores: TformStores
         RawText = False
       end
       object InsertBtn: TIWButton
-        Left = 350
+        Left = 744
         Top = 24
         Width = 75
         Height = 25
@@ -196,7 +196,7 @@ object formStores: TformStores
         OnClick = InsertBtnClick
       end
       object RefreshBtn: TIWButton
-        Left = 438
+        Left = 832
         Top = 24
         Width = 75
         Height = 25
@@ -227,8 +227,8 @@ object formStores: TformStores
       end
       object IWLabel1: TIWLabel
         Left = 56
-        Top = 210
-        Width = 161
+        Top = 422
+        Width = 209
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -258,9 +258,9 @@ object formStores: TformStores
         RawText = False
       end
       object IWLabel3: TIWLabel
-        Left = 302
-        Top = 210
-        Width = 89
+        Left = 674
+        Top = 422
+        Width = 111
         Height = 21
         Cursor = crAuto
         Anchors = [akRight, akBottom]
@@ -276,7 +276,7 @@ object formStores: TformStores
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -290,8 +290,8 @@ object formStores: TformStores
         RawText = False
       end
       object OffCombo: TIWComboBox
-        Left = 398
-        Top = 208
+        Left = 792
+        Top = 420
         Width = 49
         Height = 21
         Cursor = crAuto
@@ -338,8 +338,8 @@ object formStores: TformStores
         FriendlyName = 'OffCombo'
       end
       object IWLabel2: TIWLabel
-        Left = 462
-        Top = 210
+        Left = 856
+        Top = 422
         Width = 57
         Height = 21
         Cursor = crAuto
@@ -373,7 +373,7 @@ object formStores: TformStores
         Left = 0
         Top = 3
         Width = 3
-        Height = 248
+        Height = 460
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -401,7 +401,7 @@ object formStores: TformStores
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 559
+        Width = 953
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -431,81 +431,81 @@ object formStores: TformStores
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 416
-    Width = 630
+    Top = 628
+    Width = 1024
     Height = 28
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 630
+      Width = 1024
       TabOrder = 3
       DesignSize = (
-        630
+        1024
         28)
       inherited IWRectangle1: TIWRectangle
-        Left = 214
+        Left = 608
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1246
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 172
+        Width = 566
       end
       inherited Cancel: TIWButton
-        Left = 542
+        Left = 936
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 368
+        Left = 762
       end
       inherited Extra2: TIWButton
-        Left = 455
+        Left = 849
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 278
+        Left = 672
       end
     end
   end
   inline AdminFrameTitle1: TAdminFrameTitle
     Left = 0
     Top = 0
-    Width = 630
+    Width = 1024
     Height = 111
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 2
     inherited IWFrameRegion: TIWRegion
-      Width = 630
+      Width = 1024
       Height = 111
       TabOrder = 5
       DesignSize = (
-        630
+        1024
         111)
       inherited IWRectangle1: TIWRectangle
         Left = 152
-        Width = 2078
+        Width = 2472
       end
       inherited IWRectangle2: TIWRectangle
         Left = 152
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 22
+        Width = 416
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 236
+        Left = 630
       end
       inherited langlink: TIWSiLink
-        Left = 125
+        Left = 519
       end
       inherited Smalltitle: TIWLabel
-        Left = 490
+        Left = 884
       end
       inherited HideBox: TIWImageFile
-        Left = 615
+        Left = 1009
       end
       inherited SysReg: TIWRegion
         Color = 10526880

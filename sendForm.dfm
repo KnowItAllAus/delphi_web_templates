@@ -189,7 +189,7 @@ object formSend: TformSend
       object RequestLabel: TIWLabel
         Left = 171
         Top = 39
-        Width = 198
+        Width = 238
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -204,7 +204,7 @@ object formSend: TformSend
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taCenter
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10

@@ -442,7 +442,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -509,7 +509,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -630,7 +630,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -661,7 +661,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -728,7 +728,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -780,7 +780,7 @@ object FormPOS: TFormPOS
         object IWLabel15: TIWLabel
           Left = 314
           Top = 7
-          Width = 96
+          Width = 111
           Height = 16
           Cursor = crAuto
           IW50Hint = False
@@ -795,7 +795,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1123,7 +1123,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel4: TIWLabel
-          Left = 314
+          Left = 329
           Top = 33
           Width = 96
           Height = 16
@@ -1140,7 +1140,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1190,7 +1190,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel6: TIWLabel
-          Left = 314
+          Left = 329
           Top = 59
           Width = 96
           Height = 16
@@ -1207,7 +1207,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1221,7 +1221,7 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object IWLabel7: TIWLabel
-          Left = 10
+          Left = 18
           Top = 186
           Width = 103
           Height = 16
@@ -1238,7 +1238,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1305,7 +1305,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1355,7 +1355,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel18: TIWLabel
-          Left = 327
+          Left = 364
           Top = 174
           Width = 61
           Height = 16
@@ -1372,7 +1372,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1422,7 +1422,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel19: TIWLabel
-          Left = 328
+          Left = 338
           Top = 226
           Width = 87
           Height = 16
@@ -1439,7 +1439,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1671,7 +1671,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1785,7 +1785,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object Extralabel: TIWLabel
-          Left = 10
+          Left = 18
           Top = 275
           Width = 103
           Height = 16
@@ -1802,7 +1802,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1884,7 +1884,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SCTextLbl: TIWLabel
-          Left = 304
+          Left = 308
           Top = 126
           Width = 117
           Height = 16
@@ -1902,7 +1902,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -1953,7 +1953,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object DocLinesLbl: TIWLabel
-          Left = 328
+          Left = 324
           Top = 150
           Width = 101
           Height = 16
@@ -1971,7 +1971,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -2085,7 +2085,7 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object IWLabel27: TIWLabel
-          Left = 10
+          Left = 18
           Top = 300
           Width = 103
           Height = 16
@@ -2102,7 +2102,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -2152,7 +2152,7 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object TranIDLbl: TIWLabel
-          Left = 328
+          Left = 338
           Top = 251
           Width = 87
           Height = 16
@@ -2169,7 +2169,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -2250,7 +2250,7 @@ object FormPOS: TFormPOS
           FriendlyName = 'Signbox'
         end
         object IWLabel29: TIWLabel
-          Left = 10
+          Left = 18
           Top = 335
           Width = 103
           Height = 16
@@ -2267,7 +2267,7 @@ object FormPOS: TFormPOS
           StyleRenderOptions.RenderVisibility = True
           StyleRenderOptions.RenderStatus = True
           StyleRenderOptions.RenderAbsolute = True
-          Alignment = taLeftJustify
+          Alignment = taRightJustify
           BGColor = clNone
           Font.Color = clNone
           Font.Size = 10
@@ -2634,7 +2634,7 @@ object FormPOS: TFormPOS
         end
         object SuppressBtn: TIWRadioButton
           Left = 480
-          Top = 30
+          Top = 25
           Width = 129
           Height = 21
           Cursor = crAuto
@@ -2665,7 +2665,7 @@ object FormPOS: TFormPOS
         end
         object AssumeBtn: TIWRadioButton
           Left = 480
-          Top = 56
+          Top = 48
           Width = 129
           Height = 21
           Cursor = crAuto

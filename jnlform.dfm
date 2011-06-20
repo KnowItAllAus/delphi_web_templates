@@ -1,8 +1,8 @@
 object formJnl: TformJnl
   Left = 0
   Top = 0
-  Width = 630
-  Height = 444
+  Width = 1015
+  Height = 688
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -17,34 +17,34 @@ object formJnl: TformJnl
   ShowHint = True
   OnDefaultAction = DisplayBtnClick
   XPTheme = True
-  DesignLeft = 3
-  DesignTop = 2
+  DesignLeft = 362
+  DesignTop = 302
   inline StatsFrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0
-    Width = 630
+    Width = 1015
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 630
+      Width = 1015
       TabOrder = 12
       DesignSize = (
-        630
+        1015
         114)
       inherited IWRectangle1: TIWRectangle
-        Width = 2172
+        Width = 2557
       end
       inherited IWRectangle3: TIWRectangle
-        Width = 1802
+        Width = 2187
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 237
+        Left = 622
       end
       inherited langlink: TIWSiLink
-        Left = 190
+        Left = 575
       end
       inherited PromoReg: TIWRegion
         inherited ActivityLink: TIWLink
@@ -56,8 +56,8 @@ object formJnl: TformJnl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 630
-    Height = 302
+    Width = 1015
+    Height = 546
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -71,13 +71,13 @@ object formJnl: TformJnl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      630
-      302)
+      1015
+      546)
     object IWRegion2: TIWRegion
       Left = 32
       Top = 8
-      Width = 565
-      Height = 284
+      Width = 950
+      Height = 528
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -91,12 +91,12 @@ object formJnl: TformJnl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        565
-        284)
+        950
+        528)
       object VoucherLabel: TIWLabel
         Left = 16
         Top = 8
-        Width = 108
+        Width = 145
         Height = 19
         Cursor = crAuto
         IW50Hint = False
@@ -126,9 +126,9 @@ object formJnl: TformJnl
         RawText = False
       end
       object IWLabel1: TIWLabel
-        Left = 200
+        Left = 192
         Top = 8
-        Width = 64
+        Width = 72
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -143,7 +143,7 @@ object formJnl: TformJnl
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -194,9 +194,9 @@ object formJnl: TformJnl
         Text = 'StartEdit'
       end
       object IWLabel2: TIWLabel
-        Left = 368
+        Left = 352
         Top = 8
-        Width = 61
+        Width = 77
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -211,7 +211,7 @@ object formJnl: TformJnl
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -354,8 +354,8 @@ object formJnl: TformJnl
         OnClick = DisplayBtnClick
       end
       object PrevBtn: TIWButton
-        Left = 404
-        Top = 251
+        Left = 789
+        Top = 495
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -384,8 +384,8 @@ object formJnl: TformJnl
         OnClick = PrevLinkClick
       end
       object NextBtn: TIWButton
-        Left = 474
-        Top = 251
+        Left = 859
+        Top = 495
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -415,7 +415,7 @@ object formJnl: TformJnl
       end
       object DelJnlBtn: TIWButton
         Left = 18
-        Top = 253
+        Top = 497
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -449,7 +449,7 @@ object formJnl: TformJnl
         Left = 1
         Top = 4
         Width = 3
-        Height = 279
+        Height = 523
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -477,7 +477,7 @@ object formJnl: TformJnl
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 767
+        Width = 948
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -506,8 +506,8 @@ object formJnl: TformJnl
       object TranGrid: TIWGrid
         Left = 17
         Top = 65
-        Width = 531
-        Height = 182
+        Width = 916
+        Height = 426
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -587,9 +587,9 @@ object formJnl: TformJnl
         FriendlyName = 'StoreCombo'
       end
       object IWLabel3: TIWLabel
-        Left = 200
+        Left = 192
         Top = 40
-        Width = 64
+        Width = 72
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -604,7 +604,7 @@ object formJnl: TformJnl
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -655,9 +655,9 @@ object formJnl: TformJnl
         Text = 'StartEdit'
       end
       object IWLabel4: TIWLabel
-        Left = 368
+        Left = 352
         Top = 40
-        Width = 61
+        Width = 77
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -672,7 +672,7 @@ object formJnl: TformJnl
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -839,41 +839,41 @@ object formJnl: TformJnl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 416
-    Width = 630
+    Top = 660
+    Width = 1015
     Height = 28
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 630
+      Width = 1015
       TabOrder = 11
       DesignSize = (
-        630
+        1015
         28)
       inherited IWRectangle1: TIWRectangle
-        Left = 214
+        Left = 599
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1246
+        Width = 1631
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 172
+        Width = 557
       end
       inherited Cancel: TIWButton
-        Left = 544
+        Left = 929
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 456
+        Left = 841
       end
       inherited Extra2: TIWButton
-        Left = 368
+        Left = 753
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 301
+        Left = 686
       end
     end
   end
