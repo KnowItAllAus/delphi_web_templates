@@ -245,6 +245,9 @@ begin
            RcDataModule.SaveValue ('JobInstance','LINK');
            TFormEditTmpl.Create(WebApplication).Show;
          end else begin
+           if kind=1 then begin
+              RcDataModule.SaveValue ('JobInstance','TEMPLATE');
+           end;
            TFormJobRev.Create(WebApplication).Show;
          end;
       end;

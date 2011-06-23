@@ -8,7 +8,8 @@ uses
   IWBaseHTMLControl, IWControl, IWCompLabel, Controls, Forms,
   IWCompEdit, IWHTMLControls, IWSiLink, siComp, siLngLnk, IWCompRectangle,
   footer_user, IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion,
-  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass;
+  baretitle, IWCompCheckbox, IWCompListbox, ReferredClass,
+  IWHTML40Container, IBQuery;
 
 type
   TFormGrpDtl = class(TIWAppForm)
@@ -82,7 +83,7 @@ type
     gList : TStringList;
     dList : TStringList;
     has_live_stores : boolean;
-    currenttemplate : string;
+//    currenttemplate : string;
     procedure InitCombos;
     procedure DrawGrids;
   public
@@ -438,6 +439,8 @@ end;
 
 
 procedure TFormGrpDtl.IWAppFormCreate(Sender: TObject);
+var
+   tq : TIBQuery;
 begin
    StoreIdList := TStringlist.Create;
    PromoIdList := TStringlist.Create;
@@ -449,7 +452,8 @@ begin
    dlist:=TStringList.create;
    IWSiLink1.InitForm;
    DelBtn.Confirmation:=SiLangLinked1.GetTextOrDefault('Delete');
-   with RcDataModule.CurrentGroupQuery do begin
+   tq:=RcDataModule.CurrentGroupQuery;
+   with tq do begin
      ParamByName ('ID').AsString:=RcDataModule.GetValue('editgroup','');
      ParamByName ('COMPANY').AsString:=UserSession.Company;
      Transaction.Active:=true;
@@ -461,7 +465,7 @@ begin
      if FieldByName('GROUPKIND').AsString='V' then GroupEdit.Text:='Service';
      if FieldByName('GROUPKIND').AsString='U' then GroupEdit.Text:='User';
      TestBox.Checked:=FieldByName('TESTGROUP').AsString='Y';
-     CurrentTemplate:=FieldByName('PARAMVER').AsString;
+//     CurrentTemplate:=tq.FieldByName('PARAMVER').AsString;
      DrawGrids;
      InitCombos;
      Transaction.Active:=false;

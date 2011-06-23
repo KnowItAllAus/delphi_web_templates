@@ -69,7 +69,8 @@ begin
     except
     end;
     NameEdit.Text:=FieldByName ('Name').AsString;
-    if (RcDataModule.GetValue ('JobInstance','JOB')<>'JOB') then TemplateBox.visible:=false;
+    if (RcDataModule.GetValue ('JobInstance','JOB')<>'JOB') and (RcDataModule.GetValue('JobInstance','JOB')<>'TEMPLATE') then TemplateBox.visible:=false;
+    if (RcDataModule.GetValue ('JobInstance','JOB')='TEMPLATE') then TemplateBox.checked:=true;
   end;
 end;
 

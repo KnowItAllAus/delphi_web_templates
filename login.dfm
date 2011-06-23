@@ -402,6 +402,7 @@ object form_login: Tform_login
         Width = 75
         Height = 25
         Cursor = crAuto
+        Visible = False
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True

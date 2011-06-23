@@ -244,6 +244,10 @@ begin
    JobNameLbl.Caption:=JobNameLbl.Caption+' '+Usersession.JobName;
    RefreshGrid;
 
+   lengthedit.Visible:=false;
+   heightedit.Visible:=false;
+   lenlabel.Visible:=false;
+   heightlabel.Visible:=false;
    with RcDataModule.CurrentJobQuery do begin
      Transaction.Active:=true;
      Open;
@@ -261,10 +265,10 @@ begin
         NameLbl.Visible:=true;
         NameEdit.Visible:=true;
         TypeCombo.Visible:=true;
-        lengthedit.Visible:=false;
-        heightedit.Visible:=false;
-        lenlabel.Visible:=false;
-        heightlabel.Visible:=false;
+        //lengthedit.Visible:=true;
+        //heightedit.Visible:=true;
+        //lenlabel.Visible:=true;
+        //heightlabel.Visible:=true;
      end;
      Transaction.Active:=false;
    end;

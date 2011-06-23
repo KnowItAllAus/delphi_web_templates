@@ -2,7 +2,7 @@ object formEditTmpl: TformEditTmpl
   Left = 0
   Top = 0
   Width = 1024
-  Height = 479
+  Height = 605
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -22,7 +22,7 @@ object formEditTmpl: TformEditTmpl
     Left = 0
     Top = 118
     Width = 1024
-    Height = 332
+    Height = 458
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -37,12 +37,12 @@ object formEditTmpl: TformEditTmpl
     Splitter = False
     DesignSize = (
       1024
-      332)
+      458)
     object IWRegion2: TIWRegion
       Left = 67
       Top = 14
       Width = 911
-      Height = 297
+      Height = 423
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -57,7 +57,7 @@ object formEditTmpl: TformEditTmpl
       Splitter = False
       DesignSize = (
         911
-        297)
+        423)
       object TmplLabel: TIWLabel
         Left = 8
         Top = 8
@@ -94,7 +94,7 @@ object formEditTmpl: TformEditTmpl
         Left = 20
         Top = 40
         Width = 871
-        Height = 240
+        Height = 366
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -169,7 +169,7 @@ object formEditTmpl: TformEditTmpl
         Left = 0
         Top = 3
         Width = 3
-        Height = 294
+        Height = 420
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -288,7 +288,7 @@ object formEditTmpl: TformEditTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 450
+    Top = 576
     Width = 1024
     Height = 29
     HorzScrollBar.Visible = False

@@ -181,7 +181,7 @@ object FormImgHdr: TFormImgHdr
       object SuppressBox: TIWCheckBox
         Left = 96
         Top = 133
-        Width = 137
+        Width = 217
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -537,7 +537,7 @@ object FormImgHdr: TFormImgHdr
       object TemplateBox: TIWCheckBox
         Left = 96
         Top = 188
-        Width = 137
+        Width = 225
         Height = 21
         Cursor = crAuto
         IW50Hint = False

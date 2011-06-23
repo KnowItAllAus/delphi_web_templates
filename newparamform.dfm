@@ -15,8 +15,8 @@ object FormParamCreate: TFormParamCreate
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 2
-  DesignTop = 3
+  DesignLeft = 287
+  DesignTop = 260
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
@@ -364,23 +364,24 @@ object FormParamCreate: TFormParamCreate
       Width = 1030
       TabOrder = 5
       inherited IWRectangle1: TIWRectangle
-        Left = 354
+        Left = 723
+        Width = 307
       end
       inherited IWRectangle4: TIWRectangle
         Width = 1346
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 312
+        Width = 681
       end
       inherited Cancel: TIWButton
-        Left = 644
+        Left = 932
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 556
+        Left = 836
       end
       inherited Extra2: TIWButton
-        Left = 468
+        Left = 748
         Visible = True
         Caption = 'Create'
         OnClick = userfooter1Extra2Click

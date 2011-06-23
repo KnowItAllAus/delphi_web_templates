@@ -1,7 +1,7 @@
 object FormParamnameEdit: TFormParamnameEdit
   Left = 0
   Top = 0
-  Width = 1171
+  Width = 1024
   Height = 820
   RenderInvisibleControls = False
   AllowPageAccess = True
@@ -15,12 +15,12 @@ object FormParamnameEdit: TFormParamnameEdit
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 2
-  DesignTop = 3
+  DesignLeft = 502
+  DesignTop = 146
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1171
+    Width = 1024
     Height = 674
     Cursor = crAuto
     RenderInvisibleControls = False
@@ -35,7 +35,7 @@ object FormParamnameEdit: TFormParamnameEdit
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1171
+      1024
       674)
     object IWSiLink1: TIWSiLink
       Left = 1
@@ -70,7 +70,7 @@ object FormParamnameEdit: TFormParamnameEdit
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
-      Left = 264
+      Left = 190
       Top = 122
       Width = 657
       Height = 167
@@ -281,14 +281,14 @@ object FormParamnameEdit: TFormParamnameEdit
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1171
+    Width = 1024
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 1
     inherited IWFrameRegion: TIWRegion
-      Width = 1171
+      Width = 1024
       Height = 118
       TabOrder = 2
       inherited titleimage: TIWImageFile
@@ -296,23 +296,23 @@ object FormParamnameEdit: TFormParamnameEdit
       end
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1684
+        Width = 1537
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 836
+        Left = 689
       end
       inherited langlink: TIWSiLink
-        Left = 765
+        Left = 618
       end
       inherited Smalltitle: TIWLabel
-        Left = 1059
+        Left = 912
         Top = 100
       end
       inherited HideBox: TIWImageFile
-        Left = 1154
+        Left = 1007
         Top = 100
       end
       inherited TitleLabel: TIWLabel
@@ -324,38 +324,39 @@ object FormParamnameEdit: TFormParamnameEdit
   inline userfooter1: Tuserfooter
     Left = 0
     Top = 792
-    Width = 1171
+    Width = 1024
     Height = 28
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
     inherited IWRegion1: TIWRegion
-      Width = 1171
+      Width = 1024
       TabOrder = 3
       inherited IWRectangle1: TIWRectangle
-        Left = 495
+        Left = 728
+        Width = 297
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1487
+        Width = 1340
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 453
+        Width = 686
       end
       inherited Cancel: TIWButton
-        Left = 785
+        Left = 926
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 697
+        Left = 838
       end
       inherited Extra2: TIWButton
-        Left = 609
+        Left = 750
         Visible = True
         Caption = 'Save'
         OnClick = userfooter1Extra2Click
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 241
+        Left = 94
       end
       inherited navcombo: TIWComboBox
         Visible = False

@@ -67,7 +67,10 @@ end;
 procedure TFormParamCreate.userfooter1CancelClick(Sender: TObject);
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
-   TformGrpTmpl.create(WebApplication).show;
+   if (RcDataModule.GetValue ('JobInstance','N')='INSTANCE') then
+     TFormEditTmpl.Create(WebApplication).Show
+   else
+     TformGrpTmpl.Create(WebApplication).Show;
 end;
 
 procedure TFormParamCreate.IWAppFormCreate(Sender: TObject);
