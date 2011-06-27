@@ -1,8 +1,8 @@
 object FormVoucherEdit: TFormVoucherEdit
   Left = 0
   Top = 0
-  Width = 1000
-  Height = 738
+  Width = 790
+  Height = 564
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -18,47 +18,47 @@ object FormVoucherEdit: TFormVoucherEdit
   ShowHint = True
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
-  DesignLeft = 181
-  DesignTop = 52
+  DesignLeft = 1
+  DesignTop = 1
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1000
+    Width = 790
     Height = 117
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 1000
+      Width = 790
       Height = 117
       TabOrder = 34
       DesignSize = (
-        1000
+        790
         117)
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
       inherited IWRectangle1: TIWRectangle
         Top = 92
-        Width = 1000
+        Width = 790
       end
       inherited IWRectangle3: TIWRectangle
         Top = 97
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 665
+        Left = 455
       end
       inherited langlink: TIWSiLink
-        Left = 567
+        Left = 357
       end
       inherited Smalltitle: TIWLabel
-        Left = 928
+        Left = 718
         Top = 101
         Width = 52
       end
       inherited HideBox: TIWImageFile
-        Left = 986
+        Left = 776
         Top = 99
       end
       inherited TitleLabel: TIWLabel
@@ -69,51 +69,51 @@ object FormVoucherEdit: TFormVoucherEdit
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 709
-    Width = 1000
+    Top = 535
+    Width = 790
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 1000
+      Width = 790
       Height = 29
       TabOrder = 33
       DesignSize = (
-        1000
+        790
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 584
+        Left = 374
         Width = 417
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1616
+        Width = 1406
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 542
+        Width = 332
       end
       inherited Cancel: TIWButton
-        Left = 914
+        Left = 704
         OnClick = CancelBtnClick
       end
       inherited Extra1: TIWButton
-        Left = 826
+        Left = 616
         Visible = True
         Caption = 'Delete'
         Confirmation = 'Delete this record?'
         OnClick = DelBtnClick
       end
       inherited Extra2: TIWButton
-        Left = 738
+        Left = 528
         Visible = True
         Caption = 'Save'
         OnClick = PostButtonClick
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 614
+        Left = 404
       end
       inherited navcombo: TIWComboBox
-        Width = 167
+        Width = -43
         Visible = False
         Anchors = [akLeft, akTop, akRight]
       end
@@ -134,8 +134,8 @@ object FormVoucherEdit: TFormVoucherEdit
   object IWRegion1: TIWRegion
     Left = 0
     Top = 117
-    Width = 1000
-    Height = 592
+    Width = 790
+    Height = 418
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -149,8 +149,8 @@ object FormVoucherEdit: TFormVoucherEdit
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1000
-      592)
+      790
+      418)
     object Formatbox: TIWCheckBox
       Left = 5
       Top = 5
@@ -189,7 +189,7 @@ object FormVoucherEdit: TFormVoucherEdit
       Left = 111
       Top = 8
       Width = 825
-      Height = 577
+      Height = 403
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akBottom]
@@ -204,7 +204,7 @@ object FormVoucherEdit: TFormVoucherEdit
       Splitter = False
       DesignSize = (
         825
-        577)
+        403)
       object IWLabel8: TIWLabel
         Left = 50
         Top = 57
@@ -681,7 +681,7 @@ object FormVoucherEdit: TFormVoucherEdit
         Left = 0
         Top = 3
         Width = 3
-        Height = 574
+        Height = 400
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -1213,7 +1213,7 @@ object FormVoucherEdit: TFormVoucherEdit
         Left = 416
         Top = 172
         Width = 337
-        Height = 313
+        Height = 139
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
@@ -1231,7 +1231,7 @@ object FormVoucherEdit: TFormVoucherEdit
         Splitter = False
         DesignSize = (
           337
-          313)
+          139)
         object IWLabel11: TIWLabel
           Left = 8
           Top = 4
@@ -1267,7 +1267,7 @@ object FormVoucherEdit: TFormVoucherEdit
           Left = 2
           Top = 72
           Width = 335
-          Height = 239
+          Height = 65
           Cursor = crAuto
           Anchors = [akLeft, akTop, akBottom]
           IW50Hint = False
@@ -1525,7 +1525,7 @@ object FormVoucherEdit: TFormVoucherEdit
         Left = 48
         Top = 172
         Width = 365
-        Height = 313
+        Height = 139
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
@@ -1543,7 +1543,7 @@ object FormVoucherEdit: TFormVoucherEdit
         Splitter = False
         DesignSize = (
           365
-          313)
+          139)
         object IWLabel7: TIWLabel
           Left = 8
           Top = 9
@@ -1579,7 +1579,7 @@ object FormVoucherEdit: TFormVoucherEdit
           Left = 2
           Top = 56
           Width = 359
-          Height = 255
+          Height = 81
           Cursor = crAuto
           Anchors = [akLeft, akTop, akBottom]
           IW50Hint = False
@@ -1819,7 +1819,7 @@ object FormVoucherEdit: TFormVoucherEdit
       end
       object AvailRegion: TIWRegion
         Left = 49
-        Top = 488
+        Top = 314
         Width = 704
         Height = 84
         Cursor = crAuto

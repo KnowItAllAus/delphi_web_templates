@@ -205,12 +205,16 @@ begin
       TFormDistribStatus.Create(WebApplication).Show;
     end;
     7 : begin
+      TIWAppForm(WebApplication.ActiveForm).Release;
+      Tsu_FormRole.Create(WebApplication).Show;
     end;
     8 : begin
+    end;
+    9 : begin
       RcDataModule.Trans.Active:=false;
       WebApplication.TerminateAndRedirect (GetExitURL);
     end;
-    9 : begin
+    10 : begin
     end;
     else with UserSession.mru_list[pageindex-9] do begin
       gotoJob (id,name,rev,note);

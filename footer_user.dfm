@@ -1,7 +1,7 @@
 object userfooter: Tuserfooter
   Left = 0
   Top = 0
-  Width = 632
+  Width = 1021
   Height = 28
   HorzScrollBar.Visible = False
   Anchors = [akLeft, akRight, akBottom]
@@ -9,7 +9,7 @@ object userfooter: Tuserfooter
   object IWRegion1: TIWRegion
     Left = 0
     Top = 0
-    Width = 632
+    Width = 1021
     Height = 28
     Cursor = crAuto
     HorzScrollBar.Visible = False
@@ -28,12 +28,12 @@ object userfooter: Tuserfooter
     OnCreate = IWRegion1Create
     Splitter = False
     DesignSize = (
-      632
+      1021
       28)
     object IWRectangle1: TIWRectangle
-      Left = 256
+      Left = 744
       Top = 0
-      Width = 377
+      Width = 278
       Height = 23
       Cursor = crAuto
       Anchors = [akTop, akRight]
@@ -62,7 +62,7 @@ object userfooter: Tuserfooter
     object IWRectangle4: TIWRectangle
       Left = 0
       Top = 24
-      Width = 1248
+      Width = 1637
       Height = 3
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -180,7 +180,7 @@ object userfooter: Tuserfooter
     object IWRectangle6: TIWRectangle
       Left = 40
       Top = 0
-      Width = 214
+      Width = 702
       Height = 23
       Cursor = crAuto
       Anchors = [akLeft, akTop, akRight]
@@ -238,7 +238,7 @@ object userfooter: Tuserfooter
       RawText = False
     end
     object Cancel: TIWButton
-      Left = 546
+      Left = 935
       Top = 2
       Width = 83
       Height = 21
@@ -267,7 +267,7 @@ object userfooter: Tuserfooter
       TabOrder = 0
     end
     object Extra1: TIWButton
-      Left = 458
+      Left = 847
       Top = 2
       Width = 83
       Height = 21
@@ -297,7 +297,7 @@ object userfooter: Tuserfooter
       TabOrder = 1
     end
     object Extra2: TIWButton
-      Left = 370
+      Left = 759
       Top = 2
       Width = 83
       Height = 21
@@ -327,7 +327,7 @@ object userfooter: Tuserfooter
       TabOrder = 2
     end
     object fiwSiLink1: TIWSiLink
-      Left = 2
+      Left = 391
       Top = 9
       Width = 65
       Height = 17
@@ -406,6 +406,7 @@ object userfooter: Tuserfooter
         'Overview'
         'Publish'
         'Status'
+        'Menu'
         '- - - - - - -'
         'Logout')
       Sorted = False
@@ -446,12 +447,13 @@ object userfooter: Tuserfooter
       6176636F6D626F2E3101446973747269627574696F6E010D0A6E6176636F6D62
       6F2E32015265706F727473010D0A6E6176636F6D626F2E330141646D696E6973
       74726174696F6E010D0A6E6176636F6D626F2E34014F76657276696577010D0A
-      6E6176636F6D626F2E37012D2D2D2D2D2D2D2D2D2D2D2D2D2D010D0A6E617663
-      6F6D626F2E38014C6F676F7574010D0A6E6176636F6D626F73656C656374012D
-      2D20476F20746F202E2E2E202D2D010D0A6E6176636F6D626F2E35015075626C
-      697368010D0A6E6176636F6D626F2E3601537461747573010D0A437265617465
-      01435245415445010D0A73744F74686572537472696E67730D0A7374436F6C6C
-      656374696F6E730D0A737443686172536574730D0A5475736572666F6F746572
-      0144454641554C545F43484152534554010D0A}
+      6E6176636F6D626F2E37014D656E75010D0A6E6176636F6D626F2E38012D2D2D
+      2D2D2D2D2D2D2D2D2D2D2D010D0A6E6176636F6D626F73656C656374012D2D20
+      476F20746F202E2E2E202D2D010D0A6E6176636F6D626F2E35015075626C6973
+      68010D0A6E6176636F6D626F2E3601537461747573010D0A4372656174650143
+      5245415445010D0A6E6176636F6D626F2E39014C6F676F7574010D0A73744F74
+      686572537472696E67730D0A7374436F6C6C656374696F6E730D0A7374436861
+      72536574730D0A5475736572666F6F7465720144454641554C545F4348415253
+      4554010D0A}
   end
 end
