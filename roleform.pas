@@ -216,7 +216,7 @@ begin
     end;
     10 : begin
     end;
-    else with UserSession.mru_list[pageindex-9] do begin
+    else with UserSession.mru_list[pageindex-10] do begin
       gotoJob (id,name,rev,note);
     end;
   end;
