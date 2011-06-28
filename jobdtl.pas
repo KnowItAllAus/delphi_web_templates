@@ -33,6 +33,8 @@ type
     ArchiveBtn: TIWRadioButton;
     DelJobRevBtn: TIWButton;
     TemplateBox: TIWCheckBox;
+    IWLabel4: TIWLabel;
+    DomainEdit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure userfooter1Extra2Click(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
@@ -69,6 +71,7 @@ begin
     except
     end;
     NameEdit.Text:=FieldByName ('Name').AsString;
+    DomainEdit.Text:=FieldByName ('JobDomain').AsString;
     if (RcDataModule.GetValue ('JobInstance','JOB')<>'JOB') and (RcDataModule.GetValue('JobInstance','JOB')<>'TEMPLATE') then TemplateBox.visible:=false;
     if (RcDataModule.GetValue ('JobInstance','JOB')='TEMPLATE') then TemplateBox.checked:=true;
   end;
@@ -89,6 +92,7 @@ begin
         if ArchiveBtn.Checked then  new_status:=4;
         ParamByName ('Status').AsInteger:=new_status;
         ParamByName ('Name').AsString:=NameEdit.Text;
+        ParamByName ('JobDomain').AsString:=DomainEdit.Text;
         ParamByName ('Description').AsString:=DescEdit.Text;
         ParamByName ('LastChanged').AsDateTime:=Now;
         ParamByName ('Company').AsString:=UserSession.Company;

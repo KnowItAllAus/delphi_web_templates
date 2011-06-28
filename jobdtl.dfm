@@ -621,9 +621,9 @@ object FormJobDtl: TFormJobDtl
         OnClick = DelJobRevBtnClick
       end
       object TemplateBox: TIWCheckBox
-        Left = 425
-        Top = 60
-        Width = 121
+        Left = 393
+        Top = 58
+        Width = 96
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -650,6 +650,74 @@ object FormJobDtl: TFormJobDtl
         TabOrder = 11
         Checked = False
         FriendlyName = 'TemplateBox'
+      end
+      object IWLabel4: TIWLabel
+        Left = 496
+        Top = 58
+        Width = 73
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taRightJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'IWLabel1'
+        Caption = 'Domain'
+        RawText = False
+      end
+      object DomainEdit: TIWEdit
+        Left = 576
+        Top = 56
+        Width = 65
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'DomainEdit'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        SubmitOnAsyncEvent = True
+        TabOrder = 12
+        PasswordPrompt = False
+        Text = 'DomainEdit'
       end
     end
   end

@@ -2,7 +2,7 @@ object FormJobRev: TFormJobRev
   Left = 0
   Top = 0
   Width = 1024
-  Height = 479
+  Height = 713
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -16,11 +16,11 @@ object FormJobRev: TFormJobRev
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 78
-  DesignTop = 113
+  DesignLeft = 233
+  DesignTop = 284
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 450
+    Top = 684
     Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
@@ -70,7 +70,7 @@ object FormJobRev: TFormJobRev
     Left = 0
     Top = 119
     Width = 1024
-    Height = 331
+    Height = 565
     Cursor = crAuto
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
@@ -87,7 +87,7 @@ object FormJobRev: TFormJobRev
     Splitter = False
     DesignSize = (
       1024
-      331)
+      565)
     object langlink: TIWSiLink
       Left = 1
       Top = 1
@@ -124,7 +124,7 @@ object FormJobRev: TFormJobRev
       Left = 25
       Top = 21
       Width = 977
-      Height = 295
+      Height = 529
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
@@ -141,7 +141,7 @@ object FormJobRev: TFormJobRev
       Splitter = False
       DesignSize = (
         977
-        295)
+        529)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -175,7 +175,7 @@ object FormJobRev: TFormJobRev
         Left = 1
         Top = 4
         Width = 3
-        Height = 290
+        Height = 524
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -236,7 +236,7 @@ object FormJobRev: TFormJobRev
         Left = 16
         Top = 155
         Width = 945
-        Height = 105
+        Height = 339
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -277,7 +277,7 @@ object FormJobRev: TFormJobRev
       end
       object CreateBtn: TIWButton
         Left = 887
-        Top = 265
+        Top = 499
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -502,7 +502,7 @@ object FormJobRev: TFormJobRev
       end
       object NoteEdit: TIWEdit
         Left = 624
-        Top = 266
+        Top = 500
         Width = 249
         Height = 21
         Cursor = crAuto
@@ -539,7 +539,7 @@ object FormJobRev: TFormJobRev
       end
       object NoteLabel: TIWLabel
         Left = 584
-        Top = 268
+        Top = 502
         Width = 29
         Height = 16
         Cursor = crAuto
@@ -969,6 +969,74 @@ object FormJobRev: TFormJobRev
         Enabled = False
         PasswordPrompt = False
         Text = '0'
+      end
+      object IWLabel1: TIWLabel
+        Left = 248
+        Top = 53
+        Width = 73
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'IWLabel1'
+        Caption = 'Domain'
+        RawText = False
+      end
+      object DomainEdit: TIWEdit
+        Left = 328
+        Top = 52
+        Width = 121
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clGrayText
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'StatEdit'
+        MaxLength = 0
+        ReadOnly = True
+        Required = False
+        ScriptEvents = <>
+        SubmitOnAsyncEvent = True
+        TabOrder = 13
+        PasswordPrompt = False
+        Text = 'DomainEdit'
       end
     end
   end

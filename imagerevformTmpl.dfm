@@ -2,7 +2,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   Left = 0
   Top = 0
   Width = 1024
-  Height = 479
+  Height = 797
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -15,8 +15,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 9
-  DesignTop = 79
+  DesignLeft = 583
+  DesignTop = 175
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -61,7 +61,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 450
+    Top = 768
     Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
@@ -81,15 +81,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Width = 606
       end
       inherited Cancel: TIWButton
-        Left = 935
         Caption = 'Back'
         OnClick = userfooter1CancelClick
-      end
-      inherited Extra1: TIWButton
-        Left = 847
-      end
-      inherited Extra2: TIWButton
-        Left = 759
       end
       inherited fiwSiLink1: TIWSiLink
         Left = 687
@@ -106,7 +99,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
     Left = 0
     Top = 116
     Width = 1024
-    Height = 334
+    Height = 652
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -121,12 +114,12 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
     Splitter = False
     DesignSize = (
       1024
-      334)
+      652)
     object BodyRegion: TIWRegion
       Left = 6
       Top = 13
       Width = 992
-      Height = 306
+      Height = 624
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -141,7 +134,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
       Splitter = False
       DesignSize = (
         992
-        306)
+        624)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
@@ -175,7 +168,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Left = 1
         Top = 4
         Width = 3
-        Height = 301
+        Height = 619
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -236,7 +229,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Left = 23
         Top = 72
         Width = 344
-        Height = 227
+        Height = 545
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -706,7 +699,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Left = 376
         Top = 100
         Width = 602
-        Height = 198
+        Height = 516
         Cursor = crAuto
         HorzScrollBar.Visible = False
         VertScrollBar.Visible = False
@@ -726,7 +719,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
           Left = 2
           Top = 2
           Width = 598
-          Height = 194
+          Height = 512
           Cursor = crAuto
           Visible = False
           Align = alClient

@@ -42,6 +42,8 @@ type
     LengthEdit: TIWEdit;
     Heightlabel: TIWLabel;
     heightedit: TIWEdit;
+    IWLabel1: TIWLabel;
+    DomainEdit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -257,6 +259,7 @@ begin
        StatEdit.Text:='- - - - -';
      end;
      DescEdit.Caption:=FieldByName ('Description').AsString;
+     DomainEdit.Caption:=FieldByName ('JobDomain').AsString;
      if FieldByName ('Template').AsString='1' then begin
         templatelbl.visible:=true;
         ParamGrid.Visible:=true;
