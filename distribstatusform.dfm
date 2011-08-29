@@ -1,8 +1,8 @@
 object formDistribStatus: TformDistribStatus
   Left = 0
   Top = 0
-  Width = 630
-  Height = 444
+  Width = 1024
+  Height = 739
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -15,45 +15,45 @@ object formDistribStatus: TformDistribStatus
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 3
-  DesignTop = 2
+  DesignLeft = 655
+  DesignTop = 510
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
-    Width = 630
+    Width = 1024
     Height = 114
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
-      Width = 630
       Height = 114
       TabOrder = 3
       DesignSize = (
-        630
+        1024
         114)
       inherited IWRectangle1: TIWRectangle
         Left = 608
-        Width = 35
+        Width = 429
       end
       inherited IWRectangle2: TIWRectangle
         Left = 608
       end
       inherited IWRectangle3: TIWRectangle
-        Width = -130
+        Width = 264
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 292
+        Left = 630
       end
       inherited langlink: TIWSiLink
-        Left = 232
+        Left = 522
+        Top = 1
       end
       inherited HideBox: TIWImageFile
-        Left = 616
+        Left = 1010
       end
       inherited Smalltitle: TIWLabel
-        Left = 491
+        Left = 885
       end
       inherited EntityRegn: TIWRegion
         Color = 10526880
@@ -65,49 +65,49 @@ object formDistribStatus: TformDistribStatus
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 415
-    Width = 630
+    Top = 710
+    Width = 1024
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 1
     inherited IWRegion1: TIWRegion
-      Width = 630
+      Width = 1024
       Height = 29
       TabOrder = 4
       DesignSize = (
-        630
+        1024
         29)
       inherited IWRectangle1: TIWRectangle
-        Left = 254
+        Left = 648
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1246
+        Width = 1640
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 212
+        Width = 606
       end
       inherited Cancel: TIWButton
-        Left = 545
+        Left = 939
         Caption = 'Menu'
         OnClick = userfooter1CancelClick
       end
       inherited Extra1: TIWButton
-        Left = 457
+        Left = 851
       end
       inherited Extra2: TIWButton
-        Left = 369
+        Left = 763
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 329
+        Left = 723
       end
     end
   end
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
-    Width = 630
-    Height = 301
+    Width = 1024
+    Height = 596
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -121,13 +121,13 @@ object formDistribStatus: TformDistribStatus
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      630
-      301)
+      1024
+      596)
     object IWRegion2: TIWRegion
       Left = 48
       Top = 24
-      Width = 559
-      Height = 247
+      Width = 953
+      Height = 542
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -141,8 +141,8 @@ object formDistribStatus: TformDistribStatus
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        559
-        247)
+        953
+        542)
       object StoreLabel: TIWLabel
         Left = 56
         Top = 24
@@ -208,7 +208,7 @@ object formDistribStatus: TformDistribStatus
         LangControl = RcDataMod.LangEditControl1
       end
       object RefreshBtn: TIWButton
-        Left = 438
+        Left = 832
         Top = 24
         Width = 75
         Height = 25
@@ -239,7 +239,7 @@ object formDistribStatus: TformDistribStatus
       end
       object IWLabel1: TIWLabel
         Left = 56
-        Top = 206
+        Top = 501
         Width = 241
         Height = 21
         Cursor = crAuto
@@ -270,8 +270,8 @@ object formDistribStatus: TformDistribStatus
         RawText = False
       end
       object IWLabel3: TIWLabel
-        Left = 280
-        Top = 206
+        Left = 674
+        Top = 501
         Width = 111
         Height = 21
         Cursor = crAuto
@@ -302,8 +302,8 @@ object formDistribStatus: TformDistribStatus
         RawText = False
       end
       object OffCombo: TIWComboBox
-        Left = 398
-        Top = 204
+        Left = 792
+        Top = 499
         Width = 49
         Height = 21
         Cursor = crAuto
@@ -349,8 +349,8 @@ object formDistribStatus: TformDistribStatus
         FriendlyName = 'OffCombo'
       end
       object IWLabel2: TIWLabel
-        Left = 462
-        Top = 206
+        Left = 856
+        Top = 501
         Width = 57
         Height = 21
         Cursor = crAuto
@@ -384,7 +384,7 @@ object formDistribStatus: TformDistribStatus
         Left = 0
         Top = 3
         Width = 3
-        Height = 244
+        Height = 539
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -412,7 +412,7 @@ object formDistribStatus: TformDistribStatus
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 817
+        Width = 953
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -444,6 +444,7 @@ object formDistribStatus: TformDistribStatus
         Width = 97
         Height = 21
         Cursor = crAuto
+        Anchors = [akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -473,8 +474,8 @@ object formDistribStatus: TformDistribStatus
       object storeGrid: TIWGrid
         Left = 9
         Top = 52
-        Width = 542
-        Height = 147
+        Width = 936
+        Height = 442
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False

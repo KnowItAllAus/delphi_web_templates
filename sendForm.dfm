@@ -18,8 +18,8 @@ object formSend: TformSend
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 60
-  DesignTop = 183
+  DesignLeft = 339
+  DesignTop = 310
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -32,7 +32,7 @@ object formSend: TformSend
     inherited IWFrameRegion: TIWRegion
       Width = 1016
       Height = 114
-      TabOrder = 4
+      TabOrder = 6
       inherited IWRectangle1: TIWRectangle
         Left = 456
         Width = 2161
@@ -74,7 +74,7 @@ object formSend: TformSend
     inherited IWRegion1: TIWRegion
       Width = 1016
       Height = 29
-      TabOrder = 5
+      TabOrder = 4
       inherited Cancel: TIWButton
         Left = 929
         Caption = 'Menu'
@@ -345,7 +345,7 @@ object formSend: TformSend
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 6
+        TabOrder = 5
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'publish.sil'

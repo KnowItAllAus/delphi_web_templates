@@ -16,8 +16,8 @@ object formGrp: TformGrp
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 20
-  DesignTop = 103
+  DesignLeft = 581
+  DesignTop = 158
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -31,14 +31,6 @@ object formGrp: TformGrp
       Width = 1014
       Height = 114
       TabOrder = 2
-      inherited IWImageFile1: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
-      inherited titleimage: TIWImageFile
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-      end
       inherited IWRectangle1: TIWRectangle
         Left = 152
         Width = 2463
@@ -51,16 +43,12 @@ object formGrp: TformGrp
       end
       inherited IWImageFile3: TIWImageFile
         Left = 676
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited langlink: TIWSiLink
         Left = 613
       end
       inherited HideBox: TIWImageFile
         Left = 1000
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
       end
       inherited Smalltitle: TIWLabel
         Left = 875

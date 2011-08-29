@@ -38,7 +38,7 @@ type
     TList : TStringList;
     LList : TStringList;
     function current_offset (fn : string) : integer;
-    procedure PublishToGroup (g : string);
+    procedure PublishToGroup (g : string; silent : boolean);
     procedure PublishToAll;
     procedure update_store (company : string; store : integer; publishat : TDateTime);
     procedure PublishToGroupDeferred (groupid : string; targettime : integer);
@@ -56,7 +56,7 @@ uses
 
 {$R *.DFM}
 
-procedure TformSend.PublishToGroup (g : string);
+procedure TformSend.PublishToGroup (g : string; silent : boolean);
 begin
     with RcDataModule.RequestUpdateGroupX do begin
       try
@@ -67,10 +67,10 @@ begin
         ParamByName('GROUPID').AsString:=g;
         ExecSQL;
         Transaction.Commit;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+        if not silent then WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
       except
         Transaction.Active:=False;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+        if not silent then WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
       end;
     end;
 end;
@@ -235,7 +235,7 @@ begin
             utcoffset:=current_offset (tzfile);
          end;
          targettime:=(whencombo.itemindex-1) * 60;
-         publish_offset:=(utcoffset+targettime) mod (24*60);
+         publish_offset:=((targettime-utcoffset) + 24 * 60) mod (24*60);
          //
          // This is the time every day in UTC time we prefer to publish.
          // If it is later than this time then we publish for 'tomorrow',
@@ -292,7 +292,7 @@ begin
             utcoffset:=current_offset (tzfile);
          end;
          targettime:=(whencombo.itemindex-1) * 60;
-         publish_offset:=(utcoffset+targettime) mod (24*60);
+         publish_offset:=(targettime-utcoffset + 24 * 60) mod (24*60);
          //
          // This is the time every day in UTC time we prefer to publish.
          // If it is later than this time then we publish for 'tomorrow',
@@ -321,7 +321,7 @@ procedure TformSend.AllBtnClick(Sender: TObject);
 begin
     if LiveGroups.ItemIndex>0 then begin
       if (Whencombo.Itemindex=0) then begin
-         PublishToGroup (LList.Strings[LiveGroups.ItemIndex]);
+         PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false);
       end else begin
          PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60);
       end;
@@ -331,22 +331,16 @@ begin
 end;
 
 procedure TformSend.TestBtnClick(Sender: TObject);
+var
+    i : integer;
 begin
     if TestGroups.ItemIndex>0 then begin
-      PublishToGroup (TList.Strings[TestGroups.ItemIndex]);
+      PublishToGroup (TList.Strings[TestGroups.ItemIndex],false);
     end else with RcDataModule.RequestTestUpdqry do begin
-      try
-        Transaction.Active:=False;
-        Transaction.StartTransaction;
-        ParamByName('COMPANY').AsString:=UserSession.Company;
-        ParamByName('BUILDTIME').clear; //AsDateTime:=ptime;
-        ExecSQL;
-        Transaction.Commit;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
-      except
-        Transaction.Active:=False;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+      for i:=0 to TList.count-1 do begin
+        PublishToGroup (TList.Strings[i],true);
       end;
+      WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
     end;
 end;
 

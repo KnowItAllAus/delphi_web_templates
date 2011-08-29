@@ -23,28 +23,45 @@ object formJnl: TformJnl
     Left = 0
     Top = 0
     Width = 1015
-    Height = 114
+    Height = 113
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
       Width = 1015
+      Height = 113
       TabOrder = 12
       DesignSize = (
         1015
-        114)
+        113)
+      inherited IWImageFile1: TIWImageFile
+        ZIndex = 2
+      end
+      inherited IWImageFile2: TIWImageFile
+        Height = 74
+        ZIndex = 3
+      end
       inherited IWRectangle1: TIWRectangle
         Width = 2557
+        ZIndex = 4
+      end
+      inherited IWRectangle2: TIWRectangle
+        Top = 88
       end
       inherited IWRectangle3: TIWRectangle
         Width = 2187
       end
       inherited IWImageFile3: TIWImageFile
         Left = 622
+        Height = 85
+        ZIndex = 3
       end
       inherited langlink: TIWSiLink
         Left = 575
+      end
+      inherited TitleLabel: TIWLabel
+        ZIndex = 3
       end
       inherited PromoReg: TIWRegion
         inherited ActivityLink: TIWLink
@@ -55,9 +72,9 @@ object formJnl: TformJnl
   end
   object IWRegion1: TIWRegion
     Left = 0
-    Top = 114
+    Top = 113
     Width = 1015
-    Height = 546
+    Height = 547
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -72,12 +89,12 @@ object formJnl: TformJnl
     Splitter = False
     DesignSize = (
       1015
-      546)
+      547)
     object IWRegion2: TIWRegion
       Left = 32
       Top = 8
       Width = 950
-      Height = 528
+      Height = 529
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -92,7 +109,7 @@ object formJnl: TformJnl
       Splitter = False
       DesignSize = (
         950
-        528)
+        529)
       object VoucherLabel: TIWLabel
         Left = 16
         Top = 8
@@ -355,7 +372,7 @@ object formJnl: TformJnl
       end
       object PrevBtn: TIWButton
         Left = 789
-        Top = 495
+        Top = 496
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -385,7 +402,7 @@ object formJnl: TformJnl
       end
       object NextBtn: TIWButton
         Left = 859
-        Top = 495
+        Top = 496
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -415,7 +432,7 @@ object formJnl: TformJnl
       end
       object DelJnlBtn: TIWButton
         Left = 18
-        Top = 497
+        Top = 498
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -449,7 +466,7 @@ object formJnl: TformJnl
         Left = 1
         Top = 4
         Width = 3
-        Height = 523
+        Height = 524
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -507,7 +524,7 @@ object formJnl: TformJnl
         Left = 17
         Top = 65
         Width = 916
-        Height = 426
+        Height = 427
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False

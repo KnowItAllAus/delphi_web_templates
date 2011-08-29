@@ -69,15 +69,15 @@ begin
     if advanced then
       columncount:=11
     else
-      columncount:=6;
+      columncount:=7;
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
     Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
     Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
     Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
     Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
     Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
+    Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
     if advanced then begin
-      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
       Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
       Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
@@ -110,7 +110,7 @@ begin
         if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
            Text:=Text+'*';
       end;
-      if advanced then with Cell[i, 6] do begin
+      with Cell[i, 6] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
       end;
       if advanced then with Cell[i, 7] do begin
