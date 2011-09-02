@@ -561,7 +561,7 @@ object FormPOS: TFormPOS
       end
       object IWRegion4: TIWRegion
         Left = 120
-        Top = 139
+        Top = 142
         Width = 609
         Height = 362
         Cursor = crAuto
@@ -578,7 +578,7 @@ object FormPOS: TFormPOS
         Splitter = False
         object DupEdit: TIWEdit
           Left = 123
-          Top = 3
+          Top = 24
           Width = 171
           Height = 22
           Cursor = crAuto
@@ -614,7 +614,7 @@ object FormPOS: TFormPOS
         end
         object IWLabel12: TIWLabel
           Left = 10
-          Top = 7
+          Top = 28
           Width = 111
           Height = 16
           Cursor = crAuto
@@ -645,7 +645,7 @@ object FormPOS: TFormPOS
         end
         object IWLabel13: TIWLabel
           Left = 10
-          Top = 31
+          Top = 52
           Width = 111
           Height = 16
           Cursor = crAuto
@@ -676,7 +676,7 @@ object FormPOS: TFormPOS
         end
         object ReqEdit: TIWEdit
           Left = 123
-          Top = 27
+          Top = 48
           Width = 171
           Height = 22
           Cursor = crAuto
@@ -712,7 +712,7 @@ object FormPOS: TFormPOS
         end
         object IWLabel14: TIWLabel
           Left = 10
-          Top = 56
+          Top = 77
           Width = 111
           Height = 16
           Cursor = crAuto
@@ -743,7 +743,7 @@ object FormPOS: TFormPOS
         end
         object ExclEdit: TIWEdit
           Left = 123
-          Top = 52
+          Top = 73
           Width = 171
           Height = 22
           Cursor = crAuto
@@ -2220,7 +2220,7 @@ object FormPOS: TFormPOS
         end
         object ExclKeepAsynchBox: TIWCheckBox
           Left = 188
-          Top = 75
+          Top = 3
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -2317,12 +2317,43 @@ object FormPOS: TFormPOS
           TabOrder = 33
           PasswordPrompt = False
         end
+        object PreserveBox: TIWCheckBox
+          Left = 24
+          Top = 3
+          Width = 133
+          Height = 21
+          Cursor = crAuto
+          IW50Hint = False
+          ParentShowHint = False
+          ShowHint = True
+          ZIndex = 0
+          RenderSize = True
+          StyleRenderOptions.RenderSize = True
+          StyleRenderOptions.RenderPosition = True
+          StyleRenderOptions.RenderFont = True
+          StyleRenderOptions.RenderZIndex = True
+          StyleRenderOptions.RenderVisibility = True
+          StyleRenderOptions.RenderStatus = True
+          StyleRenderOptions.RenderAbsolute = True
+          Caption = 'Preserve Spacing'
+          Editable = True
+          Font.Color = clNone
+          Font.Size = 10
+          Font.Style = []
+          SubmitOnAsyncEvent = True
+          ScriptEvents = <>
+          DoSubmitValidation = True
+          Style = stNormal
+          TabOrder = 42
+          Checked = False
+          FriendlyName = 'Signbox'
+        end
       end
       object IWRegion5: TIWRegion
         Left = 120
-        Top = 56
+        Top = 55
         Width = 609
-        Height = 81
+        Height = 85
         Cursor = crAuto
         RenderInvisibleControls = False
         TabOrder = 1
@@ -2635,7 +2666,7 @@ object FormPOS: TFormPOS
         object SuppressBtn: TIWRadioButton
           Left = 480
           Top = 25
-          Width = 129
+          Width = 124
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2666,7 +2697,7 @@ object FormPOS: TFormPOS
         object AssumeBtn: TIWRadioButton
           Left = 480
           Top = 48
-          Width = 129
+          Width = 124
           Height = 21
           Cursor = crAuto
           IW50Hint = False

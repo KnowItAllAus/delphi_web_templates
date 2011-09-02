@@ -99,6 +99,7 @@ type
     ExclKeepAsynchBox: TIWCheckBox;
     IWLabel29: TIWLabel;
     errataedit: TIWEdit;
+    PreserveBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -196,6 +197,7 @@ begin
       DupEdit.Text:=FieldByName('DUPTEXT').AsString;
       ExclEdit.Text:=FieldByName('EXCLTEXT').AsString;
       ExclKeepAsynchBox.checked:=FieldByName('EXCLKEEPASYNCH').AsString='1';
+      PreserveBox.checked:=FieldByName('NATURALSPACE').AsString='1';
       ReqEdit.Text:=FieldByName('REQTEXT').AsString;
       DecEdit.Text:=FieldByName('DECIMALSEP').AsString;
       ThouEdit.Text:=FieldByName('THOUSEP').AsString;
@@ -269,6 +271,7 @@ begin
       ParamByName('DUPTEXT').AsString:=singlespace(DupEdit.Text);
       ParamByName('EXCLTEXT').AsString:=singlespace(ExclEdit.Text);
       ParamByName('EXCLKEEPASYNCH').AsInteger:=ord(ExclKeepAsynchBox.Checked);
+      ParamByName('NATURALSPACE').AsInteger:=ord(PreserveBox.Checked);
       ParamByName('THOUSEP').AsString:=ThouEdit.Text;
       ParamByName('DECIMALSEP').AsString:=DecEdit.Text;
       ParamByName('OLD_COMPANY').AsString:=RcDataModule.CurrentposQuery.FieldByName('COMPANY').AsString;
