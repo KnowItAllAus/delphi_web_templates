@@ -100,6 +100,8 @@ type
     IWLabel29: TIWLabel;
     errataedit: TIWEdit;
     PreserveBox: TIWCheckBox;
+    IWLabel30: TIWLabel;
+    ActiveWindowEdit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -231,6 +233,7 @@ begin
       DocLinesEdit.Text:=FieldByName('SMARTCUTMIN').AsString;
       TranIDEdit.Text:=FieldByName('TRANIDTRIG').AsString;
       ErrataEdit.Text:=FieldByName('PRNERRATA').AsString;
+      ActiveWindowEdit.Text:=FieldByName('ACTIVEWINDOW').AsString;
   end;
   SmartCutBtnClick(self);
 end;
@@ -304,6 +307,7 @@ begin
       ParamByName('PARAMS').AsString:=ParamEdit.Text;
       ParamByName('TRANIDTRIG').AsString:=TranIDEdit.Text;
       ParamByName('PRNERRATA').AsString:=ErrataEdit.Text;
+      ParamByName('ACTIVEWINDOW').AsString:=ActiveWindowEdit.Text;
       try
         offset:=strtoint (DocLinesEdit.text);
         if (offset<=0) or (offset>=99) then offset:=10;
