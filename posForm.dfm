@@ -17,8 +17,8 @@ object FormPOS: TFormPOS
   ShowHint = True
   OnDefaultAction = PostButtonClick
   XPTheme = True
-  DesignLeft = 126
-  DesignTop = 61
+  DesignLeft = 325
+  DesignTop = 111
   object IWRegion1: TIWRegion
     Left = 0
     Top = 115
@@ -2390,6 +2390,7 @@ object FormPOS: TFormPOS
           Width = 133
           Height = 21
           Cursor = crAuto
+          Visible = False
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
