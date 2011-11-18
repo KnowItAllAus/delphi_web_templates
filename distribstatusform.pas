@@ -58,6 +58,7 @@ procedure TformDistribStatus.RefreshGrid;
 var
   i : integer;
   SRO : SRObj;
+  commtime : tdatetime;
 begin
   RcDataModule.StoreQuery.Transaction.Active:=False;
   RcDataModule.StoreQuery.Transaction.StartTransaction;
@@ -67,7 +68,7 @@ begin
   RcDataModule.StoreQuery.Open;
   with StoreGrid do begin
     if advanced then
-      columncount:=11
+      columncount:=12
     else
       columncount:=7;
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
@@ -82,6 +83,7 @@ begin
       Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.CommsAge');
     end;
     i:=1;
     RowCount:=1;
@@ -125,6 +127,20 @@ begin
       end;
       if advanced then with Cell[i, 10] do begin
         Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
+      end;
+      if advanced then with Cell[i, 11] do begin
+        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
+           commtime:=now-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
+           else
+           commtime:=0;
+        if commtime<=0 then
+            text:='- - -'
+        else if abs(commtime)<1 then
+            text := TimeToStr (commtime)
+        else if commtime>1 then
+            text:=floattostrf (commtime,fffixed,7,2)+' Days';
+        if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+           Text:='';
       end;
       SRO:=SRObj.create;
       if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
