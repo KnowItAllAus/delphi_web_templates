@@ -68,22 +68,22 @@ begin
   RcDataModule.StoreQuery.Open;
   with StoreGrid do begin
     if advanced then
-      columncount:=12
+      columncount:=11
     else
-      columncount:=7;
-    Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
-    Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
-    Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
-    Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
-    Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
+      columncount:=6;
+    //Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
+    Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
+    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
+    Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
+    Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
+    Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.CommsAge');
     if advanced then begin
+      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
       Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
       Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
-      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.CommsAge');
     end;
     i:=1;
     RowCount:=1;
@@ -91,29 +91,39 @@ begin
     while not RcDataModule.StoreQuery.Eof do begin
       RowCount:=RowCount+1;
       with Cell[i, 0] do begin
-//        Clickable := True;
-        Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
-      end;
-      with Cell[i, 1] do begin
         Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Name').AsString);
       end;
-      with Cell[i, 2] do begin
+      with Cell[i, 1] do begin
         Text := htmlquote(RcDataModule.StoreQuery.FieldByName('POSName').AsString);
       end;
-      with Cell[i, 3] do begin
+      with Cell[i, 2] do begin
         if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
            Text:='No' else Text:='Yes';
       end;
-      with Cell[i, 4] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
-      end;
-      with Cell[i, 5] do begin
+      with Cell[i, 3] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
         if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
            Text:=Text+'*';
       end;
-      with Cell[i, 6] do begin
+      with Cell[i, 4] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
+      end;
+      with Cell[i, 5] do begin
+        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
+           commtime:=now-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
+           else
+           commtime:=0;
+        if commtime<=0 then
+            text:='- - -'
+        else if abs(commtime)<1 then
+            text := TimeToStr (commtime)
+        else if commtime>1 then
+            text:=floattostrf (commtime,fffixed,7,2)+' Days';
+        if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+           Text:='';
+      end;
+      if advanced then with Cell[i, 6] do begin
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
       end;
       if advanced then with Cell[i, 7] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
@@ -127,20 +137,6 @@ begin
       end;
       if advanced then with Cell[i, 10] do begin
         Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
-      end;
-      if advanced then with Cell[i, 11] do begin
-        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
-           commtime:=now-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
-           else
-           commtime:=0;
-        if commtime<=0 then
-            text:='- - -'
-        else if abs(commtime)<1 then
-            text := TimeToStr (commtime)
-        else if commtime>1 then
-            text:=floattostrf (commtime,fffixed,7,2)+' Days';
-        if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
-           Text:='';
       end;
       SRO:=SRObj.create;
       if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
@@ -187,11 +183,11 @@ begin
       Font.Style := [fsBold];
       Font.Color := clWhite;
     end else case AColumn of
-      6 :
-          if (StoreGrid.Cell[ARow,5].Text<>StoreGrid.Cell[ARow,6].Text) then begin
+      3 :
+          if (StoreGrid.Cell[ARow,3].Text<>StoreGrid.Cell[ARow,4].Text) then begin
              BGColor := clYellow;
           end;
-      1 :
+      0 :
           with SRObj(IList.Items[ARow-1]) do begin
             if enabled then begin
               if (lastcomms<now - strtoint(offcombo.text)/(60*24)) and enabled then begin
@@ -201,7 +197,7 @@ begin
               end;
             end;
           end;
-      3 :
+      2 :
           if not SRObj(IList.Items[ARow-1]).enabled then begin
              BGColor := clBlack;
              Font.Color := clWhite;

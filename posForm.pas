@@ -102,6 +102,8 @@ type
     PreserveBox: TIWCheckBox;
     IWLabel30: TIWLabel;
     ActiveWindowEdit: TIWEdit;
+    DiscCombo: TIWComboBox;
+    DiscLabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -127,6 +129,11 @@ implementation
 
 uses datamod, db, servercontroller, IWInit, cfgtypes, possform, IWTypes, parse_utils;
 {$R *.DFM}
+
+const
+  PolicyNames : array [0..1] of string = (
+  'MAGNITUDE',
+  'LITERAL' );
 
 procedure GoPos;
 begin
@@ -234,6 +241,9 @@ begin
       TranIDEdit.Text:=FieldByName('TRANIDTRIG').AsString;
       ErrataEdit.Text:=FieldByName('PRNERRATA').AsString;
       ActiveWindowEdit.Text:=FieldByName('ACTIVEWINDOW').AsString;
+      DiscCombo.ItemIndex:=0;
+      if FieldByName('DISCPOLICY').AsString='LITERAL' then
+         DiscCombo.ItemIndex:=1;
   end;
   SmartCutBtnClick(self);
 end;
@@ -308,6 +318,8 @@ begin
       ParamByName('TRANIDTRIG').AsString:=TranIDEdit.Text;
       ParamByName('PRNERRATA').AsString:=ErrataEdit.Text;
       ParamByName('ACTIVEWINDOW').AsString:=ActiveWindowEdit.Text;
+      if DiscCombo.ItemIndex<0 then DiscCombo.ItemIndex:=0;
+      ParamByName('DISCPOLICY').AsString:=policynames[DiscCombo.ItemIndex];
       try
         offset:=strtoint (DocLinesEdit.text);
         if (offset<=0) or (offset>=99) then offset:=10;

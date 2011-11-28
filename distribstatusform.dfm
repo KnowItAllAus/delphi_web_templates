@@ -28,7 +28,6 @@ object formDistribStatus: TformDistribStatus
     TabOrder = 0
     inherited IWFrameRegion: TIWRegion
       Height = 114
-      TabOrder = 3
       DesignSize = (
         1024
         114)
@@ -201,7 +200,7 @@ object formDistribStatus: TformDistribStatus
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 0
+        TabOrder = 1
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'diststat.sil'
@@ -234,7 +233,7 @@ object formDistribStatus: TformDistribStatus
         Font.Style = []
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
-        TabOrder = 1
+        TabOrder = 2
         OnClick = RefreshBtnClick
       end
       object IWLabel1: TIWLabel
@@ -338,7 +337,7 @@ object formDistribStatus: TformDistribStatus
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 2
+        TabOrder = 3
         ItemIndex = 0
         Items.Strings = (
           '120'
