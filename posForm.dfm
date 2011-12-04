@@ -2702,9 +2702,9 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object DetectBtn: TIWRadioButton
-          Left = 480
+          Left = 472
           Top = 9
-          Width = 121
+          Width = 129
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2733,9 +2733,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SuppressBtn: TIWRadioButton
-          Left = 480
-          Top = 33
-          Width = 124
+          Left = 472
+          Top = 31
+          Width = 129
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2764,9 +2764,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object AssumeBtn: TIWRadioButton
-          Left = 480
-          Top = 56
-          Width = 124
+          Left = 472
+          Top = 53
+          Width = 129
           Height = 21
           Cursor = crAuto
           IW50Hint = False
