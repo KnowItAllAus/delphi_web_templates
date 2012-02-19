@@ -8,7 +8,8 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, baretitle, siComp, siLngLnk, IWCompMemo,
-  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container;
+  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container,
+  IWCompCheckbox;
 
 type
   TformImageVersions = class(TIWAppForm)
@@ -62,6 +63,7 @@ type
     datamode : datamodes;
     format : formats;
     imgColour : integer;
+    rendered : boolean;
     function showImage(ms: TStream; format : formats): boolean;
     procedure getimagefromdb;
     procedure gettextfromdb;
@@ -305,7 +307,8 @@ begin
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
   case datamode of
-    dmImage:
+    dmImage,
+    dmRenderedImage:
       begin
         Image.Visible := True;
         try
@@ -322,6 +325,7 @@ begin
         getimagefromdb;
       end;
     dmText,
+    dmRenderedText,
     dmScanner,
     dmKeyboard,
     dmInput,
@@ -498,7 +502,7 @@ begin
     UpFrm.ModeCombo.ItemIndex:=ord(datamode);
     UpFrm.FormatCombo.ItemIndex:=ord(format);
     UpFrm.filename:=revfilenameedit.text;
-    if datamode=dmImage then begin
+    if datamode in [dmImage,dmRenderedImage] then begin
       UpFrm.original.Assign(self.Image.Picture.Bitmap);
       UpFrm.workimg:=TBitmap.create;
       UpFrm.workimg.Assign(self.Image.Picture.Bitmap);

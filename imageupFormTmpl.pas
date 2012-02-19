@@ -395,7 +395,7 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        MemBox.Visible:=True;
+        MemBox.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
         ColCombo.Visible:=True;
         ColLabel.Visible:=True;
         PreferLabel.Visible:=True;

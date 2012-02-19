@@ -387,6 +387,7 @@ begin
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
   case datamodes(ModeCombo.itemindex) of
+    dmRenderedImage,
     dmImage:
       begin
         EditLabel.Visible:=True;
@@ -406,15 +407,16 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        MemBox.Visible:=True;
-        ColCombo.Visible:=True;
+        MemBox.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
         ColLabel.Visible:=True;
         PreferLabel.Visible:=True;
         WidthGuide.Visible:=true;
         WidthGuide2.Visible:=true;
         WidthGuide3.Visible:=true;
+        ColCombo.Visible:=true;
         getimagefromdb;
       end;
+    dmRenderedText,
     dmText,
     dmScanner,
     dmKeyboard,
@@ -669,7 +671,7 @@ begin
 
      workimg.height:=bm.height;
      workimg.width:=bm.width;
-     makegrey (bm,workimg,colcombo.ItemIndex);
+     if colcombo.itemindex<>5 then makegrey (bm,workimg,colcombo.ItemIndex);
      bm.Free;
      display_work_image;
   end;

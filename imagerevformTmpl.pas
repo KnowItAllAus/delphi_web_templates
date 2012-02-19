@@ -8,7 +8,8 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, baretitle, siComp, siLngLnk, IWCompMemo,
-  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container;
+  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container,
+  IWCompCheckbox;
 
 type
   TformImageVersionsTmpl = class(TIWAppForm)
@@ -53,6 +54,7 @@ type
     datamode : datamodes;
     format : formats;
     imgColour : integer;
+    rendered : boolean;
     function showImage(ms: TStream; format : formats): boolean;
     procedure getimagefromdb;
     procedure gettextfromdb;
@@ -261,7 +263,8 @@ begin
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
   case datamode of
-    dmImage:
+    dmImage,
+    dmRenderedImage:
       begin
         Image.Visible := True;
         try
@@ -278,6 +281,7 @@ begin
         getimagefromdb;
       end;
     dmText,
+    dmRenderedText,
     dmScanner,
     dmKeyboard,
     dmInput,
