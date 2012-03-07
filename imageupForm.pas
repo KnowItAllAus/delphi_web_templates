@@ -556,7 +556,7 @@ begin
   error:='';
   try
     case datamodes(modecombo.itemindex) of
-      dmImage:
+      dmImage, dmRenderedImage:
         try
            error:='Upload : ';
            UploadFile.SaveToStream(ms);
@@ -569,7 +569,7 @@ begin
              raise;
            end;
         end;
-      dmText,
+      dmText, dmRenderedText,
       dmNet:
         try
           error:='Text : ';

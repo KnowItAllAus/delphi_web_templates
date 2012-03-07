@@ -376,7 +376,8 @@ begin
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
   case datamodes(ModeCombo.itemindex) of
-    dmImage:
+    dmImage,
+    dmRenderedImage:
       begin
         EditLabel.Visible:=True;
         MinCombo.Visible:=True;
@@ -395,7 +396,7 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        MemBox.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
+        MemBox.Visible:=datamodes(ModeCombo.itemindex) in [dmImage,dmRenderedImage];
         ColCombo.Visible:=True;
         ColLabel.Visible:=True;
         PreferLabel.Visible:=True;
@@ -405,6 +406,7 @@ begin
         getimagefromdb;
       end;
     dmText,
+    dmRenderedText,
     dmScanner,
     dmKeyboard,
     dmInput,
@@ -523,7 +525,8 @@ begin
   error:='';
   try
     case datamodes(modecombo.itemindex) of
-      dmImage:
+      dmImage,
+      dmRenderedImage:
         try
            error:='Upload : ';
            UploadFile.SaveToStream(ms);
@@ -537,6 +540,7 @@ begin
            end;
         end;
       dmText,
+      dmRenderedText,
       dmNet:
         try
           error:='Text : ';
