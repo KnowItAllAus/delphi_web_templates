@@ -37,10 +37,19 @@ implementation
 uses datamod, voucherform, ServerController, jobrev;
 
 procedure TFormJobRevDtl.userfooter1Extra2Click(Sender: TObject);
+var
+  s : ansistring;
+  w : widestring;
+  i : integer;
 begin
   try
     With RcDataModule.UpdateJobRevQuery do begin
-        ParamByName ('Note').AsString:=NoteEdit.Text;
+        w:=NoteEdit.Text;
+        s:=utf8encode(NoteEdit.Text);
+        setlength (w,length(s));
+        for i := 1 to length (s) do
+           w[i]:=char(ord(s[i]));
+        ParamByName ('Note').AsString:=w;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsInteger:=UserSession.JobRevID;
         ExecSQL;

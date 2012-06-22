@@ -3,6 +3,7 @@ object RcWebController: TRcWebController
   OnCreate = IWServerControllerBaseCreate
   AuthBeforeNewSession = False
   AppName = 'Recast'
+  CharSet = 'UTF-8'
   CacheExpiry = 120
   ComInitialization = ciNone
   Compression.Enabled = False
@@ -21,16 +22,15 @@ object RcWebController: TRcWebController
   RedirectMsgDelay = 0
   ServerResizeTimeout = 0
   ShowLoadingAnimation = True
-  SessionTimeout = 60
+  SessionTimeout = 40
   SSLOptions.NonSSLRequest = nsAccept
   SSLOptions.Port = 0
   SSLOptions.SSLVersion = sslv3
-  Version = '11.0.42'
+  Version = '11.0.47'
   AllowMultipleSessionsPerUser = True
   OnException = IWServerControllerBaseException
   OnNewSession = IWServerControllerBaseNewSession
-  Left = 474
-  Top = 149
+  AllowIE6 = False
   Height = 310
   Width = 342
 end

@@ -257,7 +257,7 @@ end;
 procedure TformImageVersions.showText(ms: TStream);
 begin
   if (ms.size > 0) then begin
-    Memo.Lines.LoadFromStream(ms);
+    Memo.Lines.LoadFromStream(ms,TEncoding.UTF8);
     cpybtn.visible:=true;
   end;
 end;

@@ -1,4 +1,4 @@
-unit groupnameform;
+﻿unit groupnameform;
 
 interface
 
@@ -34,10 +34,17 @@ implementation
 uses datamod, voucherform, ServerController, jobrev, grpdtlform;
 
 procedure TFormGroupnameEdit.userfooter1Extra2Click(Sender: TObject);
+var
+  rbs : rawbytestring;
+  ss : utf8string;
+  s : string;
+  i : integer;
 begin
   try
     With RcDataModule.GroupUpdateNameQuery do begin
-        ParamByName ('Name').AsString:=NameEdit.Text;
+    s:=NameEdit.Text;
+        ParamByName ('Name1').AsWideString:=NameEdit.Text;
+        ParamByName ('Name2').AsWideString:=s; //NameEdit.Text;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsString:=RcDataModule.GetValue ('editgroup','');
         ExecSQL;

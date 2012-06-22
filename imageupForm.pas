@@ -330,7 +330,7 @@ end;
 procedure TFormImageUp.showText(ms: TStream);
 begin
   if (ms.size > 0) then begin
-    Memo.Lines.LoadFromStream(ms);
+    Memo.Lines.LoadFromStream(ms,TEncoding.UTF8);
   end;
 end;
 
@@ -476,6 +476,9 @@ procedure TFormImageUp.PostButtonClick(Sender: TObject);
 var
    ms : TMemoryStream;
    i : integer;
+   dest : array [0..10240] of ansichar;
+   utf8bytes : integer;
+   s : string;
 begin
   RcDataModule.ImageUpdateQuery.ParamByName('ID').AsString :=
     RcDataModule.CurrentImageQuery.FieldByName('ID').AsString;
@@ -515,10 +518,12 @@ begin
   try
     if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
       for i:=0 to Memo.lines.count-1 do begin
-         Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
+         s:=FixFormat(Memo.Lines.Strings[i])+#13#10;
+         utf8bytes:=UnicodeToUtf8(@Dest[0],@s[1],10240);
+         ms.Write(Dest,utf8bytes-1);
       end;
     end;
-    Memo.Lines.SaveToStream(ms);
+//    Memo.Lines.SaveToStream(ms);
     ms.position := 0;
     RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms,ftBlob);
   finally
@@ -795,11 +800,11 @@ end;
 
 procedure TFormImageUp.SynBtnClick(Sender: TObject);
 var
-  msg : array [0..1023] of char;
-  buf : array [0..65535] of char;
+  msg : array [0..1023] of ansichar;
+  buf : array [0..65535] of ansichar;
   buflen : integer;
   i,j : integer;
-  s : string;
+  s : ansistring;
 begin
   if assigned(script_test) then begin
      buflen:=0;
@@ -816,7 +821,7 @@ begin
        inc(buflen);
      end;
      script_test (@buf[0], buflen, @msg[0], 1024);
-     WebApplication.ShowMessage(pchar(@msg[0]), smAlert);
+     WebApplication.ShowMessage(pansichar(@msg[0]), smAlert);
   end;
 end;
 

@@ -26,7 +26,7 @@ type
      co_id : integer;
      priv : integer;
      new_journ : boolean;
-     strict : boolean;
+     strictrules : boolean;
      time_offset : integer;
   end;
 
@@ -77,7 +77,7 @@ type
     TimeZoneName : string;
     NewLayout : boolean;
     mru_list : array [1..MAX_MRU] of mru_rec;
-    strict : boolean;
+    strictrules : boolean;
     group_refered_by : referer_class;
     Companies_available : TStringList;
     //
@@ -212,7 +212,7 @@ begin
       UserCompany:=inttostr(cobj.co_id);
       Company:=inttostr(cobj.co_id);
       RcDataModule.SelectTransDB(cobj.new_journ);
-      strict:=cobj.strict;
+      strictrules:=cobj.strictrules;
       SetPriv (cobj.priv);
       Timeoffset:=cobj.time_offset/1440;
       for j:=1 to MAX_MRU-1 do begin

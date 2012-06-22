@@ -45,7 +45,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, db, servercontroller, IWInit, roleform, grpdtlform, cfgtypes;
+uses datamod, db, servercontroller, IWInit, roleform, grpdtlform, cfgtypes, dialogs;
 
 procedure EditGroup (ID : String; refered_by : referer_class);
 var
@@ -116,6 +116,11 @@ begin
           text:='';
         end;
       end;
+      s := RcDataModule.GroupQuery.FieldByName('NAMEU').AsString;
+      if s<>'' then
+         showmessage (utf8decode(s));
+
+
       inc (i);
       RcDataModule.GroupQuery.Next;
     end;

@@ -197,10 +197,10 @@ begin
 
   ProdBox.Enabled:=AuthBox.Checked and ((UserSession.privilege and PRIV_LIVE)<>0);;
 
-  ImageBtn.Enabled:=not AuthBox.Checked or not UserSession.Strict;
-  InsertBtn.Enabled:=not AuthBox.Checked or not UserSession.Strict;
-  EditJobRevBtn.Enabled:=not AuthBox.Checked or not UserSession.Strict;
-  UserSession.Readonly:=AuthBox.Checked and UserSession.Strict;
+  ImageBtn.Enabled:=not AuthBox.Checked or not UserSession.Strictrules;
+  InsertBtn.Enabled:=not AuthBox.Checked or not UserSession.Strictrules;
+  EditJobRevBtn.Enabled:=not AuthBox.Checked or not UserSession.Strictrules;
+  UserSession.Readonly:=AuthBox.Checked and UserSession.Strictrules;
   AuthBox.Enabled:=(UserSession.privilege and PRIV_LIVE)<>0;
 
   RcDataModule.Trans.Active:=true;

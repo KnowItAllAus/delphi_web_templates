@@ -14,7 +14,6 @@ uses
 
 type
   Tform_login = class(TIWAppForm)
-    silink: TsiLangLinked;
     IWRegion1: TIWRegion;
     BodyRegion: TIWRegion;
     IWRectangle2: TIWRectangle;
@@ -23,7 +22,6 @@ type
     PassEdit: TIWEdit;
     UserRect: TIWRectangle;
     PassRect: TIWRectangle;
-    IWSiLink1: TIWSiLink;
     IWTimer1: TIWTimer;
     LoginBtn: TIWButton;
     IWRegion2: TIWRegion;
@@ -145,7 +143,7 @@ begin
                    cobj.priv:=FieldByName('PRIVILEGE').AsInteger
                  end;
                  cobj.new_journ:=FieldByName('TRANDBNEW').AsString='1';
-                 cobj.strict:=FieldByName('STRICT').AsString='1';
+                 cobj.strictrules:=FieldByName('STRICT').AsString='1';
                  try
                    cobj.time_offset:=FieldByName('TIMEOFFSET').AsInteger;
                  except
@@ -181,26 +179,26 @@ end;
 
 procedure Tform_login.IWAppFormCreate(Sender: TObject);
 begin
-   IWSilink1.InitForm;
+   //IWSilink1.InitForm;
    PassEdit.Text:=UserSession.pwd;
    UserEdit.Text:=UserSession.User;
-   UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
-   PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
+   //UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
+   //PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
    if comparetext(titlelabel.caption,'login')=0 then begin
       titleimage.Visible:=true;
    end else begin
       titlelabel.Visible:=true;
    end;
    if UserSession.loginedit>0 then IWTimer1.Enabled:=true;
-   langcombo.Items.Assign(siLink.langdispatcher.LangNames);
-   langcombo.ItemIndex:=siLink.langdispatcher.ActiveLanguage-1;
+   //langcombo.Items.Assign(siLink.langdispatcher.LangNames);
+   //langcombo.ItemIndex:=siLink.langdispatcher.ActiveLanguage-1;
 end;
 
 procedure Tform_login.IWTimer1Timer(Sender: TObject);
 begin
    case USerSession.loginedit of
    1 : begin
-         IWSiLink1.DoLinkClick(Sender);
+         //IWSiLink1.DoLinkClick(Sender);
          UserSession.loginedit:=2;
        end;
    2 : begin
@@ -219,10 +217,10 @@ end;
 procedure Tform_login.langcomboChange(Sender: TObject);
 begin
   RcDatamodule.siLangDispatcher1.ActiveLanguage:=LangCombo.ItemIndex+1;
-  IWSilink1.InitForm;
+  //IWSilink1.InitForm;
   //CoRect.Text:=silink.GetTextOrDefault('Company')+'&nbsp;';
-  UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
-  PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
+  //UserRect.Text:=silink.GetTextOrDefault('Username')+'&nbsp;';
+  //PassRect.Text:=silink.GetTextOrDefault('Password')+'&nbsp;';
   titleimage.visible:=false;
   titlelabel.visible:=false;
   if comparetext(titlelabel.caption,'login')=0 then begin

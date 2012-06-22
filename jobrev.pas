@@ -154,7 +154,7 @@ begin
           end;
         end;
         with Cell[i, 2] do begin
-          Text := FieldByName('NOTE').AsString;
+          Text := utf8decode(FieldByName('NOTE').AsString);
         end;
         with Cell[i, 3] do begin
           Text := FieldByName('CREATEDBY').AsString;
