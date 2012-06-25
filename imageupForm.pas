@@ -499,7 +499,7 @@ begin
     Ord(MemBox.Checked);
   RcDataModule.ImageUpdateQuery.ParamByName('COLOUR').AsInteger :=
     ColCombo.ItemIndex;
-  RcDataModule.ImageUpdateQuery.ParamByName('OLD_COMPANY').AsString :=
+  RcDataModule.ImageUpdateQuery.ParamByName('COMPANY').AsString :=
     RcDataModule.CurrentImageQuery.FieldByName('COMPANY').AsString;
   RcDataModule.ImageUpdateQuery.ParamByName('NAME').AsString := copy (filename,1,40);
   if workimg <> nil then begin
@@ -518,12 +518,10 @@ begin
   try
     if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
       for i:=0 to Memo.lines.count-1 do begin
-         s:=FixFormat(Memo.Lines.Strings[i])+#13#10;
-         utf8bytes:=UnicodeToUtf8(@Dest[0],@s[1],10240);
-         ms.Write(Dest,utf8bytes-1);
+         Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
       end;
     end;
-//    Memo.Lines.SaveToStream(ms);
+    Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
     ms.position := 0;
     RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms,ftBlob);
   finally

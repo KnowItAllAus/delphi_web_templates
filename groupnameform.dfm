@@ -15,7 +15,7 @@ object FormGroupnameEdit: TFormGroupnameEdit
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -65
+  DesignTop = -159
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118

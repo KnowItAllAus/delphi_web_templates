@@ -492,7 +492,7 @@ begin
          Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
       end;
     end;
-    Memo.Lines.SaveToStream(ms);
+    Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
     ms.position := 0;
     uq.ParamByName('TEXT').loadfromStream(ms,ftBlob);
   finally

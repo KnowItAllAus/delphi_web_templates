@@ -42,9 +42,8 @@ var
 begin
   try
     With RcDataModule.GroupUpdateNameQuery do begin
-    s:=NameEdit.Text;
-        ParamByName ('Name1').AsWideString:=NameEdit.Text;
-        ParamByName ('Name2').AsWideString:=s; //NameEdit.Text;
+        s:=NameEdit.Text;
+        ParamByName ('Name').AsWideString:=NameEdit.Text;
         ParamByName ('Company').AsString:=UserSession.Company;
         ParamByName ('ID').AsString:=RcDataModule.GetValue ('editgroup','');
         ExecSQL;
