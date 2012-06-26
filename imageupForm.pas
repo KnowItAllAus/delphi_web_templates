@@ -522,7 +522,7 @@ begin
       end;
     end;
     Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
-    ms.position := 0;
+    ms.position := 3;  // Avoid BOM
     RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms,ftBlob);
   finally
     ms.free;
