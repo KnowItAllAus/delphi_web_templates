@@ -457,7 +457,7 @@ end;
 
 procedure TFormImageUpTmpl.PostButtonClick(Sender: TObject);
 var
-   ms : TMemoryStream;
+   ms, ms2 : TMemoryStream;
    i : integer;
    uq : TIBQuery;
 begin
@@ -486,6 +486,7 @@ begin
     uq.ParamByName('IMAGE').AsString := '';
   end;
   ms := TMemoryStream.Create;
+  ms2 := TMemoryStream.Create;
   try
     if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
       for i:=0 to Memo.lines.count-1 do begin
@@ -494,9 +495,11 @@ begin
     end;
     Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
     ms.position := 3;  // Avoid BOM
-    uq.ParamByName('TEXT').loadfromStream(ms,ftBlob);
+    ms2.CopyFrom(ms,ms.size-3);
+    uq.ParamByName('TEXT').loadfromStream(ms2,ftBlob);
   finally
     ms.free;
+    ms2.free;
   end;
   uq.ExecSQL;
   uq.Transaction.Commit;

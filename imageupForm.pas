@@ -474,7 +474,7 @@ end;
 
 procedure TFormImageUp.PostButtonClick(Sender: TObject);
 var
-   ms : TMemoryStream;
+   ms,ms2 : TMemoryStream;
    i : integer;
    dest : array [0..10240] of ansichar;
    utf8bytes : integer;
@@ -515,6 +515,7 @@ begin
     RcDataModule.ImageUpdateQuery.ParamByName('IMAGE').AsString := '';
   end;
   ms := TMemoryStream.Create;
+  ms2 := TMemoryStream.Create;
   try
     if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
       for i:=0 to Memo.lines.count-1 do begin
@@ -523,9 +524,11 @@ begin
     end;
     Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
     ms.position := 3;  // Avoid BOM
-    RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms,ftBlob);
+    ms2.CopyFrom(ms,ms.Size-3);
+    RcDataModule.ImageUpdateQuery.ParamByName('TEXT').loadfromStream(ms2,ftBlob);
   finally
     ms.free;
+    ms2.Free;
   end;
   RcDataModule.ImageUpdateQuery.ExecSQL;
   if referedby=nil then RcDataModule.ImageUpdateQuery.Transaction.Commit;
