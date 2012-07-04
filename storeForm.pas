@@ -77,6 +77,8 @@ type
     IWLabel20: TIWLabel;
     TestBox: TIWCheckBox;
     AutoBox: TIWCheckBox;
+    IWLabel21: TIWLabel;
+    SerialEdit: TIWEdit;
     procedure CancelBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
@@ -228,6 +230,8 @@ begin
       RcDataModule.CurrentstoreQuery.FieldByName('COMPANY').AsString;
     RcDataModule.storeUpdateQuery.ParamByName('NAME').AsString:=
       NewNameEdit.Text;
+    RcDataModule.storeUpdateQuery.ParamByName('SERIAL').AsString:=
+      SerialEdit.Text;
     RcDataModule.storeUpdateQuery.ExecSQL;
     RcDataModule.storeUpdateQuery.Transaction.CommitRetaining;
   except
@@ -484,6 +488,7 @@ begin
       PosCombo.Items.Add (IntToStr(po.id)+'  '+po.name);
   end;
   NewNameEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('NAME').AsString;
+  SerialEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('SERIAL').AsString;
   ParamEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PARAMS').AsString;
   ErrataEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PRNERRATA').AsString;
   NewIDEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('ID').AsString;

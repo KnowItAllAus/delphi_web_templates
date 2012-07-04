@@ -35,6 +35,7 @@ type
     procedure userfooter1CancelClick(Sender: TObject);
     procedure advancedboxAsyncClick(Sender: TObject;
       EventParams: TStringList);
+    procedure RefreshBtnAsyncClick(Sender: TObject; EventParams: TStringList);
   private
     IList : TList;
     advanced : boolean;
@@ -68,7 +69,7 @@ begin
   RcDataModule.StoreQuery.Open;
   with StoreGrid do begin
     if advanced then
-      columncount:=11
+      columncount:=12
     else
       columncount:=6;
     //Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
@@ -79,11 +80,12 @@ begin
     Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
     Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.CommsAge');
     if advanced then begin
-      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
-      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
-      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
+      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Serial');
+      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
+      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
+      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
     end;
     i:=1;
     RowCount:=1;
@@ -123,19 +125,22 @@ begin
            Text:='';
       end;
       if advanced then with Cell[i, 6] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Serial').AsString);
       end;
       if advanced then with Cell[i, 7] do begin
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
+      end;
+      if advanced then with Cell[i, 8] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
         //if assigned(blob) then Text := Inttostr(blob.Blobsize) else Text:='<Null>';
       end;
-      if advanced then with Cell[i, 8] do begin
+      if advanced then with Cell[i, 9] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
       end;
-      if advanced then with Cell[i, 9] do begin
+      if advanced then with Cell[i, 10] do begin
         Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
       end;
-      if advanced then with Cell[i, 10] do begin
+      if advanced then with Cell[i, 11] do begin
         Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
       end;
       SRO:=SRObj.create;
@@ -159,6 +164,12 @@ begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   advanced:=false;
+  RefreshGrid;
+end;
+
+procedure TformDistribStatus.RefreshBtnAsyncClick(Sender: TObject;
+  EventParams: TStringList);
+begin
   RefreshGrid;
 end;
 
