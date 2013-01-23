@@ -27,7 +27,6 @@ object RcWebController: TRcWebController
   SSLOptions.Port = 0
   SSLOptions.SSLVersion = sslv3
   Version = '11.0.47'
-  AllowMultipleSessionsPerUser = True
   OnException = IWServerControllerBaseException
   OnNewSession = IWServerControllerBaseNewSession
   AllowIE6 = False

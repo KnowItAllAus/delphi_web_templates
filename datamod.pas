@@ -172,6 +172,7 @@ type
     GrpDepUpQuery: TIBQuery;
     GrpDepDnQuery: TIBQuery;
     suUserAddQuery: TIBQuery;
+    FastTranquery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

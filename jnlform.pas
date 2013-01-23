@@ -9,7 +9,7 @@ uses
   IWBaseControl, IWVCLBaseContainer, IWVCLBaseControl, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, AbBase, AbBrowse, AbZBrows, AbZipper,
   IWSiLink, siComp, siLngLnk, IWCompRectangle, footer_user, statstitle,
-  IWCompListbox, IWCompCheckbox, IWHTML40Container;
+  IWCompListbox, IWCompCheckbox, IWHTML40Container, db;
 
 type
   TformJnl = class(TIWAppForm)
@@ -60,6 +60,7 @@ type
     lastStore : integer;
     procedure DisplayGrid;
     procedure MakeTranFiles (hdr : TStream; itm : TStream; option : integer);
+    procedure WriteRecord (s : TStream; D : TDataset; items : integer);
     function GetStoreName (Id : string) : string;
   public
     { Public declarations }
@@ -71,7 +72,7 @@ var
 
 implementation
 
-uses DataMod, ServerController, IWInit, cfgTypes, db, statform, roleform, parse;
+uses DataMod, ServerController, IWInit, cfgTypes, statform, roleform, parse;
 {$R *.DFM}
 
 const
@@ -111,6 +112,7 @@ begin
     end;
   end;
 end;
+
 
 procedure TformJnl.DisplayGrid;
 var
@@ -245,6 +247,141 @@ begin
   RcDataModule.Trans2.Active:=False;
 end;
 
+
+(*procedure TformJnl.DisplayGrid;
+var
+  i: integer;
+  storename : string;
+  timeoffset : TDateTime;
+  recs : integer;
+  newstart : TDateTime;
+  newend : TDatetime;
+  newstore : integer;
+  f : TField;
+  newrec : boolean;
+begin
+  recs:=0;
+  timeoffset:=(utccombo.itemindex-12)*60/1440;
+  RcDataModule.Trans.Active:=False;
+  RcDataModule.Trans2.Active:=False;
+  with TranGrid do begin
+    Cell[0, 0].Text := siLangLinked1.GetTextOrDefault('Grid.Time');
+    Cell[0, 1].Text := siLangLinked1.GetTextOrDefault('Grid.Customer');
+    Cell[0, 2].Text := siLangLinked1.GetTextOrDefault('Grid.Desc');
+    Cell[0, 3].Text := siLangLinked1.GetTextOrDefault('Grid.Qty');
+    Cell[0, 4].Text := siLangLinked1.GetTextOrDefault('Grid.Amount');
+    Cell[0, 5].Text := siLangLinked1.GetTextOrDefault('Grid.Price');
+    Cell[0, 6].Text := siLangLinked1.GetTextOrDefault('Grid.Stock');
+  end;
+
+  try
+    with RcDataModule.FastTranQuery do begin
+      Close;
+      ParamByName('COMPANY').AsString := UserSession.Company;
+      newstore:=StrToInt (StoreIDList.Strings[StoreCombo.ItemIndex]);
+      Parambyname('STOREID').AsInteger := newstore;
+      newstart:=StrToDate(StartEdit.Text)+StrToTime (StartTime.Text)-timeOffset;
+      ParamByName('TIMESTART').AsDateTime := newstart;
+      newend:= StrToDate(EndEdit.Text)+StrToTime (EndTime.Text)-timeOffset;
+      if (newstart<>laststart) or (newend<>lastend) or (newstore<>laststore) then offset:=0;
+      laststart:=newstart; lastend:=newend; laststore:=newstore;
+      ParamByName('TIMEEND').AsDateTime := newend;
+      ParamByName('maxrec').AsInteger := MaxRec+1;
+      ParamByName('offset').AsInteger := offset;
+      Open;
+    end;
+  except
+  end;
+
+  with TranGrid, rcDataModule do begin
+    i := 1;
+    RowCount := 1;
+    TranItemQuery.ParamByName('COMPANY').AsString :=
+      UserSession.Company;
+    while not FastTranQuery.Eof and (recs<maxrec) do begin
+      newrec:=false;
+      if (FastTranQuery.FieldByName('ID').AsInteger<>lastID) then begin
+         inc (recs);
+         newrec:=true;
+      end;
+      while not FastTranItemQuery.Eof then begin
+          RowCount := RowCount + 1;
+          with Cell[i, 0] do begin
+            Text := FormatDateTime ('dd/mm/yy hh:mm',TranQuery.FieldByName('TRANDATE').AsDateTime+timeOffset);
+          end;
+          with Cell[i, 1] do begin
+            Text := TranQuery.FieldByName('CUSTID').AsString;
+          end;
+          with Cell[i, 2] do begin
+            storename:=GetStoreName (TranQuery.FieldByName('STOREID').AsString);
+            if Storename='' then storename:='['+TranQuery.FieldByName('STOREID').AsString+']';
+            Text := siLangLinked1.GetTextOrDefault('Grid.Store')+'='+storename+', '+
+                    siLangLinked1.GetTextOrDefault('Grid.Printer')+'='+
+                    TranQuery.FieldByName('POS').AsString+' ('+
+                    TranQuery.FieldByName('PRINTER').AsString + ')';
+          end;
+          with Cell[i, 3] do begin
+            Text := TranQuery.FieldByName('TRANNUM').AsString;
+          end;
+          with Cell[i, 4] do begin
+            Text := TranQuery.FieldByName('TRANOP').AsString;;
+          end;
+          with Cell[i, 5] do begin
+            Text := TranQuery.FieldByName('TRANAISLE').AsString;
+          end;
+          with Cell[i, 6] do begin
+            if TranQuery.FieldByName ('TOTAL').IsNull then begin
+               Text := TranQuery.FieldByName('OTHER').AsString;
+            end else begin
+               Text := '['+TranQuery.FieldByName('TOTAL').AsString+'] '
+                    +TranQuery.FieldByName('OTHER').AsString;
+            end;
+          end;
+          inc(i);
+          while not TranItemQuery.Eof do begin
+            RowCount := RowCount + 1;
+            with Cell[i, 0] do begin
+              Text := '';
+            end;
+            with Cell[i, 1] do begin
+              f:=TranItemQuery.FieldByName('RESOLVEDBC');
+              if (f=nil) then
+                  Text:=''
+                  else
+                  Text := htmlquote(f.AsString);
+            end;
+            with Cell[i, 2] do begin
+              Text := htmlquote(TranItemQuery.FieldByName('DESCRIPTION').AsString);
+            end;
+            with Cell[i, 3] do begin
+              Text := TranItemQuery.FieldByName('QUANTITY').AsString;
+            end;
+            with Cell[i, 4] do begin
+              Text := TranItemQuery.FieldByName('AMOUNT').AsString;
+            end;
+            with Cell[i, 5] do begin
+              Text := TranItemQuery.FieldByName('UNITPRICE').AsString;
+            end;
+            with Cell[i, 6] do begin
+              Text := TranItemQuery.FieldByName('STOCKID').AsString;
+            end;
+            inc(i);
+            TranItemQuery.Next;
+          end;
+      end; { if not TranItemQuery }
+      TranQuery.Next;
+    end; { while tranquery }
+  end; {with }
+  nextBtn.visible:= not RcDataModule.TranQuery.Eof;
+  prevBtn.visible:= offset > 0;
+
+  RcDataModule.FastTranQuery.Close;
+//  RcDataModule.TranItemQuery.Close;
+  RcDataModule.Trans.Active:=False;
+  RcDataModule.Trans2.Active:=False;
+end;
+*)
+
 procedure TformJnl.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
@@ -306,39 +443,44 @@ begin
   DisplayGrid;
 end;
 
-procedure WriteRecord (s : TStream; D : TDataset; items : integer);
+procedure TFormJnl.WriteRecord (s : TStream; D : TDataset; items : integer);
 var
-  str : string;
+  str : ansistring;
   i : integer;
   count : integer;
   itm : boolean;
   fname : string;
+  value : string;
 begin
   str:='';
   count:=0;
   for i:=0 to D.FieldCount-1 do begin
+     value:=quote(D.Fields[i].AsString);
      fname:=D.Fields[i].FieldName;
+     if fname='STOREID' then begin
+        value:=quote(GetStoreName(D.Fields[i].AsString));
+     end;
      itm:=copy (fname,1,5)='ITEM_';
      case items of
        0 : if not itm then begin
              if (count>0) then str:=str+',';
-             str:=str+quote(D.Fields[i].AsString);
+             str:=str+value;
              inc(count);
            end;
        1 : if itm then begin
              if (count>0) then str:=str+',';
-             str:=str+quote(D.Fields[i].AsString);
+             str:=str+value;
              inc(count);
            end;
        2 : if (fname<>'ITEM_ID') and (fname<>'ITEM_TRANID') then begin
              if (count>0) then str:=str+',';
-             str:=str+quote(D.Fields[i].AsString);
+             str:=str+value;
              inc(count);
            end;
        3 : if (fname<>'ITEM_ID') and (fname<>'ITEM_TRANID') then begin
              if itm then begin
                if (count>0) then str:=str+',';
-               str:=str+quote(D.Fields[i].AsString);
+               str:=str+value;
                inc(count);
              end else begin
                if (count>0) then str:=str+',';
@@ -353,7 +495,7 @@ end;
 
 procedure WriteNames (s : TStream; D : TDataset; items : integer);
 var
-  str : string;
+  str : ansistring;
   i : integer;
   fname : string;
   count : integer;

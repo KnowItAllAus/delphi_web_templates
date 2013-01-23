@@ -1,15 +1,11 @@
 object AdminData: TAdminData
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 52
-  Top = 193
   Height = 407
   Width = 303
   object StoreEnabledQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, stores.lastcomms, stores.id,' +
@@ -36,8 +32,6 @@ object AdminData: TAdminData
   object StoreOnQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, stores.lastcomms, stores.id,' +
@@ -71,8 +65,6 @@ object AdminData: TAdminData
   object StoreOffQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, stores.company, stores.lastc' +
@@ -107,8 +99,6 @@ object AdminData: TAdminData
   object StoreDbgQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, stores.lastcomms, stores.id,' +
@@ -135,8 +125,6 @@ object AdminData: TAdminData
   object StoreAllQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, storedata.name, stores.lastc' +
@@ -164,8 +152,6 @@ object AdminData: TAdminData
   object StorePendingQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, stores.lastcomms, stores.id,' +
@@ -191,13 +177,11 @@ object AdminData: TAdminData
       end>
   end
   object Trans: TIBTransaction
-    Active = False
     DefaultDatabase = RecastDB
     DefaultAction = TARollback
     Params.Strings = (
       'concurrency'
       'nowait')
-    AutoStopAction = saNone
     Left = 138
     Top = 78
   end
@@ -207,17 +191,13 @@ object AdminData: TAdminData
       'user_name=webapp'
       'PASSWORD=recastweb')
     LoginPrompt = False
-    IdleTimer = 0
     SQLDialect = 1
-    TraceFlags = []
     Left = 136
     Top = 128
   end
   object SlaveAllEnQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, printers.company, printers.a' +
@@ -251,8 +231,6 @@ object AdminData: TAdminData
   object SlaveAllQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, printers.company, printers.a' +
@@ -285,8 +263,6 @@ object AdminData: TAdminData
   object SlavePendingQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select company.name as companyname, printers.company,'
       
@@ -330,8 +306,6 @@ object AdminData: TAdminData
   object SlaveOffQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'SELECT company.name as companyname, printers.address, printers.l' +
@@ -378,8 +352,6 @@ object AdminData: TAdminData
   object SlaveDbgQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname,printers.company, printers.ad' +
@@ -413,8 +385,6 @@ object AdminData: TAdminData
   object SlaveBypassQuery: TIBQuery
     Database = RecastDB
     Transaction = Trans
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       
         'select company.name as companyname, printers.company, printers.a' +
@@ -443,6 +413,46 @@ object AdminData: TAdminData
         DataType = ftInteger
         Name = 'Company'
         ParamType = ptInput
+      end>
+  end
+  object SlaveOnQuery: TIBQuery
+    Database = RecastDB
+    Transaction = Trans
+    SQL.Strings = (
+      
+        'SELECT company.name as companyname, printers.address, printers.l' +
+        'astcontact, printers.id, printers.pos, printerdata.name, printer' +
+        's.ver, printers.bypass, storedata.name as storename, stores.last' +
+        'comms  '
+      'FROM storedata, printers, printerdata, stores, company '
+      'WHERE'
+      'storedata.id=printers.store and '
+      'stores.id = printers.store and '
+      'printers.id=printerdata.id and'
+      'company.id=stores.company and'
+      '(company=:Company or 0=:Company) and '
+      'storedata.enabled=1 and'
+      'lastcontact>:lastcontact '
+      'ORDER BY storedata.name')
+    Left = 211
+    Top = 233
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'Company'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftInteger
+        Name = 'Company'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDateTime
+        Name = 'lastcontact'
+        ParamType = ptInput
+        Value = 0d
       end>
   end
 end

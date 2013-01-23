@@ -79,6 +79,8 @@ type
     AutoBox: TIWCheckBox;
     IWLabel21: TIWLabel;
     SerialEdit: TIWEdit;
+    IWLabel22: TIWLabel;
+    PhoneEdit: TIWEdit;
     procedure CancelBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
@@ -232,11 +234,16 @@ begin
       NewNameEdit.Text;
     RcDataModule.storeUpdateQuery.ParamByName('SERIAL').AsString:=
       SerialEdit.Text;
+    RcDataModule.storeUpdateQuery.ParamByName('PHONE').AsString:=
+      PhoneEdit.Text;
     RcDataModule.storeUpdateQuery.ExecSQL;
     RcDataModule.storeUpdateQuery.Transaction.CommitRetaining;
   except
-     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
-     exit;
+    on e : exception do begin
+       showmessage (e.Message);
+       WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
+       exit;
+    end;
   end;
 
   if (autobox.checked) then try
@@ -489,6 +496,7 @@ begin
   end;
   NewNameEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('NAME').AsString;
   SerialEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('SERIAL').AsString;
+  PhoneEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PHONE').AsString;
   ParamEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PARAMS').AsString;
   ErrataEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PRNERRATA').AsString;
   NewIDEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('ID').AsString;

@@ -148,6 +148,7 @@ begin
       3 : query:=RcAdminData.slaveallquery;
       4 : query:=RcAdminData.slavedbgquery;
       5 : query:=RcAdminData.slavebypassquery;
+      6 : query:=RcAdminData.slaveonquery;
    end;
    if query<>nil then with query do begin
       try

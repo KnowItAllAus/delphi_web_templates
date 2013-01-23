@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -58
+  DesignTop = -265
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -974,7 +974,7 @@ object formStore: TformStore
         Left = 416
         Top = 87
         Width = 265
-        Height = 197
+        Height = 171
         Cursor = crAuto
         IW50Hint = False
         ParentShowHint = False
@@ -1814,6 +1814,73 @@ object formStore: TformStore
         TabOrder = 13
         PasswordPrompt = False
       end
+      object IWLabel22: TIWLabel
+        Left = 447
+        Top = 267
+        Width = 51
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'IWLabel1'
+        Caption = 'Phone'
+        RawText = False
+      end
+      object PhoneEdit: TIWEdit
+        Left = 504
+        Top = 264
+        Width = 177
+        Height = 23
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'NewNameEdit'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        SubmitOnAsyncEvent = True
+        TabOrder = 26
+        PasswordPrompt = False
+      end
     end
   end
   inline FrameBareTitle1: TFrameBareTitle
@@ -1842,6 +1909,7 @@ object formStore: TformStore
       end
       inherited IWRectangle3: TIWRectangle
         Width = 849
+        ExplicitWidth = 849
       end
       inherited IWImageFile3: TIWImageFile
         Left = 514
@@ -1860,9 +1928,11 @@ object formStore: TformStore
         ExplicitLeft = 832
       end
       inherited TitleLabel: TIWLabel
-        Width = 486
+        Width = 605
+        Height = 93
         Caption = 'administration'
-        ExplicitWidth = 486
+        ExplicitWidth = 605
+        ExplicitHeight = 93
       end
     end
   end
@@ -1897,6 +1967,12 @@ object formStore: TformStore
       inherited IWRectangle6: TIWRectangle
         Width = 431
         ExplicitWidth = 431
+      end
+      inherited UserLabel: TIWLabel
+        Width = 68
+        Height = 26
+        ExplicitWidth = 68
+        ExplicitHeight = 26
       end
       inherited Cancel: TIWButton
         Left = 763

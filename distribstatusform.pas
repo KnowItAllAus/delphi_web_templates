@@ -69,9 +69,9 @@ begin
   RcDataModule.StoreQuery.Open;
   with StoreGrid do begin
     if advanced then
-      columncount:=12
+      columncount:=13
     else
-      columncount:=6;
+      columncount:=7;
     //Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
     Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
@@ -79,13 +79,14 @@ begin
     Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
     Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
     Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.CommsAge');
+    Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Phone');
     if advanced then begin
-      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Serial');
-      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
-      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
-      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
+      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Serial');
+      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
+      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
     end;
     i:=1;
     RowCount:=1;
@@ -124,23 +125,26 @@ begin
         if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
            Text:='';
       end;
-      if advanced then with Cell[i, 6] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Serial').AsString);
+      with Cell[i, 6] do begin
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Phone').AsString);
       end;
       if advanced then with Cell[i, 7] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Serial').AsString);
       end;
       if advanced then with Cell[i, 8] do begin
+        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
+      end;
+      if advanced then with Cell[i, 9] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
         //if assigned(blob) then Text := Inttostr(blob.Blobsize) else Text:='<Null>';
       end;
-      if advanced then with Cell[i, 9] do begin
+      if advanced then with Cell[i, 10] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
       end;
-      if advanced then with Cell[i, 10] do begin
+      if advanced then with Cell[i, 11] do begin
         Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
       end;
-      if advanced then with Cell[i, 11] do begin
+      if advanced then with Cell[i, 12] do begin
         Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
       end;
       SRO:=SRObj.create;

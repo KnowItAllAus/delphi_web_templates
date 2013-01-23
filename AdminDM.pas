@@ -21,6 +21,7 @@ type
     SlaveOffQuery: TIBQuery;
     SlaveDbgQuery: TIBQuery;
     SlaveBypassQuery: TIBQuery;
+    SlaveOnQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

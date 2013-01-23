@@ -104,6 +104,8 @@ type
     ActiveWindowEdit: TIWEdit;
     DiscCombo: TIWComboBox;
     DiscLabel: TIWLabel;
+    OtherWindowEdit: TIWEdit;
+    IWLabel31: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
@@ -241,6 +243,7 @@ begin
       TranIDEdit.Text:=FieldByName('TRANIDTRIG').AsString;
       ErrataEdit.Text:=FieldByName('PRNERRATA').AsString;
       ActiveWindowEdit.Text:=FieldByName('ACTIVEWINDOW').AsString;
+      OtherWindowEdit.Text:=FieldByName('OTHERWINDOW').AsString;
       DiscCombo.ItemIndex:=0;
       if FieldByName('DISCPOLICY').AsString='LITERAL' then
          DiscCombo.ItemIndex:=1;
@@ -318,6 +321,7 @@ begin
       ParamByName('TRANIDTRIG').AsString:=TranIDEdit.Text;
       ParamByName('PRNERRATA').AsString:=ErrataEdit.Text;
       ParamByName('ACTIVEWINDOW').AsString:=ActiveWindowEdit.Text;
+      ParamByName('OTHERWINDOW').AsString:=OtherWindowEdit.Text;
       if DiscCombo.ItemIndex<0 then DiscCombo.ItemIndex:=0;
       ParamByName('DISCPOLICY').AsString:=policynames[DiscCombo.ItemIndex];
       try
