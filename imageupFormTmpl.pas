@@ -53,6 +53,7 @@ type
     ColCombo: TIWComboBox;
     WrapBox: TIWCheckBox;
     SortBtn: TIWButton;
+    SynBtn: TIWButton;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -69,6 +70,7 @@ type
     procedure MemoAsyncKeyPress(Sender: TObject; EventParams: TStringList);
     procedure SortBtnClick(Sender: TObject);
     procedure WrapBoxClick(Sender: TObject);
+    procedure SynBtnClick(Sender: TObject);
   private
     { Private declarations }
     function showImage(ms: TStream): boolean;
@@ -93,7 +95,7 @@ var
 implementation
 
 uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevformtmpl, IBCustomDataSet, IBQuery, IBDatabase,
-  IBTable, IBUpdateSQL;
+  IBTable, IBUpdateSQL, scripting;
 
 {$R *.DFM}
 
@@ -324,7 +326,7 @@ end;
 procedure TFormImageUpTmpl.showText(ms: TStream);
 begin
   if (ms.size > 0) then begin
-    Memo.Lines.LoadFromStream(ms);
+    Memo.Lines.LoadFromStream(ms,TEncoding.UTF8);
   end;
 end;
 
@@ -368,6 +370,7 @@ begin
   Senselabel.Visible:=false;
   pclabel.Visible:=false;
   pclabel2.Visible:=false;
+  synbtn.visible:=false;
 
   ContentStats.Caption:='';
   WidthGuide.Visible:=False;
@@ -424,6 +427,7 @@ begin
            wrapbox.Visible:=true;
            SortBtn.Visible:=true;
         end;
+        synbtn.visible:=datamodes(ModeCombo.itemindex)=dmScript;
       end;
     dmRandom:
       begin
@@ -795,6 +799,33 @@ begin
      Memo.Lines[i]:=fixformat(Memo.Lines[i]);
   end;
   memo.Lines.Sort;
+end;
+
+procedure TFormImageUpTmpl.SynBtnClick(Sender: TObject);
+var
+  msg : array [0..1023] of ansichar;
+  buf : array [0..65535] of ansichar;
+  buflen : integer;
+  i,j : integer;
+  s : ansistring;
+begin
+  if assigned(script_test) then begin
+     buflen:=0;
+     for i:=0 to memo.Lines.Count-1 do begin
+       s:=memo.lines[i];
+       for j:=1 to length(s) do begin
+         buf[buflen]:=s[j];
+         inc(buflen);
+         if (buflen>65532) then exit;
+       end;
+       buf[buflen]:=#13;
+       inc(buflen);
+       buf[buflen]:=#10;
+       inc(buflen);
+     end;
+     script_test (@buf[0], buflen, @msg[0], 1024);
+     WebApplication.ShowMessage(pansichar(@msg[0]), smAlert);
+  end;
 end;
 
 procedure TFormImageUpTmpl.WrapBoxClick(Sender: TObject);
