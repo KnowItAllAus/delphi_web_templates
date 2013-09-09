@@ -8,7 +8,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, promotitle, siComp, siLngLnk, IWCompButton,
-  IWHTML40Container;
+  IWHTML40Container, IWCompListbox;
 
 type
   TformJobs = class(TIWAppForm)
@@ -24,6 +24,9 @@ type
     silink: TsiLangLinked;
     CreateBtn: TIWButton;
     PromoFrameTitle1: TPromoFrameTitle;
+    FindBtn: TIWButton;
+    GuidEdit: TIWEdit;
+    prodbox: TIWComboBox;
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -31,6 +34,7 @@ type
     procedure CreateBtnClick(Sender: TObject);
     procedure JobGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
+    procedure FindBtnClick(Sender: TObject);
   private
   public
     procedure RefreshGrid;
@@ -43,7 +47,7 @@ procedure GotoJob (ID : String; name : string; rev : string; note : string);
 implementation
 
 uses DataMod, ServerController, IWInit, cfgTypes, roleform, Graphics,
-     voucherForm, imagesform, jobrev, edittmplform;
+     voucherForm, imagesform, jobrev, edittmplform, IBQuery;
 
 {$R *.dfm}
 
@@ -135,7 +139,7 @@ begin
             Text:=SiLink.GetTextOrDefault('Grid.Original');
         end;
         with Cell[i, 3] do begin
-          Text := htmlquote(FieldByName('DESCRIPTION').AsString);
+          Text := htmlquote(ansistring(FieldByName('DESCRIPTION').AsString));
         end;
         with Cell[i, 4] do begin
           try
@@ -186,6 +190,56 @@ end;
 procedure TformJobs.EditJob (ID : String; name : string);
 begin
    GotoJob (ID,name,'','');
+end;
+
+procedure TformJobs.FindBtnClick(Sender: TObject);
+var
+  jobid : integer;
+  jobname, rev, note : string;
+  tq : TIBQuery;
+begin
+  tq:=RcDataModule.SQLQry;
+  with tq do begin
+     SQL.Clear;
+     SQL.Add('SELECT i.COMPANY, i.ID, jv.NOTE, jv.ID as jobversion, j.name as jobname, j.id as jobid,'
+             +' i.NAME, i.GUID, i.DESCRIPTION, i.TEMPLATE, j.test_ver, j.prod_ver '
+             +' FROM IMAGEHDR i'
+             +' left join JOBVERS jv on jv.id = i.JOBID'
+             +' left join jobs j on j.id = jv.JOBID'
+             +' where i.GUID like :guid'
+             +' and i.company=:company');
+    try
+      //prepare;
+      ParamByName('COMPANY').AsString:=UserSession.Company;
+      ParamByName('GUID').AsString:=GuidEdit.text;
+      Transaction.StartTransaction;
+      try
+        Open;
+        while not eof do begin
+          if prodbox.ItemIndex=0 then
+             rev:=FieldByName ('test_ver').AsString
+          else
+             rev:=FieldByName ('prod_ver').AsString;
+          jobid:=FieldByName ('JobID').AsInteger;
+          jobname:=FieldByName ('jobname').AsString;
+          note:=FieldByName ('Note').AsString;
+          if rev=FieldByName ('jobversion').AsString then begin
+             Transaction.active:=false;
+             //RcDataModule.VoucherQuery.ParamByName('JOBID').AsInteger:=jobid;
+             GotoJob (IntToStr(jobid),jobname,rev,note);
+             exit;
+          end;
+          next;
+        end;
+      except
+      end;
+      close;
+      Transaction.active:=false;
+    except
+      Transaction.active:=false;
+    end;
+  end;
+  WebApplication.ShowMessage(silink.GetTextOrDefault('NotFound'), smAlert);
 end;
 
 function job_exists (id : string; var kind : integer) : boolean;
