@@ -16,8 +16,8 @@ object FormGrpDtl: TFormGrpDtl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 8
-  DesignTop = -269
+  DesignLeft = -142
+  DesignTop = -47
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -45,6 +45,7 @@ object FormGrpDtl: TFormGrpDtl
         Top = 98
         Width = 1028
         ExplicitTop = 98
+        ExplicitWidth = 1028
       end
       inherited IWImageFile3: TIWImageFile
         Left = 693
@@ -98,9 +99,9 @@ object FormGrpDtl: TFormGrpDtl
       1028
       550)
     object IWRegion2: TIWRegion
-      Left = 61
-      Top = 10
-      Width = 897
+      Left = 9
+      Top = 6
+      Width = 1008
       Height = 520
       Cursor = crAuto
       RenderInvisibleControls = False
@@ -115,7 +116,7 @@ object FormGrpDtl: TFormGrpDtl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        897
+        1008
         520)
       object GrpLabel: TIWLabel
         Left = 14
@@ -252,7 +253,7 @@ object FormGrpDtl: TFormGrpDtl
       object StoreGrid: TIWGrid
         Left = 19
         Top = 275
-        Width = 307
+        Width = 382
         Height = 207
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
@@ -295,7 +296,7 @@ object FormGrpDtl: TFormGrpDtl
       object VoucherGrid: TIWGrid
         Left = 17
         Top = 95
-        Width = 309
+        Width = 384
         Height = 124
         Cursor = crAuto
         IW50Hint = False
@@ -366,8 +367,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object DelBtn: TIWButton
-        Left = 816
-        Top = 10
+        Left = 909
+        Top = 11
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -459,7 +460,7 @@ object FormGrpDtl: TFormGrpDtl
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 897
+        Width = 1008
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -484,6 +485,7 @@ object FormGrpDtl: TFormGrpDtl
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 897
       end
       object TestBox: TIWCheckBox
         Left = 571
@@ -521,7 +523,7 @@ object FormGrpDtl: TFormGrpDtl
       object StoreCombo: TIWComboBox
         Left = 93
         Top = 487
-        Width = 233
+        Width = 308
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -622,7 +624,7 @@ object FormGrpDtl: TFormGrpDtl
       object PromoCombo: TIWComboBox
         Left = 88
         Top = 225
-        Width = 238
+        Width = 313
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -661,8 +663,8 @@ object FormGrpDtl: TFormGrpDtl
         FriendlyName = 'RegionCombo'
       end
       object TemplateGrid: TIWGrid
-        Left = 655
-        Top = 95
+        Left = 760
+        Top = 100
         Width = 236
         Height = 417
         Cursor = crAuto
@@ -735,8 +737,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object NewTmplRevBtn: TIWButton
-        Left = 817
-        Top = 51
+        Left = 923
+        Top = 53
         Width = 61
         Height = 24
         Cursor = crAuto
@@ -793,7 +795,7 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = EditBtnClick
       end
       object GroupGrid: TIWGrid
-        Left = 335
+        Left = 433
         Top = 95
         Width = 311
         Height = 124
@@ -835,8 +837,8 @@ object FormGrpDtl: TFormGrpDtl
         ScrollToCurrentRow = False
       end
       object AddGroupButton: TIWButton
-        Left = 337
-        Top = 226
+        Left = 435
+        Top = 225
         Width = 61
         Height = 23
         Cursor = crAuto
@@ -864,7 +866,7 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddGroupButtonClick
       end
       object GroupCombo: TIWComboBox
-        Left = 404
+        Left = 502
         Top = 225
         Width = 242
         Height = 21
@@ -936,8 +938,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object IWLabel7: TIWLabel
-        Left = 347
-        Top = 248
+        Left = 433
+        Top = 252
         Width = 409
         Height = 16
         Cursor = crAuto
@@ -967,8 +969,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object DepGrid: TIWGrid
-        Left = 335
-        Top = 296
+        Left = 433
+        Top = 295
         Width = 311
         Height = 186
         Cursor = crAuto
@@ -1041,8 +1043,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object IWLabel10: TIWLabel
-        Left = 350
-        Top = 263
+        Left = 433
+        Top = 274
         Width = 296
         Height = 33
         Cursor = crAuto
@@ -1074,7 +1076,7 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object AddChildButton: TIWButton
-        Left = 337
+        Left = 433
         Top = 487
         Width = 61
         Height = 23
@@ -1104,8 +1106,8 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddChildButtonClick
       end
       object ChildCombo: TIWComboBox
-        Left = 408
-        Top = 488
+        Left = 506
+        Top = 487
         Width = 238
         Height = 21
         Cursor = crAuto

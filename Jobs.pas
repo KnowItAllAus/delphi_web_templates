@@ -238,6 +238,36 @@ begin
     except
       Transaction.active:=false;
     end;
+
+    SQL.Clear;
+    SQL.Add('select GROUPPARAMTMPL.*, GROUPOBJHDR.ID as OBJID,');
+    SQL.Add('GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PTYPE,');
+    SQL.Add('JOBS.ID as jobid,');
+    SQL.Add('GROUPOBJHDR.NAME from GROUPPARAMTMPL');
+    SQL.Add('left join GROUPOBJHDR on GROUPOBJHDR.GROUPPARAMTMPLID=GROUPPARAMTMPL.ID');
+    SQL.Add('left join JOBS on JOBS.PARAMTMPLID=GROUPPARAMTMPL.ID');
+    SQL.Add('where GROUPPARAMTMPL.COMPANY=:COMPANY');
+    SQL.Add('and groupobjhdr.guid like :guid and GROUPOBJHDR.PARAMTYPE=''O''');
+
+    try
+      //prepare;
+      ParamByName('COMPANY').AsString:=UserSession.Company;
+      ParamByName('GUID').AsString:=GuidEdit.text;
+      Transaction.StartTransaction;
+      try
+        Open;
+        if not eof then begin
+          jobid:=FieldByName ('JobID').AsInteger;
+          GotoJob (IntToStr(jobid),jobname,'','');
+          exit;
+        end;
+      except
+      end;
+      close;
+      Transaction.active:=false;
+    except
+      Transaction.active:=false;
+    end;
   end;
   WebApplication.ShowMessage(silink.GetTextOrDefault('NotFound'), smAlert);
 end;
