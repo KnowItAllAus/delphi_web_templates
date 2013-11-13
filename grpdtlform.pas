@@ -101,6 +101,14 @@ type tag_obj = class
   s : string;
 end;
 
+function trim40 (s : string) : string;
+begin
+  if (length (s)>40) then begin
+     s:=copy (s,1,40)+'...';
+  end;
+  result:=s;
+end;
+
 function trim30 (s : string) : string;
 begin
   if (length (s)>30) then begin
@@ -351,7 +359,7 @@ begin
        live_store:=GrpStoreQuery.FieldByName('TEST').AsString<>'1';
        if (not live_store) or
           (not testbox.checked and ((UserSession.privilege and PRIV_LIVE)<>0)) then begin
-         StoreCombo.Items.Add((trim30(GrpStoreQuery.FieldByName('NAME').AsString)));
+         StoreCombo.Items.Add((trim45(GrpStoreQuery.FieldByName('NAME').AsString)));
          storeIdList.Add(GrpStoreQuery.FieldByName('ID').AsString);
        end;
        GrpStoreQuery.next;
@@ -367,7 +375,7 @@ begin
     promoIdList.Clear;
     while not GrpPromoQuery.Eof do begin
        if (GrpPromoQuery.FieldByName('Template').AsString<>'1') then begin
-          PromoCombo.Items.Add((trim30(GrpPromoQuery.FieldByName('NAME').AsString)));
+          PromoCombo.Items.Add((trim45(GrpPromoQuery.FieldByName('NAME').AsString)));
           promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
        end;
        GrpPromoQuery.next;

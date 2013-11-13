@@ -128,7 +128,7 @@ var
   dst : word;
   b : byte;
   i,j : integer;
-  zname : array [1..40] of char;
+  zname : array [1..40] of ansichar;
   startdate, enddate : TDatetime;
   dst_active : boolean;
 begin

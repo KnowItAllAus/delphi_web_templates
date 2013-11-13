@@ -52,12 +52,6 @@ object formDistribStatus: TformDistribStatus
         Left = 630
         ExplicitLeft = 630
       end
-      inherited TitleLabel: TIWLabel
-        Width = 484
-        Height = 93
-        ExplicitWidth = 484
-        ExplicitHeight = 93
-      end
       inherited langlink: TIWSiLink
         Left = 522
         Top = 1

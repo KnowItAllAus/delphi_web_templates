@@ -16,8 +16,8 @@ object FormGrpDtl: TFormGrpDtl
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -142
-  DesignTop = -47
+  DesignLeft = 8
+  DesignTop = 8
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -99,7 +99,7 @@ object FormGrpDtl: TFormGrpDtl
       1028
       550)
     object IWRegion2: TIWRegion
-      Left = 9
+      Left = 17
       Top = 6
       Width = 1008
       Height = 520
@@ -706,8 +706,8 @@ object FormGrpDtl: TFormGrpDtl
         ScrollToCurrentRow = False
       end
       object IWLabel3: TIWLabel
-        Left = 654
-        Top = 58
+        Left = 760
+        Top = 60
         Width = 147
         Height = 15
         Cursor = crAuto
@@ -907,7 +907,7 @@ object FormGrpDtl: TFormGrpDtl
         FriendlyName = 'RegionCombo'
       end
       object IWLabel5: TIWLabel
-        Left = 347
+        Left = 435
         Top = 38
         Width = 409
         Height = 16
@@ -970,9 +970,9 @@ object FormGrpDtl: TFormGrpDtl
       end
       object DepGrid: TIWGrid
         Left = 433
-        Top = 295
+        Top = 315
         Width = 311
-        Height = 186
+        Height = 166
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -1012,7 +1012,7 @@ object FormGrpDtl: TFormGrpDtl
         ScrollToCurrentRow = False
       end
       object IWLabel8: TIWLabel
-        Left = 360
+        Left = 435
         Top = 53
         Width = 281
         Height = 43
@@ -1044,9 +1044,9 @@ object FormGrpDtl: TFormGrpDtl
       end
       object IWLabel10: TIWLabel
         Left = 433
-        Top = 274
+        Top = 270
         Width = 296
-        Height = 33
+        Height = 39
         Cursor = crAuto
         IW50Hint = False
         ParentShowHint = False

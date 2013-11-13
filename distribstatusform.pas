@@ -46,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses db, datamod, servercontroller, IWInit, graphics, roleform, cfgtypes;
+uses db, datamod, servercontroller, IWInit, graphics, roleform, cfgtypes, dateutils, windows, global;
 
 type
    SRObj = class
@@ -112,9 +112,9 @@ begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
       end;
       with Cell[i, 5] do begin
-        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
-           commtime:=now-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
-           else
+        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then begin
+           commtime:=utcnow-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime;
+           end else
            commtime:=0;
         if commtime<=0 then
             text:='- - -'
@@ -205,7 +205,7 @@ begin
       0 :
           with SRObj(IList.Items[ARow-1]) do begin
             if enabled then begin
-              if (lastcomms<now - strtoint(offcombo.text)/(60*24)) and enabled then begin
+              if (lastcomms<utcNow - strtoint(offcombo.text)/(60*24)) and enabled then begin
                 BGColor := clRed;
               end else begin
                 BGColor := TColor($60C060);

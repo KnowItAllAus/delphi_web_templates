@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -265
+  DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -1748,9 +1748,9 @@ object formStore: TformStore
         FriendlyName = 'AutoBox'
       end
       object IWLabel21: TIWLabel
-        Left = 447
+        Left = 416
         Top = 293
-        Width = 51
+        Width = 82
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1765,7 +1765,7 @@ object formStore: TformStore
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -1815,9 +1815,9 @@ object formStore: TformStore
         PasswordPrompt = False
       end
       object IWLabel22: TIWLabel
-        Left = 447
+        Left = 416
         Top = 267
-        Width = 51
+        Width = 82
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1832,7 +1832,7 @@ object formStore: TformStore
         StyleRenderOptions.RenderVisibility = True
         StyleRenderOptions.RenderStatus = True
         StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
@@ -1928,11 +1928,9 @@ object formStore: TformStore
         ExplicitLeft = 832
       end
       inherited TitleLabel: TIWLabel
-        Width = 605
-        Height = 93
+        Width = 486
         Caption = 'administration'
-        ExplicitWidth = 605
-        ExplicitHeight = 93
+        ExplicitWidth = 486
       end
     end
   end

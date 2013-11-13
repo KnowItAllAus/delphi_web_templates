@@ -51,7 +51,7 @@ const
 implementation
 
 {$R *.dfm}
-uses Servercontroller, datamod, AdminDM, IBQuery, db, storeform, roleform, cfgtypes;
+uses Servercontroller, datamod, AdminDM, IBQuery, db, storeform, roleform, cfgtypes, global;
 
 
 procedure TFormSys.rendercell(ACell: TIWGridCell; const ARow,
@@ -92,7 +92,7 @@ begin
    if query<>nil then with query do begin
       try
         p:=params.findparam ('LastComms');
-        if (assigned(p)) then p.AsDateTime:=now - 2/24;  // 2 hours since contact
+        if (assigned(p)) then p.AsDateTime:=utcnow - 2/24;  // 2 hours since contact
       except
       end;
       parambyname ('Company').AsString:=UserSession.Company;
@@ -153,7 +153,7 @@ begin
    if query<>nil then with query do begin
       try
         p:=query.Params.FindParam('LastContact');
-        if (assigned(p)) then p.AsDateTime:=now - 2/24;  // 2 hours since contact
+        if (assigned(p)) then p.AsDateTime:=utcnow - 2/24;  // 2 hours since contact
       except
       end;
       parambyname ('Company').AsString:=UserSession.Company;

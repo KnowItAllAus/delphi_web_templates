@@ -14,10 +14,11 @@ function GetAppBase: string;
 function GetTransBase: string;
 function GetPort: integer;
 function debug : boolean;
+function utcnow : TDatetime;
 
 implementation
 
-uses IniFiles,sysutils,scripting;
+uses IniFiles,sysutils,scripting, dateutils;
 
 var
   PrinterDirectory: string;
@@ -33,6 +34,11 @@ var
   CacheDir : string;
   appBase : string;
   TransBase : string;
+
+function utcnow : TDatetime;
+begin
+  result:= TTimeZone.Local.ToUniversalTime(now);
+end;
 
 function getURLBase: string;
 begin

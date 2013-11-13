@@ -464,6 +464,7 @@ object FormSys: TFormSys
       end
       inherited Smalltitle: TIWLabel
         Left = 888
+        ExplicitLeft = 888
       end
       inherited HideBox: TIWImageFile
         Left = 1409

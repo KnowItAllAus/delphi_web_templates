@@ -51,7 +51,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, storeForm, roleform, cfgtypes;
+uses datamod, db, servercontroller, IWInit, storeForm, roleform, cfgtypes, global;
 
 {$R *.DFM}
 
@@ -264,7 +264,7 @@ begin
         1 :
             with SRObj(IList.Items[ARow-1]) do begin
               if enabled then begin
-                if (lastcomms<now - strtoint(offcombo.text)/(60*24)) and enabled then begin
+                if (lastcomms<utcnow - strtoint(offcombo.text)/(60*24)) and enabled then begin
                   BGColor := clRed;
                 end else if log>0 then begin
                   BGColor := TColor($c000c0);
@@ -289,7 +289,7 @@ begin
           2 :
               with SRObj(IList.Items[ARow-1]) do begin
                 if enabled then begin
-                  if (lastcomms<now - strtoint(offcombo.text)/(60*24)) and enabled then begin
+                  if (lastcomms<utcnow - strtoint(offcombo.text)/(60*24)) and enabled then begin
                     BGColor := clRed;
                   end else if log>0 then begin
                     BGColor := TColor($c000c0);
