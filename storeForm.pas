@@ -119,7 +119,7 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse_utils, IWTypes;
+uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse_utils, IWTypes, dateutils;
 
 {$R *.DFM}
 
@@ -520,6 +520,20 @@ begin
   DrawGroupGrid;
 end;
 
+function LocalToUTC(LocalTime: TDateTime): TDateTime;
+var TimeZoneInformation: TTimeZoneInformation;
+    Bias: integer;
+begin
+   Bias := 0;
+   case GetTimeZoneInformation(TimeZoneInformation) of
+    TIME_ZONE_ID_STANDARD: Bias := TimeZoneInformation.Bias + TimeZoneInformation.StandardBias;
+    TIME_ZONE_ID_DAYLIGHT: Bias := TimeZoneInformation.Bias + TimeZoneInformation.DaylightBias;
+   else
+    Bias := TimeZoneInformation.Bias;
+   end;
+   result := incminute(Localtime, Bias);
+end;
+
 procedure TformStore.PrinterGridRenderCell(ACell: TIWGridCell; const ARow,
   AColumn: Integer);
 begin
@@ -549,7 +563,7 @@ begin
       end else if AColumn=4 then begin
          if ACell.Text<>'' then begin
             try
-               if now-PrnObj(PrnList.Items[ARow-1]).dt>2/24 then
+               if localtoUTC(now)-PrnObj(PrnList.Items[ARow-1]).dt>2/24 then
                   BGColor:=clRed;
             except
             end;

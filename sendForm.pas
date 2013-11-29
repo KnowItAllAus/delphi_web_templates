@@ -170,6 +170,8 @@ begin
    case GetTimeZoneInformation(TimeZoneInformation) of
     TIME_ZONE_ID_STANDARD: Bias := TimeZoneInformation.Bias + TimeZoneInformation.StandardBias;
     TIME_ZONE_ID_DAYLIGHT: Bias := TimeZoneInformation.Bias + TimeZoneInformation.DaylightBias;
+   else
+    Bias := TimeZoneInformation.Bias;
    end;
    result := incminute(Localtime, Bias);
 end;
