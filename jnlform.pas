@@ -217,19 +217,20 @@ begin
                   Text := htmlquote(f.AsString);
             end;
             with Cell[i, 2] do begin
-              Text := htmlquote(TranItemQuery.FieldByName('DESCRIPTION').AsString);
+              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('DESCRIPTION').AsString));
+              //Text := htmlquoteutf8(TranItemQuery.FieldByName('DESCRIPTION').AsString);
             end;
             with Cell[i, 3] do begin
-              Text := TranItemQuery.FieldByName('QUANTITY').AsString;
+              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('QUANTITY').AsString));
             end;
             with Cell[i, 4] do begin
-              Text := TranItemQuery.FieldByName('AMOUNT').AsString;
+              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('AMOUNT').AsString));
             end;
             with Cell[i, 5] do begin
-              Text := TranItemQuery.FieldByName('UNITPRICE').AsString;
+              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('UNITPRICE').AsString));
             end;
             with Cell[i, 6] do begin
-              Text := TranItemQuery.FieldByName('STOCKID').AsString;
+              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('STOCKID').AsString));
             end;
             inc(i);
             TranItemQuery.Next;
