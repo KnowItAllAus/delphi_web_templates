@@ -274,6 +274,10 @@ begin
   TUserSession(ASession.Data).Company:=getrunparam('c',Asession.runparams);
   TUserSession(ASession.Data).User:=getrunparam('u',Asession.runparams);
   TUserSession(ASession.Data).pwd:=getrunparam('p',Asession.runparams);
+
+  if (ASession.Request.ServerPort <> SSLOptions.Port) and (getSecureURL<>'') then begin
+    ASession.TerminateAndRedirect(getSecureURL);
+  end;
 end;
 
 (*procedure do_time;

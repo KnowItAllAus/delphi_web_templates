@@ -23,8 +23,9 @@ object RcWebController: TRcWebController
   ServerResizeTimeout = 0
   ShowLoadingAnimation = True
   SessionTimeout = 40
+  SSLOptions.CertificatePassword = 'ssl@s4tech2014'
   SSLOptions.NonSSLRequest = nsAccept
-  SSLOptions.Port = 0
+  SSLOptions.Port = 443
   SSLOptions.SSLVersion = sslv3
   Version = '11.0.47'
   OnException = IWServerControllerBaseException

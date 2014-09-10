@@ -9,6 +9,7 @@ function GetDBName: string;
 function GetTransDBName: string;
 function GetPrefix: string;
 function GetExitURL: string;
+function GetSecureURL: string;
 function GetURLBase: string;
 function GetAppBase: string;
 function GetTransBase: string;
@@ -28,6 +29,7 @@ var
   TransDBName: string;
   Prefix: string;
   ExitURL : String;
+  SecureURL : String;
   port : integer;
   debugmode : boolean;
   URLBase : string;
@@ -100,6 +102,11 @@ begin
   result := ExitURL;
 end;
 
+function GetSecureURL: string;
+begin
+  result := SecureURL;
+end;
+
 function GetPort: integer;
 begin
   result := port;
@@ -115,6 +122,7 @@ begin
     DBName := '';
     TransDBName:='';
     ExitURL:='';
+    SecureURL:='';
     TransBase:='';
     Port := 80;
     ZoneDirectory:='';
@@ -130,6 +138,7 @@ begin
       if (copy(paramstr(i), 1, 3) = '-B=') then Basedirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-F=') then Prefix := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-X=') then ExitURL := copy(paramstr(i), 4, length(paramstr(i)) - 3);
+      if (copy(paramstr(i), 1, 3) = '-S=') then SecureURL := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-D=') then DBName := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 4) = '-DT=') then TransDBName := copy(paramstr(i), 5, length(paramstr(i)) - 4);
       if (copy(paramstr(i), 1, 3) = '-R=') then PrinterDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
