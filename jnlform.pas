@@ -124,6 +124,7 @@ var
   newend : TDatetime;
   newstore : integer;
   f : TField;
+  s2 : string;
 begin
   recs:=0;
   timeoffset:=(utccombo.itemindex-12)*60/1440;
@@ -217,7 +218,9 @@ begin
                   Text := htmlquote(f.AsString);
             end;
             with Cell[i, 2] do begin
-              Text := htmlquoteutf8(System.Utf8ToUnicodeString(TranItemQuery.FieldByName('DESCRIPTION').AsString));
+              s2:=TranItemQuery.FieldByName('DESCRIPTION').AsString;
+              //s1:=System.Utf8ToUnicodeString(s2);
+              Text := htmlquoteutf8(s2);
               //Text := htmlquoteutf8(TranItemQuery.FieldByName('DESCRIPTION').AsString);
             end;
             with Cell[i, 3] do begin

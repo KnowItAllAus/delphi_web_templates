@@ -37,8 +37,8 @@ uses
   selectlang in 'selectlang.pas' {FormLanguage: TIWAppForm},
   promotitle in 'promotitle.pas' {PromoFrameTitle: TFrame},
   Jobs in 'Jobs.pas' {formJobs: TIWAppForm},
-  admintitle in 'Admintitle.pas' {AdminFrameTitle: TFrame},
-  distribtitle in 'Distribtitle.pas' {DistribFrameTitle: TFrame},
+  Admintitle in 'Admintitle.pas' {AdminFrameTitle: TFrame},
+  Distribtitle in 'Distribtitle.pas' {DistribFrameTitle: TFrame},
   ReferredClass in 'ReferredClass.pas',
   jobdtl in 'jobdtl.pas' {FormJobDtl: TIWAppForm},
   CfgTypes in '..\common\CfgTypes.pas',
@@ -52,7 +52,6 @@ uses
   jobrev in 'jobrev.pas' {FormJobRev: TIWAppForm},
   jobrevdtlform in 'jobrevdtlform.pas' {FormJobRevDtl: TIWAppForm},
   voucherEditForm in 'voucherEditForm.pas' {FormVoucherEdit: TIWAppForm},
-  storeForm in 'storeForm.pas' {formStore: TIWAppForm},
   AdminDM in 'AdminDM.pas' {AdminData: TDataModule},
   tmplnameform in 'tmplnameform.pas' {FormTmplnameEdit: TIWAppForm},
   storegrpForm in 'storegrpForm.pas' {formGrpStore: TIWAppForm},
@@ -67,7 +66,8 @@ uses
   grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
   paramform in 'paramform.pas' {ParamForm: TIWAppForm},
   textedit in 'textedit.pas' {editform: TIWAppForm},
-  textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm};
+  textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm},
+  credsForm in 'credsForm.pas' {formCreds: TIWAppForm};
 
 {$R *.res}
 

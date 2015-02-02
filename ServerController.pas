@@ -238,6 +238,7 @@ begin
    FormIWMain.Log ('ZoneDir="'+ZoneDir+'"');
    FormIWMain.Log ('LangDir="'+LangDir+'"');
    FormIWMain.Log ('ExitURL="'+GetExitURL+'"');
+   FormIWMain.Log ('SecureURL="'+GetSecureURL+'"');
    FormIWMain.Log ('CacheDir="'+GetCacheDir+'"');
    URLBase:=GetUrlBase;
    FormIWMain.Log ('BaseURL="'+GetURLBase+'"');
@@ -245,6 +246,9 @@ begin
    FormIWMain.Log ('Translatedir="'+GetTransBase+'"');
    //InternalFilesURL:=GetAppBase;
    //SessionTimeoutURL.URL:=GetExitURL;
+   if getSecureURL<>'' then begin
+      //self.SSLOptions.NonSSLRequest:=nsRedirect;
+   end;
 end;
 
 function getrunparam (name : string; s : TStrings) : string;
@@ -275,9 +279,7 @@ begin
   TUserSession(ASession.Data).User:=getrunparam('u',Asession.runparams);
   TUserSession(ASession.Data).pwd:=getrunparam('p',Asession.runparams);
 
-  if (ASession.Request.ServerPort <> SSLOptions.Port) and (getSecureURL<>'') then begin
-    ASession.TerminateAndRedirect(getSecureURL);
-  end;
+  FormIWMain.Log ('Request port : '+inttostr(ASession.Request.ServerPort));
 end;
 
 (*procedure do_time;

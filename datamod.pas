@@ -173,6 +173,10 @@ type
     GrpDepDnQuery: TIBQuery;
     suUserAddQuery: TIBQuery;
     FastTranquery: TIBQuery;
+    CredQuery: TIBQuery;
+    CredAdd: TIBQuery;
+    CredDel: TIBQuery;
+    CredUpdate: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
