@@ -53,7 +53,6 @@ var
 begin
   RcDataModule.UserQuery.Transaction.Active:=false;
   RcDataModule.UserQuery.Transaction.Active:=true;
-  RcDataModule.UserQuery.ParamByName ('COMPANY').AsString:=UserSession.UserCompany;
   RcDataModule.UserQuery.ParamByName ('USERID').AsString:= UserSession.User;
   RcDataModule.UserQuery.ParamByName ('PASSWD').AsString:=CurrentEdit.Text;
   RcDataModule.UserQuery.Open;
@@ -73,7 +72,6 @@ begin
     RcDataModule.Trans.Active:=False;
     RcDataModule.Trans.StartTransaction;
     RcDataModule.ChangePasswd.ParamByName('ID').AsString:=UserSession.User;
-    RcDataModule.ChangePasswd.ParamByName('COMPANY').AsString:=UserSession.UserCompany;
     RcDataModule.ChangePasswd.ParamByName('PASSWD').AsString:=PassEdit.Text;
     RcDataModule.ChangePasswd.ExecSQL;
     RcDataModule.Trans.Commit;
