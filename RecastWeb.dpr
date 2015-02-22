@@ -16,7 +16,7 @@ uses
   passwdForm in 'passwdForm.pas' {FormPasswd: TIWAppForm},
   statform in 'statform.pas' {formStats: TIWAppForm},
   posForm in 'posForm.pas' {FormPOS: TIWAppForm},
-  possform in 'possform.pas' {formPoss: TIWAppForm},
+  posexform in 'posexform.pas' {formPosEx: TIWAppForm},
   global in 'global.pas',
   voucherEditForm2 in 'voucherEditForm2.pas' {FormVoucherEdit2: TIWAppForm},
   storesForm in 'storesForm.pas' {formStores: TIWAppForm},
@@ -67,7 +67,8 @@ uses
   paramform in 'paramform.pas' {ParamForm: TIWAppForm},
   textedit in 'textedit.pas' {editform: TIWAppForm},
   textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm},
-  credsForm in 'credsForm.pas' {formCreds: TIWAppForm};
+  credsForm in 'credsForm.pas' {formCreds: TIWAppForm},
+  possform in 'possform.pas' {formPoss: TIWAppForm};
 
 {$R *.res}
 

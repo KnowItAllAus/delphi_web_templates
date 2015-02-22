@@ -41,12 +41,14 @@ type
     procedure IWAppFormCreate(Sender: TObject);
     procedure CredGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
-    procedure IWAppFormDestroy(Sender: TObject);
     procedure CredGridCellClick(ASender: TObject; const ARow, AColumn: Integer);
     procedure CancelCredBtnClick(Sender: TObject);
     procedure DelCredBtnClick(Sender: TObject);
     procedure AddCredBtnClick(Sender: TObject);
   private
+    old_v : string;
+    old_l : string;
+    old_d : string;
     procedure drawCredGrid;
     { Private declarations }
   public
@@ -96,6 +98,9 @@ begin
       ParamByName('DATA').AsString:=valueedit.text;
       ParamByName('LOOKUP').AsString:=lookupedit.text;
       ParamByName('NAME').AsString:=nameedit.text;
+      ParamByName('OLD_MDOMAIN').AsString:=old_d;
+      ParamByName('OLD_LOOKUP').AsString:=old_l;
+      ParamByName('OLD_VENDOR').AsString:=old_v;
       ExecSQL;
       transaction.Commit;
     end;
@@ -199,6 +204,9 @@ begin
   CancelCredBtn.Visible:=true;
   AddCredBtn.Caption:='Update';
   DelCredBtn.Visible:=true;
+  old_v:=VendorEdit.text;
+  old_l:=LookupEdit.Text;
+  old_d:=DomainEdit.Text;
 end;
 
 procedure TformCreds.CredGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -226,6 +234,9 @@ procedure TformCreds.DelCredBtnClick(Sender: TObject);
 begin
   with RcDataModule.CredDel do begin
     ParamByName ('NAME').AsString:=nameedit.Text;
+    ParamByName ('VENDOR').AsString:=old_v;
+    ParamByName ('LOOKUP').AsString:=old_l;
+    ParamByName ('MDOMAIN').AsString:=old_d;
     ParamByName ('STORE_ID').AsString:=RcDataModule.CredQuery.ParamByName('STORE_ID').AsString;
     ExecSQL;
     transaction.Commit;
@@ -233,70 +244,5 @@ begin
   drawcredgrid;
   CancelCredBtnClick(sender);
 end;
-
-procedure TformCreds.IWAppFormDestroy(Sender: TObject);
-begin
-end;
-
-(*procedure TformCreds.DrawCredGrid;
-var
-  i : integer;
-  _index : integer;
-  GrpID : integer;
-begin
-  RcDataModule.GroupQuery.Close;
-  RcDataModule.GroupQuery.ParamByName('COMPANY').AsString:=
-     UserSession.Company;
-  RcDataModule.GroupQuery.Open;
-  GroupCombo.Items.Clear;
-  GList.Clear;
-  with GroupCombo do begin
-    while not RcDataModule.GroupQuery.Eof do begin
-      GList.Add (RcDataModule.GroupQuery.FieldByName('ID').AsString);
-      Items.Add (RcDataModule.GroupQuery.FieldByName('Name').AsString);
-      RcDataModule.GroupQuery.Next;
-    end;
-  end;
-  GroupCombo.ItemIndex:=-1;
-  RcDataModule.GroupQuery.Close;
-
-  GrpGrid.RowCount:=0;
-  GrpList.Clear;
-  with RcDataModule do begin
-    GrpAllocQuery.Close;
-    GrpAllocQuery.ParamByName('COMPANY').AsString:=
-       UserSession.Company;
-    GrpAllocQuery.ParamByName('ITEMID').AsString:=
-       CurrentStoreQuery.FieldByName('ID').AsString;
-    GrpAllocQuery.Open;
-    with GrpGrid do begin
-      RowCount:=1;
-      Cell[0, 0].Text := '';
-      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
-      i:=1;
-      while not GrpAllocQuery.Eof do begin
-        RowCount:=RowCount+1;
-        with Cell[i, 0] do begin
-          Clickable := True;
-          GrpList.Add (GrpAllocQuery.FieldByName('ID').AsString);
-          Text:='Del';
-        end;
-        with Cell[i, 1] do begin
-          GrpID:=GrpAllocQuery.FieldByName('GROUPID').AsInteger;
-          _Index:=GList.IndexOf (IntToStr(GrpID));
-          if _Index>-1 then begin
-             GList.Delete(_Index);
-             GroupCombo.Items.Delete(_Index);
-          end;
-          Text := htmlquote(GetGroupName (GrpID, StrToInt(UserSession.Company)));
-        end;
-        inc (i);
-        GrpAllocQuery.Next;
-      end;
-    end;
-    GrpAllocQuery.Close;
-  end;
-end;
-*)
 
 end.

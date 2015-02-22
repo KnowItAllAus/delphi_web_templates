@@ -8,7 +8,6 @@ object formCreds: TformCreds
   ConnectionMode = cmAny
   SupportedBrowsers = [brNetscape7, brIE, brOpera, brSafari, brNetscape6]
   OnCreate = IWAppFormCreate
-  OnDestroy = IWAppFormDestroy
   Background.Fixed = False
   HandleTabs = False
   LeftToRight = True

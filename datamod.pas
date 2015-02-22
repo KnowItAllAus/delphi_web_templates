@@ -177,6 +177,8 @@ type
     CredAdd: TIBQuery;
     CredDel: TIBQuery;
     CredUpdate: TIBQuery;
+    PosExQuery: TIBQuery;
+    PosExUseQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

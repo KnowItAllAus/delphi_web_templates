@@ -1,4 +1,4 @@
-object formPoss: TformPoss
+object formPosEx: TformPosEx
   Left = 0
   Top = 0
   Width = 1028
@@ -16,7 +16,7 @@ object formPoss: TformPoss
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -117
   object IWRegion1: TIWRegion
     Left = 0
     Top = 110
@@ -60,7 +60,7 @@ object formPoss: TformPoss
       object PosLabel: TIWLabel
         Left = 48
         Top = 26
-        Width = 37
+        Width = 102
         Height = 19
         Cursor = crAuto
         IW50Hint = False
@@ -86,7 +86,7 @@ object formPoss: TformPoss
         HasTabOrder = False
         AutoSize = False
         FriendlyName = 'PosLabel'
-        Caption = 'POS'
+        Caption = 'POS Export'
         RawText = False
       end
       object IWSiLink1: TIWSiLink
@@ -119,44 +119,14 @@ object formPoss: TformPoss
         TabOrder = 0
         RawText = False
         SiLangLinked = siLangLinked1
-        LangFile = 'poss.sil'
+        LangFile = 'posex.sil'
         LangControl = RcDataMod.LangEditControl1
-      end
-      object InsertBtn: TIWButton
-        Left = 637
-        Top = 16
-        Width = 75
-        Height = 25
-        Cursor = crAuto
-        Anchors = [akTop, akRight]
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Caption = 'New'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clWebBLUE
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'InsertBtn'
-        ScriptEvents = <>
-        TabOrder = 1
-        OnClick = InsertBtnClick
       end
       object PosGrid: TIWGrid
         Left = 48
         Top = 51
-        Width = 662
-        Height = 475
+        Width = 337
+        Height = 494
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -188,7 +158,7 @@ object formPoss: TformPoss
         UseFrame = True
         UseSize = True
         FriendlyName = 'PosGrid'
-        ColumnCount = 4
+        ColumnCount = 2
         OnCellClick = PosGridCellClick
         RowCount = 1
         ShowEmptyCells = True
@@ -253,6 +223,153 @@ object formPoss: TformPoss
         Alignment = taLeftJustify
         VAlign = vaMiddle
       end
+      object PosNameLbl: TIWLabel
+        Left = 166
+        Top = 26
+        Width = 102
+        Height = 19
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.FontName = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'PosLabel'
+        Caption = 'Pos name'
+        RawText = False
+      end
+      object IWLabel2: TIWLabel
+        Left = 391
+        Top = 57
+        Width = 83
+        Height = 19
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.FontName = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'GrpLabel'
+        Caption = 'Export To'
+        RawText = False
+      end
+      object CoCombo: TIWComboBox
+        Left = 493
+        Top = 55
+        Width = 245
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 1
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- Go to ... --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = True
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 3
+        ItemIndex = -1
+        Items.Strings = (
+          'Jobs'
+          'Job Distribution'
+          'Journal'
+          'System'
+          'Overview'
+          'Publish'
+          'Status'
+          '- - - - - - -'
+          'Logout')
+        Sorted = False
+        FriendlyName = 'navcombo'
+      end
+      object ExportBtn: TIWButton
+        Left = 559
+        Top = 95
+        Width = 83
+        Height = 23
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 2
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Export'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'ExportBtn'
+        ScriptEvents = <>
+        TabOrder = 4
+        OnClick = ExportBtnClick
+      end
     end
   end
   inline userfooter1: Tuserfooter
@@ -269,7 +386,7 @@ object formPoss: TformPoss
     inherited IWRegion1: TIWRegion
       Width = 1028
       Height = 29
-      TabOrder = 2
+      TabOrder = 1
       ExplicitWidth = 1028
       ExplicitHeight = 29
       inherited IWRectangle1: TIWRectangle
@@ -318,7 +435,7 @@ object formPoss: TformPoss
     inherited IWFrameRegion: TIWRegion
       Width = 1028
       Height = 110
-      TabOrder = 3
+      TabOrder = 2
       ExplicitWidth = 1028
       ExplicitHeight = 110
       inherited titleimage: TIWImageFile
@@ -370,6 +487,8 @@ object formPoss: TformPoss
     StringsTypes.Strings = (
       'TIB_STRINGLIST'
       'TSTRINGLIST')
+    SmartExcludeProps.Strings = (
+      'PosNameLbl.Caption')
     LangDispatcher = RcDataMod.siLangDispatcher1
     LangDelim = 1
     LangNames.Strings = (
@@ -386,28 +505,38 @@ object formPoss: TformPoss
       'HelpKeyword'
       'Title'
       'Confirmation')
-    Left = 512
-    Top = 432
+    Left = 472
+    Top = 424
     TranslationData = {
       73007400430061007000740069006F006E0073005F0055006E00690063006F00
       640065000D000A0050006F0073004C006100620065006C00010050004F005300
-      01000D000A0049006E007300650072007400420074006E0001004E0065007700
-      01000D000A0073007400480069006E00740073005F0055006E00690063006F00
-      640065000D000A007300740044006900730070006C00610079004C0061006200
-      65006C0073005F0055006E00690063006F00640065000D000A00730074004600
-      6F006E00740073005F0055006E00690063006F00640065000D000A0073007400
-      4D0075006C00740069004C0069006E00650073005F0055006E00690063006F00
-      640065000D000A007300740053007400720069006E00670073005F0055006E00
-      690063006F00640065000D000A0047007200690064002E004900640001004900
-      440001000D000A0047007200690064002E004E0061006D00650001004E006100
-      6D00650001000D000A0047007200690064002E004C00610079006F0075007400
-      01004C00610079006F007500740001000D000A0047007200690064002E004500
-      780070006F007200740001004500780070006F007200740001000D000A007300
-      74004F00740068006500720053007400720069006E00670073005F0055006E00
-      690063006F00640065000D000A0049005700530069004C0069006E006B003100
-      2E004C0061006E006700460069006C006500010070006F00730073002E007300
-      69006C0001000D000A007300740043006F006C006C0065006300740069006F00
-      6E0073005F0055006E00690063006F00640065000D000A007300740043006800
-      6100720053006500740073005F0055006E00690063006F00640065000D000A00}
+      20004500780070006F007200740001000D000A00490057004C00610062006500
+      6C00320001004500780070006F0072007400200054006F0001000D000A004500
+      780070006F0072007400420074006E0001004500780070006F00720074000100
+      0D000A0073007400480069006E00740073005F0055006E00690063006F006400
+      65000D000A007300740044006900730070006C00610079004C00610062006500
+      6C0073005F0055006E00690063006F00640065000D000A007300740046006F00
+      6E00740073005F0055006E00690063006F00640065000D000A00730074004D00
+      75006C00740069004C0069006E00650073005F0055006E00690063006F006400
+      65000D000A0043006F0043006F006D0062006F002E004900740065006D007300
+      01004A006F00620073002C0022004A006F006200200044006900730074007200
+      690062007500740069006F006E0022002C004A006F00750072006E0061006C00
+      2C00530079007300740065006D002C004F007600650072007600690065007700
+      2C005000750062006C006900730068002C005300740061007400750073002C00
+      22002D0020002D0020002D0020002D0020002D0020002D0020002D0022002C00
+      4C006F0067006F007500740001000D000A007300740053007400720069006E00
+      670073005F0055006E00690063006F00640065000D000A004700720069006400
+      2E0063006F006D00700061006E007900010043006F006D00700061006E007900
+      01000D000A0047007200690064002E00640065006C0065007400650001004400
+      65006C0065007400650001000D000A00730074004F0074006800650072005300
+      7400720069006E00670073005F0055006E00690063006F00640065000D000A00
+      49005700530069004C0069006E006B0031002E004C0061006E00670046006900
+      6C006500010070006F007300650078002E00730069006C0001000D000A004300
+      6F0043006F006D0062006F002E004E006F00530065006C006500630074006900
+      6F006E00540065007800740001002D002D00200047006F00200074006F002000
+      2E002E002E0020002D002D0001000D000A007300740043006F006C006C006500
+      6300740069006F006E0073005F0055006E00690063006F00640065000D000A00
+      73007400430068006100720053006500740073005F0055006E00690063006F00
+      640065000D000A00}
   end
 end

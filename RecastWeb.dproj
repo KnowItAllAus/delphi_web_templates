@@ -1,0 +1,358 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{0491EE35-47DB-40C5-BB91-EB3DF1B08E54}</ProjectGuid>
+			<MainSource>RecastWeb.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Release</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>12.3</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclimg;vcl;vclx;dbrtl;Rave90VCL;bdertl;VclSmp;rtl;svnui;svn;TeeUI;TeeDB;Tee;vclactnband;vcldb;vcldbx;vcltouch;xmlrtl;dsnap;dsnapcon;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;vclie;inet;inetdb;webdsnap;websnap;inetdbbde;inetdbxpress;soaprtl;DbxCommonDriver;DBXInterBaseDriver;DBXMySQLDriver;dbexpress;dbxcds;CodeSiteExpressVcl;intrawebdb_110_150;Intraweb_110_150;DbxClientDriver;AzureCloud;CoolTrayIcon_D140;A407_R;AbbreviaVCL;UnicodeConvDelphi7;s4;s4de</DCC_UsePackage>
+			<DCC_E>false</DCC_E>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_F>false</DCC_F>
+			<DCC_S>false</DCC_S>
+			<DCC_N>false</DCC_N>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="RecastWeb.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="ServerController.pas">
+				<Form>RcWebController</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="login.pas">
+				<Form>form_login</Form>
+				<DesignClass>TIWForm1</DesignClass>
+			</DCCReference>
+			<DCCReference Include="datamod.pas">
+				<Form>RcDataMod</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imageupFormTmpl.pas">
+				<Form>FormImageUpTmpl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="voucherForm.pas">
+				<Form>FormVoucher</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="editTmplForm.pas">
+				<Form>formEditTmpl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="printerForm.pas">
+				<Form>formPrinter</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="sendForm.pas">
+				<Form>formSend</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="passwdForm.pas">
+				<Form>FormPasswd</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="statform.pas">
+				<Form>formStats</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="posForm.pas">
+				<Form>FormPOS</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="posexform.pas">
+				<Form>formPosEx</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="global.pas"/>
+			<DCCReference Include="voucherEditForm2.pas">
+				<Form>FormVoucherEdit2</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="storesForm.pas">
+				<Form>formStores</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="jnlform.pas">
+				<Form>formJnl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imagesForm.pas">
+				<Form>formImages</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="grpForm.pas">
+				<Form>formGrp</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="grpdtlform.pas">
+				<Form>FormGrpDtl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="su_main.pas">
+				<Form>su_FormMain</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="formCo.pas">
+				<Form>su_coForm</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="su_pwdform.pas">
+				<Form>supwdform</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="sysform.pas">
+				<Form>formsys</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="baretitle.pas">
+				<Form>FrameBareTitle</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="statstitle.pas">
+				<Form>StatsFrameTitle</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="roleform.pas">
+				<Form>su_FormRole</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="langfooter.pas">
+				<Form>langfooter</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="footer_user.pas">
+				<Form>userfooter</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="cocopyForm.pas">
+				<Form>Copyform</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="selectlang.pas">
+				<Form>FormLanguage</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="promotitle.pas">
+				<Form>PromoFrameTitle</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Jobs.pas">
+				<Form>formJobs</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Admintitle.pas">
+				<Form>AdminFrameTitle</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Distribtitle.pas">
+				<Form>DistribFrameTitle</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="ReferredClass.pas"/>
+			<DCCReference Include="jobdtl.pas">
+				<Form>FormJobDtl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="..\common\CfgTypes.pas"/>
+			<DCCReference Include="distribdtlForm.pas">
+				<Form>formdistribdtl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="fieldrevformTmpl.pas">
+				<Form>formFieldVersionsTmpl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imghdrform.pas">
+				<Form>FormImgHdr</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="overviewform.pas">
+				<Form>FormOverview</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="distribstatusform.pas">
+				<Form>formDistribStatus</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="exportfrm.pas">
+				<Form>FormExport</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="voucherNewEditForm.pas">
+				<Form>FormVoucherNewEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="jobrev.pas">
+				<Form>FormJobRev</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="jobrevdtlform.pas">
+				<Form>FormJobRevDtl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="voucherEditForm.pas">
+				<Form>FormVoucherEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="AdminDM.pas">
+				<Form>AdminData</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="tmplnameform.pas">
+				<Form>FormTmplnameEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="storegrpForm.pas">
+				<Form>formGrpStore</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imageupForm.pas">
+				<Form>FormImageUp</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="newparamform.pas">
+				<Form>FormParamCreate</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="TmplRevPropform.pas">
+				<Form>FormTmplRevProp</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imagerevform.pas">
+				<Form>formImageVersions</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="groupnameform.pas">
+				<Form>FormGroupnameEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="imagerevformTmpl.pas">
+				<Form>formImageVersionsTmpl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="paramnameform.pas">
+				<Form>FormParamnameEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="..\common\parse_utils.pas"/>
+			<DCCReference Include="grptmplForm.pas">
+				<Form>formGrpTmpl</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="paramform.pas">
+				<Form>ParamForm</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="textedit.pas">
+				<Form>editform</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="textblockfrm.pas">
+				<Form>formTextBlockEdit</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="credsForm.pas">
+				<Form>formCreds</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<DCCReference Include="possform.pas">
+				<Form>formPoss</Form>
+				<DesignClass>TIWAppForm</DesignClass>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">RecastWeb.dpr</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">5129</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Parameters>
+						<Parameters Name="RunParams">-L=c:\server_install\web\lang\ -P=801 -D=firebird:/var/lib/firebird/2.5/data/recast-config.fdb -DT=firebird:/var/lib/firebird/2.5/data/recast-trans.fdb  -R=c:\server_install\web\printers\ -X=http://127.0.0.1:801 -S=https://configx.s4-technology.com</Parameters>
+						<Parameters Name="DebugCWD">c:\server_install\web\</Parameters>
+					</Parameters>
+					<Excluded_Packages>
+						<Excluded_Packages Name="C:\Documents and Settings\All Users\Documents\RAD Studio\8.0\Bpl\Activex.bpl">(untitled)</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

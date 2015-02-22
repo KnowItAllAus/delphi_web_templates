@@ -32,6 +32,7 @@ type
   private
     { Private declarations }
     procedure EditPos (ID : String);
+    procedure ExPos (ID : String; aname : string);
   public
     { Public declarations }
   end;
@@ -41,7 +42,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, roleform, posForm, cfgtypes;
+uses datamod, db, servercontroller, IWInit, roleform, posForm, posExForm, cfgtypes;
 
 {$R *.DFM}
 
@@ -58,10 +59,30 @@ begin
   end;
 end;
 
+procedure TformPoss.ExPos (ID : String; aname : string);
+var
+  posex : TFormPosEx;
+begin
+  with RcDataModule.CurrentPosQuery do begin
+    Close;
+    Transaction.Active:=True;
+    ParamByName ('COMPANY').AsString:=UserSession.Company;
+    ParamByName ('ID').AsString:=ID;
+    Open;
+    TIWAppForm(WebApplication.ActiveForm).Release;
+    posex:=TFormPosEx.Create (WebApplication);
+    posex.setpos(strtoint(id),aname);
+    posex.show;
+  end;
+end;
+
 procedure TformPoss.PosGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
 begin
-  RcDataModule.Trans.Active:=False;
-  EditPos (PosGrid.Cell[ARow,0].Text);
+  if AColumn=0 then begin
+     RcDataModule.Trans.Active:=False;
+     EditPos (PosGrid.Cell[ARow,0].Text);
+  end else
+     ExPos (PosGrid.Cell[ARow,0].Text, PosGrid.Cell[ARow,1].Text);
 end;
 
 procedure TformPoss.InsertBtnClick(Sender: TObject);
@@ -113,16 +134,24 @@ begin
   RcDataModule.PosQuery.ParamByName('COMPANY').AsString:=
      UserSession.Company;
   RcDataModule.PosQuery.Open;
+  PosGrid.ColumnCount:=3;
+  if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+     PosGrid.ColumnCount:=4;
+  end;
   with PosGrid do begin
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Id');
     Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
     Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Layout');
+    if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('');
+    end;
     i:=1;
     RowCount:=1;
     while not RcDataModule.PosQuery.Eof do begin
       RowCount:=RowCount+1;
       with Cell[i, 0] do begin
-        Clickable := True;
+        if (RcDataModule.PosQuery.FieldByName('REFPOSID').AsString='') then
+           Clickable := True;
         Text := RcDataModule.PosQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
@@ -130,6 +159,12 @@ begin
       end;
       with Cell[i, 2] do begin
         Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
+      end;
+      if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+        with Cell[i, 3] do begin
+          Clickable := True;
+          Text := SiLangLinked1.GetTextOrDefault('Grid.Export');
+        end;
       end;
       inc (i);
       RcDataModule.PosQuery.Next;
