@@ -49,13 +49,35 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, roleform, posForm, cfgtypes;
+uses datamod, db, servercontroller, IWInit, roleform, posForm, cfgtypes, IWTypes;
 
 {$R *.DFM}
 
 procedure TformPosEx.PosGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
+var
+  stores,refs : integer;
 begin
   RcDataModule.Trans.Active:=False;
+  try
+    with RcDataModule do begin
+      SQLQry.SQL.Clear;
+      SQLQry.Transaction.Active:=false;
+      SQLQry.Transaction.Active:=true;
+      SQLQry.SQL.Add('select * from P_POS_USAGE (:posid)');
+      SQLQry.ParamByName ('POSID').AsInteger:=integer(posgrid.Cell[ARow, 0].tag);
+      SQLQry.Open;
+      refs:=SQLQRY.FieldByName('TOTALREFS').AsInteger;
+      stores:=SQLQRY.FieldByName('TOTALSTORES').AsInteger;
+    end;
+  except
+  end;
+
+  RcDataModule.Trans.Active:=False;
+  if stores+refs>0 then begin
+     WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('deleteinuse')+inttostr(stores+refs), smAlert);
+     exit;
+  end;
+
   try
     with RcDataModule do begin
       SQLEx.SQL.Clear;
@@ -89,6 +111,7 @@ begin
     end;
   except
   end;
+  DrawGrid;
 end;
 
 procedure TformPosEx.InsertBtnClick(Sender: TObject);
