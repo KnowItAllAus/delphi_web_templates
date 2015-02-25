@@ -3,7 +3,7 @@
 			<ProjectGuid>{0491EE35-47DB-40C5-BB91-EB3DF1B08E54}</ProjectGuid>
 			<MainSource>RecastWeb.dpr</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>

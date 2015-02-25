@@ -9,7 +9,7 @@ uses
   IWHTMLControls, IWContainer, IWRegion, IWExtCtrls, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWSiLink, siComp, siLngLnk, footer_user, baretitle, IWHTMLContainer,
-  ReferredClass, IWHTML40Container;
+  ReferredClass, IWHTML40Container, Generics.Collections;
 
 type
   TformCreds = class(TIWAppForm)
@@ -45,10 +45,10 @@ type
     procedure CancelCredBtnClick(Sender: TObject);
     procedure DelCredBtnClick(Sender: TObject);
     procedure AddCredBtnClick(Sender: TObject);
+    procedure IWAppFormDestroy(Sender: TObject);
   private
-    old_v : string;
-    old_l : string;
-    old_d : string;
+    keylist : TList<double>;
+    edit_id : double;
     procedure drawCredGrid;
     { Private declarations }
   public
@@ -90,17 +90,13 @@ begin
   end else begin
     with RcDataModule.CredUpdate do begin
       ParamByName('VENDOR').AsString:=VendorEdit.Text;
-      ParamByName('STORE_ID').AsString:=RcDataModule.CredQuery.ParamByName('STORE_ID').AsString;
       ParamByName('MDOMAIN').AsString:=domainedit.text;
       ParamByName('FTYPE').AsString:='M';
       if lookupedit.text<>'' then
          ParamByName('FTYPE').AsString:='L';
       ParamByName('DATA').AsString:=valueedit.text;
       ParamByName('LOOKUP').AsString:=lookupedit.text;
-      ParamByName('NAME').AsString:=nameedit.text;
-      ParamByName('OLD_MDOMAIN').AsString:=old_d;
-      ParamByName('OLD_LOOKUP').AsString:=old_l;
-      ParamByName('OLD_VENDOR').AsString:=old_v;
+      ParamByName('ID').AsFloat:=edit_id;
       ExecSQL;
       transaction.Commit;
     end;
@@ -134,8 +130,10 @@ begin
     Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Data');
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('');
     i:=1;
+    Keylist.Clear;
     while not RcDataModule.CredQuery.Eof do begin
       RowCount:=i+1;
+      KeyList.Add(RcDataModule.CredQuery.FieldByName('ID').AsFloat);
       with Cell[i, 0] do begin
         Clickable:=true;
         Text := SiLangLinked1.GetTextOrDefault ('Grid.Edit');
@@ -171,10 +169,16 @@ var
   i : integer;
   co : string;
 begin
+  KeyList:=TList<double>.create;
   IWSilink1.InitForm;
   co:=TUserSession(WebApplication.Data).Company;
   DrawCredGrid;
   CancelCredBtnClick(sender);
+end;
+
+procedure TformCreds.IWAppFormDestroy(Sender: TObject);
+begin
+  Keylist.Free;
 end;
 
 procedure TformCreds.CancelCredBtnClick(Sender: TObject);
@@ -204,9 +208,7 @@ begin
   CancelCredBtn.Visible:=true;
   AddCredBtn.Caption:='Update';
   DelCredBtn.Visible:=true;
-  old_v:=VendorEdit.text;
-  old_l:=LookupEdit.Text;
-  old_d:=DomainEdit.Text;
+  edit_id:=Keylist[ARow-1];
 end;
 
 procedure TformCreds.CredGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -233,11 +235,7 @@ end;
 procedure TformCreds.DelCredBtnClick(Sender: TObject);
 begin
   with RcDataModule.CredDel do begin
-    ParamByName ('NAME').AsString:=nameedit.Text;
-    ParamByName ('VENDOR').AsString:=old_v;
-    ParamByName ('LOOKUP').AsString:=old_l;
-    ParamByName ('MDOMAIN').AsString:=old_d;
-    ParamByName ('STORE_ID').AsString:=RcDataModule.CredQuery.ParamByName('STORE_ID').AsString;
+    ParamByName ('ID').AsFloat:=edit_id;
     ExecSQL;
     transaction.Commit;
   end;
