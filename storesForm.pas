@@ -114,33 +114,86 @@ begin
   with StoreGrid do begin
     i:=1;
     RowCount:=1;
-    ColumnCount:=11;
-    Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
-    Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
-    Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
-    Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
-    Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
-    Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
-    Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-    Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-    Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
     if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-       ColumnCount:=12;
-       Cell[0, 11].Text := '';
+      ColumnCount:=13;
+      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
+      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+      Cell[0, 2].Text := '';
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
+      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
+      Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
+      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
+      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
+      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
+      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+    end else begin
+      ColumnCount:=12;
+      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
+      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+      Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
+      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
+      Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
+      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
+      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
+      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
+      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
     end;
     RcDataModule.Log('Refresh iterate');
     while not RcDataModule.StoreQuery.Eof do begin
       RcDataModule.Log('Refresh Read');
       RowCount:=RowCount+1;
       if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-          with Cell[i, 11] do begin
+          with Cell[i, 0] do begin
+            Clickable := True;
+            Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
+          end;
+          with Cell[i, 1] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('Name').AsString;
+          end;
+          with Cell[i, 2] do begin
             Text := SiLangLinked1.GetTextOrDefault ('Grid.Credentials');
             Clickable := true;
           end;
-      end;
-      begin
+          with Cell[i, 3] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString;
+          end;
+          with Cell[i, 4] do begin
+            if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+               Text:='No' else Text:='Yes';
+          end;
+          with Cell[i, 5] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('Printer').AsString;
+          end;
+          with Cell[i, 6] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
+            if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
+               Text:=Text+'*';
+          end;
+          with Cell[i, 7] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
+          end;
+          with Cell[i, 8] do begin
+            Text:=RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
+          end;
+          with Cell[i, 9] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
+          end;
+          with Cell[i, 10] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
+          end;
+          with Cell[i, 11] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+          end;
+          with Cell[i, 12] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
+          end;
+      end else begin
           with Cell[i, 0] do begin
             Clickable := True;
             Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
@@ -170,15 +223,19 @@ begin
             Text:=RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
           end;
           with Cell[i, 8] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
+            Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
           end;
           with Cell[i, 9] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+            Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
           end;
           with Cell[i, 10] do begin
+            Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+          end;
+          with Cell[i, 11] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
           end;
       end;
+
       SRO:=SRObj.create;
       if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
          SRO.lastcomms:=RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime

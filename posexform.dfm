@@ -226,7 +226,7 @@ object formPosEx: TformPosEx
       object PosNameLbl: TIWLabel
         Left = 166
         Top = 26
-        Width = 102
+        Width = 387
         Height = 19
         Cursor = crAuto
         IW50Hint = False
