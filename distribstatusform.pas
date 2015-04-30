@@ -69,7 +69,7 @@ begin
   RcDataModule.StoreQuery.Open;
   with StoreGrid do begin
     if advanced then
-      columncount:=13
+      columncount:=14
     else
       columncount:=7;
     //Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
@@ -87,6 +87,7 @@ begin
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Location');
+      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
     end;
     i:=1;
     RowCount:=1;
@@ -146,6 +147,9 @@ begin
       end;
       if advanced then with Cell[i, 12] do begin
         Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
+      end;
+      if advanced then with Cell[i, 13] do begin
+        Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
       end;
       SRO:=SRObj.create;
       if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
