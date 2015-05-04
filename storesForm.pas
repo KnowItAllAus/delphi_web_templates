@@ -262,15 +262,15 @@ procedure TformStores.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
-  if UserSession.Company='0' then begin
-     StoreGrid.ColumnCount:=StoreGrid.ColumnCount+1;
-     InsertBtn.Visible:=false;
-  end;
   RefreshGrid;
 end;
 
 procedure TformStores.StoreGridRenderCell(ACell: TIWGridCell; const ARow,
   AColumn: Integer);
+var
+  cfgcol : integer;
+  namecol : integer;
+  enabledcol : integer;
 begin
   with ACell do begin
     // Title Row
@@ -284,58 +284,39 @@ begin
       BGColor := clBlue;
       Font.Style := [fsBold];
       Font.Color := clWhite;
-    end else if UserSession.Company<>'0' then begin
-      case AColumn of
-        6 :
-            if (StoreGrid.Cell[ARow,5].Text<>StoreGrid.Cell[ARow,6].Text) then begin
-               BGColor := clYellow;
-            end;
-        1 :
-            with SRObj(IList.Items[ARow-1]) do begin
-              if enabled then begin
-                if (lastcomms<utcnow - strtoint(offcombo.text)/(60*24)) and enabled then begin
-                  BGColor := clRed;
-                end else if log>0 then begin
-                  BGColor := TColor($c000c0);
-                  Font.Color := clWhite;
-                end else begin
-                  BGColor := TColor($60C060);
-                end;
+    end else begin
+      namecol:=1;
+      enabledcol:=3;
+      if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+        cfgcol:=7;
+      end else begin
+        cfgcol:=6;
+      end;
+      if AColumn=cfgcol then begin
+         if (StoreGrid.Cell[ARow,cfgcol-1].Text<>StoreGrid.Cell[ARow,cfgcol].Text) then begin
+            BGColor := clYellow;
+         end;
+      end else if AColumn=namecol then begin
+          with SRObj(IList.Items[ARow-1]) do begin
+            if enabled then begin
+              if (lastcomms<utcnow - strtoint(offcombo.text)/(60*24)) and enabled then begin
+                BGColor := clRed;
+              end else if log>0 then begin
+                BGColor := TColor($c000c0);
+                Font.Color := clWhite;
+              end else begin
+                BGColor := TColor($60C060);
               end;
             end;
-        3 :
-            if not SRObj(IList.Items[ARow-1]).enabled then begin
+          end;
+      end else if AColumn=enabledcol then begin
+          if not SRObj(IList.Items[ARow-1]).enabled then begin
                BGColor := clBlack;
                Font.Color := clWhite;
-            end;
-      end;
-    end else begin
-      case AColumn of
-          7 :
-              if (StoreGrid.Cell[ARow,6].Text<>StoreGrid.Cell[ARow,7].Text) then begin
-                 BGColor := clYellow;
-              end;
-          2 :
-              with SRObj(IList.Items[ARow-1]) do begin
-                if enabled then begin
-                  if (lastcomms<utcnow - strtoint(offcombo.text)/(60*24)) and enabled then begin
-                    BGColor := clRed;
-                  end else if log>0 then begin
-                    BGColor := TColor($c000c0);
-                    Font.Color := clWhite;
-                  end else begin
-                    BGColor := TColor($60C060);
-                  end;
-                end;
-              end;
-          4 :
-              if not SRObj(IList.Items[ARow-1]).enabled then begin
-                 BGColor := clBlack;
-                 Font.Color := clWhite;
-              end;
-        end;
+          end;
       end;
     end;
+  end;
 end;
 
 procedure TformStores.InsertBtnClick(Sender: TObject);
