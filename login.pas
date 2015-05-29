@@ -100,12 +100,15 @@ var
    admin : boolean;
    adminpriv : integer;
    lastco : integer;
+   passhash : string;
 begin
+   passhash:=RcDataModule.gethash(passedit.Text);
+   //showmessage ('hash='+s);
    try
       // Next form...
       with RCDataModule.SQLQry do begin
          SQL.Clear;
-         SQL.Add('Select * from users where userid='''+UserEdit.text+''' and passwd='''+PassEdit.Text+'''');
+         SQL.Add('Select * from users where userid='''+UserEdit.text+''' and pass='''+passhash+'''');
          Open;
          if eof then begin
             raise Exception.Create ('Invalid Login');

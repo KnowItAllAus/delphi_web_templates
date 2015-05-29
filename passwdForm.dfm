@@ -51,6 +51,7 @@ object FormPasswd: TFormPasswd
         Top = 98
         Width = 1028
         ExplicitTop = 98
+        ExplicitWidth = 1028
       end
       inherited IWImageFile3: TIWImageFile
         Left = 693
@@ -147,7 +148,6 @@ object FormPasswd: TFormPasswd
     ShowHint = True
     ZIndex = 1000
     Splitter = False
-    ExplicitTop = 120
     DesignSize = (
       1028
       525)

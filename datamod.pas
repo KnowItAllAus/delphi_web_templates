@@ -9,7 +9,8 @@ uses
   QGraphics, QControls, QForms, QDialogs, QStdCtrls,
 {$ENDIF}
   SysUtils, Classes, IBCustomDataSet, IBQuery, IBDatabase,
-  Db, IBTable, IBUpdateSQL, IWMain, siComp, IWSiLink, IBSQL;
+  Db, IBTable, IBUpdateSQL, IWMain, siComp, IWSiLink, IBSQL, DCPcrypt2,
+  DCPsha256;
 
 type
   TStringObj = class
@@ -179,6 +180,7 @@ type
     CredUpdate: TIBQuery;
     PosExQuery: TIBQuery;
     PosExUseQuery: TIBQuery;
+    sha: TDCP_sha256;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -186,6 +188,7 @@ type
     values : TStringList;
   public
     { Public declarations }
+    function getHash(ss : string) : string;
     function nextID : integer;
     function nextVendorCode : integer;
     procedure showdb;
@@ -219,6 +222,22 @@ end;
 {$ELSE}
   {$R *.xfm}
 {$ENDIF}
+
+function TRcDataMod.getHash(ss : string) : string;
+var
+   HashDigest: array of byte;
+   j : integer;
+   s : string;
+begin
+   sha.Init;
+   sha.UpdateUnicodeStr('@recastWEB:'+ss);
+   SetLength(HashDigest,sha.HashSize div 8);
+   sha.Final(HashDigest[0]);  // get the output
+   s := '';
+   for j := 0 to Length(HashDigest) - 1 do  // convert it into a hex string
+        s := s + IntToHex(HashDigest[j],2);
+   result:=s;
+end;
 
 procedure TRcDataMod.SaveValue (name : string; value : string);
 var
