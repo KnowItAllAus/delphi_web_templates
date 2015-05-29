@@ -108,7 +108,9 @@ begin
       // Next form...
       with RCDataModule.SQLQry do begin
          SQL.Clear;
-         SQL.Add('Select * from users where userid='''+UserEdit.text+''' and pass='''+passhash+'''');
+         SQL.Add('Select * from users where userid=:userid and pass=:pass');
+         parambyname('userid').AsString:=UserEdit.text;
+         parambyname('pass').AsString:=passhash;
          Open;
          if eof then begin
             raise Exception.Create ('Invalid Login');

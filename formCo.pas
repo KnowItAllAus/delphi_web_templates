@@ -277,7 +277,7 @@ begin
     with RcDataModule.suUserInsertQuery do begin
       user_id:=RcDataModule.nextID;
       ParamByName('USERID').AsString:=unameEdit.text;
-      ParamByName('PASSWD').AsString:=pwdedit.text;
+      ParamByName('PASS').AsString:=RcDataModule.getHash(pwdedit.text);
       ParamByName('ID').AsInteger:=user_id;
       ExecSQL;
     end;
