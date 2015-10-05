@@ -34,9 +34,6 @@ type
     AddStoreBtn: TIWButton;
     AddJobBtn: TIWButton;
     PromoCombo: TIWComboBox;
-    TemplateGrid: TIWGrid;
-    IWLabel3: TIWLabel;
-    NewTmplRevBtn: TIWButton;
     EditBtn: TIWButton;
     GroupGrid: TIWGrid;
     AddGroupButton: TIWButton;
@@ -144,9 +141,9 @@ var
   celltag : tag_obj;
   level : integer;
 begin
-  for r:=0 to Templategrid.RowCount-1 do
+(*  for r:=0 to Templategrid.RowCount-1 do
     for c:=0 to Templategrid.ColumnCount-1 do
-      Templategrid.Cell[r,c].Tag.Free;
+      Templategrid.Cell[r,c].Tag.Free; *)
   has_live_stores:=false;
   StoreGrid.ColumnCount:=2;
   VoucherGrid.ColumnCount:=3;
@@ -166,14 +163,14 @@ begin
       Cell[0, 1].Text:='';
       Cell[0, 2].Text:='';
   end;
-  With TemplateGrid do begin
+(*  With TemplateGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Date');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Selected');
       Cell[0, 2].Text := '';
       Cell[0, 3].Text := '';
       Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault('Grid.Note');
-  end;
+  end; *)
   With DepGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
@@ -246,7 +243,7 @@ begin
     GrpUseQuery.Transaction.Active:=false;
   end;
   with RcDataModule do begin
-    GrpTmplQuery.Close;
+(*    GrpTmplQuery.Close;
     GrpTmplQuery.ParamByName('COMPANY').AsString:=
        UserSession.Company;
     GrpTmplQuery.ParamByName('GROUPID').AsString:=RcDataModule.GetValue ('editgroup','');
@@ -276,7 +273,7 @@ begin
     end;
     GrpTmplQuery.Close;
     GrpTmplQuery.Transaction.Active:=false;
-
+*)
     // Show Upward Dependencies
     GrpDepUpQuery.Close;
     GrpDepUpQuery.ParamByName('COMPANY').AsString:=
@@ -483,7 +480,7 @@ begin
       DelBtn.visible:=false;
       nameedit.enabled:=false;
       nameedit.BGColor:=clbtnhighlight;
-      newtmplRevBtn.Visible:=false;
+      //newtmplRevBtn.Visible:=false;
       AddJobBtn.Enabled:=false;
       AddGroupButton.enabled:=false;
       AddChildButton.enabled:=false;
@@ -535,9 +532,9 @@ begin
    PList.Free;
    GList.free;
    Dlist.free;
-   for r:=0 to Templategrid.RowCount-1 do
-     for c:=0 to Templategrid.ColumnCount-1 do
-       Templategrid.Cell[r,c].Tag.Free;
+//   for r:=0 to Templategrid.RowCount-1 do
+  //   for c:=0 to Templategrid.ColumnCount-1 do
+    //   Templategrid.Cell[r,c].Tag.Free;
 end;
 
 procedure TFormGrpDtl.AddStoreBtnClick(Sender: TObject);
@@ -690,7 +687,7 @@ var
    FGT : TFormGrpTmpl;
    TRP : TFormTmplRevProp;
 begin
-   RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,0].tag).s);
+(*   RcDataModule.SaveValue ('edittmpl',tag_obj(templategrid.Cell[arow,0].tag).s);
    TIWAppForm(WebApplication.ActiveForm).Release;
    RcDataModule.SaveValue ('JobInstance','N');
    if AColumn=2 then begin
@@ -701,7 +698,7 @@ begin
      TRP:=TFormTmplRevProp.create(WebApplication);
      TRP.NoteEdit.Text:=xmlunquote(templategrid.Cell[arow,4].Text);
      TRP.show;
-   end;
+   end;  *)
 end;
 
 procedure TFormGrpDtl.AddGroupButtonClick(Sender: TObject);

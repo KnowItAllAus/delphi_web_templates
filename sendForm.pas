@@ -43,7 +43,7 @@ type
     procedure PublishToGroup (g : string; silent : boolean);
     procedure PublishToAll;
     procedure update_store (company : string; store : integer; publishat : TDateTime);
-    procedure PublishToGroupDeferred (groupid : string; targettime : integer);
+    procedure PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer);
   public
     { Public declarations }
   end;
@@ -273,7 +273,7 @@ begin
   end;
 end;
 
-procedure TFormSend.PublishToGroupDeferred (groupid : string; targettime : integer);
+procedure TFormSend.PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer);
 var
   tzfile : string;
   utcoffset : integer;
@@ -282,6 +282,7 @@ var
   publish_offset : word;
   publishtime : tdatetime;
   now_offset : word;
+  tomorrow : boolean;
 begin
   try
     with RcDataModule.SQLQry do begin
@@ -314,9 +315,18 @@ begin
          now_utc:=LocalToUTC(Now);
          DecodeTime(now_utc, now_Hour, now_Min, now_Sec, now_MSec);
          now_offset:=60*now_hour + now_min;
+         tomorrow:=false;
          if publish_offset<now_offset then begin
             // Do it tomorrow
             publish_offset:=publish_offset + 24*60;
+            tomorrow:=true;
+         end;
+         if (targetday>0) then begin
+            if not tomorrow then begin
+               // Get a tomorrow baseline
+               publish_offset:=publish_offset + 24*60;
+            end;
+            publish_offset:=publish_offset + (targetday-1)*24*60;
          end;
          publishtime:=incminute(int(now_utc),publish_offset);
          update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
@@ -337,7 +347,7 @@ begin
       if (Whencombo.Itemindex=0) then begin
          PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false);
       end else begin
-         PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60);
+         PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60,daycombo.ItemIndex);
       end;
     end else begin
       PublishToAll;
