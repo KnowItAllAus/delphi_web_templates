@@ -28,6 +28,8 @@ type
     TestGroups: TIWComboBox;
     WhenCombo: TIWComboBox;
     WhenLabel: TIWLabel;
+    DayCombo: TIWComboBox;
+    IWLabel1: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
@@ -199,6 +201,7 @@ var
   targettime : word;
   publishtime : tdatetime;
   now_offset : word;
+  tomorrow : boolean;
 begin
   if whencombo.itemindex=0 then begin
     with RcDataModule.RequestUpdate do begin
@@ -245,9 +248,18 @@ begin
          now_utc:=LocalToUTC(Now);
          DecodeTime(now_utc, now_Hour, now_Min, now_Sec, now_MSec);
          now_offset:=60*now_hour + now_min;
+         tomorrow:=false;
          if publish_offset<now_offset then begin
             // Do it tomorrow
             publish_offset:=publish_offset + 24*60;
+            tomorrow:=true;
+         end;
+         if (daycombo.ItemIndex>0) then begin
+            if not tomorrow then begin
+               // Get a tomorrow baseline
+               publish_offset:=publish_offset + 24*60;
+            end;
+            publish_offset:=publish_offset + (daycombo.itemindex-1)*24*60;
          end;
          publishtime:=incminute(int(now_utc),publish_offset);
          update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
@@ -293,7 +305,7 @@ begin
             tzfile:=zonedir+tzfile+'.dst';
             utcoffset:=current_offset (tzfile);
          end;
-         targettime:=(whencombo.itemindex-1) * 60;
+         //targettime:=(whencombo.itemindex-1) * 60;
          publish_offset:=(targettime-utcoffset + 24 * 60) mod (24*60);
          //
          // This is the time every day in UTC time we prefer to publish.

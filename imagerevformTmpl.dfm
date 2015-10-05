@@ -47,6 +47,7 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Top = 96
         Width = 1024
         ExplicitTop = 96
+        ExplicitWidth = 1024
       end
       inherited IWImageFile3: TIWImageFile
         Left = 689

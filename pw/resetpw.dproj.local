@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2015/05/29 15:53:05.046,=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2015/05/29 15:58:07.751,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.pas=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2015/05/29 15:58:07.751,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.dfm=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2015/05/29 15:58:10.555,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Project1.dproj=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2015/05/29 18:15:39.266,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\pwmain.pas=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.pas</Transaction>
-    <Transaction>2015/05/29 18:15:39.266,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\pwmain.dfm=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.dfm</Transaction>
-    <Transaction>2015/05/29 18:15:55.009,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\resetpw.dproj=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2015/05/29 15:53:05.000.046,=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2015/05/29 15:58:07.000.751,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.pas=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.pas</Transaction>
+    <Transaction>2015/05/29 15:58:07.000.751,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Unit1.dfm=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.dfm</Transaction>
+    <Transaction>2015/05/29 15:58:10.000.555,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\Project1.dproj=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Project1.dproj</Transaction>
+    <Transaction>2015/05/29 18:15:39.000.266,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.pas=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\pwmain.pas</Transaction>
+    <Transaction>2015/05/29 18:15:39.000.266,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Unit1.dfm=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\pwmain.dfm</Transaction>
+    <Transaction>2015/05/29 18:15:55.000.009,C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\Project1.dproj=C:\Documents and Settings\user\My Documents\RAD Studio\Projects\pw\resetpw.dproj</Transaction>
   </Transactions>
 </BorlandProject>

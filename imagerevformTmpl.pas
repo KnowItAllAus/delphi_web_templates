@@ -144,11 +144,6 @@ begin
   if ImageGrid.RowCount>1 then ImageGridCellClick(Sender, ImageGrid.RowCount-1, 0);
   DelBtn.Confirmation:=UserFooter1.silink_footer.GetTextOrDefault('DeletePrompt');
   limitlabel.font.color:=bodyregion.color;
-  if UserSession.ReadOnly then begin
-     prodbtn.enabled:=false;
-     newbtn.enabled:=false;
-     delbtn.enabled:=false;
-  end;
   Baselabel.Caption:=RcDataModule.GetValue('edittmpltype','unknown');
 end;
 

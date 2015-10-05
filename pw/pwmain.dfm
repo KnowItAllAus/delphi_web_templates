@@ -1,7 +1,7 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'Config Server Password Reset'
   ClientHeight = 168
   ClientWidth = 553
   Color = clBtnFace

@@ -109,10 +109,6 @@ begin
   t:=RcDataModule.Trans;
   IWSiLink1.InitForm;
   RefreshGrid;
-  if UserSession.ReadOnly then begin
-     newbtn.enabled:=false;
-     ValueEdit.enabled:=false;
-  end;
   ValueEdit.Text:='';
   FieldTypeLbl.caption:=RcDataModule.GetValue ('edittmpltype','???');
 end;

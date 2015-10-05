@@ -136,7 +136,7 @@ object formSend: TformSend
       Left = 249
       Top = 50
       Width = 540
-      Height = 223
+      Height = 247
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop]
@@ -153,7 +153,7 @@ object formSend: TformSend
         Left = 0
         Top = 3
         Width = 3
-        Height = 220
+        Height = 244
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -177,6 +177,7 @@ object formSend: TformSend
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitHeight = 220
       end
       object IWRectangle2: TIWRectangle
         Left = 0
@@ -443,7 +444,7 @@ object formSend: TformSend
         FriendlyName = 'GroupItems'
       end
       object WhenCombo: TIWComboBox
-        Left = 85
+        Left = 94
         Top = 185
         Width = 131
         Height = 21
@@ -538,6 +539,83 @@ object formSend: TformSend
         AutoSize = False
         FriendlyName = 'RequestLabel'
         Caption = 'When :'
+        RawText = False
+      end
+      object DayCombo: TIWComboBox
+        Left = 55
+        Top = 212
+        Width = 170
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- No Selection --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = True
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 8
+        ItemIndex = -1
+        Items.Strings = (
+          'As time allows'
+          'Tomorrow'
+          'Tomorrow + 1 day'
+          'Tomorrow + 2 days')
+        Sorted = False
+        FriendlyName = 'WhenCombo'
+      end
+      object IWLabel1: TIWLabel
+        Left = 19
+        Top = 212
+        Width = 60
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'RequestLabel'
+        Caption = 'Day : '
         RawText = False
       end
     end
