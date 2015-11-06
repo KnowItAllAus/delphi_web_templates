@@ -54,6 +54,18 @@ type
     WrapBox: TIWCheckBox;
     SortBtn: TIWButton;
     SynBtn: TIWButton;
+    view: TIWComboBox;
+    viewlabel: TIWLabel;
+    grid: TIWGrid;
+    GridCtrls: TIWRegion;
+    NewColEdit: TIWEdit;
+    ColumnBtn: TIWButton;
+    RowBtn: TIWButton;
+    columns: TIWComboBox;
+    IWLabel3: TIWLabel;
+    action: TIWComboBox;
+    IWLabel4: TIWLabel;
+    ChngBtn: TIWButton;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -71,6 +83,11 @@ type
     procedure SortBtnClick(Sender: TObject);
     procedure WrapBoxClick(Sender: TObject);
     procedure SynBtnClick(Sender: TObject);
+    procedure viewChange(Sender: TObject);
+    procedure ColumnBtnClick(Sender: TObject);
+    procedure RowBtnClick(Sender: TObject);
+    procedure ChngBtnClick(Sender: TObject);
+    procedure gridCellClick(ASender: TObject; const ARow, AColumn: Integer);
   private
     { Private declarations }
     function showImage(ms: TStream): boolean;
@@ -79,6 +96,11 @@ type
     procedure showText(ms: TStream);
     procedure GoImages;
     procedure MakeGrey (oldimg : TBitmap; var newimg : TBitmap; colour : integer);
+    procedure exportgrid;
+    procedure drawgrid;
+    procedure memosort;
+    procedure fixgridwidth;
+    procedure setcolumnlist;
   public
     { Public declarations }
     workimg : TBitmap;
@@ -189,10 +211,52 @@ begin
    result:=s;
 end;
 
+function FixQuoteFormat (cs : string) : string;
+var
+   s : string;
+   i : integer;
+begin
+   s:='''';
+   for i:=1 to length(cs) do begin
+     if cs[i]='{' then s:=s+'''';
+     s:=s+cs[i];
+     if cs[i]='''' then s:=s+'''';
+     if cs[i]='}' then s:=s+'''';
+   end;
+   s:=s+'''';
+   result:=s; //FixFormat(s);
+end;
+
+function DequoteText (cs : string) : string;
+var
+   s : string;
+   i : integer;
+   wasquote : boolean;
+begin
+   s:='';
+   if length(cs)>0 then begin
+     wasquote:=false;
+     for I := 1 to length(cs) do
+       if (cs[i]='''') and not wasquote then begin
+          wasquote:=true;
+       end else begin
+          s:=s+cs[i];
+          wasquote:=false;
+       end;
+   end;
+   result:=s;
+end;
+
 procedure TFormImageUpTmpl.GoImages;
 begin
   TIWAppForm(WebApplication.ActiveForm).Release;
   TformImageVersionsTmpl.Create (WebApplication).show;
+end;
+
+procedure TFormImageUpTmpl.gridCellClick(ASender: TObject; const ARow,
+  AColumn: Integer);
+begin
+  grid.deleteRow(ARow);
 end;
 
 procedure TFormImageUpTmpl.CancelBtnClick(Sender: TObject);
@@ -201,6 +265,105 @@ begin
     RcDataModule.ImageUpdateQueryTmpl.Transaction.Active := False;
     GoImages;
   end else DelBtnClick (Sender);
+end;
+
+procedure TFormImageUpTmpl.ChngBtnClick(Sender: TObject);
+var
+  col,i : integer;
+  c : TIWEdit;
+begin
+  col:=columns.ItemIndex;
+  if col=-1 then exit;
+  case action.itemindex of
+    0 : // Delete
+      begin
+        for I := 0 to grid.rowcount-1 do begin
+          grid.Cell[i,col].Control.Free;
+          grid.Cell[i,col].Control:=nil;
+        end;
+        grid.DeleteColumn(col);
+      end;
+    2 : // Move left
+      if col>0 then begin
+        for I := 0 to grid.rowcount-1 do begin
+          c:=TIWEdit (grid.Cell[i,col].Control);
+          grid.Cell[i,col].Control:=grid.Cell[i,col-1].Control;
+          grid.Cell[i,col-1].Control:=c;
+        end;
+      end;
+    1 : // Move right
+      if col<grid.ColumnCount-2 then begin
+        for I := 0 to grid.rowcount-1 do begin
+          c:=TIWEdit (grid.Cell[i,col].Control);
+          grid.Cell[i,col].Control:=grid.Cell[i,col+1].Control;
+          grid.Cell[i,col+1].Control:=c;
+        end;
+      end;
+  end;
+  setcolumnlist;
+  fixgridwidth;
+end;
+
+procedure TFormImageUpTmpl.ColumnBtnClick(Sender: TObject);
+var
+  element : integer;
+  width : integer;
+begin
+  with Grid do begin
+    if rowcount>0 then ColumnCount:=ColumnCount+1;
+    if RowCount=0 then RowCount:=1; // At least a header line
+    element:=0;
+    while element < grid.rowcount do begin
+        grid.Cell[element,grid.ColumnCount-1].text:=grid.Cell[element,grid.ColumnCount-2].text;
+        grid.Cell[element,grid.ColumnCount-1].clickable:=grid.Cell[element,grid.ColumnCount-2].clickable;
+        with Cell[element, grid.ColumnCount-2] do begin
+            text:='';
+            clickable:=false;
+            Control := TIWEdit.Create(Self);
+            with TIWEdit(Control) do begin
+              Text := '';
+              Width := 200;
+            end;
+        end;
+        inc(element);
+    end;
+  end;
+  if newcoledit.Text='' then
+     with grid.Cell[0, grid.ColumnCount-2] do begin
+        TIWEdit(Control).Text:='Column '+inttostr(self.grid.columncount-1);
+        TIWEdit(Control).BGColor := $00D8B7A2;
+     end
+  else
+     with grid.Cell[0, grid.ColumnCount-2] do begin
+        TIWEdit(Control).Text:=NewColEdit.Text;
+        TIWEdit(Control).BGColor := $00D8B7A2;
+        Newcoledit.Text:='';
+     end;
+  fixgridwidth;
+  setcolumnlist;
+end;
+
+procedure TFormImageUpTmpl.RowBtnClick(Sender: TObject);
+var
+  element : integer;
+begin
+  if grid.ColumnCount=0 then grid.ColumnCount:=1;
+
+  with Grid do begin
+    RowCount:=RowCount+1;
+    for element:=0 to ColumnCount-2 do
+        with Cell[RowCount-1, element] do begin
+            Control := TIWEdit.Create(Self);
+            with TIWEdit(Control) do begin
+              Text := '';
+              Width := 200;
+            end;
+        end;
+    with Cell[rowcount-1, columncount-1] do begin
+      text:='Delete';
+      clickable:=true;
+    end;
+  end;
 end;
 
 procedure TFormImageUpTmpl.IWAppFormCreate(Sender: TObject);
@@ -273,6 +436,15 @@ begin
   end;
 end;
 
+procedure TFormImageUpTmpl.setColumnList;
+var
+  element : integer;
+begin
+  columns.items.clear;
+  if grid.rowcount=0 then exit;
+  for element:=0 to grid.columncount-2 do
+    columns.items.add(inttostr(element+1)+': '+TIWEdit(grid.Cell[0, element].control).text);
+end;
 
 procedure TFormImageUpTmpl.Display_work_image;
 begin
@@ -349,6 +521,10 @@ begin
   TBlobField(RcDataModule.CurrentImageQueryTmpl.FieldByName('TEXT')).savetostream(ms);
   ms.position := 0;
   showText(ms);
+  if (memo.Lines.Count>0) and (pos('!!HEADER!!',memo.Lines[0])>0) then begin
+     view.ItemIndex:=1;
+     viewChange(Self);
+  end;
   ms.free;
 end;
 
@@ -371,13 +547,17 @@ begin
   pclabel.Visible:=false;
   pclabel2.Visible:=false;
   synbtn.visible:=false;
-
+  grid.Visible:=false;
+  gridctrls.Visible:=false;
   ContentStats.Caption:='';
   WidthGuide.Visible:=False;
   WidthGuide2.Visible:=False;
   WidthGuide3.Visible:=False;
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
+  view.ItemIndex:=0;
+  view.visible:=false;
+  viewlabel.visible:=false;
   case datamodes(ModeCombo.itemindex) of
     dmImage,
     dmRenderedImage:
@@ -422,11 +602,13 @@ begin
         UploadFile.Visible := True;
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
-        gettextfromdb;
-        if datamodes(ModeCombo.ItemIndex)=dmText then begin
+        if (datamodes(ModeCombo.ItemIndex)=dmText) then begin
            wrapbox.Visible:=true;
            SortBtn.Visible:=true;
+           view.visible:=true;
+           viewlabel.visible:=true;
         end;
+        gettextfromdb;
         synbtn.visible:=datamodes(ModeCombo.itemindex)=dmScript;
       end;
     dmRandom:
@@ -457,6 +639,42 @@ begin
         gettextfromdb;
       end;
   end;
+end;
+
+procedure TFormImageUpTmpl.exportgrid;
+var
+  i,j : integer;
+  s : string;
+  fname : string;
+begin
+  memo.lines.clear;
+  for I := 0 to grid.RowCount-1 do begin
+    s:='';
+    for j := 0 to grid.ColumnCount-2 do begin
+        s:=s+TIWEdit(grid.Cell[i,j].Control).Text;
+    end;
+    if s<>'' then begin // No blank lines
+      s:='';
+      if i=0 then begin
+        s:='!!HEADER!!';
+        for j := 0 to grid.ColumnCount-2 do begin
+          fname:=TIWEdit(grid.Cell[i,j].Control).Text;
+          if pos (':',fname)=0 then
+             s:=s+TIWEdit(grid.Cell[i,j].Control).Text+':'+inttostr(TIWEdit(grid.Cell[i,j].Control).Width)+#9
+          else
+             s:=s+TIWEdit(grid.Cell[i,j].Control).Text+#9;
+        end;
+      end else begin
+        for j := 0 to grid.ColumnCount-2 do begin
+          s:=s+TIWEdit(grid.Cell[i,j].Control).Text+#9;
+        end;
+      end;
+      delete (s,length(s),1); // Trailing tab
+      s:=fixquoteformat (s);
+      memo.Lines.Add(s);
+    end;
+  end;
+  memosort;
 end;
 
 procedure TFormImageUpTmpl.PostButtonClick(Sender: TObject);
@@ -492,6 +710,10 @@ begin
   ms := TMemoryStream.Create;
   ms2 := TMemoryStream.Create;
   try
+    if (modecombo.text='Text') and (view.ItemIndex=1) then begin
+       // Grid view
+       exportgrid;
+    end;
     if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
       for i:=0 to Memo.lines.count-1 do begin
          Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
@@ -570,6 +792,185 @@ begin
     end;
   end;
   ms.free;
+end;
+
+procedure TFormImageUpTmpl.fixgridwidth;
+var
+  width : integer;
+  element : integer;
+begin
+  if grid.rowcount=0 then begin
+     grid.width:=10;
+     exit;
+  end;
+  width:=8;
+  for element:=0 to grid.columncount-2 do
+    width:=width+grid.BorderSize*2+2+TIWEdit(grid.Cell[0, element].control).width;
+  grid.Width:=width;
+  if grid.rowcount>1 then
+     grid.Width:=grid.width+grid.BorderSize*2+2+45;
+end;
+
+procedure TFormImageUpTmpl.DrawGrid;
+
+  function nextfield (s : string) : string;
+  var
+    i : integer;
+  begin
+    for I := 1 to length(s) do begin
+      if s[i]=#9 then begin
+         result:=copy (s,1,i-1);
+         exit;
+      end
+    end;
+    result:=s;
+  end;
+
+  function countfields (s : string) : integer;
+  var
+    j : string;
+    count : integer;
+  begin
+    while s<>'' do begin
+       j:=nextfield(s);
+       delete (s,1,length(j)+1);
+       inc (count);
+    end;
+    result:=count;
+  end;
+
+var
+  i: integer;
+  element: integer;
+  grid_index : integer;
+  KindOffset : integer;
+  ValueOffset : integer;
+  CaptionOffset : integer;
+  s : string;
+  maxcol : integer;
+  col : integer;
+  j : string;
+  len : integer;
+  width : integer;
+begin
+  with Grid do begin
+    KindOffset:=0;
+    CaptionOffset:=1;
+    ValueOffset:=2;
+    element:=0;
+
+    i := 0;
+    RowCount := 0;    // header row
+    maxcol:=1;
+
+    while element < memo.lines.count do begin
+        RowCount := RowCount + 1;
+        col:=countfields(memo.lines[element]);
+        inc (element);
+        if col>maxcol then maxcol:=col;
+    end;
+    grid.ColumnCount:=maxcol+1;
+    element:=0;
+
+    if memo.lines.Count>0 then begin
+       s:=dequotetext(memo.lines[0]);
+       if copy(dequotetext(memo.lines[0]),1,10)='!!HEADER!!' then  begin
+          delete (s, 1, 10);
+          for col:=0 to maxcol-1 do begin
+            if s<>'' then begin
+              j:=nextfield (s);
+              delete (s,1,length(j)+1);
+            end else j:='';
+            if j='' then
+               j:='Column '+inttostr(col+1);
+
+            len:=200;
+            if pos(':',j)>0 then
+               try
+                 len:=strtoint(copy(j,pos(':',j)+1));
+                 j:=(copy(j,1,pos(':',j)-1));
+                 if (len<10) or (len>800) then len:=200;
+               except
+                 len:=200;
+               end;
+            with Cell[element, col] do begin
+              Control := TIWEdit.Create(Self);
+              with TIWEdit(Control) do begin
+                Text := j;
+                Width := len;
+                BGColor := $00D8B7A2;
+              end;
+            end;
+          end;
+          element:=1; // Ignore first line when loading the normal fields
+       end else begin
+          grid.RowCount:=grid.RowCount+1;
+          for col:=0 to maxcol-1 do begin
+            j:='Column '+inttostr(col+1);
+            with Cell[element, col] do begin
+              Control := TIWEdit.Create(Self);
+              with TIWEdit(Control) do begin
+                Text := j;
+                Width := 200;
+                BGColor := $00D8B7A2;
+              end;
+            end;
+          end;
+       end;
+    end;
+
+    grid_index:=1;
+    while element < memo.lines.count do begin
+        s:=memo.lines[element];
+        try
+          s:=dequotetext(s);
+        except
+        end;
+
+        for col:=0 to maxcol-1 do begin
+          if s<>'' then begin
+            j:=nextfield (s);
+            delete (s,1,length(j)+1);
+          end else j:='';
+
+          with Cell[grid_index, col] do begin
+            Control := TIWEdit.Create(Self);
+            with TIWEdit(Control) do begin
+              Text := j;
+              Width := TIWEdit(self.grid.cell[0,col].control).width;
+            end;
+          end;
+        end;
+        with Cell[grid_index, maxcol] do begin
+            text:='Delete';
+            clickable:=true;
+        end;
+        inc(element);
+        inc (grid_index);
+      end;
+  end;
+  fixgridwidth;
+  setcolumnlist;
+end;
+
+procedure TFormImageUpTmpl.viewChange(Sender: TObject);
+begin
+  if view.ItemIndex=0 then begin
+     exportgrid;
+     memosort;
+     grid.Visible:=false;
+     gridctrls.Visible:=false;
+     sortbtn.Visible:=true;
+     memo.Visible:=true;
+     wrapbox.visible:=true;
+  end else begin
+     drawgrid;
+     grid.Visible:=true;
+     gridctrls.Visible:=true;
+     memo.Visible:=false;
+     sortbtn.Visible:=false;
+     wrapbox.visible:=false;
+  end;
 end;
 
 procedure TFormImageUpTmpl.DelBtnClick(Sender: TObject);
@@ -790,15 +1191,29 @@ begin
   // nothing much to do, just causes session timer to reset
 end;
 
-procedure TFormImageUpTmpl.SortBtnClick(Sender: TObject);
+procedure TformImageUpTmpl.memosort;
 var
   i : integer;
+  header : string;
 begin
   memo.Lines.CaseSensitive:=true;
   for i:=0 to Memo.Lines.Count-1 do begin
      Memo.Lines[i]:=fixformat(Memo.Lines[i]);
   end;
+  header:='';
+  if copy(memo.lines[0],1,11)='''!!HEADER!!' then begin
+     header:=memo.lines[0];
+     memo.Lines.Delete(0);
+  end;
   memo.Lines.Sort;
+  if header <>'' then
+     memo.Lines.Insert(0,header);
+end;
+
+
+procedure TFormImageUpTmpl.SortBtnClick(Sender: TObject);
+begin
+  memosort;
 end;
 
 procedure TFormImageUpTmpl.SynBtnClick(Sender: TObject);
