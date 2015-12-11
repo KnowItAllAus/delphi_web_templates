@@ -312,8 +312,8 @@ object formSend: TformSend
         FriendlyName = 'LiveGroups'
       end
       object AllBtn: TIWButton
-        Left = 64
-        Top = 96
+        Left = 72
+        Top = 88
         Width = 121
         Height = 43
         Cursor = crAuto
@@ -375,7 +375,7 @@ object formSend: TformSend
       end
       object TestBtn: TIWButton
         Left = 360
-        Top = 96
+        Top = 92
         Width = 121
         Height = 43
         Cursor = crAuto

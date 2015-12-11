@@ -690,9 +690,9 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         RawText = False
       end
       object Baselabel: TIWLabel
-        Left = 375
-        Top = 70
-        Width = 50
+        Left = 376
+        Top = 75
+        Width = 234
         Height = 16
         Cursor = crAuto
         IW50Hint = False

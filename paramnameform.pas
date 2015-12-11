@@ -7,7 +7,8 @@ uses
   Forms, footer_user, siComp, siLngLnk, IWCompEdit, IWCompLabel,
   IWCompRectangle, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWHTMLControls, IWSiLink, Controls, IWVCLBaseContainer,
-  IWContainer, IWHTMLContainer, IWRegion, IWCompButton, IWHTML40Container;
+  IWContainer, IWHTMLContainer, IWRegion, IWCompButton, IWHTML40Container,
+  IWCompRadioButton;
 
 type
   TFormParamnameEdit = class(TIWAppForm)
@@ -23,6 +24,8 @@ type
     FrameBareTitle1: TFrameBareTitle;
     userfooter1: Tuserfooter;
     DelBtn: TIWButton;
+    ObjBtn: TIWRadioButton;
+    FieldBtn: TIWRadioButton;
     procedure userfooter1Extra2Click(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
@@ -43,10 +46,11 @@ begin
       SQLQry.Transaction.Active:=false;
       SQLQry.Transaction.Active:=true;
       SQLQry.SQL.Clear;
-      SQLQry.SQL.Add('update GROUPOBJHDR set NAME=:NAME where ID=:ID and COMPANY=:COMPANY');
+      SQLQry.SQL.Add('update GROUPOBJHDR set NAME=:NAME, PARAMTYPE=:PTYPE where ID=:ID and COMPANY=:COMPANY');
       SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
       SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
       SQLQry.ParamByName ('NAME').AsString:=NameEdit.Text;
+      if objbtn.checked then SQLQry.ParamByName ('PTYPE').AsString:='O' else SQLQry.ParamByName ('PTYPE').AsString:='F';
       SQLQry.ExecSQL;
       SQLQry.Transaction.Commit;
     end;

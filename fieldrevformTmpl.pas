@@ -8,7 +8,8 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
   Controls, Forms, baretitle, siComp, siLngLnk, IWCompMemo,
-  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container;
+  IWCompListbox, IWCompEdit, IWCompButton, cfgtypes, IWHTML40Container,
+  IWCompTimeEdit;
 
 type
   TformFieldVersionsTmpl = class(TIWAppForm)
@@ -27,6 +28,7 @@ type
     ValueEdit: TIWEdit;
     IWLabel1: TIWLabel;
     FieldTypeLbl: TIWLabel;
+    Options: TIWComboBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure ImageGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -44,11 +46,8 @@ implementation
 {$R *.dfm}
 
 uses datamod, graphics, serverController, jpeg, db, imagesform, imageupformtmpl, grptmplform,
-IBCustomDataSet, IBQuery, IBDatabase, editTmplForm,
-  IBTable, IBUpdateSQL, dialogs;
-
-var
-  t : TIBTransaction;
+IBCustomDataSet, IBQuery, IBDatabase, editTmplForm, parse_utils,
+  IBTable, IBUpdateSQL, dialogs, RegularExpressions;
 
 procedure TformFieldVersionsTmpl.RefreshGrid;
 var
@@ -104,13 +103,91 @@ begin
   RcDataModule.ImageVerQueryTmpl.Transaction.Active:=false;
 end;
 
-procedure TformFieldVersionsTmpl.IWAppFormCreate(Sender: TObject);
+function findconstraint (fieldname : string; constraint : string) : string;
+var
+  param : string;
+  value : string;
 begin
-  t:=RcDataModule.Trans;
+  result:='';
+  param:=uppercase(copy (constraint,1,pos('=',constraint)-1));
+  value:=copy (constraint,length(param)+2,999);
+  if param=fieldname then begin
+     result:=dequotedstr(value);
+  end;
+end;
+
+function getoptions (s : string) : string;
+var
+  sl : TStringlist;
+  i : integer;
+begin
+  sl:=TStringlist.Create;
+  result:='';
+  try
+    GetCommaFields(sl, s);
+    for I := 0 to sl.Count-1 do begin
+      result:=findConstraint ('OPTIONS',sl[i]);
+      if result<>'' then exit;
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
+procedure setoptions (opts : string; optionlist : TStrings);
+var
+  opt : string;
+begin
+  optionlist.clear;
+  while pos('|',opts)>0 do begin
+     opt:=copy (opts,1,pos('|',opts)-1);
+     delete (opts,1,length(opt)+1);
+     optionlist.add (opt);
+  end;
+  // Last field
+  optionlist.add (opts);
+end;
+
+procedure TformFieldVersionsTmpl.IWAppFormCreate(Sender: TObject);
+var
+  con : string;
+  t : string;
+  constraint : string;
+  fieldtype : string;
+  sl : TStringlist;
+  i : integer;
+  fieldoptions:string;
+begin
   IWSiLink1.InitForm;
   RefreshGrid;
   ValueEdit.Text:='';
-  FieldTypeLbl.caption:=RcDataModule.GetValue ('edittmpltype','???');
+  con:=RcDataModule.GetValue ('edittmplconstraint','???');
+  if con<>'' then begin
+     t:=RcDataModule.GetValue ('edittmpltype','???');
+     if t='Date' then t:=t+' (yyyy-mm-dd)';
+     if t='Time' then t:=t+' (hh:mm)';
+     FieldTypeLbl.caption:=t+' : '+con
+  end else
+     FieldTypeLbl.caption:=RcDataModule.GetValue ('edittmpltype','???');
+
+  constraint:=RcDataModule.GetValue ('edittmplconstraint','');
+  sl:=TStringlist.Create;
+  fieldoptions:='';
+  try
+    getcommafields(sl,constraint);
+    for I := 0 to sl.Count-1 do begin
+      fieldoptions:=getoptions(sl[i]);
+      if fieldoptions<>'' then break;
+    end;
+    if fieldoptions<>'' then begin
+      setoptions(fieldoptions,options.items);
+      options.visible:=true;
+      options.itemindex:=-1;
+      valueedit.visible:=false;
+    end;
+  finally
+    sl.Free;
+  end;
 end;
 
 procedure TformFieldVersionsTmpl.ImageGridRenderCell(ACell: TIWGridCell;
@@ -167,10 +244,172 @@ begin
       TformGrpTmpl.Create(WebApplication).Show;
 end;
 
+function isOption (opts : string; val : string) : boolean;
+var
+  opt : string;
+begin
+  while pos('|',opts)>0 do begin
+     opt:=copy (opts,1,pos('|',opts)-1);
+     delete (opts,1,length(opt)+1);
+     if opt=val then begin
+        result:=true;
+        exit;
+     end;
+  end;
+  // Last field
+  if opts=val then begin
+     result:=true;
+     exit;
+  end;
+  result:=false;
+end;
+
+function checkconstraint (fieldtype : string; input : string; constraint : string) : boolean;
+var
+  param : string;
+  value : string;
+  regexpr : TRegEx;
+  match   : TMatch;
+  group   : TGroup;
+begin
+  result:=true;
+  //showmessage ('Field '+fieldtype+' Value '+value+' Constraint '+constraint);
+
+  param:=clipspaces(uppercase(copy (constraint,1,pos('=',constraint)-1)));
+  value:=clipspaces(copy (constraint,length(param)+2,999));
+  fieldtype:=uppercase(fieldtype);
+  if param='REGEX' then begin
+    // create our regex instance, and we want to do a case insensitive search, in multiline mode
+    regexpr := TRegEx.Create(dequotedstr(value),[roIgnoreCase]);
+    match := regexpr.Match(input);
+    if not match.Success then
+    begin
+      result:=false;
+      exit;
+    end;
+  end else if param='OPTIONS' then begin
+    result:=isOption (dequotedstr(value),input);
+  end else begin
+    if fieldType='INTEGER' then begin
+      try
+        if param='MAX' then
+           result:=strtoint(value)>=strtoint(input);
+        if param='MIN' then
+           result:=strtoint(value)<=strtoint(input);
+      except
+        result:=false;
+      end;
+    end;
+  end;
+end;
+
+function IsValidDate(y,m,d : integer): boolean;
+const
+  DAYS_OF_MONTH: array[1..12] of integer = (31, 29, 31, 30, 31, 30, 31, 31, 30,
+  31, 30, 31);
+begin
+  result := false;
+  if (m<1) or (m>12) then Exit;
+  if (d<1) or (d>DAYS_OF_MONTH[m]) then Exit;
+  if (not IsLeapYear(y)) and (m = 2) and (d = 29) then Exit;
+  result := true;
+end;
+
+function IsValidTime(h,m : integer): boolean;
+begin
+  result := false;
+  if (h<0) or (h>23) then Exit;
+  if (m<0) or (m>59) then Exit;
+  result := true;
+end;
+
+function checktype (fieldtype : string; input : string) : boolean;
+var
+  regexpr : TRegEx;
+  match   : TMatch;
+  group   : TGroup;
+  day,month,year,hour,min : integer;
+begin
+  result:=true;
+  fieldtype:=uppercase(fieldtype);
+  if fieldType='INTEGER' then begin
+    try
+      strtoint(input);
+    except
+      result:=false;
+    end;
+  end else if fieldType='DATE' then begin
+    regexpr := TRegEx.Create('(\d{4})-(\d{2})-(\d{2})',[roIgnoreCase]);
+    match := regexpr.Match(dequotedstr(input));
+    if not match.success or (Match.Groups.Count<>4) then begin
+      result:=false;
+    end else begin
+      try
+        day:=StrToInt(Match.Groups[3].Value);
+        month:=StrToInt(Match.Groups[2].Value);
+        year:=StrToInt(Match.Groups[1].Value);
+        result:=isvaliddate (year,month,day);
+      except
+        result:=false;
+      end;
+    end;
+  end else if fieldType='TIME' then begin
+    regexpr := TRegEx.Create('(\d):(\d{2})',[roIgnoreCase]);
+    match := regexpr.Match(dequotedstr(input));
+    if not match.success or (Match.Groups.Count<>3) then begin
+      result:=false;
+    end else begin
+      try
+        hour:=StrToInt(Match.Groups[1].Value);
+        min:=StrToInt(Match.Groups[2].Value);
+        result:=isvalidtime (hour,min);
+      except
+        result:=false;
+      end;
+    end;
+  end;
+end;
+
 procedure TformFieldVersionsTmpl.NewBtnClick(Sender: TObject);
 var
   ImageId : integer;
+  pt : string;
+  constraint : string;
+  fieldtype : string;
+  sl : TStringlist;
+  i : integer;
+  val : string;
 begin
+  pt:=RcDataModule.GetValue ('editparam','');
+  fieldtype:=RcDataModule.GetValue ('edittmpltype','???');
+  constraint:=RcDataModule.GetValue ('edittmplconstraint','');
+
+  if options.visible then begin
+    if options.itemindex=-1 then
+       val:=''
+    else
+       val:=options.text
+  end else
+    val:=valueedit.Text;
+  sl:=TStringlist.Create;
+  try
+    getcommafields(sl,constraint);
+    if (val<>'') and not checkType (fieldtype,val) then begin
+       WebApplication.ShowMessage('Error : Type '+fieldtype, smAlert);
+       exit;
+    end;
+    for I := 0 to sl.Count-1 do begin
+      if not checkConstraint (fieldtype,val,sl[i]) then begin
+         WebApplication.ShowMessage('Error : Constraint '+sl[i], smAlert);
+         exit;
+      end;
+    end;
+  finally
+    sl.Free;
+  end;
+
+  //showmessage ('Type='+fieldtype+' Constraint='+constraint);
+
   with RcDataModule do begin
     Trans.Active:=true;
     ImageId:=nextID;

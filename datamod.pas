@@ -181,6 +181,7 @@ type
     PosExQuery: TIBQuery;
     PosExUseQuery: TIBQuery;
     sha: TDCP_sha256;
+    SQLEx2: TIBSQL;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

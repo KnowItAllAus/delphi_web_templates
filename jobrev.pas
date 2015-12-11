@@ -10,6 +10,10 @@ uses
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, promotitle,
   IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox, IWHTML40Container;
 
+type tag_obj = class
+  s : string;
+end;
+
 type
   TFormJobRev = class(TIWAppForm)
     userfooter1: Tuserfooter;
@@ -33,17 +37,19 @@ type
     NoteLabel: TIWLabel;
     templatelbl: TIWLabel;
     ParamGrid: TIWGrid;
-    NameLbl: TIWLabel;
     NameEdit: TIWEdit;
-    AddParamBtn: TIWButton;
+    ParamSaveBtn: TIWButton;
     TypeCombo: TIWComboBox;
     TypeLbl: TIWLabel;
-    lenlabel: TIWLabel;
-    LengthEdit: TIWEdit;
-    Heightlabel: TIWLabel;
-    heightedit: TIWEdit;
     IWLabel1: TIWLabel;
     DomainEdit: TIWEdit;
+    ConstraintEdit: TIWEdit;
+    ConstraintLbl: TIWLabel;
+    NameLbl: TIWLabel;
+    ParamDelBtn: TIWButton;
+    ParamCancelBtn: TIWButton;
+    paramnotelbl: TIWLabel;
+    paramnoteedit: TIWEdit;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -52,14 +58,18 @@ type
     procedure EditJobBtnClick(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure CreateBtnClick(Sender: TObject);
-    procedure AddParamBtnClick(Sender: TObject);
+    procedure ParamSaveBtnClick(Sender: TObject);
     procedure ParamGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure ParamGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure IWAppFormDestroy(Sender: TObject);
-    procedure TypeComboAsyncChange(Sender: TObject;
-      EventParams: TStringList);
+    procedure ParamDelBtnClick(Sender: TObject);
+    procedure ParamCancelBtnClick(Sender: TObject);
+  private
+    currentparam : tag_obj;
+    procedure RefreshParamGrid;
+
   public
     procedure RefreshGrid;
   end;
@@ -70,13 +80,7 @@ implementation
 
 {$R *.dfm}
 
-uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit;
-
-const paramtypes : array [1..7] of string = ('Object','Text','Date','Time','Integer', 'Image', 'Text Block');
-
-type tag_obj = class
-  s : string;
-end;
+uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit, dialogs;
 
 procedure TFormJobRev.JobGridRenderCell(ACell: TIWGridCell; const ARow,
   AColumn: Integer);
@@ -100,6 +104,84 @@ begin
         BGColor := clNone;
       end;
     end;
+  end;
+end;
+
+procedure TFormJobRev.RefreshParamGrid;
+
+var
+  i : integer;
+  t : tag_obj;
+begin
+  nameedit.text:='';
+  typecombo.itemindex:=-1;
+  constraintedit.text:='';
+  paramnoteedit.text:='';
+  nameedit.enabled:=true;
+  nameedit.color:=$ffffff;
+  typecombo.enabled:=true;
+  currentparam:=nil;
+  paramdelbtn.visible:=false;
+  paramcancelbtn.visible:=false;
+  paramsavebtn.caption:='Add';
+
+  with RcDataModule.SQLQry do begin
+    Transaction.Active:=False;
+    Transaction.Active:=True;
+    Close;
+    SQL.Clear;
+    SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID');
+    ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+    Open;
+    with ParamGrid do begin
+      RowCount:=1;
+      if (UserSession.privilege and PRIV_LIVE)=0 then ParamGrid.ColumnCount:=4 else ParamGrid.ColumnCount:=5;
+      Cell[0, 0].Text := SiLink.GetTextOrDefault('');
+      Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Parameter');
+      Cell[0, 2].Text := SiLink.GetTextOrDefault('Grid.Type');
+      Cell[0, 3].Text := SiLink.GetTextOrDefault('Grid.Constraints');
+      Cell[0, 4].Text := SiLink.GetTextOrDefault('Grid.Note');
+      if (UserSession.privilege and PRIV_LIVE)<>0 then Cell[0, 0].Text := '';
+      i:=1;
+      while not Eof do begin
+        RowCount:=RowCount+1;
+        with Cell[i, 1] do begin
+          Text := htmlquote(FieldByName('PARAMNAME').AsString);
+          t:=tag_obj.create;
+          t.s:=FieldByName('ID').AsString;
+          tag:=t;
+        end;
+        with Cell[i, 2] do begin
+          try
+            Text:=TypeCombo.Items[ord(strtoparamtype(FieldByName('PARAMTYPE').AsString))];
+          except
+          end;
+        end;
+        with Cell[i, 3] do begin
+          try
+            Text := htmlquote(FieldByName('FIELDCONSTRAINT').AsString);
+          except
+          end;
+        end;
+        with Cell[i, 4] do begin
+          try
+            Text := htmlquote(FieldByName('NOTE').AsString);
+          except
+          end;
+        end;
+        if (UserSession.privilege and PRIV_LIVE)<>0 then begin
+           with Cell[i, 0] do begin
+             Text := SiLink.GetTextOrDefault('Grid.Edit');
+             Clickable:=true;
+           end;
+        end;
+        inc (i);
+        Next;
+      end;
+    end;
+    Close;
+    Transaction.Active:=False;
   end;
 end;
 
@@ -187,57 +269,7 @@ begin
     Close;
     Transaction.Active:=False;
   end;
-
-  with RcDataModule.SQLQry do begin
-    Transaction.Active:=False;
-    Transaction.Active:=True;
-    Close;
-    SQL.Clear;
-    SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID');
-    ParamByName('COMPANY').AsString:=UserSession.Company;
-    ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
-    Open;
-    with ParamGrid do begin
-      RowCount:=1;
-      if (UserSession.privilege and PRIV_LIVE)=0 then ParamGrid.ColumnCount:=3 else ParamGrid.ColumnCount:=4;
-      Cell[0, 0].Text := SiLink.GetTextOrDefault('Grid.Parameter');
-      Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Type');
-      Cell[0, 2].Text := SiLink.GetTextOrDefault('Grid.Constraints');
-      if (UserSession.privilege and PRIV_LIVE)<>0 then Cell[0, 3].Text := '';
-      i:=1;
-      while not Eof do begin
-        RowCount:=RowCount+1;
-        with Cell[i, 0] do begin
-          Text := htmlquote(FieldByName('PARAMNAME').AsString);
-          t:=tag_obj.create;
-          t.s:=FieldByName('ID').AsString;
-          tag:=t;
-        end;
-        with Cell[i, 1] do begin
-          try
-            Text := FieldByName('PARAMTYPE').AsString;
-          except
-          end;
-        end;
-        with Cell[i, 2] do begin
-          try
-            Text := FieldByName('MAXWIDTH').AsString+'/'+FieldByName('MAXHEIGHT').AsString;
-            if Text='/' then text:='';
-          except
-          end;
-        end;
-        if (UserSession.privilege and PRIV_LIVE)<>0 then
-           with Cell[i, 3] do begin
-             Text := SiLink.GetTextOrDefault('Grid.Delete');
-             Clickable:=true;
-           end;
-        inc (i);
-        Next;
-      end;
-    end;
-    Close;
-    Transaction.Active:=False;
-  end;
+  RefreshParamGrid;
 end;
 
 procedure TFormJobRev.IWAppFormCreate(Sender: TObject);
@@ -246,10 +278,6 @@ begin
    JobNameLbl.Caption:=JobNameLbl.Caption+' '+Usersession.JobName;
    RefreshGrid;
 
-   lengthedit.Visible:=false;
-   heightedit.Visible:=false;
-   lenlabel.Visible:=false;
-   heightlabel.Visible:=false;
    with RcDataModule.CurrentJobQuery do begin
      Transaction.Active:=true;
      Open;
@@ -263,11 +291,15 @@ begin
      if FieldByName ('Template').AsString='1' then begin
         templatelbl.visible:=true;
         ParamGrid.Visible:=true;
-        AddParamBtn.Visible:=true;
+        ParamSaveBtn.Visible:=true;
         TypeLbl.Visible:=true;
         NameLbl.Visible:=true;
         NameEdit.Visible:=true;
         TypeCombo.Visible:=true;
+        constraintedit.visible:=true;
+        paramnoteedit.visible:=true;
+        constraintlbl.visible:=true;
+        paramnotelbl.visible:=true;
         //lengthedit.Visible:=true;
         //heightedit.Visible:=true;
         //lenlabel.Visible:=true;
@@ -277,15 +309,15 @@ begin
    end;
    if (UserSession.privilege and PRIV_LIVE)=0 then begin
       TypeCombo.Visible:=false;
-      AddParamBtn.Visible:=false;
+      ParamSaveBtn.Visible:=false;
       TypeLbl.Visible:=false;
       NameLbl.Visible:=false;
       NameEdit.Visible:=false;
+      constraintedit.visible:=false;
+      paramnoteedit.visible:=false;
+      constraintlbl.visible:=false;
+      paramnotelbl.visible:=false;
       EditJobBtn.Visible:=false;
-      lengthedit.Visible:=false;
-      heightedit.Visible:=false;
-      lenlabel.Visible:=false;
-      heightlabel.Visible:=false;
    end;
 end;
 
@@ -347,45 +379,91 @@ begin
   end;
 end;
 
-procedure TFormJobRev.AddParamBtnClick(Sender: TObject);
-var
-  x : integer;
+procedure TFormJobRev.ParamCancelBtnClick(Sender: TObject);
 begin
-  if NameEdit.Text<>'' then try
+  RefreshParamGrid;
+end;
+
+procedure TFormJobRev.ParamDelBtnClick(Sender: TObject);
+begin
+  try
     with RcDataModule.SQLQry do begin
       Transaction.Active:=False;
       Transaction.Active:=True;
       Close;
       SQL.Clear;
-      SQL.Add ('insert into JOBPARAMS (COMPANY,JOBID,ID,PARAMNAME,PARAMTYPE,MAXWIDTH,MAXHEIGHT) Values (:COMPANY,:JOBID,:ID,:NAME,:TYPE,:MAXWIDTH,:MAXHEIGHT)');
+      SQL.Add ('delete from JOBPARAMS where COMPANY=:COMPANY and ID=:ID');
       ParamByName('COMPANY').AsString:=UserSession.Company;
-      ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
-      ParamByName('ID').AsInteger:=RcDataModule.NextId;
-      ParamByName('NAME').AsString:=NameEdit.Text;
-      ParamByName('TYPE').AsString:=ParamTypes[TypeCombo.ItemIndex+1];
-      try
-        x:=strtoint(lengthedit.text);
-        if x>0 then ParamByName('MAXWIDTH').AsInteger:=x
-           else ParamByName('MAXWIDTH').Clear;
-      except
-        ParamByName('MAXWIDTH').Clear;
-      end;
-      try
-        x:=strtoint(heightedit.text);
-        if x>0 then ParamByName('MAXHEIGHT').AsInteger:=x
-           else ParamByName('MAXHEIGHT').Clear;
-      except
-        ParamByName('MAXHEIGHT').Clear;
-      end;
+      ParamByName('ID').AsString:=currentparam.s;
       ExecSQL;
       Transaction.Commit;
     end;
   except
   end;
+  RefreshParamGrid;
+end;
+
+procedure TFormJobRev.ParamSaveBtnClick(Sender: TObject);
+var
+  x : integer;
+  j : integer;
+  co : string;
+begin
+  if currentparam<>nil then begin
+
+    if NameEdit.Text<>'' then try
+      with RcDataModule.SQLQry do begin
+        Transaction.Active:=False;
+        Transaction.Active:=True;
+        Close;
+        SQL.Clear;
+        SQL.Add ('update JOBPARAMS set NOTE=:NOTE, PARAMTYPE=:TYPE, FIELDCONSTRAINT=:FIELDCONSTRAINT where'
+        +' COMPANY=:COMPANY and JOBID=:JOBID and ID=:ID');
+        co:=UserSession.Company;
+        ParamByName('COMPANY').AsString:=co;
+        j:=UserSession.JobHdrID;
+        ParamByName('JOBID').AsInteger:=j;
+        ParamByName('ID').AsString:=currentparam.s;
+        ParamByName('NOTE').AsString:=paramnoteedit.text;
+        ParamByName('TYPE').AsString:=ParamNames[paramtypes(TypeCombo.ItemIndex)];
+        ParamByName('FIELDCONSTRAINT').AsString:=ConstraintEdit.Text;
+        ExecSQL;
+        Transaction.Commit;
+      end;
+    except
+{      on e : exception do
+        showmessage(e.message); }
+    end;
+
+  end else begin
+    if typecombo.ItemIndex=-1 then begin
+       WebApplication.ShowMessage('Error : No parameter type', smAlert);
+       exit;
+    end;
+
+    if NameEdit.Text<>'' then try
+      with RcDataModule.SQLQry do begin
+        Transaction.Active:=False;
+        Transaction.Active:=True;
+        Close;
+        SQL.Clear;
+        SQL.Add ('insert into JOBPARAMS (COMPANY,JOBID,ID,PARAMNAME,PARAMTYPE,FIELDCONSTRAINT,NOTE) Values (:COMPANY,:JOBID,:ID,:NAME,:TYPE,:FIELDCONSTRAINT,:NOTE)');
+        ParamByName('COMPANY').AsString:=UserSession.Company;
+        ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+        ParamByName('ID').AsInteger:=RcDataModule.NextId;
+        ParamByName('NAME').AsString:=NameEdit.Text;
+        ParamByName('FIELDCONSTRAINT').AsString:=ConstraintEdit.Text;
+        ParamByName('NOTE').AsString:=ParamNoteEdit.Text;
+        ParamByName('TYPE').AsString:=ParamNames[paramtypes(TypeCombo.ItemIndex)];
+        ExecSQL;
+        Transaction.Commit;
+      end;
+    except
+    end;
+  end;
   NameEdit.Text:='';
-  lengthedit.Text:='0';
-  heightedit.Text:='0';
-  RefreshGrid;
+  ConstraintEdit.Text:='';
+  RefreshParamGrid;
 end;
 
 procedure TFormJobRev.ParamGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -411,25 +489,16 @@ end;
 
 procedure TFormJobRev.ParamGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
-var
-  t : tag_obj;
 begin
-  t:=tag_obj(ParamGrid.Cell[ARow,0].tag);
-  try
-    with RcDataModule.SQLQry do begin
-      Transaction.Active:=False;
-      Transaction.Active:=True;
-      Close;
-      SQL.Clear;
-      SQL.Add ('delete from JOBPARAMS where COMPANY=:COMPANY and ID=:ID');
-      ParamByName('COMPANY').AsString:=UserSession.Company;
-      ParamByName('ID').AsString:=t.s;
-      ExecSQL;
-      Transaction.Commit;
-    end;
-  except
-  end;
-  RefreshGrid;
+  currentParam:=tag_obj(ParamGrid.Cell[ARow,1].tag);
+  constraintedit.text:=ParamGrid.Cell[ARow,3].Text;
+  nameedit.text:=ParamGrid.Cell[ARow,1].text;
+  typecombo.itemindex:=typecombo.Items.IndexOf(ParamGrid.Cell[ARow,2].text);
+  nameedit.enabled:=false;
+  nameedit.color:=$d0d0d0;
+  paramdelbtn.visible:=true;
+  paramcancelbtn.visible:=true;
+  paramsavebtn.caption:='Update';
 end;
 
 procedure TFormJobRev.IWAppFormDestroy(Sender: TObject);
@@ -438,27 +507,6 @@ var
 begin
   for r:=1 to Paramgrid.RowCount-1 do
     Paramgrid.Cell[r,0].Tag.Free;
-end;
-
-procedure TFormJobRev.TypeComboAsyncChange(Sender: TObject;
-  EventParams: TStringList);
-var
-  hassize : boolean;
-begin
-  hassize:=typecombo.ItemIndex in [5,6];
-  lengthedit.enabled:=hassize;
-  heightedit.enabled:=hassize;
-  if hassize then begin
-    lengthedit.font.Color:=clblack;
-    lengthedit.BGColor:=clwhite;
-    heightedit.font.Color:=clblack;
-    heightedit.BGColor:=clwhite;
-  end else begin
-    lengthedit.Color:=clgray;
-    lengthedit.BGColor:=$00EBDAD0;
-    heightedit.Color:=clgray;
-    heightedit.BGColor:=$00EBDAD0;
-  end;
 end;
 
 end.

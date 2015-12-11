@@ -10,9 +10,12 @@ uses
   IWCompCheckbox, IWCompListbox, IWCompMemo, IWBaseControl,
   IWVCLBaseContainer, IWVCLBaseControl, jpeg, IWHTMLContainer,
   IWBaseHTMLControl, IWAppForm, IWSiLink, siComp, siLngLnk, baretitle,
-  footer_user, ReferredClass, IWTypes, GraphicEx, IWHTML40Container;
+  footer_user, ReferredClass, IWTypes, GraphicEx, IWHTML40Container,
+  IWBaseComponent, IWBaseHTMLComponent, IWBaseHTML40Component;
 
 type
+  TModfunc = procedure (var sl : TStrings; col : integer; title : boolean);
+
   TFormImageUpTmpl = class(TIWAppForm)
     siLangLinked1: TsiLangLinked;
     FrameBareTitle1: TFrameBareTitle;
@@ -39,24 +42,13 @@ type
     FormatCombo: TIWComboBox;
     MemBox: TIWCheckBox;
     Widthguide: TIWRectangle;
-    Senselabel: TIWLabel;
-    MinCombo: TIWComboBox;
-    AdjBtn: TIWButton;
-    pclabel2: TIWLabel;
-    pccombo: TIWComboBox;
-    pclabel: TIWLabel;
-    DimCombo: TIWComboBox;
-    EditLabel: TIWLabel;
     Widthguide2: TIWRectangle;
     Widthguide3: TIWRectangle;
-    ColLabel: TIWLabel;
-    ColCombo: TIWComboBox;
     WrapBox: TIWCheckBox;
     SortBtn: TIWButton;
     SynBtn: TIWButton;
     view: TIWComboBox;
     viewlabel: TIWLabel;
-    grid: TIWGrid;
     GridCtrls: TIWRegion;
     NewColEdit: TIWEdit;
     ColumnBtn: TIWButton;
@@ -66,6 +58,34 @@ type
     action: TIWComboBox;
     IWLabel4: TIWLabel;
     ChngBtn: TIWButton;
+    grid: TIWGrid;
+    repainttimer: TIWTimer;
+    ImageAdjustRegion: TIWRegion;
+    EditLabel: TIWLabel;
+    ColLabel: TIWLabel;
+    ColCombo: TIWComboBox;
+    MinCombo: TIWComboBox;
+    Senselabel: TIWLabel;
+    DimCombo: TIWComboBox;
+    pccombo: TIWComboBox;
+    AdjBtn: TIWButton;
+    pclabel2: TIWLabel;
+    pclabel: TIWLabel;
+    GridPreviewRegion: TIWRegion;
+    GridContinueBtn: TIWButton;
+    DiscardBtn: TIWButton;
+    FileFormatCombo: TIWComboBox;
+    IWLabel1: TIWLabel;
+    IWRegion3: TIWRegion;
+    Preview: TIWGrid;
+    Spacebtn: TIWButton;
+    FirstBtn: TIWButton;
+    PrevBtn: TIWButton;
+    NextBtn: TIWButton;
+    LastBtn: TIWButton;
+    PageCombo: TIWComboBox;
+    constraintlbl: TIWLabel;
+    BorderBox: TIWCheckBox;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -88,8 +108,18 @@ type
     procedure RowBtnClick(Sender: TObject);
     procedure ChngBtnClick(Sender: TObject);
     procedure gridCellClick(ASender: TObject; const ARow, AColumn: Integer);
+    procedure IWAppFormResize(Sender: TObject);
+    procedure IWAppFormAfterRender(Sender: TObject);
+    procedure repainttimerTimer(Sender: TObject);
+    procedure DiscardBtnClick(Sender: TObject);
+    procedure GridContinueBtnClick(Sender: TObject);
+    procedure CSVBoxClick(Sender: TObject);
+    procedure SpacebtnClick(Sender: TObject);
+    procedure FirstBtnClick(Sender: TObject);
+    procedure PageComboChange(Sender: TObject);
   private
     { Private declarations }
+    page : integer;
     function showImage(ms: TStream): boolean;
     procedure getimagefromdb;
     procedure gettextfromdb;
@@ -99,8 +129,15 @@ type
     procedure exportgrid;
     procedure drawgrid;
     procedure memosort;
-    procedure fixgridwidth;
+    function fixgridwidth : boolean;
     procedure setcolumnlist;
+    procedure convertCSVMemo;
+    function convertCSV (s : string) : string;
+    procedure convertSpaceMemo;
+    function convertSpace (s : string) : string;
+    procedure DrawPreviewGrid;
+    function modifyTabRec (s : string; col : integer; line : integer; modfunc : TModfunc = nil) : string;
+    function checkconstraints (s : TStream; b : TBitmap) : boolean;
   public
     { Public declarations }
     workimg : TBitmap;
@@ -117,9 +154,33 @@ var
 implementation
 
 uses datamod, db, servercontroller, IWInit, Math, cfgtypes, imagerevformtmpl, IBCustomDataSet, IBQuery, IBDatabase,
-  IBTable, IBUpdateSQL, scripting;
+  IBTable, IBUpdateSQL, scripting, Parse_utils;
 
 {$R *.DFM}
+
+const
+  pagesize : integer = 40;
+
+procedure MakeAnythingBut (oldimg : TBitmap; color : TColor);
+var
+  x,y : Integer;
+  P : PByteArray;
+  r,g,b : word;
+  tc : TColor;
+begin
+    oldimg.PixelFormat:=pf32Bit;
+    for y := 0 to oldimg.height -1 do
+    begin
+      P := oldimg.ScanLine[y];
+      for x := 0 to oldimg.width -1 do begin
+          r:=(P[x*4+2]);
+          g:=(P[x*4+1]);
+          b:=(P[x*4]);
+          if (r=color and $FF) and (b=(color and $FF00) shr 8) and (g=(color and $FF) shr 16) then
+              P[x*4]:=P[x*4] xor 1;
+      end;
+    end;
+end;
 
 function FixFormat (cs : string) : string;
 var
@@ -211,12 +272,17 @@ begin
    result:=s;
 end;
 
-function FixQuoteFormat (cs : string) : string;
+function QuoteText (cs : string) : string;
 var
    s : string;
    i : integer;
 begin
-   s:='''';
+   s:='';
+   if cs='' then begin
+      result:='''''';
+      exit;
+   end;
+   if cs[1]<>'{' then s:='''';
    for i:=1 to length(cs) do begin
      if cs[i]='{' then s:=s+'''';
      s:=s+cs[i];
@@ -255,8 +321,25 @@ end;
 
 procedure TFormImageUpTmpl.gridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
+var
+  row : integer;
 begin
-  grid.deleteRow(ARow);
+  exportgrid;
+  row:=(page-1)*pagesize+ARow;
+  memo.Lines.Delete(row);
+  if page>max(((memo.Lines.Count-1)+pagesize-1) div pagesize,1) then
+     page:=page-1;
+  drawgrid;
+end;
+
+procedure TFormImageUpTmpl.GridContinueBtnClick(Sender: TObject);
+begin
+  gridpreviewregion.visible:=false;
+  if fileformatcombo.ItemIndex in [0,1] then begin
+     convertCSVMemo;
+  end else if fileformatcombo.ItemIndex in [2,3] then
+     convertSpaceMemo;
+  drawgrid;
 end;
 
 procedure TFormImageUpTmpl.CancelBtnClick(Sender: TObject);
@@ -267,80 +350,98 @@ begin
   end else DelBtnClick (Sender);
 end;
 
+procedure delcolfunc (var ts : TStrings; col : integer; first : boolean);
+begin
+  if ts.Count>=col then
+     ts.Delete(col);
+end;
+
+procedure moveleft (var ts : TStrings; col : integer; first : boolean);
+var
+  s : string;
+begin
+  if col=0 then exit;
+  s:=ts[col];
+  ts[col]:=ts[col-1];
+  ts[col-1]:=s;
+end;
+
+procedure moveright (var ts : TStrings; col : integer; first : boolean);
+var
+  s : string;
+begin
+  if col>=ts.Count-1 then exit;
+  s:=ts[col];
+  ts[col]:=ts[col+1];
+  ts[col+1]:=s;
+end;
+
 procedure TFormImageUpTmpl.ChngBtnClick(Sender: TObject);
 var
   col,i : integer;
   c : TIWEdit;
+  element : integer;
 begin
+  exportgrid;
   col:=columns.ItemIndex;
   if col=-1 then exit;
   case action.itemindex of
     0 : // Delete
       begin
-        for I := 0 to grid.rowcount-1 do begin
-          grid.Cell[i,col].Control.Free;
-          grid.Cell[i,col].Control:=nil;
+        memo.Lines[0]:=quotetext('!!HEADER!!'+modifytabrec (copy(dequotetext(memo.Lines[0]),11,999),col,i,delcolfunc));
+        for i:=1 to memo.Lines.count-1 do begin
+            memo.Lines[i]:=quotetext(modifytabrec (dequotetext(memo.Lines[i]),col,i,delcolfunc));
         end;
-        grid.DeleteColumn(col);
+        drawgrid;
       end;
     2 : // Move left
-      if col>0 then begin
-        for I := 0 to grid.rowcount-1 do begin
-          c:=TIWEdit (grid.Cell[i,col].Control);
-          grid.Cell[i,col].Control:=grid.Cell[i,col-1].Control;
-          grid.Cell[i,col-1].Control:=c;
+      begin
+        memo.Lines[0]:=quotetext('!!HEADER!!'+modifytabrec (copy(dequotetext(memo.Lines[0]),11,999),col,i,moveleft));
+        for i:=1 to memo.Lines.count-1 do begin
+            memo.Lines[i]:=quotetext(modifytabrec (dequotetext(memo.Lines[i]),col,i,moveleft));
         end;
+        drawgrid;
       end;
     1 : // Move right
-      if col<grid.ColumnCount-2 then begin
-        for I := 0 to grid.rowcount-1 do begin
-          c:=TIWEdit (grid.Cell[i,col].Control);
-          grid.Cell[i,col].Control:=grid.Cell[i,col+1].Control;
-          grid.Cell[i,col+1].Control:=c;
+      begin
+        memo.Lines[0]:=quotetext('!!HEADER!!'+modifytabrec (copy(dequotetext(memo.Lines[0]),11,999),col,i,moveright));
+        for i:=1 to memo.Lines.count-1 do begin
+            memo.Lines[i]:=quotetext(modifytabrec (dequotetext(memo.Lines[i]),col,i,moveright));
         end;
+        drawgrid;
       end;
   end;
   setcolumnlist;
   fixgridwidth;
 end;
 
+var
+  newcolname : string;
+
+procedure inscolfunc (var ts : TStrings; col : integer; first : boolean);
+begin
+  if first then
+     if newcolname<>'' then
+       ts.add (newcolname)
+     else
+       ts.add ('Column '+inttostr(col))
+  else
+     ts.add('');
+end;
+
 procedure TFormImageUpTmpl.ColumnBtnClick(Sender: TObject);
 var
-  element : integer;
-  width : integer;
+  col,i : integer;
 begin
-  with Grid do begin
-    if rowcount>0 then ColumnCount:=ColumnCount+1;
-    if RowCount=0 then RowCount:=1; // At least a header line
-    element:=0;
-    while element < grid.rowcount do begin
-        grid.Cell[element,grid.ColumnCount-1].text:=grid.Cell[element,grid.ColumnCount-2].text;
-        grid.Cell[element,grid.ColumnCount-1].clickable:=grid.Cell[element,grid.ColumnCount-2].clickable;
-        with Cell[element, grid.ColumnCount-2] do begin
-            text:='';
-            clickable:=false;
-            Control := TIWEdit.Create(Self);
-            with TIWEdit(Control) do begin
-              Text := '';
-              Width := 200;
-            end;
-        end;
-        inc(element);
-    end;
+  exportgrid;
+  col:=grid.columncount;
+  newcolname:=newcoledit.Text;
+  for i:=0 to memo.Lines.count-1 do begin
+      memo.Lines[i]:=quotetext(modifytabrec (dequotetext(memo.Lines[i]),col,i,inscolfunc));
   end;
-  if newcoledit.Text='' then
-     with grid.Cell[0, grid.ColumnCount-2] do begin
-        TIWEdit(Control).Text:='Column '+inttostr(self.grid.columncount-1);
-        TIWEdit(Control).BGColor := $00D8B7A2;
-     end
-  else
-     with grid.Cell[0, grid.ColumnCount-2] do begin
-        TIWEdit(Control).Text:=NewColEdit.Text;
-        TIWEdit(Control).BGColor := $00D8B7A2;
-        Newcoledit.Text:='';
-     end;
-  fixgridwidth;
+  drawgrid;
   setcolumnlist;
+  fixgridwidth;
 end;
 
 procedure TFormImageUpTmpl.RowBtnClick(Sender: TObject);
@@ -366,8 +467,21 @@ begin
   end;
 end;
 
-procedure TFormImageUpTmpl.IWAppFormCreate(Sender: TObject);
+procedure TFormImageUpTmpl.IWAppFormAfterRender(Sender: TObject);
 begin
+  if fixgridwidth then begin
+     grid.Invalidate;
+     grid.RepaintControl;
+     grid.Refresh;
+  end;
+end;
+
+procedure TFormImageUpTmpl.IWAppFormCreate(Sender: TObject);
+var
+  ft : paramtypes;
+  t : string;
+begin
+  page:=1;
   workimg:=nil;
   original:=TBitmap.create;
   IWSilink1.InitForm;
@@ -376,6 +490,19 @@ begin
       NewIDEdit.Text := FieldByName('ID').AsString;
       try
         ModeCombo.ItemIndex := FieldByName('DATAMODE').AsInteger;
+        t:=RcDataModule.GetValue ('edittmpltype','???');
+        ft:=strtoparamtype(t);
+        modecombo.ItemIndex:=-1;
+        case ft of
+        ft_Object: ;
+        ft_image_blob :
+          modecombo.ItemIndex:=0;
+        ft_text_blob, ft_table_blob :
+          modecombo.ItemIndex:=1;
+        ft_rendered_image_blob :
+          modecombo.ItemIndex:=13;
+        end;
+        modecombo.Enabled:=modecombo.ItemIndex=-1;
       except
         ModeCombo.ItemIndex := 0;
       end;
@@ -385,6 +512,7 @@ begin
         FormatCombo.ItemIndex := 0;
       end;
       MemBox.Checked:=FieldByName ('RESIDENT').AsString<>'0';
+      constraintlbl.caption:='Constraints : '+RcDataModule.GetValue ('edittmplconstraint','???');
   end;
   ModeComboChange(nil);
 end;
@@ -529,10 +657,12 @@ begin
 end;
 
 procedure TFormImageUpTmpl.ModeComboChange(Sender: TObject);
-
+var
+  mode : datamodes;
 begin
   WrapBox.Visible:=false;
   SortBtn.Visible:=false;
+  spacebtn.Visible:=false;
   FormatCombo.Visible:=False;
   MemBox.Visible:=False;
   ColCombo.Visible:=False;
@@ -549,6 +679,7 @@ begin
   synbtn.visible:=false;
   grid.Visible:=false;
   gridctrls.Visible:=false;
+  GridPreviewRegion.Visible:=false;
   ContentStats.Caption:='';
   WidthGuide.Visible:=False;
   WidthGuide2.Visible:=False;
@@ -558,13 +689,14 @@ begin
   view.ItemIndex:=0;
   view.visible:=false;
   viewlabel.visible:=false;
-  case datamodes(ModeCombo.itemindex) of
+  imageadjustregion.Visible:=false;
+  borderbox.visible:=false;
+  mode:=datamodes(ModeCombo.itemindex);
+  case mode of
     dmImage,
     dmRenderedImage:
       begin
         EditLabel.Visible:=True;
-        MinCombo.Visible:=True;
-        Senselabel.Visible:=True;
         pclabel2.Visible:=True;
         AdjBtn.Visible:=True;
         PcCombo.Visible:=True;
@@ -580,8 +712,15 @@ begin
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
         MemBox.Visible:=datamodes(ModeCombo.itemindex) in [dmImage,dmRenderedImage];
-        ColCombo.Visible:=True;
-        ColLabel.Visible:=True;
+        if mode=dmImage then begin
+           ColCombo.Visible:=True;
+           ColLabel.Visible:=True;
+           MinCombo.Visible:=True;
+           Senselabel.Visible:=True;
+        end else begin
+           borderbox.visible:=true;
+        end;
+        imageadjustregion.Visible:=true;
         PreferLabel.Visible:=True;
         WidthGuide.Visible:=true;
         WidthGuide2.Visible:=true;
@@ -605,6 +744,7 @@ begin
         if (datamodes(ModeCombo.ItemIndex)=dmText) then begin
            wrapbox.Visible:=true;
            SortBtn.Visible:=true;
+           SpaceBtn.Visible:=true;
            view.visible:=true;
            viewlabel.visible:=true;
         end;
@@ -643,106 +783,333 @@ end;
 
 procedure TFormImageUpTmpl.exportgrid;
 var
-  i,j : integer;
+  j : integer;
   s : string;
   fname : string;
+  element : integer;
+  line : integer;
 begin
-  memo.lines.clear;
-  for I := 0 to grid.RowCount-1 do begin
+  // Export paged data!
+  //memo.lines.clear;
+  element:=(page-1)*pagesize+1;
+  for line := 0 to grid.RowCount-1 do begin
     s:='';
     for j := 0 to grid.ColumnCount-2 do begin
-        s:=s+TIWEdit(grid.Cell[i,j].Control).Text;
+        s:=s+TIWEdit(grid.Cell[line,j].Control).Text;
     end;
-    if s<>'' then begin // No blank lines
+    if (s<>'') or (line=0) then begin // No blank lines other than header
       s:='';
-      if i=0 then begin
+      if line=0 then begin
         s:='!!HEADER!!';
         for j := 0 to grid.ColumnCount-2 do begin
-          fname:=TIWEdit(grid.Cell[i,j].Control).Text;
+          fname:=TIWEdit(grid.Cell[0,j].Control).Text;
           if pos (':',fname)=0 then
-             s:=s+TIWEdit(grid.Cell[i,j].Control).Text+':'+inttostr(TIWEdit(grid.Cell[i,j].Control).Width)+#9
+             s:=s+TIWEdit(grid.Cell[0,j].Control).Text+':'+inttostr(TIWEdit(grid.Cell[0,j].Control).Width)+#9
           else
-             s:=s+TIWEdit(grid.Cell[i,j].Control).Text+#9;
+             s:=s+TIWEdit(grid.Cell[0,j].Control).Text+#9;
         end;
+        delete (s,length(s),1); // Trailing tab
+        if memo.Lines.Count=0 then
+           memo.Lines.Add('');
+        s:=quotetext (s);
+        memo.Lines[0]:=s;
       end else begin
         for j := 0 to grid.ColumnCount-2 do begin
-          s:=s+TIWEdit(grid.Cell[i,j].Control).Text+#9;
+          s:=s+TIWEdit(grid.Cell[line,j].Control).Text+#9;
         end;
+        delete (s,length(s),1); // Trailing tab
+        if memo.Lines.Count<=element then
+           memo.Lines.Add('');
+        s:=quotetext (s);
+        memo.Lines[element]:=s;
+        inc (element);
       end;
-      delete (s,length(s),1); // Trailing tab
-      s:=fixquoteformat (s);
-      memo.Lines.Add(s);
     end;
   end;
   memosort;
 end;
 
+procedure TFormImageUpTmpl.FirstBtnClick(Sender: TObject);
+begin
+  exportgrid;
+  case TIWButton(Sender).Tag of
+  1 : page:=1;
+  2 : page:=max(page-1,1);
+  3 : page:=min(page+1,memo.Lines.Count div pagesize + 1);
+  4 : page:=memo.Lines.Count div pagesize + 1;
+  end;
+  drawgrid;
+end;
+
+procedure TFormImageUpTmpl.PageComboChange(Sender: TObject);
+begin
+  exportgrid;
+  page:=pagecombo.itemindex+1;
+  drawgrid;
+end;
+
+function checkconstraint(constraint : string; s : TStream; b : TBitmap) : boolean;
+var
+  param : string;
+  value : string;
+begin
+  result:=true;
+  param:=clipspaces(uppercase(copy (constraint,1,pos('=',constraint)-1)));
+  value:=clipspaces(copy (constraint,length(param)+2,999));
+  try
+    if param='MAXWIDTH' then begin
+      if assigned(b) then
+         result:=b.Width<=strtoint(value)
+    end else if param='MINWIDTH' then begin
+      if assigned(b) then
+         result:=b.Width>=strtoint(value)
+    end else if param='MINHEIGHT' then begin
+      if assigned(b) then
+         result:=b.Height>=strtoint(value)
+    end else if param='MAXHEIGHT' then begin
+      if assigned(b) then
+         result:=b.Height<=strtoint(value)
+    end else if param='MAX' then begin
+      if assigned(s) then
+         result:=s.Size<=strtoint(value);
+    end;
+  except
+    result:=false;
+  end;
+end;
+
+function TFormImageUpTmpl.checkconstraints (s : TStream; b : TBitmap) : boolean;
+var
+  pt : string;
+  constraint : string;
+  fieldtype : string;
+  sl : TStringlist;
+  i : integer;
+  val : string;
+begin
+  result:=false;
+  fieldtype:=RcDataModule.GetValue ('edittmpltype','???');
+  constraint:=RcDataModule.GetValue ('edittmplconstraint','');
+  sl:=TStringlist.Create;
+  try
+    getcommafields(sl,constraint);
+    for I := 0 to sl.Count-1 do begin
+      if not checkConstraint (sl[i],s,b) then begin
+         WebApplication.ShowMessage('Error : Constraint '+sl[i], smAlert);
+         exit;
+      end;
+    end;
+  finally
+    sl.Free;
+  end;
+  result:=true;
+end;
+
 procedure TFormImageUpTmpl.PostButtonClick(Sender: TObject);
 var
-   ms, ms2 : TMemoryStream;
+   ms, textstream : TMemoryStream;
    i : integer;
    uq : TIBQuery;
 begin
-  uq:=RcDataModule.ImageUpdateQueryTmpl;
-  uq.ParamByName('ID').AsString :=
-    RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
-  uq.ParamByName('DATAMODE').AsInteger :=
-    ModeCombo.ItemIndex;
-  uq.ParamByName('FORMAT').AsInteger :=
-    FormatCombo.ItemIndex;
-  uq.ParamByName('RESIDENT').AsInteger :=
-    Ord(MemBox.Checked);
-  uq.ParamByName('COLOUR').AsInteger :=
-    ColCombo.ItemIndex;
-  uq.ParamByName('COMPANY').AsString := UserSession.Company;
-  if workimg <> nil then begin
-    ms := TMemoryStream.Create;
-    try
-      workimg.SaveToStream(ms);
-      ms.position := 0;
-      uq.ParamByName('IMAGE').loadfromStream(ms,ftBlob);
-    finally
-      ms.free;
-    end;
-  end else begin
-    uq.ParamByName('IMAGE').AsString := '';
-  end;
-  ms := TMemoryStream.Create;
-  ms2 := TMemoryStream.Create;
+  textstream := nil;
+  ms:=nil;
   try
-    if (modecombo.text='Text') and (view.ItemIndex=1) then begin
+    if (modecombo.itemindex=1) {text} and (view.ItemIndex=1) then begin
        // Grid view
        exportgrid;
     end;
-    if (modecombo.text<>'Script') and (modecombo.text<>'Stock') then begin
+    if (modecombo.itemindex<>7) {script}  and (modecombo.itemindex<>3) {Stock} then begin
       for i:=0 to Memo.lines.count-1 do begin
          Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
       end;
     end;
-    Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
-    ms.position := 3;  // Avoid BOM
-    ms2.CopyFrom(ms,ms.size-3);
-    uq.ParamByName('TEXT').loadfromStream(ms2,ftBlob);
-  finally
-    ms.free;
-    ms2.free;
-  end;
-  uq.ExecSQL;
-  uq.Transaction.Commit;
+    ms := TMemoryStream.Create;
+    if not (modecombo.itemindex in [0,13]) {image, rendered image} then begin
+        Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
+        ms.position := 3;  // Avoid BOM
+        textstream := TMemoryStream.Create;
+        textstream.CopyFrom(ms,ms.size-3);
+        freeandnil(ms);
+    end;
 
-  with RcDataModule do try
-    SQLQry.Transaction.Active:=false;
-    SQLQry.Transaction.Active:=true;
-    SQLQry.SQL.Clear;
-    SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
-    SQLQry.ParamByName ('CURRENT').AsString:=RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
-    SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
-    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
-    SQLQry.ExecSQL;
-    SQLQry.Transaction.Commit;
-  except
+    if (modecombo.itemindex in [0,13]) {image, rendered image} then begin
+       if not checkconstraints (nil,workimg) then
+         exit;
+    end else begin
+       // Some text blob
+       if not checkconstraints (textstream,nil) then
+         exit;
+    end;
+
+    uq:=RcDataModule.ImageUpdateQueryTmpl;
+    uq.ParamByName('ID').AsString :=
+      RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
+    uq.ParamByName('DATAMODE').AsInteger :=
+      ModeCombo.ItemIndex;
+    uq.ParamByName('FORMAT').AsInteger :=
+      FormatCombo.ItemIndex;
+    uq.ParamByName('RESIDENT').AsInteger :=
+      Ord(MemBox.Checked);
+    uq.ParamByName('COLOUR').AsInteger :=
+      ColCombo.ItemIndex;
+    uq.ParamByName('COMPANY').AsString := UserSession.Company;
+    if workimg <> nil then begin
+      ms := TMemoryStream.Create;
+      try
+        workimg.SaveToStream(ms);
+        ms.position := 0;
+        uq.ParamByName('IMAGE').loadfromStream(ms,ftBlob);
+      finally
+        freeandnil(ms);
+      end;
+    end else begin
+      uq.ParamByName('IMAGE').AsString := '';
+    end;
+    if assigned(textstream) then
+       uq.ParamByName('TEXT').loadfromStream(textstream,ftBlob);
+    uq.ExecSQL;
+    uq.Transaction.Commit;
+
+    with RcDataModule do try
+      SQLQry.Transaction.Active:=false;
+      SQLQry.Transaction.Active:=true;
+      SQLQry.SQL.Clear;
+      SQLQry.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+      SQLQry.ParamByName ('CURRENT').AsString:=RcDataModule.CurrentImageQueryTmpl.ParamByName('ID').AsString;
+      SQLQry.ParamByName ('ID').AsString:=RcDataModule.GetValue ('editparam','');
+      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLQry.ExecSQL;
+      SQLQry.Transaction.Commit;
+    except
+    end;
+    GoImages;
+  finally
+    if assigned(textstream) then textstream.free;
+    if assigned(ms) then ms.free;
   end;
-  GoImages;
+end;
+
+function TFormImageUpTmpl.convertCSV (s : string) : string;
+Var
+  ts : tstringlist;
+  i : integer;
+Begin
+  Ts := Tstringlist.create;
+  Ts.StrictDelimiter:=true;
+  Ts.CommaText := S;
+  s:='';
+  for I := 0 to ts.count-1 do begin
+      s:=s+ts[i]+#9;
+  end;
+  delete (s,length(s),1);
+  ts.free;
+  result:=s;
+end;
+
+procedure SetSpaceText(sl : TStrings; const Value: string);
+var
+  LOldDelimiter: Char;
+  LOldQuoteChar: Char;
+begin
+  LOldDelimiter := sl.Delimiter;
+  LOldQuoteChar := sl.QuoteChar;
+  sl.Delimiter := ' ';
+  sl.QuoteChar := '"';
+  sl.StrictDelimiter:=true;
+  try
+    sl.DelimitedText:=Value;
+  finally
+    sl.Delimiter := LOldDelimiter;
+    sl.QuoteChar := LOldQuoteChar;
+  end;
+end;
+
+procedure SetTabText(sl : TStrings; const Value: string);
+var
+  LOldDelimiter: Char;
+  LOldQuoteChar: Char;
+begin
+  LOldDelimiter := sl.Delimiter;
+  LOldQuoteChar := sl.QuoteChar;
+  sl.Delimiter := #9;
+  sl.QuoteChar := '"';
+  sl.StrictDelimiter:=true;
+  try
+    sl.DelimitedText:=Value;
+  finally
+    sl.Delimiter := LOldDelimiter;
+    sl.QuoteChar := LOldQuoteChar;
+  end;
+end;
+
+function TFormImageUpTmpl.convertSpace (s : string) : string;
+Var
+  ts : tstringlist;
+  i : integer;
+Begin
+  Ts := Tstringlist.create;
+  setspacetext (Ts,S);
+  s:='';
+  for I := 0 to ts.count-1 do begin
+      s:=s+ts[i]+#9;
+  end;
+  delete (s,length(s),1);
+  ts.free;
+  result:=s;
+end;
+
+function TFormImageUpTmpl.modifyTabRec (s : string; col : integer; line : integer; modfunc : TModfunc = nil) : string;
+Var
+  ts : tstrings;
+  i : integer;
+Begin
+  Ts := Tstringlist.create;
+  settabtext (Ts,S);
+  s:='';
+  if assigned(modfunc) then begin
+     modfunc(ts,col,line=0);
+  end;
+  for I := 0 to ts.count-1 do begin
+      s:=s+ts[i]+#9;
+  end;
+  delete (s,length(s),1);
+  ts.free;
+  result:=s;
+end;
+
+procedure TFormImageUpTmpl.convertCSVMemo;
+Var
+  S : string;
+  element : integer;
+Begin
+  for element:=0 to memo.lines.count-1 do begin
+     s:=memo.lines[element];
+     memo.lines[element]:=convertcsv (s);
+  end;
+  if memo.lines.count>0  then begin
+     if (fileformatcombo.ItemIndex=1) and (pos('!!HEADER!!',memo.lines[0])=0) then
+        memo.lines[0]:='!!HEADER!!'+memo.lines[0];
+  end;
+end;
+
+procedure TFormImageUpTmpl.convertSpaceMemo;
+Var
+  S : string;
+  element : integer;
+Begin
+  for element:=0 to memo.lines.count-1 do begin
+     s:=memo.lines[element];
+     memo.lines[element]:=convertspace (s);
+  end;
+  if memo.lines.count>0  then begin
+     if (fileformatcombo.ItemIndex=3) and (pos('!!HEADER!!',memo.lines[0])=0) then
+        memo.lines[0]:='!!HEADER!!'+memo.lines[0];
+  end;
+end;
+
+procedure TFormImageUpTmpl.CSVBoxClick(Sender: TObject);
+begin
+  DrawPreviewGrid;
 end;
 
 procedure TFormImageUpTmpl.UploadBtnClick(Sender: TObject);
@@ -777,6 +1144,9 @@ begin
           ms.position := 0;
           error:='Show Text : ';
           showText(ms);
+          if view.ItemIndex<>0 then begin
+            DrawPreviewGrid;
+          end;
         except
           on e : exception do begin
              error:=error+e.Message;
@@ -794,31 +1164,36 @@ begin
   ms.free;
 end;
 
-procedure TFormImageUpTmpl.fixgridwidth;
+function TFormImageUpTmpl.fixgridwidth : boolean;
 var
   width : integer;
   element : integer;
+  oldwidth : integer;
 begin
+  oldwidth:=grid.width;
   if grid.rowcount=0 then begin
      grid.width:=10;
+     result:=false;
      exit;
   end;
   width:=8;
   for element:=0 to grid.columncount-2 do
-    width:=width+grid.BorderSize*2+2+TIWEdit(grid.Cell[0, element].control).width;
+    width:=width+grid.BorderSize*2+4+TIWEdit(grid.Cell[0, element].control).width;
   grid.Width:=width;
   if grid.rowcount>1 then
-     grid.Width:=grid.width+grid.BorderSize*2+2+45;
+     grid.Width:=grid.width+grid.BorderSize*2+2+45;   // Allow for 'delete' link
+  if grid.width>imageregion.width then grid.width:=imageregion.width;
+  result:=oldwidth<>grid.width;
 end;
 
 procedure TFormImageUpTmpl.DrawGrid;
 
-  function nextfield (s : string) : string;
+  function nextfield (s : string; delim : char) : string;
   var
     i : integer;
   begin
     for I := 1 to length(s) do begin
-      if s[i]=#9 then begin
+      if s[i]=delim then begin
          result:=copy (s,1,i-1);
          exit;
       end
@@ -826,13 +1201,14 @@ procedure TFormImageUpTmpl.DrawGrid;
     result:=s;
   end;
 
-  function countfields (s : string) : integer;
+  function countfields (s : string; delim : char) : integer;
   var
     j : string;
     count : integer;
   begin
+    count:=0;
     while s<>'' do begin
-       j:=nextfield(s);
+       j:=nextfield(s,delim);
        delete (s,1,length(j)+1);
        inc (count);
     end;
@@ -843,34 +1219,32 @@ var
   i: integer;
   element: integer;
   grid_index : integer;
-  KindOffset : integer;
-  ValueOffset : integer;
-  CaptionOffset : integer;
   s : string;
   maxcol : integer;
   col : integer;
   j : string;
   len : integer;
-  width : integer;
 begin
+  pagecombo.Items.Clear;
+  for i:=1 to (memo.lines.count-1) div pagesize do
+     pagecombo.Items.Add('Page : '+inttostr(i));
+  if ((memo.Lines.Count-1) mod pagesize>0) or (memo.Lines.Count=1) then
+     pagecombo.Items.Add('Page : '+inttostr((memo.Lines.Count-1) div pagesize + 1));
+  pagecombo.ItemIndex:=page-1;
   with Grid do begin
-    KindOffset:=0;
-    CaptionOffset:=1;
-    ValueOffset:=2;
-    element:=0;
+    element:=(page-1)*pagesize;
 
-    i := 0;
     RowCount := 0;    // header row
     maxcol:=1;
 
-    while element < memo.lines.count do begin
+    while element < min(memo.lines.count,page*pagesize+1) do begin
         RowCount := RowCount + 1;
-        col:=countfields(memo.lines[element]);
+        col:=countfields(memo.lines[element],#9);
+//        showmessage ('Fields='+inttostr(col));
         inc (element);
         if col>maxcol then maxcol:=col;
     end;
     grid.ColumnCount:=maxcol+1;
-    element:=0;
 
     if memo.lines.Count>0 then begin
        s:=dequotetext(memo.lines[0]);
@@ -878,7 +1252,7 @@ begin
           delete (s, 1, 10);
           for col:=0 to maxcol-1 do begin
             if s<>'' then begin
-              j:=nextfield (s);
+              j:=nextfield (s,#9);
               delete (s,1,length(j)+1);
             end else j:='';
             if j='' then
@@ -893,7 +1267,7 @@ begin
                except
                  len:=200;
                end;
-            with Cell[element, col] do begin
+            with Cell[0, col] do begin
               Control := TIWEdit.Create(Self);
               with TIWEdit(Control) do begin
                 Text := j;
@@ -902,12 +1276,11 @@ begin
               end;
             end;
           end;
-          element:=1; // Ignore first line when loading the normal fields
        end else begin
           grid.RowCount:=grid.RowCount+1;
           for col:=0 to maxcol-1 do begin
             j:='Column '+inttostr(col+1);
-            with Cell[element, col] do begin
+            with Cell[0, col] do begin
               Control := TIWEdit.Create(Self);
               with TIWEdit(Control) do begin
                 Text := j;
@@ -920,7 +1293,8 @@ begin
     end;
 
     grid_index:=1;
-    while element < memo.lines.count do begin
+    element:=(page-1)*pagesize+1;
+    while element < min(memo.lines.count,page*pagesize+1) do begin
         s:=memo.lines[element];
         try
           s:=dequotetext(s);
@@ -929,7 +1303,7 @@ begin
 
         for col:=0 to maxcol-1 do begin
           if s<>'' then begin
-            j:=nextfield (s);
+            j:=nextfield (s,#9);
             delete (s,1,length(j)+1);
           end else j:='';
 
@@ -953,23 +1327,154 @@ begin
   setcolumnlist;
 end;
 
+procedure TFormImageUpTmpl.DrawPreviewGrid;
+
+  function nextfield (s : string) : string;
+  var
+    i : integer;
+  begin
+    for I := 1 to length(s) do begin
+      if s[i]=#9 then begin
+         result:=copy (s,1,i-1);
+         exit;
+      end
+    end;
+    result:=s;
+  end;
+
+  function countfields (s : string) : integer;
+  var
+    j : string;
+    count : integer;
+  begin
+    count:=0;
+    while s<>'' do begin
+       j:=nextfield(s);
+       delete (s,1,length(j)+1);
+       inc (count);
+    end;
+    result:=count;
+  end;
+
+var
+  element: integer;
+  grid_index : integer;
+  s : string;
+  maxcol : integer;
+  col : integer;
+  j : string;
+  ts : TStringlist;
+begin
+  gridpreviewregion.Visible:=true;
+  with Preview do begin
+    element:=0;
+
+    RowCount := 0;    // header row
+    maxcol:=1;
+    ts:=tStringlist.Create;
+
+    while (element < memo.lines.count) and (element<5) do begin
+        ts.Add(memo.lines[element]);
+        if fileformatcombo.ItemIndex in [0,1] then
+           ts[element]:=convertCSV(ts[element])
+        else if fileformatcombo.ItemIndex in [2,3] then
+           ts[element]:=convertSpace(ts[element]);
+
+        RowCount := RowCount + 1;
+        col:=countfields(ts[element]);
+//        showmessage ('Fields='+inttostr(col));
+        inc (element);
+        if col>maxcol then maxcol:=col;
+    end;
+    ColumnCount:=maxcol;
+    element:=0;
+
+    if ts.Count>0 then begin
+       s:=dequotetext(ts[0]);
+       if fileformatcombo.ItemIndex in [1,3] then begin  // Inc. Titles
+          for col:=0 to maxcol-1 do begin
+            if s<>'' then begin
+              j:=nextfield (s);
+              delete (s,1,length(j)+1);
+            end else j:='';
+            if j='' then
+               j:='Column '+inttostr(col+1);
+
+            if pos(':',j)>0 then
+               try
+                 j:=(copy(j,1,pos(':',j)-1));
+               except
+               end;
+            with Cell[element, col] do begin
+                Text := htmlquote(j);
+                BGColor := $00D8B7A2;
+            end;
+          end;
+          element:=1; // Ignore first line when loading the normal fields
+       end else begin
+          RowCount:=RowCount+1;
+          for col:=0 to maxcol-1 do begin
+            with cell[0,col] do begin
+              j:='Column '+inttostr(col+1);
+              Text := j;
+              BGColor := $00D8B7A2;
+            end;
+          end;
+       end;
+    end;
+
+    grid_index:=1;
+    while element < ts.count do begin
+      s:=ts[element];
+      try
+        s:=dequotetext(s);
+      except
+      end;
+
+      for col:=0 to maxcol-1 do begin
+        if s<>'' then begin
+          j:=nextfield (s);
+          delete (s,1,length(j)+1);
+        end else j:='';
+
+        with Cell[grid_index, col] do begin
+          text:=htmlquote(j);
+          BGColor:=$00EBDAD0;
+        end;
+      end;
+      inc(element);
+      inc (grid_index);
+    end;
+  end;
+end;
+
 procedure TFormImageUpTmpl.viewChange(Sender: TObject);
 begin
-  if view.ItemIndex=0 then begin
-     exportgrid;
-     memosort;
-     grid.Visible:=false;
-     gridctrls.Visible:=false;
-     sortbtn.Visible:=true;
-     memo.Visible:=true;
-     wrapbox.visible:=true;
-  end else begin
-     drawgrid;
-     grid.Visible:=true;
-     gridctrls.Visible:=true;
-     memo.Visible:=false;
-     sortbtn.Visible:=false;
-     wrapbox.visible:=false;
+  case view.ItemIndex of
+    0 : begin
+       exportgrid;
+       grid.Visible:=false;
+       gridctrls.Visible:=false;
+       sortbtn.Visible:=true;
+       spacebtn.Visible:=true;
+       memo.Visible:=true;
+       wrapbox.visible:=true;
+    end;
+    1,2 : begin
+       page:=1;
+       if memo.Lines.count=0 then
+          memo.Lines.Add(quotetext('!!HEADER!!'));
+       if  (copy(dequotetext(memo.Lines[0]),1,10)<>'!!HEADER!!') then
+          memo.Lines.insert(0,quotetext('!!HEADER!!'));
+       drawgrid;
+       grid.Visible:=true;
+       gridctrls.Visible:=true;
+       memo.Visible:=false;
+       sortbtn.Visible:=false;
+       spacebtn.Visible:=false;
+       wrapbox.visible:=false;
+       repainttimer.enabled:=true;
+    end;
   end;
 end;
 
@@ -984,6 +1489,11 @@ begin
     if (referedby=nil) then RcDataModule.ImageDeleteQuery.Transaction.Commit;
   end;
   GoImages;
+end;
+
+procedure TFormImageUpTmpl.DiscardBtnClick(Sender: TObject);
+begin
+   GridPreviewRegion.Visible:=false;
 end;
 
 procedure TFormImageUpTmpl.FormatComboChange(Sender: TObject);
@@ -1014,11 +1524,17 @@ begin
    original.free;
 end;
 
+procedure TFormImageUpTmpl.IWAppFormResize(Sender: TObject);
+begin
+  if view.itemindex>0 then fixgridwidth;
+end;
+
 procedure TFormImageUpTmpl.AdjBtnClick(Sender: TObject);
 var
   bm : TBitmap;
   r : TRect;
   mul : integer;
+  d,k : integer;
 begin
   if assigned(workimg) then begin
      bm:=TBitmap.Create;
@@ -1050,7 +1566,24 @@ begin
 
      workimg.height:=bm.height;
      workimg.width:=bm.width;
-     makegrey (bm,workimg,colcombo.ItemIndex);
+     if colcombo.visible and (colcombo.itemindex<>0) then
+        makegrey (bm,workimg,colcombo.ItemIndex)
+     else begin
+        if borderbox.checked then begin
+          makeanythingbut(bm,$AAAA00);
+          bm.Canvas.Pen.Color:=$AAAA00; //fefefe;
+          bm.Canvas.Pen.Width:=3;
+          bm.Canvas.Brush.Style:=bsclear;
+          d:=max(min(bm.width,bm.height) div 10,10);
+          for k:=0 to d do begin
+             bm.Canvas.RoundRect(1-k,1-k,bm.Width-1+k,bm.Height-1+k,d,d);
+          end;
+        end;
+        workimg.assign(bm);
+     end;
+     if borderbox.checked then begin
+
+     end;
      bm.Free;
      display_work_image;
   end;
@@ -1185,6 +1718,11 @@ begin
 
 end;
 
+procedure TFormImageUpTmpl.repainttimerTimer(Sender: TObject);
+begin
+  repainttimer.enabled:=false;
+end;
+
 procedure TFormImageUpTmpl.MemoAsyncKeyPress(Sender: TObject;
   EventParams: TStringList);
 begin
@@ -1214,6 +1752,21 @@ end;
 procedure TFormImageUpTmpl.SortBtnClick(Sender: TObject);
 begin
   memosort;
+end;
+
+procedure TFormImageUpTmpl.SpacebtnClick(Sender: TObject);
+var
+  i : integer;
+  j: Integer;
+  s : string;
+begin
+  for i:=0 to memo.Lines.count-1 do begin
+     s:=memo.Lines[i];
+     for j := 1 to length(s) do begin
+         if s[j]=' ' then s[j]:=#9
+     end;
+     memo.Lines[i]:=s;
+  end;
 end;
 
 procedure TFormImageUpTmpl.SynBtnClick(Sender: TObject);

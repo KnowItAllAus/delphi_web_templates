@@ -63,7 +63,6 @@ uses
   imagerevformTmpl in 'imagerevformTmpl.pas' {formImageVersionsTmpl: TIWAppForm},
   paramnameform in 'paramnameform.pas' {FormParamnameEdit: TIWAppForm},
   parse_utils in '..\common\parse_utils.pas',
-  grptmplForm in 'grptmplForm.pas' {formGrpTmpl: TIWAppForm},
   paramform in 'paramform.pas' {ParamForm: TIWAppForm},
   textedit in 'textedit.pas' {editform: TIWAppForm},
   textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm},

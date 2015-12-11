@@ -15,8 +15,8 @@ object FormParamnameEdit: TFormParamnameEdit
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 502
-  DesignTop = 146
+  DesignLeft = 8
+  DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
@@ -219,7 +219,7 @@ object FormParamnameEdit: TFormParamnameEdit
       object IWLabel3: TIWLabel
         Left = 48
         Top = 73
-        Width = 40
+        Width = 36
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -276,6 +276,68 @@ object FormParamnameEdit: TFormParamnameEdit
         TabOrder = 4
         OnClick = DelBtnClick
       end
+      object ObjBtn: TIWRadioButton
+        Left = 138
+        Top = 99
+        Width = 186
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Create Object (Image etc)'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Checked = True
+        Group = 'no group'
+        Value = 'ObjBtn'
+        FriendlyName = 'ObjBtn'
+        SubmitOnAsyncEvent = True
+      end
+      object FieldBtn: TIWRadioButton
+        Left = 138
+        Top = 124
+        Width = 186
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Create Field (Date etc)'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Checked = False
+        Group = 'no group'
+        Value = 'FieldBtn'
+        FriendlyName = 'FieldBtn'
+        SubmitOnAsyncEvent = True
+      end
     end
   end
   inline FrameBareTitle1: TFrameBareTitle
@@ -287,37 +349,52 @@ object FormParamnameEdit: TFormParamnameEdit
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 1024
+    ExplicitHeight = 118
     inherited IWFrameRegion: TIWRegion
       Width = 1024
       Height = 118
       TabOrder = 2
+      ExplicitWidth = 1024
+      ExplicitHeight = 118
       inherited titleimage: TIWImageFile
         ImageFile.Filename = 'E:\delphi\delphi_web\files\promotions.GIF'
       end
       inherited IWRectangle1: TIWRectangle
         Top = 93
         Width = 1537
+        ExplicitTop = 93
+        ExplicitWidth = 1537
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
+        Width = 1024
+        ExplicitTop = 98
       end
       inherited IWImageFile3: TIWImageFile
         Left = 689
+        ExplicitLeft = 689
       end
       inherited langlink: TIWSiLink
         Left = 618
+        ExplicitLeft = 618
       end
       inherited Smalltitle: TIWLabel
         Left = 912
         Top = 100
+        ExplicitLeft = 912
+        ExplicitTop = 100
       end
       inherited HideBox: TIWImageFile
         Left = 1007
         Top = 100
+        ExplicitLeft = 1007
+        ExplicitTop = 100
       end
       inherited TitleLabel: TIWLabel
         Width = 387
         Caption = 'distribution'
+        ExplicitWidth = 387
       end
     end
   end
@@ -329,34 +406,45 @@ object FormParamnameEdit: TFormParamnameEdit
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 792
+    ExplicitWidth = 1024
     inherited IWRegion1: TIWRegion
       Width = 1024
       TabOrder = 3
+      ExplicitWidth = 1024
       inherited IWRectangle1: TIWRectangle
         Left = 728
         Width = 297
+        ExplicitLeft = 728
+        ExplicitWidth = 297
       end
       inherited IWRectangle4: TIWRectangle
         Width = 1340
+        ExplicitWidth = 1340
       end
       inherited IWRectangle6: TIWRectangle
         Width = 686
+        ExplicitWidth = 686
       end
       inherited Cancel: TIWButton
         Left = 926
         OnClick = userfooter1CancelClick
+        ExplicitLeft = 926
       end
       inherited Extra1: TIWButton
         Left = 838
+        ExplicitLeft = 838
       end
       inherited Extra2: TIWButton
         Left = 750
         Visible = True
         Caption = 'Save'
         OnClick = userfooter1Extra2Click
+        ExplicitLeft = 750
       end
       inherited fiwSiLink1: TIWSiLink
         Left = 94
+        ExplicitLeft = 94
       end
       inherited navcombo: TIWComboBox
         Visible = False
@@ -364,7 +452,7 @@ object FormParamnameEdit: TFormParamnameEdit
     end
   end
   object silanglinked1: TsiLangLinked
-    Version = '5.3.1.1'
+    Version = '6.5.4.7'
     StringsTypes.Strings = (
       'TIB_STRINGLIST'
       'TSTRINGLIST')
@@ -389,26 +477,51 @@ object FormParamnameEdit: TFormParamnameEdit
       'HotKey')
     Top = 136
     TranslationData = {
-      737443617074696F6E730D0A4A6F624C6162656C01506172616D65746572204E
-      616D65010D0A49574C6162656C33014E616D65010D0A737448696E74730D0A73
-      74446973706C61794C6162656C730D0A7374466F6E74730D0A5475736572666F
-      6F746572014D532053616E73205365726966010D0A73744D756C74694C696E65
-      730D0A4957526567696F6E312E4578747261546167506172616D7301010D0A49
-      5753694C696E6B312E4578747261546167506172616D7301010D0A426F647952
-      6567696F6E2E4578747261546167506172616D7301010D0A495752656374616E
-      676C65322E4578747261546167506172616D7301010D0A495752656374616E67
-      6C65312E4578747261546167506172616D7301010D0A4A6F624C6162656C2E45
-      78747261546167506172616D7301010D0A4E616D65456469742E457874726154
-      6167506172616D7301010D0A49574C6162656C332E4578747261546167506172
-      616D7301010D0A44656C42746E2E4578747261546167506172616D7301010D0A
-      7374537472696E67730D0A44656C6574650144656C6574652074686973207265
-      636F72643F010D0A73744F74686572537472696E67730D0A495753694C696E6B
-      312E436F6E6669726D6174696F6E01010D0A495753694C696E6B312E4C616E67
-      46696C6501706172616D6E616D65656469742E73696C010D0A49575265637461
-      6E676C65322E5465787401010D0A495752656374616E676C65312E5465787401
-      010D0A4E616D65456469742E54657874014E616D6545646974010D0A44656C42
-      746E2E436F6E6669726D6174696F6E01010D0A7374436F6C6C656374696F6E73
-      0D0A737443686172536574730D0A5475736572666F6F7465720144454641554C
-      545F43484152534554010D0A}
+      73007400430061007000740069006F006E0073005F0055006E00690063006F00
+      640065000D000A004A006F0062004C006100620065006C000100500061007200
+      61006D00650074006500720020004E0061006D00650001000D000A0049005700
+      4C006100620065006C00330001004E0061006D00650001000D000A0073007400
+      480069006E00740073005F0055006E00690063006F00640065000D000A007300
+      740044006900730070006C00610079004C006100620065006C0073005F005500
+      6E00690063006F00640065000D000A007300740046006F006E00740073005F00
+      55006E00690063006F00640065000D000A005400750073006500720066006F00
+      6F0074006500720001004D0053002000530061006E0073002000530065007200
+      6900660001000D000A00730074004D0075006C00740069004C0069006E006500
+      73005F0055006E00690063006F00640065000D000A0049005700520065006700
+      69006F006E0031002E0045007800740072006100540061006700500061007200
+      61006D007300010001000D000A0049005700530069004C0069006E006B003100
+      2E004500780074007200610054006100670050006100720061006D0073000100
+      01000D000A0042006F006400790052006500670069006F006E002E0045007800
+      74007200610054006100670050006100720061006D007300010001000D000A00
+      49005700520065006300740061006E0067006C00650032002E00450078007400
+      7200610054006100670050006100720061006D007300010001000D000A004900
+      5700520065006300740061006E0067006C00650031002E004500780074007200
+      610054006100670050006100720061006D007300010001000D000A004A006F00
+      62004C006100620065006C002E00450078007400720061005400610067005000
+      6100720061006D007300010001000D000A004E0061006D006500450064006900
+      74002E004500780074007200610054006100670050006100720061006D007300
+      010001000D000A00490057004C006100620065006C0033002E00450078007400
+      7200610054006100670050006100720061006D007300010001000D000A004400
+      65006C00420074006E002E004500780074007200610054006100670050006100
+      720061006D007300010001000D000A007300740053007400720069006E006700
+      73005F0055006E00690063006F00640065000D000A00440065006C0065007400
+      65000100440065006C0065007400650020007400680069007300200072006500
+      63006F00720064003F0001000D000A00730074004F0074006800650072005300
+      7400720069006E00670073005F0055006E00690063006F00640065000D000A00
+      49005700530069004C0069006E006B0031002E0043006F006E00660069007200
+      6D006100740069006F006E00010001000D000A0049005700530069004C006900
+      6E006B0031002E004C0061006E006700460069006C0065000100700061007200
+      61006D006E0061006D00650065006400690074002E00730069006C0001000D00
+      0A0049005700520065006300740061006E0067006C00650032002E0054006500
+      78007400010001000D000A0049005700520065006300740061006E0067006C00
+      650031002E005400650078007400010001000D000A004E0061006D0065004500
+      6400690074002E00540065007800740001004E0061006D006500450064006900
+      740001000D000A00440065006C00420074006E002E0043006F006E0066006900
+      72006D006100740069006F006E00010001000D000A007300740043006F006C00
+      6C0065006300740069006F006E0073005F0055006E00690063006F0064006500
+      0D000A0073007400430068006100720053006500740073005F0055006E006900
+      63006F00640065000D000A005400750073006500720066006F006F0074006500
+      72000100440045004600410055004C0054005F00430048004100520053004500
+      540001000D000A00}
   end
 end

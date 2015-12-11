@@ -439,7 +439,7 @@ begin
     UpFrm.Memo.Lines.Assign(self.Memo.lines);
     UpFrm.ModeCombo.ItemIndex:=ord(datamode);
     UpFrm.FormatCombo.ItemIndex:=ord(format);
-    if datamode=dmImage then begin
+    if datamode in [dmImage,dmRenderedImage] then begin
       UpFrm.original.Assign(self.Image.Picture.Bitmap);
       UpFrm.workimg:=TBitmap.create;
       UpFrm.workimg.Assign(self.Image.Picture.Bitmap);

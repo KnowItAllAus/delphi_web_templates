@@ -55,6 +55,7 @@ type tag_obj = class
   param : boolean;
   ptype : string;
   paramtype : string;
+  constraint : string;
   s : string;
   width : integer;
   height : integer;
@@ -101,6 +102,8 @@ var
   lasttmpl: string;
   tmplid : integer;
   refjobid : integer;
+  ftype : string;
+  typeerror : boolean;
 begin
   lasttmpl:='';
   for r:=0 to Tmplgrid.RowCount-1 do
@@ -143,14 +146,15 @@ begin
       SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
       SQLQry.Open;
       with TmplGrid do begin
-        ColumnCount:=6;
+        ColumnCount:=7;
         RowCount:=1;
+        Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
         Cell[0, 1].Text := '';
         Cell[0, 2].Text := '';
         Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Type');
         Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Guid');
-        Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
-        Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Note');
+        Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Constraint');
+        Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Note');
         i:=1;
         while not SQLQry.Eof do begin
           if lasttmpl<>SQLQry.FieldByName('ID').AsString then begin
@@ -158,12 +162,13 @@ begin
               with Cell[i, 0] do begin
                 Text := htmlquote(SQLQry.FieldByName('TEMPLATENAME').AsString);
               end;
-              Cell[i, 2].text:='';
               Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.AddParam');
               Cell[i, 1].clickable:=true;
+              Cell[i, 2].text:='';
               Cell[i, 3].text:='';
               Cell[i, 4].text:='';
-              Cell[i, 5].text:=htmlquote(SQLQry.FieldByName('NOTE').AsString);
+              Cell[i, 5].text:='';
+              Cell[i, 6].text:=htmlquote(SQLQry.FieldByName('NOTE').AsString);
               celltag:=tag_obj.create;
               celltag.param:=false;
               celltag.paramtype:=SQLQry.FieldByName('PARAMTYPE').AsString;
@@ -186,17 +191,35 @@ begin
               Cell[i, 2].clickable:=true;
               Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
               Cell[i, 1].clickable:=true;
-              Cell[i, 5].text:='';
+              Cell[i, 5].text:=htmlquote(SQLQry.FieldByName('FIELDCONSTRAINT').AsString);
+              Cell[i, 6].text:='';
               Cell[i, 4].text:=SQLQry.FieldByName('GUID').AsString;
+              ftype:=SQLQry.FieldByName('PARAMTYPE').AsString;
+              typeerror:=false;
+              if ftype<>'' then
+                case strtoparamtype(ftype) of
+                  ft_object, ft_image_blob, ft_text_blob, ft_rendered_image_blob, ft_table_blob :
+                    if SQLQry.FieldByName('PTYPE').AsString='F' then typeerror:=true;
+                else
+                   if SQLQry.FieldByName('PTYPE').AsString='O' then typeerror:=true;
+                end;
+
+              if ftype='' then
+                 ftype:=SiLangLinked1.GetTextOrDefault ('Grid.unlinked');
               if SQLQry.FieldByName('PTYPE').AsString='F' then
-                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')
+                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')+' ('+ftype+')'
                  else
-                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Object');
+                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Object')+' ('+ftype+')';
+
+              if typeerror then
+                 Cell[i,3].text:=Cell[i,3].text+' - Type Error';
+
               celltag:=tag_obj.create;
               celltag.param:=true;
               celltag.ptype:=SQLQry.FieldByName('PTYPE').AsString;
               celltag.paramtype:=SQLQry.FieldByName('PARAMTYPE').AsString;
               celltag.s:=SQLQry.FieldByName('OBJID').AsString;
+              celltag.constraint:=SQLQry.FieldByName('FIELDCONSTRAINT').AsString;
               Cell[i, 0].Tag:=celltag;
               inc (i);
           end;
@@ -222,6 +245,7 @@ begin
       if AColumn=1 then begin
           TIWAppForm(WebApplication.ActiveForm).Release;
           RcDataModule.SaveValue ('edittmpltype',t.paramtype);
+          RcDataModule.SaveValue ('edittmplconstraint',t.constraint);
           if t.ptype='F' then begin
              TformFieldVersionsTmpl.create(WebApplication).show;
           end else begin
@@ -230,6 +254,8 @@ begin
       end else if AColumn=2 then begin
           FPNE:=TFormParamNameEdit.create(WebApplication);
           FPNE.NameEdit.Text:=TmplGrid.Cell[ARow,0].Text;
+          FPNE.ObjBtn.Checked:=t.ptype='O';
+          FPNE.FieldBtn.Checked:=t.ptype='F';
           TIWAppForm(WebApplication.ActiveForm).Release;
           FPNE.show;
       end;

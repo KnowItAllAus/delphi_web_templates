@@ -47,7 +47,7 @@ procedure GotoJob (ID : String; name : string; rev : string; note : string);
 implementation
 
 uses DataMod, ServerController, IWInit, cfgTypes, roleform, Graphics,
-     voucherForm, imagesform, jobrev, edittmplform, IBQuery;
+     voucherForm, imagesform, jobrev, edittmplform, IBQuery, parse_utils;
 
 {$R *.dfm}
 
@@ -344,6 +344,37 @@ begin
    end;
 end;
 
+function findconstraint (fieldname : string; constraint : string) : string;
+var
+  param : string;
+  value : string;
+begin
+  result:='';
+  param:=uppercase(copy (constraint,1,pos('=',constraint)-1));
+  value:=copy (constraint,length(param)+2,999);
+  if param=fieldname then begin
+     result:=dequotedstr(value);
+  end;
+end;
+
+function getdefault (s : string) : string;
+var
+  sl : TStringlist;
+  i : integer;
+begin
+  sl:=TStringlist.Create;
+  result:='';
+  try
+    GetCommaFields(sl, s);
+    for I := 0 to sl.Count-1 do begin
+      result:=findConstraint ('DEFAULT',sl[i]);
+      if result<>'' then exit;
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
 procedure TformJobs.NewTmplInstance (tmplid : string; tmplname : string);
 var
   newinstanceid :  integer;
@@ -352,6 +383,10 @@ var
   kind : string;
   tmplco : string;
   tmplrealid : string;
+  defaultvalue : string;
+  valueid : integer;
+  paramconstraints : string;
+  headerid : string;
 begin
   tmplco:=usersession.company;
   tmplrealid:=tmplid;
@@ -422,19 +457,43 @@ begin
       while not SQLQry.EOF do begin
         SQLEx.SQL.Clear;
         SQLEx.SQL.Add('insert into GROUPOBJHDR (ID,COMPANY,NAME,GUID,GROUPPARAMTMPLID,PARAMTYPE) VALUES (:ID,:COMPANY,:NAME,:GUID,:HDR,:PARAMTYPE)');
-        SQLEx.ParamByName ('ID').AsString:=inttostr(rcdatamodule.nextID);
+        headerid:=inttostr(rcdatamodule.nextID);
+        SQLEx.ParamByName ('ID').AsString:=headerid;
         SQLEx.ParamByName ('HDR').AsInteger:=newinstanceid;
         SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
         SQLEx.ParamByName ('NAME').AsString:=SQLQry.FieldByName('PARAMNAME').AsString;
         if (SQLQry.FieldByName ('PARAMTYPE').AsString='Object') or
            (SQLQry.FieldByName ('PARAMTYPE').AsString='Image') or
+           (SQLQry.FieldByName ('PARAMTYPE').AsString='Rendered Image') or
            (SQLQry.FieldByName ('PARAMTYPE').AsString='Text Block')
-           then
-           SQLEx.ParamByName ('PARAMTYPE').AsString:='O'
-        else
+           then begin
+           SQLEx.ParamByName ('PARAMTYPE').AsString:='O';
+           SQLEx.ParamByName ('GUID').AsString:=RcDataModule.make_guid;
+           SQLEx.ExecQuery;
+        end else begin
            SQLEx.ParamByName ('PARAMTYPE').AsString:='F';
-        SQLEx.ParamByName ('GUID').AsString:=RcDataModule.make_guid;
-        SQLEx.ExecQuery;
+           SQLEx.ExecQuery;
+           paramconstraints:=SQLQry.FieldByName ('FIELDCONSTRAINT').AsString;
+           defaultvalue:=getdefault (paramconstraints);
+           if defaultvalue<>'' then begin
+             valueId:=nextID;
+             SQLEx2.SQL.Clear;
+             SQLEx2.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME,DATAFIELD) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME,:DATAFIELD)');
+             SQLEx2.ParamByName ('ID').AsString:=inttostr(ValueID);
+             SQLEx2.ParamByName ('HDR').AsString:=headerid;
+             SQLEx2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+             SQLEx2.ParamByName ('CREATEDBY').AsString:=UserSession.User;
+             SQLEx2.ParamByName ('CREATEDTIME').AsDateTime:=now;
+             SQLEx2.ParamByName ('DATAFIELD').AsString:=defaultvalue;
+             SQLEx2.ExecQuery;
+             SQLEx2.SQL.Clear;
+             SQLEx2.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+             SQLEx2.ParamByName ('CURRENT').AsString:=inttostr(ValueID);
+             SQLEx2.ParamByName ('ID').AsString:=headerid;
+             SQLEx2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+             SQLEx2.ExecQuery;
+           end;
+        end;
         SQLQry.Next;
       end;
       SQLEx.Transaction.Commit;

@@ -282,8 +282,8 @@ object formJobs: TformJobs
         PasswordPrompt = False
       end
       object JobGrid: TIWGrid
-        Left = 16
-        Top = 40
+        Left = 10
+        Top = 38
         Width = 790
         Height = 169
         Cursor = crAuto

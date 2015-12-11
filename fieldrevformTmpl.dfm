@@ -45,7 +45,9 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       end
       inherited IWRectangle3: TIWRectangle
         Top = 96
+        Width = 1024
         ExplicitTop = 96
+        ExplicitWidth = 1024
       end
       inherited IWImageFile3: TIWImageFile
         Left = 689
@@ -361,7 +363,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         Text = 'NameEdit'
       end
       object NewBtn: TIWButton
-        Left = 448
+        Left = 442
         Top = 57
         Width = 75
         Height = 21
@@ -429,7 +431,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       object IWLabel1: TIWLabel
         Left = 12
         Top = 57
-        Width = 107
+        Width = 101
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -478,13 +480,55 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         BGColor = clNone
         Font.Color = clNone
         Font.Size = 10
-        Font.Style = []
+        Font.Style = [fsBold]
         NoWrap = False
         ConvertSpaces = False
         HasTabOrder = False
         FriendlyName = 'IWLabel1'
         Caption = '??'
         RawText = False
+      end
+      object Options: TIWComboBox
+        Left = 126
+        Top = 56
+        Width = 308
+        Height = 21
+        Cursor = crAuto
+        Visible = False
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- No Selection --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = True
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 6
+        ItemIndex = -1
+        Sorted = False
+        FriendlyName = 'Options'
       end
     end
   end

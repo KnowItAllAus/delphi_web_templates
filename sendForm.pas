@@ -109,6 +109,7 @@ begin
   IWSiLink1.InitForm;
   CompanyLabel.Caption:=UserSession.CompanyName;
   WhenCombo.itemindex:=1;
+  DayCombo.ItemIndex:=0;
 end;
 
 procedure TformSend.IWAppFormDestroy(Sender: TObject);
