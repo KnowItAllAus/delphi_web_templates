@@ -424,7 +424,7 @@ begin
         SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
         SQLQry.ParamByName ('CREATEDBY').AsString:=UserSession.User;
         SQLQry.ParamByName ('CREATEDTIME').AsDateTime:=now;
-        SQLQry.ParamByName ('DATAFIELD').AsString:=ValueEdit.text;
+        SQLQry.ParamByName ('DATAFIELD').AsString:=Val;
         SQLQry.ExecSQL;
         SQLQry.Transaction.Commit;
         SQLQry.Transaction.Active:=false;
