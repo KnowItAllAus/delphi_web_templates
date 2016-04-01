@@ -68,6 +68,7 @@ end;
 
 procedure TformImages.EditHdr (ID : String);
 begin
+  RcDataModule.SaveValue('EditJob','');
   with RcDataModule.CurrentImagehdrQuery do begin
     Close;
     ParamByName ('COMPANY').AsString:=UserSession.Company;
@@ -167,6 +168,7 @@ begin
   RcDataModule.ImageHdrInsertQuery.ParamByName('GUID').AsString:=s;
   RcDataModule.ImageHdrInsertQuery.ParamByName('JOBID').clear;
   RcDataModule.ImageHdrInsertQuery.ExecSQL;
+  //RcDataModule.ImageHdrInsertQuery.Transaction.commit;
   EditHdr (IntToStr(ImageID));
 end;
 

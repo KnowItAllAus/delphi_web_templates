@@ -102,6 +102,8 @@ begin
 end;
 
 procedure TFormImgHdr.IWAppFormCreate(Sender: TObject);
+var
+   job : string;
 begin
    hdrid:=RcDataModule.GetValue('ImageHdrId','');
    if hdrid='0' then begin
@@ -139,18 +141,23 @@ begin
         SetNameBtn.Visible:=false;
      end;
    end;
-   with RcDataModule.SQLQry do begin
-     SQL.Clear;
-     SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID and PARAMTYPE=''Object''');
-     ParamByName ('COMPANY').AsString:=UserSession.Company;
-     ParamByName ('JOBID').AsString:=RcDataModule.GetValue('EditJob','');
-     Open;
-     while not eof do begin
-        ObjectCombo.Items.Add (FieldByName('Paramname').AsString);
-        next;
+   job:=RcDataModule.GetValue('EditJob','');
+   if job<>'' then begin
+     with RcDataModule.SQLQry do begin
+       SQL.Clear;
+       SQL.Add ('select * from JOBPARAMS where COMPANY=:COMPANY and JOBID=:JOBID and PARAMTYPE=''Object''');
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       ParamByName ('JOBID').AsString:=RcDataModule.GetValue('EditJob','');
+       Open;
+       while not eof do begin
+          ObjectCombo.Items.Add (FieldByName('Paramname').AsString);
+          next;
+       end;
+       Close;
+       Transaction.Active:=false;
      end;
-     Close;
-     Transaction.Active:=false;
+   end else begin
+     templatebox.Visible:=false;
    end;
 end;
 

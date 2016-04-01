@@ -47,7 +47,7 @@ procedure GotoJob (ID : String; name : string; rev : string; note : string);
 implementation
 
 uses DataMod, ServerController, IWInit, cfgTypes, roleform, Graphics,
-     voucherForm, imagesform, jobrev, edittmplform, IBQuery, parse_utils;
+     voucherForm, imagesform, jobrev, edittmplform, IBQuery, parse_utils, dialogs;
 
 {$R *.dfm}
 
@@ -77,7 +77,9 @@ procedure TformJobs.RefreshGrid;
 var
   i : integer;
   istemplate : boolean;
+  iq : TIBQuery;
 begin
+  iq:=RcDataModule.JobAllQuery;
   with RcDataModule.JobAllQuery do begin
     Transaction.Active:=False;
     Transaction.Active:=True;
@@ -127,14 +129,14 @@ begin
         end;
         with Cell[i, 6] do begin
           if FieldByName('JOBKIND').AsString='LINK' then begin
-            Text:=SiLink.GetTextOrDefault('Grid.Import')+': '+FieldByName('REFERCONAME').AsString;
+            Text:=htmlquote(SiLink.GetTextOrDefault('Grid.Import')+': '+FieldByName('REFERCONAME').AsString+' ['+FieldByName('REFERJOBNAME').AsString+']');
           end else if FieldByName('JOBKIND').AsString='INSTANCE' then begin
             if fieldbyname ('REFERJOBCO').AsString<>UserSession.Company then begin
-                Text:=SiLink.GetTextOrDefault('Grid.Instance')+
-                  ' : '+FieldByName('REFERJOBNAME').AsString+' - '+FieldByName('REFERCONAME').AsString;;
+                Text:=htmlquote(SiLink.GetTextOrDefault('Grid.Instance')+
+                  ' : '+FieldByName('REFERCONAME').AsString+' ['+FieldByName('REFERJOBNAME').AsString+']');
             end else
-                Text:=SiLink.GetTextOrDefault('Grid.Instance')+
-                  ' : '+FieldByName('REFERJOBNAME').AsString;
+                Text:=htmlquote(SiLink.GetTextOrDefault('Grid.Instance')+
+                  ' : ['+FieldByName('REFERJOBNAME').AsString+']');
           end else
             Text:=SiLink.GetTextOrDefault('Grid.Original');
         end;
