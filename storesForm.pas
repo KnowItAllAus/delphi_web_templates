@@ -161,7 +161,10 @@ begin
             Clickable := true;
           end;
           with Cell[i, 3] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString;
+            if RcDataModule.StoreQuery.FieldByName('FromCo').IsNull then
+               Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString
+            else
+               Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString+' ('+RcDataModule.StoreQuery.FieldByName('FromCo').AsString+')'
           end;
           with Cell[i, 4] do begin
             if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then

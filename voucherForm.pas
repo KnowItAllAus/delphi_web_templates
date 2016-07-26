@@ -107,8 +107,8 @@ begin
   RcDataModule.ImageJobQuery.Open;
   with ImageGrid, RcDataModule.ImageJobQuery do begin
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
-    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Desc');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Type');
+    Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Type');
+    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Desc');
     Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('Grid.GUID');
     Cell[0, 4].Text := '';
     i:=1;
@@ -131,17 +131,18 @@ begin
            else
            text:=s;
       end;
-      with Cell[i, 1] do begin
-        Text := htmlquote(FieldByName('Description').AsString);
-      end;
       with Cell[i, 2] do begin
+        text:=htmlquote(FieldByName('Description').AsString);
+      end;
+      with Cell[i, 1] do begin
+        if FieldByName('refcount').AsString='0' then Font.color:=clYellow;
         try
            if templateobj then
-              Text:='TMPL'
+              Text:='TMPL ('+FieldByName('refcount').AsString+')'
            else if FieldByName('Datamode').IsNull then
-               Text:='- -'
+              Text:='- -'
            else
-               Text:=DataModeNamesAbbr [datamodes(FieldByName('Datamode').AsInteger)];
+              Text:=DataModeNamesAbbr [datamodes(FieldByName('Datamode').AsInteger)]+' ('+FieldByName('refcount').AsString+')';
         except
            Text:='---';
         end;
@@ -285,8 +286,13 @@ begin
       // Alternate Row Colors
       if Font.Color=clRed then begin
         BGColor:=clRed;
+        font.color:=clBlack;
       end else if Font.Color=clWhite then begin
         BGColor:=clWhite;
+        font.color:=clBlack;
+      end else if Font.Color=clYellow then begin
+        BGColor:=clYellow;
+        font.color:=clBlack;
       end else if Odd(ARow) then begin
         BGColor := clLtGray;
       end else begin

@@ -280,6 +280,7 @@ begin
   TUserSession(ASession.Data).pwd:=getrunparam('p',Asession.runparams);
 
   FormIWMain.Log ('Request port : '+inttostr(ASession.Request.ServerPort));
+  FormIWMain.Log ('Request IP : '+ASession.Request.host);
 end;
 
 (*procedure do_time;

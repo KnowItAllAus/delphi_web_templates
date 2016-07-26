@@ -155,10 +155,13 @@ begin
         Text := RcDataModule.PosQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
-        Text := htmlquote(RcDataModule.PosQuery.FieldByName('Name').AsString);
+         if RcDataModule.StoreQuery.FieldByName('FromCo').IsNull then
+            Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString
+         else
+            Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString+' ('+RcDataModule.StoreQuery.FieldByName('FromCo').AsString+')'
       end;
       with Cell[i, 2] do begin
-        Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
+         Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
       end;
       if (UserSession.privilege and PRIV_SUPER)<>0 then begin
         with Cell[i, 3] do begin

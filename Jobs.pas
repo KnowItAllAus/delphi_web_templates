@@ -64,11 +64,14 @@ begin
       Font.Color := clWhite;
     end else begin
       // Alternate Row Colors
-      if Odd(ARow) then begin
+      if font.Color=clGreen then
+        BGColor := clGreen
+      else if Odd(ARow) then begin
         BGColor := clLtGray;
       end else begin
         BGColor := clNone;
       end;
+      Font.Color := clBlack;
     end;
   end;
 end;
@@ -147,6 +150,11 @@ begin
           try
             Text := '';
             if not FieldByName('STATUS').IsNull then Text:=JobStatusNames[jobstates(FieldByName('STATUS').AsInteger)];
+            font.Color:=clBlack;
+            if (FieldByName('TEST_VER').AsString=FieldByName('PROD_VER').AsString) and
+               (FieldByName('JOBKIND').AsString<>'LINK') and
+               (FieldByName('JOBKIND').AsString<>'INSTANCE') then
+                 font.Color:=clGreen;
           except
           end;
         end;

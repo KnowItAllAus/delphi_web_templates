@@ -47,6 +47,7 @@ object FormVoucher: TFormVoucher
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
+        Width = 1028
         ExplicitTop = 98
       end
       inherited IWImageFile3: TIWImageFile
@@ -364,7 +365,7 @@ object FormVoucher: TFormVoucher
       object NoteLabel: TIWLabel
         Left = 48
         Top = 26
-        Width = 31
+        Width = 28
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -756,7 +757,7 @@ object FormVoucher: TFormVoucher
     end
   end
   object silanglinked1: TsiLangLinked
-    Version = '6.5.3.2'
+    Version = '6.5.4.7'
     StringsTypes.Strings = (
       'TIB_STRINGLIST'
       'TSTRINGLIST')
