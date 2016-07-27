@@ -134,15 +134,15 @@ object formJobs: TformJobs
       LangControl = RcDataMod.LangEditControl1
     end
     object BodyRegion: TIWRegion
-      Left = 96
+      Left = 16
       Top = 21
-      Width = 821
+      Width = 985
       Height = 292
       Cursor = crAuto
       HorzScrollBar.Visible = False
       VertScrollBar.Visible = False
       RenderInvisibleControls = False
-      Anchors = [akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 1
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsSolid
@@ -153,12 +153,12 @@ object formJobs: TformJobs
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        821
+        985
         292)
       object IWRectangle2: TIWRectangle
         Left = 1
         Top = 1
-        Width = 819
+        Width = 983
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -183,6 +183,7 @@ object formJobs: TformJobs
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 819
       end
       object IWRectangle1: TIWRectangle
         Left = 1
@@ -245,12 +246,12 @@ object formJobs: TformJobs
         RawText = False
       end
       object NewJobEdit: TIWEdit
-        Left = 152
-        Top = 223
-        Width = 429
+        Left = 10
+        Top = 224
+        Width = 442
         Height = 21
         Cursor = crAuto
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -284,10 +285,10 @@ object formJobs: TformJobs
       object JobGrid: TIWGrid
         Left = 10
         Top = 38
-        Width = 790
+        Width = 959
         Height = 169
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -325,8 +326,8 @@ object formJobs: TformJobs
         ScrollToCurrentRow = False
       end
       object CreateBtn: TIWButton
-        Left = 600
-        Top = 223
+        Left = 470
+        Top = 224
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -355,8 +356,8 @@ object formJobs: TformJobs
         OnClick = CreateBtnClick
       end
       object FindBtn: TIWButton
-        Left = 600
-        Top = 263
+        Left = 409
+        Top = 254
         Width = 105
         Height = 25
         Cursor = crAuto
@@ -385,12 +386,12 @@ object formJobs: TformJobs
         OnClick = FindBtnClick
       end
       object GuidEdit: TIWEdit
-        Left = 256
-        Top = 263
-        Width = 325
+        Left = 113
+        Top = 255
+        Width = 290
         Height = 21
         Cursor = crAuto
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -422,12 +423,12 @@ object formJobs: TformJobs
         PasswordPrompt = False
       end
       object prodbox: TIWComboBox
-        Left = 152
-        Top = 263
-        Width = 98
+        Left = 10
+        Top = 255
+        Width = 97
         Height = 20
         Cursor = crAuto
-        Anchors = [akLeft, akRight, akBottom]
+        Anchors = [akLeft, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
