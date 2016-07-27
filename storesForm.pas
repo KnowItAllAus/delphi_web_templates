@@ -33,13 +33,14 @@ type
       AColumn: Integer);
     procedure InsertBtnClick(Sender: TObject);
     procedure StoreGridCellClick(ASender: TObject;const ARow, AColumn: Integer);
-    procedure RefreshBtnClick(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure AdminFrameTitle1StoreLinkClick(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
+    procedure RefreshBtnAsyncClick(Sender: TObject; EventParams: TStringList);
   private
     { Private declarations }
     IList : TList;
+    procedure PublishClick(Sender: TObject);
   public
     { Public declarations }
     procedure EditStore (ID : String; isnew : boolean);
@@ -52,7 +53,7 @@ var
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, storeForm, credsForm, roleform, cfgtypes, global;
+uses datamod, db, servercontroller, IWInit, storeForm, credsForm, roleform, cfgtypes, global, IWTypes;
 
 {$R *.DFM}
 
@@ -115,7 +116,7 @@ begin
     i:=1;
     RowCount:=1;
     if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-      ColumnCount:=13;
+      ColumnCount:=14;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
       Cell[0, 2].Text := '';
@@ -129,8 +130,9 @@ begin
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('');
     end else begin
-      ColumnCount:=12;
+      ColumnCount:=13;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
       Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
@@ -143,6 +145,7 @@ begin
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('');
     end;
     RcDataModule.Log('Refresh iterate');
     while not RcDataModule.StoreQuery.Eof do begin
@@ -196,6 +199,17 @@ begin
           with Cell[i, 12] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
           end;
+          with Cell[i, 13] do begin
+            Control := TIWButton.Create(Self);
+            with TIWButton(Control) do begin
+              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
+              Width := 80;
+              Height:= 20;
+              Confirmation:='Publish now to '+RcDataModule.StoreQuery.FieldByName('Name').AsString;;
+              onClick:=PublishClick;
+              tag:=RcDataModule.StoreQuery.FieldByName('ID').AsInteger;
+            end;
+          end;
       end else begin
           with Cell[i, 0] do begin
             Clickable := True;
@@ -236,6 +250,17 @@ begin
           end;
           with Cell[i, 11] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
+          end;
+          with Cell[i, 12] do begin
+            Control := TIWButton.Create(Self);
+            with TIWButton(Control) do begin
+              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
+              Width := 80;
+              Height:= 20;
+              Confirmation:='Publish now to '+RcDataModule.StoreQuery.FieldByName('Name').AsString;;
+              onClick:=PublishClick;
+              tag:=RcDataModule.StoreQuery.FieldByName('ID').AsInteger;
+            end;
           end;
       end;
 
@@ -358,9 +383,30 @@ begin
     EditCreds (StoreGrid.Cell[ARow,0].Text,StoreGrid.Cell[ARow,1].Text);
 end;
 
-procedure TformStores.RefreshBtnClick(Sender: TObject);
+procedure TformStores.RefreshBtnAsyncClick(Sender: TObject;
+  EventParams: TStringList);
 begin
   RefreshGrid;
+end;
+
+procedure TformStores.PublishClick(Sender: TObject);
+begin
+    with RcDataModule.RequestUpdateStore do begin
+      try
+        Transaction.Active:=False;
+        Transaction.StartTransaction;
+        ParamByName('BUILDTIME').Clear; // Immediate. Should really be the local time now at site
+        ParamByName('COMPANY').AsString:=UserSession.Company;
+        ParamByName('STOREID').AsInteger:=(Sender as TIWButton).Tag;
+        ExecSQL;
+        Transaction.Commit;
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+        RefreshGrid;
+      except
+        Transaction.Active:=False;
+        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+      end;
+    end;
 end;
 
 procedure TformStores.IWAppFormDestroy(Sender: TObject);

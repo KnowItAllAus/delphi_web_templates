@@ -63,7 +63,7 @@ type
     POSLayout: TIBQuery;
     TranQuery: TIBQuery;
     TranItemQuery: TIBQuery;
-    RequestUpdate: TIBQuery;
+    RequestUpdateStore: TIBQuery;
     DelAllJnlItemQuery: TIBQuery;
     ItemMoveQuery: TIBQuery;
     IntegerField10: TIntegerField;
@@ -182,6 +182,8 @@ type
     PosExUseQuery: TIBQuery;
     sha: TDCP_sha256;
     SQLEx2: TIBSQL;
+    RequestUpdate: TIBQuery;
+    POSTypeQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

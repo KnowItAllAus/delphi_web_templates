@@ -34,7 +34,7 @@ object formSend: TformSend
     inherited IWFrameRegion: TIWRegion
       Width = 1016
       Height = 114
-      TabOrder = 6
+      TabOrder = 2
       ExplicitWidth = 1016
       ExplicitHeight = 114
       inherited IWRectangle1: TIWRectangle
@@ -89,7 +89,6 @@ object formSend: TformSend
     inherited IWRegion1: TIWRegion
       Width = 1016
       Height = 29
-      TabOrder = 4
       ExplicitWidth = 1016
       ExplicitHeight = 29
       inherited Cancel: TIWButton
@@ -136,7 +135,7 @@ object formSend: TformSend
       Left = 249
       Top = 50
       Width = 540
-      Height = 247
+      Height = 279
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop]
@@ -153,7 +152,7 @@ object formSend: TformSend
         Left = 0
         Top = 3
         Width = 3
-        Height = 244
+        Height = 276
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -306,7 +305,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 1
+        TabOrder = 3
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'LiveGroups'
@@ -338,7 +337,7 @@ object formSend: TformSend
         Font.Style = []
         FriendlyName = 'PubBtn'
         ScriptEvents = <>
-        TabOrder = 0
+        TabOrder = 4
         OnClick = AllBtnClick
       end
       object IWSiLink1: TIWSiLink
@@ -367,7 +366,7 @@ object formSend: TformSend
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 5
+        TabOrder = 1
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'publish.sil'
@@ -399,7 +398,7 @@ object formSend: TformSend
         Font.Style = []
         FriendlyName = 'PubBtn'
         ScriptEvents = <>
-        TabOrder = 2
+        TabOrder = 9
         OnClick = TestBtnClick
       end
       object TestGroups: TIWComboBox
@@ -438,7 +437,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 3
+        TabOrder = 8
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'GroupItems'
@@ -479,7 +478,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 7
+        TabOrder = 5
         ItemIndex = 0
         Items.Strings = (
           'Now'
@@ -577,7 +576,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 8
+        TabOrder = 6
         ItemIndex = -1
         Items.Strings = (
           'As time allows'
@@ -616,6 +615,78 @@ object formSend: TformSend
         AutoSize = False
         FriendlyName = 'RequestLabel'
         Caption = 'Day : '
+        RawText = False
+      end
+      object PosTypes: TIWComboBox
+        Left = 55
+        Top = 239
+        Width = 170
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- No Selection --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = True
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 7
+        ItemIndex = -1
+        Sorted = False
+        FriendlyName = 'LiveGroups'
+      end
+      object IWLabel2: TIWLabel
+        Left = 19
+        Top = 239
+        Width = 60
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'RequestLabel'
+        Caption = 'POS :'
         RawText = False
       end
     end

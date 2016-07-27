@@ -258,7 +258,7 @@ object formDistribStatus: TformDistribStatus
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
         TabOrder = 1
-        OnClick = RefreshBtnClick
+        OnAsyncClick = RefreshBtnAsyncClick
       end
       object IWLabel1: TIWLabel
         Left = 56
@@ -462,8 +462,8 @@ object formDistribStatus: TformDistribStatus
         VAlign = vaMiddle
       end
       object advancedbox: TIWCheckBox
-        Left = 720
-        Top = 24
+        Left = 729
+        Top = 25
         Width = 97
         Height = 21
         Cursor = crAuto

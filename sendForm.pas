@@ -30,6 +30,8 @@ type
     WhenLabel: TIWLabel;
     DayCombo: TIWComboBox;
     IWLabel1: TIWLabel;
+    PosTypes: TIWComboBox;
+    IWLabel2: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWAppFormDestroy(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
@@ -39,11 +41,12 @@ type
     { Private declarations }
     TList : TStringList;
     LList : TStringList;
+    PList : TStringList;
     function current_offset (fn : string) : integer;
-    procedure PublishToGroup (g : string; silent : boolean);
-    procedure PublishToAll;
+    procedure PublishToGroup (g : string; silent : boolean; pos : string);
+    procedure PublishToAll(pos : string);
     procedure update_store (company : string; store : integer; publishat : TDateTime);
-    procedure PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer);
+    procedure PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer; pos : string);
   public
     { Public declarations }
   end;
@@ -58,7 +61,7 @@ uses
 
 {$R *.DFM}
 
-procedure TformSend.PublishToGroup (g : string; silent : boolean);
+procedure TformSend.PublishToGroup (g : string; silent : boolean; pos : string);
 begin
     with RcDataModule.RequestUpdateGroupX do begin
       try
@@ -81,6 +84,7 @@ procedure TformSend.IWAppFormCreate(Sender: TObject);
 begin
   TList:=TStringList.Create;
   LList:=TStringList.Create;
+  PList:=TStringList.Create;
   RcDataModule.Trans.Active:=False;
   RcDataModule.Trans.StartTransaction;
   RcDataModule.GroupQuery.Close;
@@ -101,6 +105,19 @@ begin
     end;
     RcDataModule.GroupQuery.Next;
   end;
+  RcDataModule.PosTypeQuery.Close;
+  RcDataModule.PosTypeQuery.ParamByName('COMPANY').AsString:=
+     UserSession.Company;
+  RcDataModule.PosTypeQuery.Open;
+  while not RcDataModule.PosTypeQuery.Eof do begin
+    if RcDataModule.PosTypeQuery.FieldByName('fromco').AsString<>'' then
+       PosTypes.Items.Add (RcDataModule.PosTypeQuery.FieldByName('Name').AsString+' ('+RcDataModule.PosTypeQuery.FieldByName('fromco').AsString+')')
+    else
+       PosTypes.Items.Add (RcDataModule.PosTypeQuery.FieldByName('Name').AsString);
+    PList.Add(RcDataModule.PosTypeQuery.FieldByName('POSID').AsString);
+    RcDataModule.PosTypeQuery.Next;
+  end;
+
   if (UserSession.privilege and PRIV_LIVE)=0 then AllBtn.Enabled:=false;
   LiveGroups.ItemIndex:=0;
   TestGroups.ItemIndex:=0;
@@ -116,6 +133,7 @@ procedure TformSend.IWAppFormDestroy(Sender: TObject);
 begin
    FreeAndNil(LList);
    FreeAndNil(TList);
+   FreeAndNil(PList);
 end;
 
 procedure TformSend.userfooter1CancelClick(Sender: TObject);
@@ -192,7 +210,7 @@ begin
   end;
 end;
 
-procedure TFormSend.PublishToAll;
+procedure TFormSend.PublishToAll(pos : string);
 var
   tzfile : string;
   utcoffset : integer;
@@ -211,12 +229,16 @@ begin
         Transaction.StartTransaction;
         ParamByName('BUILDTIME').Clear; // Immediate. Should really be the local time now at site
         ParamByName('COMPANY').AsString:=UserSession.Company;
+        ParamByName('POSID').AsString:=pos;
+        ParamByName('POSIDX').AsString:=pos;
         ExecSQL;
         Transaction.Commit;
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
       except
-        Transaction.Active:=False;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+        on e: exception do begin
+          WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected')+' '+e.message, smAlert);
+          Transaction.Active:=False;
+        end;
       end;
     end;
     exit;
@@ -228,6 +250,10 @@ begin
        SQL.Add('select storedata.* from STORES join STOREDATA on STOREDATA.ID=STORES.ID');
        SQL.Add('where STORES.COMPANY=:COMPANY');
        SQL.Add('and STOREDATA.ENABLED=1');
+       if pos<>'-1' then begin
+          SQL.Add('and STOREDATA.POSID=:POSID');
+          parambyname('POSID').asstring:=pos;
+       end;
        ParamByName ('COMPANY').AsString:=UserSession.Company;
        Transaction.Active:=false;
        Open;
@@ -274,7 +300,7 @@ begin
   end;
 end;
 
-procedure TFormSend.PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer);
+procedure TFormSend.PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer; pos : string);
 var
   tzfile : string;
   utcoffset : integer;
@@ -292,6 +318,10 @@ begin
        SQL.Add('join STOREDATA on STOREDATA.ID=STOREID');
        SQL.Add('where STOREDATA.COMPANY=:COMPANY');
        SQL.Add('and STOREDATA.ENABLED=1');
+       if pos<>'-1' then begin
+          SQL.Add('and STOREDATA.POSID=:POSID');
+          parambyname('POSID').asstring:=pos;
+       end;
        ParamByName ('COMPANY').AsInteger:=strtoint(UserSession.Company);
        ParamByName ('GROUPID').AsInteger:=strtoint(groupid);
        Transaction.Active:=false;
@@ -343,15 +373,19 @@ end;
 
 
 procedure TformSend.AllBtnClick(Sender: TObject);
+var
+  pos : string;
 begin
+    if postypes.itemindex=-1 then pos:='-1'
+       else pos:=plist[postypes.itemindex];
     if LiveGroups.ItemIndex>0 then begin
       if (Whencombo.Itemindex=0) then begin
-         PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false);
+         PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false,pos);
       end else begin
-         PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60,daycombo.ItemIndex);
+         PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60,daycombo.ItemIndex,pos);
       end;
     end else begin
-      PublishToAll;
+      PublishToAll(pos);
     end;
 end;
 
@@ -360,10 +394,10 @@ var
     i : integer;
 begin
     if TestGroups.ItemIndex>0 then begin
-      PublishToGroup (TList.Strings[TestGroups.ItemIndex],false);
+      PublishToGroup (TList.Strings[TestGroups.ItemIndex],false,'-1');
     end else with RcDataModule.RequestTestUpdqry do begin
       for i:=0 to TList.count-1 do begin
-        PublishToGroup (TList.Strings[i],true);
+        PublishToGroup (TList.Strings[i],true,'-1');
       end;
       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
     end;
