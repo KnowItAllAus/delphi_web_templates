@@ -18,7 +18,7 @@ object FormPOS: TFormPOS
   OnDefaultAction = PostButtonClick
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -273
+  DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
     Top = 115
@@ -72,13 +72,13 @@ object FormPOS: TFormPOS
       LangControl = RcDataMod.LangEditControl1
     end
     object RuleRegn: TIWRegion
-      Left = 121
-      Top = 18
-      Width = 777
-      Height = 627
+      Left = 9
+      Top = 6
+      Width = 1011
+      Height = 649
       Cursor = crAuto
       RenderInvisibleControls = False
-      Anchors = [akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsSolid
@@ -88,12 +88,16 @@ object FormPOS: TFormPOS
       ShowHint = True
       ZIndex = 1000
       Splitter = False
+      DesignSize = (
+        1011
+        649)
       object IWLabel20: TIWLabel
-        Left = 51
-        Top = 521
+        Left = 9
+        Top = 520
         Width = 57
         Height = 16
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -120,8 +124,8 @@ object FormPOS: TFormPOS
         RawText = False
       end
       object IWLabel11: TIWLabel
-        Left = 51
-        Top = 158
+        Left = 9
+        Top = 159
         Width = 57
         Height = 16
         Cursor = crAuto
@@ -151,9 +155,9 @@ object FormPOS: TFormPOS
         RawText = False
       end
       object IWLabel2: TIWLabel
-        Left = 22
+        Left = 9
         Top = 66
-        Width = 89
+        Width = 57
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -178,7 +182,7 @@ object FormPOS: TFormPOS
         HasTabOrder = False
         AutoSize = False
         FriendlyName = 'IWLabel2'
-        Caption = 'Item Format'
+        Caption = 'Items'
         RawText = False
       end
       object IWLabel1: TIWLabel
@@ -352,7 +356,7 @@ object FormPOS: TFormPOS
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 777
+        Width = 1011
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -377,12 +381,13 @@ object FormPOS: TFormPOS
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 777
       end
       object IWRectangle1: TIWRectangle
         Left = 0
         Top = 3
         Width = 3
-        Height = 624
+        Height = 646
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -406,15 +411,17 @@ object FormPOS: TFormPOS
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitHeight = 624
       end
       object IWRegion3: TIWRegion
-        Left = 120
-        Top = 515
-        Width = 609
+        Left = 72
+        Top = 518
+        Width = 879
         Height = 86
         Cursor = crAuto
         RenderInvisibleControls = False
         TabOrder = 0
+        Anchors = [akLeft, akTop, akRight]
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
         BorderOptions.Style = cbsSolid
@@ -424,6 +431,9 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = 1000
         Splitter = False
+        DesignSize = (
+          879
+          86)
         object IWLabel25: TIWLabel
           Left = 10
           Top = 7
@@ -458,9 +468,10 @@ object FormPOS: TFormPOS
         object ScanPatternEdit: TIWEdit
           Left = 123
           Top = 5
-          Width = 470
+          Width = 734
           Height = 20
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -492,11 +503,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel26: TIWLabel
-          Left = 426
-          Top = 33
+          Left = 694
+          Top = 31
           Width = 87
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -523,11 +535,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object ScanOutEdit: TIWEdit
-          Left = 523
+          Left = 787
           Top = 31
           Width = 70
           Height = 20
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -592,9 +605,10 @@ object FormPOS: TFormPOS
         object ActiveWindowEdit: TIWEdit
           Left = 123
           Top = 31
-          Width = 297
+          Width = 574
           Height = 20
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -628,9 +642,10 @@ object FormPOS: TFormPOS
         object OtherWindowEdit: TIWEdit
           Left = 123
           Top = 57
-          Width = 297
+          Width = 574
           Height = 20
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -694,13 +709,14 @@ object FormPOS: TFormPOS
         end
       end
       object IWRegion4: TIWRegion
-        Left = 120
+        Left = 72
         Top = 150
-        Width = 609
+        Width = 879
         Height = 362
         Cursor = crAuto
         RenderInvisibleControls = False
         TabOrder = 8
+        Anchors = [akLeft, akTop, akRight]
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
         BorderOptions.Style = cbsSolid
@@ -710,12 +726,16 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = -1
         Splitter = False
+        DesignSize = (
+          879
+          362)
         object DupEdit: TIWEdit
           Left = 123
           Top = 24
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -811,9 +831,10 @@ object FormPOS: TFormPOS
         object ReqEdit: TIWEdit
           Left = 123
           Top = 48
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -878,9 +899,10 @@ object FormPOS: TFormPOS
         object ExclEdit: TIWEdit
           Left = 123
           Top = 73
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -912,11 +934,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel15: TIWLabel
-          Left = 314
+          Left = 536
           Top = 7
           Width = 111
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -943,11 +966,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object MerchEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 3
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1012,9 +1036,10 @@ object FormPOS: TFormPOS
         object ProdEndEdit: TIWEdit
           Left = 123
           Top = 125
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1048,9 +1073,10 @@ object FormPOS: TFormPOS
         object ProdStartEdit: TIWEdit
           Left = 123
           Top = 99
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1221,11 +1247,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object LogoEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 29
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1257,11 +1284,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel4: TIWLabel
-          Left = 329
+          Left = 551
           Top = 33
           Width = 96
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1288,11 +1316,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object VoucherEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 55
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1324,11 +1353,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel6: TIWLabel
-          Left = 329
+          Left = 551
           Top = 59
           Width = 96
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1388,9 +1418,10 @@ object FormPOS: TFormPOS
         object StartEdit: TIWEdit
           Left = 123
           Top = 182
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1455,9 +1486,10 @@ object FormPOS: TFormPOS
         object EndEdit: TIWEdit
           Left = 123
           Top = 214
-          Width = 171
+          Width = 390
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1489,11 +1521,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel18: TIWLabel
-          Left = 364
+          Left = 586
           Top = 174
           Width = 61
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1520,11 +1553,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object VoidEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 171
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1556,11 +1590,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel19: TIWLabel
-          Left = 338
+          Left = 560
           Top = 226
           Width = 87
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1587,11 +1622,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object CancelEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 222
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1623,11 +1659,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel23: TIWLabel
-          Left = 360
+          Left = 582
           Top = 200
           Width = 97
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1654,11 +1691,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object ExceptEdit: TIWEdit
-          Left = 460
+          Left = 682
           Top = 196
-          Width = 137
+          Width = 182
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1690,11 +1728,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IWLabel24: TIWLabel
-          Left = 490
-          Top = 86
+          Left = 607
+          Top = 83
           Width = 47
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1721,11 +1760,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object OffsetEdit: TIWEdit
-          Left = 438
+          Left = 660
           Top = 80
           Width = 38
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1757,11 +1797,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object EopBox: TIWCheckBox
-          Left = 544
+          Left = 766
           Top = 85
           Width = 57
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1821,9 +1862,10 @@ object FormPOS: TFormPOS
         object SuppressEdit: TIWEdit
           Left = 123
           Top = 244
-          Width = 170
+          Width = 389
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1855,11 +1897,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object TimeoutBtn: TIWRadioButton
-          Left = 424
+          Left = 646
           Top = 104
           Width = 87
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1887,11 +1930,12 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SmartCutBtn: TIWRadioButton
-          Left = 512
+          Left = 734
           Top = 104
           Width = 94
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1952,9 +1996,10 @@ object FormPOS: TFormPOS
         object ExtraEdit: TIWEdit
           Left = 123
           Top = 271
-          Width = 475
+          Width = 742
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -1986,11 +2031,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object NormBtn: TIWRadioButton
-          Left = 344
+          Left = 566
           Top = 104
           Width = 82
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2018,12 +2064,13 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SCTextLbl: TIWLabel
-          Left = 308
+          Left = 530
           Top = 126
           Width = 117
           Height = 16
           Cursor = crAuto
           Visible = False
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2050,12 +2097,13 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object SCTrigEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 122
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
           Visible = False
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2087,12 +2135,13 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object DocLinesLbl: TIWLabel
-          Left = 324
+          Left = 546
           Top = 150
           Width = 101
           Height = 16
           Cursor = crAuto
           Visible = False
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2119,12 +2168,13 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object DocLinesEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 146
           Width = 38
           Height = 22
           Cursor = crAuto
           Visible = False
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2156,12 +2206,13 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object IncBox: TIWCheckBox
-          Left = 488
+          Left = 710
           Top = 151
           Width = 105
           Height = 21
           Cursor = crAuto
           Visible = False
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2188,11 +2239,12 @@ object FormPOS: TFormPOS
           FriendlyName = 'EopBox'
         end
         object CutLbl: TIWLabel
-          Left = 306
+          Left = 528
           Top = 104
           Width = 39
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2252,9 +2304,10 @@ object FormPOS: TFormPOS
         object ParamEdit: TIWEdit
           Left = 123
           Top = 296
-          Width = 475
+          Width = 742
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2286,11 +2339,12 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object TranIDLbl: TIWLabel
-          Left = 338
+          Left = 560
           Top = 251
           Width = 87
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2317,11 +2371,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object TranIDEdit: TIWEdit
-          Left = 427
+          Left = 649
           Top = 247
-          Width = 171
+          Width = 216
           Height = 22
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2417,10 +2472,11 @@ object FormPOS: TFormPOS
         object errataedit: TIWEdit
           Left = 123
           Top = 331
-          Width = 475
+          Width = 742
           Height = 22
           Cursor = crAuto
           Hint = '#n'#39'text'#39' format separated by colons. Use > to replace codes.'
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2485,13 +2541,14 @@ object FormPOS: TFormPOS
         end
       end
       object IWRegion5: TIWRegion
-        Left = 120
-        Top = 55
-        Width = 609
+        Left = 72
+        Top = 57
+        Width = 879
         Height = 90
         Cursor = crAuto
         RenderInvisibleControls = False
         TabOrder = 1
+        Anchors = [akLeft, akTop, akRight]
         BorderOptions.NumericWidth = 1
         BorderOptions.BorderWidth = cbwNumeric
         BorderOptions.Style = cbsSolid
@@ -2501,6 +2558,9 @@ object FormPOS: TFormPOS
         ShowHint = True
         ZIndex = -1
         Splitter = False
+        DesignSize = (
+          879
+          90)
         object IWLabel9: TIWLabel
           Left = 10
           Top = 10
@@ -2535,7 +2595,7 @@ object FormPOS: TFormPOS
         object DecEdit: TIWEdit
           Left = 136
           Top = 4
-          Width = 17
+          Width = 33
           Height = 25
           Cursor = crAuto
           IW50Hint = False
@@ -2571,7 +2631,7 @@ object FormPOS: TFormPOS
           Text = '.'
         end
         object IWLabel10: TIWLabel
-          Left = 168
+          Left = 188
           Top = 10
           Width = 170
           Height = 16
@@ -2602,9 +2662,9 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object ThouEdit: TIWEdit
-          Left = 336
+          Left = 344
           Top = 4
-          Width = 17
+          Width = 32
           Height = 25
           Cursor = crAuto
           IW50Hint = False
@@ -2673,9 +2733,10 @@ object FormPOS: TFormPOS
         object FormEdit: TIWEdit
           Left = 123
           Top = 35
-          Width = 338
+          Width = 607
           Height = 22
           Cursor = crAuto
+          Anchors = [akLeft, akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2707,8 +2768,8 @@ object FormPOS: TFormPOS
           PasswordPrompt = False
         end
         object Signbox: TIWCheckBox
-          Left = 75
-          Top = 59
+          Left = 82
+          Top = 63
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -2738,11 +2799,12 @@ object FormPOS: TFormPOS
           FriendlyName = 'Signbox'
         end
         object IWLabel28: TIWLabel
-          Left = 392
+          Left = 649
           Top = 9
           Width = 81
           Height = 16
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2769,11 +2831,12 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object DetectBtn: TIWRadioButton
-          Left = 472
+          Left = 736
           Top = 9
           Width = 129
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2800,11 +2863,12 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SuppressBtn: TIWRadioButton
-          Left = 472
+          Left = 736
           Top = 31
           Width = 129
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2831,11 +2895,12 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object AssumeBtn: TIWRadioButton
-          Left = 472
+          Left = 736
           Top = 53
           Width = 129
           Height = 21
           Cursor = crAuto
+          Anchors = [akTop, akRight]
           IW50Hint = False
           ParentShowHint = False
           ShowHint = True
@@ -2862,9 +2927,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object DiscCombo: TIWComboBox
-          Left = 352
-          Top = 59
-          Width = 110
+          Left = 351
+          Top = 63
+          Width = 141
           Height = 21
           Cursor = crAuto
           IW50Hint = False
@@ -2907,7 +2972,7 @@ object FormPOS: TFormPOS
         end
         object DiscLabel: TIWLabel
           Left = 224
-          Top = 61
+          Top = 63
           Width = 121
           Height = 16
           Cursor = crAuto
@@ -3029,10 +3094,13 @@ object FormPOS: TFormPOS
         Top = 95
         Width = 1028
         ExplicitTop = 95
+        ExplicitWidth = 1028
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 322
-        ExplicitLeft = 322
+        Left = 708
+        Top = 1
+        ExplicitLeft = 708
+        ExplicitTop = 1
       end
       inherited langlink: TIWSiLink
         Left = 626

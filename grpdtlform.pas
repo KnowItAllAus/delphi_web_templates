@@ -38,8 +38,6 @@ type
     GroupGrid: TIWGrid;
     AddGroupButton: TIWButton;
     GroupCombo: TIWComboBox;
-    IWLabel5: TIWLabel;
-    IWLabel7: TIWLabel;
     DepGrid: TIWGrid;
     IWLabel8: TIWLabel;
     IWLabel10: TIWLabel;

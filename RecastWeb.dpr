@@ -67,7 +67,8 @@ uses
   textedit in 'textedit.pas' {editform: TIWAppForm},
   textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm},
   credsForm in 'credsForm.pas' {formCreds: TIWAppForm},
-  possform in 'possform.pas' {formPoss: TIWAppForm};
+  possform in 'possform.pas' {formPoss: TIWAppForm},
+  storeForm in 'storeForm.pas' {formStore: TIWAppForm};
 
 {$R *.res}
 

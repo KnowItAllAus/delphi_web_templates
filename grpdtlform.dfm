@@ -17,7 +17,7 @@ object FormGrpDtl: TFormGrpDtl
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -70
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -99,13 +99,13 @@ object FormGrpDtl: TFormGrpDtl
       1028
       550)
     object IWRegion2: TIWRegion
-      Left = 60
-      Top = 5
-      Width = 1008
+      Left = 3
+      Top = 6
+      Width = 1021
       Height = 520
       Cursor = crAuto
       RenderInvisibleControls = False
-      Anchors = [akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -116,7 +116,7 @@ object FormGrpDtl: TFormGrpDtl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        1008
+        1021
         520)
       object GrpLabel: TIWLabel
         Left = 14
@@ -151,9 +151,9 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object IWLabel2: TIWLabel
-        Left = 125
+        Left = 120
         Top = 13
-        Width = 49
+        Width = 54
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -367,8 +367,8 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object DelBtn: TIWButton
-        Left = 909
-        Top = 11
+        Left = 406
+        Top = 38
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -397,8 +397,8 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = DelBtnClick
       end
       object IWSiLink1: TIWSiLink
-        Left = 718
-        Top = 13
+        Left = 335
+        Top = 38
         Width = 65
         Height = 17
         Cursor = crAuto
@@ -460,7 +460,7 @@ object FormGrpDtl: TFormGrpDtl
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 1008
+        Width = 1021
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -692,11 +692,12 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = EditBtnClick
       end
       object GroupGrid: TIWGrid
-        Left = 521
+        Left = 523
         Top = 95
-        Width = 424
+        Width = 479
         Height = 124
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -765,9 +766,10 @@ object FormGrpDtl: TFormGrpDtl
       object GroupCombo: TIWComboBox
         Left = 590
         Top = 225
-        Width = 355
+        Width = 412
         Height = 21
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -803,75 +805,13 @@ object FormGrpDtl: TFormGrpDtl
         Sorted = False
         FriendlyName = 'RegionCombo'
       end
-      object IWLabel5: TIWLabel
-        Left = 521
-        Top = 36
-        Width = 409
-        Height = 16
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = [fsBold]
-        NoWrap = False
-        ConvertSpaces = False
-        HasTabOrder = False
-        AutoSize = False
-        FriendlyName = 'IWLabel6'
-        Caption = 'Include Groups (Parent groups)'
-        RawText = False
-      end
-      object IWLabel7: TIWLabel
-        Left = 523
-        Top = 252
-        Width = 409
-        Height = 16
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = [fsBold]
-        NoWrap = False
-        ConvertSpaces = False
-        HasTabOrder = False
-        AutoSize = False
-        FriendlyName = 'IWLabel6'
-        Caption = 'Groups that use this group (child groups)'
-        RawText = False
-      end
       object DepGrid: TIWGrid
-        Left = 523
+        Left = 525
         Top = 315
-        Width = 422
+        Width = 477
         Height = 166
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -911,40 +851,10 @@ object FormGrpDtl: TFormGrpDtl
       object IWLabel8: TIWLabel
         Left = 521
         Top = 46
-        Width = 281
+        Width = 481
         Height = 43
         Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Alignment = taLeftJustify
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        NoWrap = False
-        ConvertSpaces = False
-        HasTabOrder = False
-        AutoSize = False
-        FriendlyName = 'IWLabel6'
-        Caption = 'Stores in this group will get jobs and updates from these groups'
-        RawText = False
-      end
-      object IWLabel10: TIWLabel
-        Left = 523
-        Top = 270
-        Width = 296
-        Height = 39
-        Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -968,8 +878,42 @@ object FormGrpDtl: TFormGrpDtl
         AutoSize = False
         FriendlyName = 'IWLabel6'
         Caption = 
-          'Stores in these groups will get jobs and updates from both this ' +
-          'group and any groups included above'
+          'Parent Groups - Stores in this group will get jobs and updates f' +
+          'rom these groups'
+        RawText = False
+      end
+      object IWLabel10: TIWLabel
+        Left = 523
+        Top = 270
+        Width = 479
+        Height = 39
+        Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'IWLabel6'
+        Caption = 
+          'Child Groups - Stores in these groups will get jobs and updates ' +
+          'from both this group and any groups included above'
         RawText = False
       end
       object AddChildButton: TIWButton
@@ -1005,10 +949,10 @@ object FormGrpDtl: TFormGrpDtl
       object ChildCombo: TIWComboBox
         Left = 590
         Top = 487
-        Width = 355
+        Width = 412
         Height = 21
         Cursor = crAuto
-        Anchors = [akLeft, akBottom]
+        Anchors = [akLeft, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1045,9 +989,9 @@ object FormGrpDtl: TFormGrpDtl
         FriendlyName = 'RegionCombo'
       end
       object IWLabel12: TIWLabel
-        Left = 96
-        Top = 36
-        Width = 76
+        Left = 88
+        Top = 35
+        Width = 86
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1078,7 +1022,7 @@ object FormGrpDtl: TFormGrpDtl
       object GroupEdit: TIWEdit
         Left = 180
         Top = 36
-        Width = 91
+        Width = 133
         Height = 21
         Cursor = crAuto
         IW50Hint = False

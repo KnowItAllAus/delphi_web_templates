@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -117
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -125,7 +125,7 @@ object formStore: TformStore
       object NewNameEdit: TIWEdit
         Left = 136
         Top = 27
-        Width = 205
+        Width = 257
         Height = 23
         Cursor = crAuto
         IW50Hint = False
@@ -261,7 +261,7 @@ object formStore: TformStore
       object PrinterCombo: TIWComboBox
         Left = 136
         Top = 81
-        Width = 209
+        Width = 257
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -305,7 +305,7 @@ object formStore: TformStore
       object PromoCombo: TIWComboBox
         Left = 136
         Top = 109
-        Width = 209
+        Width = 257
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -1508,7 +1508,7 @@ object formStore: TformStore
       object AuxPromoCombo: TIWComboBox
         Left = 156
         Top = 164
-        Width = 209
+        Width = 248
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -1552,7 +1552,7 @@ object formStore: TformStore
       object AuxPrinterCombo: TIWComboBox
         Left = 156
         Top = 136
-        Width = 209
+        Width = 248
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -1965,12 +1965,6 @@ object formStore: TformStore
       inherited IWRectangle6: TIWRectangle
         Width = 431
         ExplicitWidth = 431
-      end
-      inherited UserLabel: TIWLabel
-        Width = 68
-        Height = 26
-        ExplicitWidth = 68
-        ExplicitHeight = 26
       end
       inherited Cancel: TIWButton
         Left = 763
