@@ -341,10 +341,32 @@ begin
 end;
 
 procedure TFormPOS.PostButtonClick(Sender: TObject);
+var
+  pname : string;
+  id : integer;
+  co : string;
 begin
   try
     if not postdata then exit;
+    id:=RcDataModule.posUpdateQuery.ParamByName('ID').asinteger;
+    pname:='['+NewNameEdit.text+']';
     RcDataModule.posUpdateQuery.Transaction.Commit;
+    try
+        with RcDataModule do begin
+          SQLEx.SQL.Clear;
+          SQLEx.Transaction.Active:=false;
+          SQLEx.Transaction.Active:=true;
+          co:=UserSession.Company;
+          SQLEx.SQL.Add('update POS set name=:NAME where REFPOSID=:ID and REFCOMPANY=:COMPANY');
+          SQLEx.ParamByName ('ID').AsInteger:=id;
+          SQLEx.ParamByName ('NAME').AsString:=pname;
+          SQLEx.ParamByName ('COMPANY').AsString:=co;
+          SQLEx.ExecQuery;
+          SQLEx.Transaction.commit;
+        end;
+    except
+    end;
+
     GoPos;
   except
     WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));

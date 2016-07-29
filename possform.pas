@@ -33,6 +33,8 @@ type
     { Private declarations }
     procedure EditPos (ID : String);
     procedure ExPos (ID : String; aname : string);
+    procedure DeleteClick(Sender: TObject);
+    procedure DrawGrid;
   public
     { Public declarations }
   end;
@@ -57,6 +59,23 @@ begin
     TIWAppForm(WebApplication.ActiveForm).Release;
     TFormPos.Create (WebApplication).show;
   end;
+end;
+
+procedure TformPoss.DeleteClick(Sender: TObject);
+begin
+    with RcDataModule.PosDeleteQuery do begin
+      try
+        Transaction.Active:=False;
+        Transaction.StartTransaction;
+        ParamByName('COMPANY').AsString:=UserSession.Company;
+        ParamByName('ID').AsInteger:=(Sender as TIWButton).tag;
+        ExecSQL;
+        Transaction.Commit;
+        DrawGrid;
+      except
+        Transaction.Active:=False;
+      end;
+    end;
 end;
 
 procedure TformPoss.ExPos (ID : String; aname : string);
@@ -126,10 +145,17 @@ begin
 end;
 
 procedure TformPoss.IWAppFormCreate(Sender: TObject);
-var
-  i : integer;
 begin
   IWSilink1.InitForm;
+  DrawGrid;
+end;
+
+procedure TformPoss.DrawGrid;
+var
+  i : integer;
+  imported,super : boolean;
+  layoutcol : integer;
+begin
   RcDataModule.PosQuery.Close;
   RcDataModule.PosQuery.ParamByName('COMPANY').AsString:=
      UserSession.Company;
@@ -141,17 +167,25 @@ begin
   with PosGrid do begin
     Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault('Grid.Id');
     Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault('Grid.Name');
-    Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Layout');
     if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('');
+      Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('');
+      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault('Grid.Layout');
+    end else begin
+      Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault('Grid.Layout');
     end;
     i:=1;
     RowCount:=1;
+    super:=(UserSession.privilege and PRIV_SUPER)<>0;
+    layoutcol:=2;
+    if super then layoutcol:=3;
+
     while not RcDataModule.PosQuery.Eof do begin
       RowCount:=RowCount+1;
+      imported:=(RcDataModule.PosQuery.FieldByName('REFPOSID').AsString<>'');
       with Cell[i, 0] do begin
-        if (RcDataModule.PosQuery.FieldByName('REFPOSID').AsString='') then
-           Clickable := True;
+        if not imported then begin
+          Clickable := True;
+        end;
         Text := RcDataModule.PosQuery.FieldByName('ID').AsString;
       end;
       with Cell[i, 1] do begin
@@ -160,13 +194,25 @@ begin
          else
             Text := RcDataModule.PosQuery.FieldByName('Name').AsString+' ('+RcDataModule.PosQuery.FieldByName('FromCo').AsString+')'
       end;
-      with Cell[i, 2] do begin
-         Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
-      end;
       if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-        with Cell[i, 3] do begin
+        with Cell[i, 2] do begin
           Clickable := True;
           Text := SiLangLinked1.GetTextOrDefault('Grid.Export');
+        end;
+      end;
+      with Cell[i, layoutcol] do begin
+        if (RcDataModule.PosQuery.FieldByName('REFPOSID').AsString='') then begin
+          Text := htmlquote(RcDataModule.PosQuery.FieldByName('ProdLayout').AsString);
+        end else begin
+          Control := TIWButton.Create(Self);
+          with TIWButton(Control) do begin
+            Caption := 'Delete';
+            Width := 80;
+            Height:= 20;
+            Confirmation:='Delete '+RcDataModule.PosQuery.FieldByName('Name').AsString+'?';
+            onClick:=DeleteClick;
+            tag:=RcDataModule.POSQuery.FieldByName('ID').AsInteger;
+          end;
         end;
       end;
       inc (i);

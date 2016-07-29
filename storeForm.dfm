@@ -40,13 +40,13 @@ object formStore: TformStore
       849
       601)
     object IWRegion2: TIWRegion
-      Left = 67
+      Left = 9
       Top = 21
-      Width = 716
+      Width = 824
       Height = 566
       Cursor = crAuto
       RenderInvisibleControls = False
-      Anchors = [akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsSolid
@@ -57,7 +57,7 @@ object formStore: TformStore
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        716
+        824
         566)
       object StoreLabel: TIWLabel
         Left = 8
@@ -858,10 +858,10 @@ object formStore: TformStore
       object PrinterGrid: TIWGrid
         Left = 104
         Top = 395
-        Width = 577
+        Width = 685
         Height = 168
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -897,6 +897,7 @@ object formStore: TformStore
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitWidth = 577
       end
       object setupcombo: TIWComboBox
         Left = 136
@@ -973,9 +974,10 @@ object formStore: TformStore
       object GrpGrid: TIWGrid
         Left = 416
         Top = 87
-        Width = 265
+        Width = 373
         Height = 171
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1011,13 +1013,15 @@ object formStore: TformStore
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitWidth = 265
       end
       object GroupCombo: TIWComboBox
         Left = 416
         Top = 61
-        Width = 265
+        Width = 373
         Height = 21
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1054,6 +1058,7 @@ object formStore: TformStore
           'All')
         Sorted = False
         FriendlyName = 'RegionCombo'
+        ExplicitWidth = 265
       end
       object IWLabel3: TIWLabel
         Left = 416
@@ -1087,11 +1092,12 @@ object formStore: TformStore
         RawText = False
       end
       object AddGrpBtn: TIWButton
-        Left = 616
+        Left = 724
         Top = 32
         Width = 61
         Height = 25
         Cursor = crAuto
+        Anchors = [akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1114,6 +1120,7 @@ object formStore: TformStore
         ScriptEvents = <>
         TabOrder = 17
         OnClick = AddGrpBtnClick
+        ExplicitLeft = 616
       end
       object IWSiLink1: TIWSiLink
         Left = 253
@@ -1179,7 +1186,7 @@ object formStore: TformStore
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 716
+        Width = 824
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -1204,6 +1211,7 @@ object formStore: TformStore
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 716
       end
       object LogEdit: TIWEdit
         Left = 296
@@ -1404,9 +1412,10 @@ object formStore: TformStore
       object ParamEdit: TIWEdit
         Left = 136
         Top = 315
-        Width = 545
+        Width = 653
         Height = 23
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1436,6 +1445,7 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 14
         PasswordPrompt = False
+        ExplicitWidth = 545
       end
       object IWLabel18: TIWLabel
         Left = 22
@@ -1471,10 +1481,11 @@ object formStore: TformStore
       object ErrataEdit: TIWEdit
         Left = 136
         Top = 340
-        Width = 545
+        Width = 653
         Height = 23
         Cursor = crAuto
         Hint = '#n'#39'text'#39' format separated by colons. Use > to replace codes.'
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1504,6 +1515,7 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 15
         PasswordPrompt = False
+        ExplicitWidth = 545
       end
       object AuxPromoCombo: TIWComboBox
         Left = 156
@@ -1781,9 +1793,10 @@ object formStore: TformStore
       object SerialEdit: TIWEdit
         Left = 504
         Top = 290
-        Width = 177
+        Width = 285
         Height = 23
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1813,6 +1826,7 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 13
         PasswordPrompt = False
+        ExplicitWidth = 177
       end
       object IWLabel22: TIWLabel
         Left = 416
@@ -1848,9 +1862,10 @@ object formStore: TformStore
       object PhoneEdit: TIWEdit
         Left = 504
         Top = 264
-        Width = 177
+        Width = 285
         Height = 23
         Cursor = crAuto
+        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1880,6 +1895,7 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 26
         PasswordPrompt = False
+        ExplicitWidth = 177
       end
     end
   end

@@ -33,6 +33,7 @@ type
     procedure IWAppFormCreate(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure ExportBtnClick(Sender: TObject);
+    //procedure refreshbtnClick(Sender: TObject);
   private
     { Private declarations }
     posid : Integer;
@@ -58,39 +59,41 @@ var
   stores,refs : integer;
 begin
   RcDataModule.Trans.Active:=False;
-  try
-    with RcDataModule do begin
-      SQLQry.SQL.Clear;
-      SQLQry.Transaction.Active:=false;
-      SQLQry.Transaction.Active:=true;
-      SQLQry.SQL.Add('select * from P_POS_USAGE (:posid)');
-      SQLQry.ParamByName ('POSID').AsInteger:=integer(posgrid.Cell[ARow, 0].tag);
-      SQLQry.Open;
-      refs:=SQLQRY.FieldByName('TOTALREFS').AsInteger;
-      stores:=SQLQRY.FieldByName('TOTALSTORES').AsInteger;
+  if aColumn=1 then begin
+    try
+      with RcDataModule do begin
+        SQLQry.SQL.Clear;
+        SQLQry.Transaction.Active:=false;
+        SQLQry.Transaction.Active:=true;
+        SQLQry.SQL.Add('select * from P_POS_USAGE (:posid)');
+        SQLQry.ParamByName ('POSID').AsInteger:=integer(posgrid.Cell[ARow, 0].tag);
+        SQLQry.Open;
+        refs:=SQLQRY.FieldByName('TOTALREFS').AsInteger;
+        stores:=SQLQRY.FieldByName('TOTALSTORES').AsInteger;
+      end;
+    except
     end;
-  except
-  end;
 
-  RcDataModule.Trans.Active:=False;
-  if stores+refs>0 then begin
-     WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('deleteinuse')+inttostr(stores+refs), smAlert);
-     exit;
-  end;
-
-  try
-    with RcDataModule do begin
-      SQLEx.SQL.Clear;
-      SQLEx.Transaction.Active:=false;
-      SQLEx.Transaction.Active:=true;
-      SQLEx.SQL.Add('delete from POS where ID=:ID');
-      SQLEx.ParamByName ('ID').AsInteger:=integer(posgrid.Cell[ARow, 0].tag);
-      SQLEx.ExecQuery;
-      SQLEx.Transaction.commit;
+    RcDataModule.Trans.Active:=False;
+    if stores+refs>0 then begin
+       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('deleteinuse')+inttostr(stores+refs), smAlert);
+       exit;
     end;
-  except
+
+    try
+      with RcDataModule do begin
+        SQLEx.SQL.Clear;
+        SQLEx.Transaction.Active:=false;
+        SQLEx.Transaction.Active:=true;
+        SQLEx.SQL.Add('delete from POS where ID=:ID');
+        SQLEx.ParamByName ('ID').AsInteger:=integer(posgrid.Cell[ARow, 0].tag);
+        SQLEx.ExecQuery;
+        SQLEx.Transaction.commit;
+      end;
+    except
+    end;
+    DrawGrid;
   end;
-  DrawGrid;
 end;
 
 procedure TformPosEx.ExportBtnClick(Sender: TObject);
@@ -218,6 +221,34 @@ begin
   IWSilink1.InitForm;
   CoList:=TStringlist.Create;
 end;
+
+(*procedure TformPosEx.refreshbtnClick(Sender: TObject);
+var
+  pname : string;
+  arow : integer;
+  co : string;
+  t : integer;
+begin
+  for arow:=1 to posgrid.rowcount-1 do begin
+    try
+        pname:='['+posnamelbl.caption+']';
+        with RcDataModule do begin
+          SQLEx.SQL.Clear;
+          SQLEx.Transaction.Active:=false;
+          SQLEx.Transaction.Active:=true;
+          co:=UserSession.Company;
+          t:=integer(posgrid.Cell[ARow, 0].tag);
+          SQLEx.SQL.Add('update POS set name=:NAME where ID=:ID and REFCOMPANY=:COMPANY');
+          SQLEx.ParamByName ('ID').AsInteger:=t;
+          SQLEx.ParamByName ('NAME').AsString:=pname;
+          SQLEx.ParamByName ('COMPANY').AsString:=co;
+          SQLEx.ExecQuery;
+          SQLEx.Transaction.commit;
+        end;
+    except
+    end;
+  end;
+end;*)
 
 procedure TformPosEx.userfooter1CancelClick(Sender: TObject);
 begin
