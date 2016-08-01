@@ -218,9 +218,9 @@ object FormPOS: TFormPOS
       end
       object NewNameEdit: TIWEdit
         Left = 120
-        Top = 31
+        Top = 29
         Width = 225
-        Height = 20
+        Height = 23
         Cursor = crAuto
         IW50Hint = False
         ParentShowHint = False
@@ -711,7 +711,7 @@ object FormPOS: TFormPOS
       object IWRegion4: TIWRegion
         Left = 72
         Top = 150
-        Width = 879
+        Width = 927
         Height = 362
         Cursor = crAuto
         RenderInvisibleControls = False
@@ -727,12 +727,12 @@ object FormPOS: TFormPOS
         ZIndex = -1
         Splitter = False
         DesignSize = (
-          879
+          927
           362)
         object DupEdit: TIWEdit
           Left = 123
           Top = 24
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -765,6 +765,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 13
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel12: TIWLabel
           Left = 10
@@ -831,7 +832,7 @@ object FormPOS: TFormPOS
         object ReqEdit: TIWEdit
           Left = 123
           Top = 48
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -864,6 +865,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 14
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel14: TIWLabel
           Left = 10
@@ -899,7 +901,7 @@ object FormPOS: TFormPOS
         object ExclEdit: TIWEdit
           Left = 123
           Top = 73
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -932,9 +934,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 15
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel15: TIWLabel
-          Left = 536
+          Left = 584
           Top = 7
           Width = 111
           Height = 16
@@ -964,9 +967,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel15'
           Caption = 'Merchant copy'
           RawText = False
+          ExplicitLeft = 536
         end
         object MerchEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 3
           Width = 216
           Height = 22
@@ -1001,6 +1005,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 23
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IWLabel16: TIWLabel
           Left = 82
@@ -1036,7 +1041,7 @@ object FormPOS: TFormPOS
         object ProdEndEdit: TIWEdit
           Left = 123
           Top = 125
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -1069,11 +1074,12 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 17
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object ProdStartEdit: TIWEdit
           Left = 123
           Top = 99
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -1106,6 +1112,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 16
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel17: TIWLabel
           Left = 10
@@ -1247,7 +1254,7 @@ object FormPOS: TFormPOS
           RawText = False
         end
         object LogoEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 29
           Width = 216
           Height = 22
@@ -1282,9 +1289,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 24
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IWLabel4: TIWLabel
-          Left = 551
+          Left = 599
           Top = 33
           Width = 96
           Height = 16
@@ -1314,9 +1322,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel15'
           Caption = 'Logo Point'
           RawText = False
+          ExplicitLeft = 551
         end
         object VoucherEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 55
           Width = 216
           Height = 22
@@ -1351,9 +1360,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 25
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IWLabel6: TIWLabel
-          Left = 551
+          Left = 599
           Top = 59
           Width = 96
           Height = 16
@@ -1383,6 +1393,7 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel15'
           Caption = 'Voucher Point'
           RawText = False
+          ExplicitLeft = 551
         end
         object IWLabel7: TIWLabel
           Left = 18
@@ -1418,7 +1429,7 @@ object FormPOS: TFormPOS
         object StartEdit: TIWEdit
           Left = 123
           Top = 182
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -1451,6 +1462,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 19
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel8: TIWLabel
           Left = 10
@@ -1486,7 +1498,7 @@ object FormPOS: TFormPOS
         object EndEdit: TIWEdit
           Left = 123
           Top = 214
-          Width = 390
+          Width = 438
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -1519,9 +1531,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 20
           PasswordPrompt = False
+          ExplicitWidth = 390
         end
         object IWLabel18: TIWLabel
-          Left = 586
+          Left = 634
           Top = 174
           Width = 61
           Height = 16
@@ -1551,9 +1564,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = 'Void'
           RawText = False
+          ExplicitLeft = 586
         end
         object VoidEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 171
           Width = 216
           Height = 22
@@ -1588,9 +1602,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 31
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IWLabel19: TIWLabel
-          Left = 560
+          Left = 608
           Top = 226
           Width = 87
           Height = 16
@@ -1620,9 +1635,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = 'Cancel'
           RawText = False
+          ExplicitLeft = 560
         end
         object CancelEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 222
           Width = 216
           Height = 22
@@ -1657,9 +1673,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 33
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IWLabel23: TIWLabel
-          Left = 582
+          Left = 630
           Top = 200
           Width = 97
           Height = 16
@@ -1689,9 +1706,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = 'Except when '
           RawText = False
+          ExplicitLeft = 582
         end
         object ExceptEdit: TIWEdit
-          Left = 682
+          Left = 730
           Top = 196
           Width = 182
           Height = 22
@@ -1726,9 +1744,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 32
           PasswordPrompt = False
+          ExplicitLeft = 682
         end
         object IWLabel24: TIWLabel
-          Left = 607
+          Left = 655
           Top = 83
           Width = 47
           Height = 16
@@ -1758,9 +1777,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel15'
           Caption = 'Offset'
           RawText = False
+          ExplicitLeft = 607
         end
         object OffsetEdit: TIWEdit
-          Left = 660
+          Left = 708
           Top = 80
           Width = 38
           Height = 22
@@ -1795,11 +1815,12 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 26
           PasswordPrompt = False
+          ExplicitLeft = 660
         end
         object EopBox: TIWCheckBox
-          Left = 766
+          Left = 814
           Top = 85
-          Width = 57
+          Width = 75
           Height = 21
           Cursor = crAuto
           Anchors = [akTop, akRight]
@@ -1827,6 +1848,7 @@ object FormPOS: TFormPOS
           TabOrder = 27
           Checked = False
           FriendlyName = 'EopBox'
+          ExplicitLeft = 766
         end
         object IWLabel32: TIWLabel
           Left = 10
@@ -1862,7 +1884,7 @@ object FormPOS: TFormPOS
         object SuppressEdit: TIWEdit
           Left = 123
           Top = 244
-          Width = 389
+          Width = 437
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -1895,9 +1917,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 21
           PasswordPrompt = False
+          ExplicitWidth = 389
         end
         object TimeoutBtn: TIWRadioButton
-          Left = 646
+          Left = 694
           Top = 104
           Width = 87
           Height = 21
@@ -1928,11 +1951,12 @@ object FormPOS: TFormPOS
           Value = 'TimeoutBtn'
           FriendlyName = 'TimeoutBtn'
           SubmitOnAsyncEvent = True
+          ExplicitLeft = 646
         end
         object SmartCutBtn: TIWRadioButton
-          Left = 734
+          Left = 782
           Top = 104
-          Width = 94
+          Width = 123
           Height = 21
           Cursor = crAuto
           Anchors = [akTop, akRight]
@@ -1961,6 +1985,7 @@ object FormPOS: TFormPOS
           Value = 'SmartCutBtn'
           FriendlyName = 'Smart Cut'
           SubmitOnAsyncEvent = True
+          ExplicitLeft = 734
         end
         object Extralabel: TIWLabel
           Left = 18
@@ -1996,7 +2021,7 @@ object FormPOS: TFormPOS
         object ExtraEdit: TIWEdit
           Left = 123
           Top = 271
-          Width = 742
+          Width = 790
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -2029,9 +2054,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 22
           PasswordPrompt = False
+          ExplicitWidth = 742
         end
         object NormBtn: TIWRadioButton
-          Left = 566
+          Left = 614
           Top = 104
           Width = 82
           Height = 21
@@ -2062,9 +2088,10 @@ object FormPOS: TFormPOS
           Value = 'NormBtn'
           FriendlyName = 'NormBtn'
           SubmitOnAsyncEvent = True
+          ExplicitLeft = 566
         end
         object SCTextLbl: TIWLabel
-          Left = 530
+          Left = 578
           Top = 126
           Width = 117
           Height = 16
@@ -2095,9 +2122,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = #39'Smart Cut Text'#39
           RawText = False
+          ExplicitLeft = 530
         end
         object SCTrigEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 122
           Width = 216
           Height = 22
@@ -2133,9 +2161,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 28
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object DocLinesLbl: TIWLabel
-          Left = 546
+          Left = 594
           Top = 150
           Width = 101
           Height = 16
@@ -2166,9 +2195,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel15'
           Caption = 'Min doc lines'
           RawText = False
+          ExplicitLeft = 546
         end
         object DocLinesEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 146
           Width = 38
           Height = 22
@@ -2204,9 +2234,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 29
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object IncBox: TIWCheckBox
-          Left = 710
+          Left = 758
           Top = 151
           Width = 105
           Height = 21
@@ -2237,9 +2268,10 @@ object FormPOS: TFormPOS
           TabOrder = 30
           Checked = False
           FriendlyName = 'EopBox'
+          ExplicitLeft = 710
         end
         object CutLbl: TIWLabel
-          Left = 528
+          Left = 576
           Top = 104
           Width = 39
           Height = 16
@@ -2269,6 +2301,7 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = 'Cut'
           RawText = False
+          ExplicitLeft = 528
         end
         object IWLabel27: TIWLabel
           Left = 18
@@ -2304,7 +2337,7 @@ object FormPOS: TFormPOS
         object ParamEdit: TIWEdit
           Left = 123
           Top = 296
-          Width = 742
+          Width = 790
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -2337,9 +2370,10 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 42
           PasswordPrompt = False
+          ExplicitWidth = 742
         end
         object TranIDLbl: TIWLabel
-          Left = 560
+          Left = 608
           Top = 251
           Width = 87
           Height = 16
@@ -2369,9 +2403,10 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel14'
           Caption = 'Tran ID'
           RawText = False
+          ExplicitLeft = 560
         end
         object TranIDEdit: TIWEdit
-          Left = 649
+          Left = 697
           Top = 247
           Width = 216
           Height = 22
@@ -2406,6 +2441,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 43
           PasswordPrompt = False
+          ExplicitLeft = 649
         end
         object ExclKeepAsynchBox: TIWCheckBox
           Left = 188
@@ -2472,7 +2508,7 @@ object FormPOS: TFormPOS
         object errataedit: TIWEdit
           Left = 123
           Top = 331
-          Width = 742
+          Width = 790
           Height = 22
           Cursor = crAuto
           Hint = '#n'#39'text'#39' format separated by colons. Use > to replace codes.'
@@ -2506,6 +2542,7 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
           TabOrder = 34
           PasswordPrompt = False
+          ExplicitWidth = 742
         end
         object PreserveBox: TIWCheckBox
           Left = 24
@@ -2543,7 +2580,7 @@ object FormPOS: TFormPOS
       object IWRegion5: TIWRegion
         Left = 72
         Top = 57
-        Width = 879
+        Width = 927
         Height = 90
         Cursor = crAuto
         RenderInvisibleControls = False
@@ -2559,7 +2596,7 @@ object FormPOS: TFormPOS
         ZIndex = -1
         Splitter = False
         DesignSize = (
-          879
+          927
           90)
         object IWLabel9: TIWLabel
           Left = 10
@@ -2701,7 +2738,7 @@ object FormPOS: TFormPOS
         end
         object IWLabel3: TIWLabel
           Left = 10
-          Top = 39
+          Top = 37
           Width = 111
           Height = 16
           Cursor = crAuto
@@ -2732,8 +2769,8 @@ object FormPOS: TFormPOS
         end
         object FormEdit: TIWEdit
           Left = 123
-          Top = 35
-          Width = 607
+          Top = 33
+          Width = 640
           Height = 22
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight]
@@ -2769,7 +2806,7 @@ object FormPOS: TFormPOS
         end
         object Signbox: TIWCheckBox
           Left = 82
-          Top = 63
+          Top = 62
           Width = 121
           Height = 21
           Cursor = crAuto
@@ -2799,7 +2836,7 @@ object FormPOS: TFormPOS
           FriendlyName = 'Signbox'
         end
         object IWLabel28: TIWLabel
-          Left = 649
+          Left = 697
           Top = 9
           Width = 81
           Height = 16
@@ -2829,11 +2866,12 @@ object FormPOS: TFormPOS
           FriendlyName = 'IWLabel28'
           Caption = 'First Copy'
           RawText = False
+          ExplicitLeft = 649
         end
         object DetectBtn: TIWRadioButton
-          Left = 736
-          Top = 9
-          Width = 129
+          Left = 769
+          Top = 8
+          Width = 136
           Height = 21
           Cursor = crAuto
           Anchors = [akTop, akRight]
@@ -2863,9 +2901,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object SuppressBtn: TIWRadioButton
-          Left = 736
-          Top = 31
-          Width = 129
+          Left = 769
+          Top = 33
+          Width = 136
           Height = 21
           Cursor = crAuto
           Anchors = [akTop, akRight]
@@ -2895,9 +2933,9 @@ object FormPOS: TFormPOS
           SubmitOnAsyncEvent = True
         end
         object AssumeBtn: TIWRadioButton
-          Left = 736
-          Top = 53
-          Width = 129
+          Left = 769
+          Top = 58
+          Width = 136
           Height = 21
           Cursor = crAuto
           Anchors = [akTop, akRight]
@@ -2928,9 +2966,9 @@ object FormPOS: TFormPOS
         end
         object DiscCombo: TIWComboBox
           Left = 351
-          Top = 63
+          Top = 59
           Width = 141
-          Height = 21
+          Height = 23
           Cursor = crAuto
           IW50Hint = False
           ParentShowHint = False
@@ -2972,7 +3010,7 @@ object FormPOS: TFormPOS
         end
         object DiscLabel: TIWLabel
           Left = 224
-          Top = 63
+          Top = 62
           Width = 121
           Height = 16
           Cursor = crAuto
