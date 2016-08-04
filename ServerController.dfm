@@ -22,7 +22,7 @@ object RcWebController: TRcWebController
   RedirectMsgDelay = 0
   ServerResizeTimeout = 0
   ShowLoadingAnimation = True
-  SessionTimeout = 40
+  SessionTimeout = 60
   SSLOptions.CertificatePassword = 'ssl@s4tech2014'
   SSLOptions.NonSSLRequest = nsAccept
   SSLOptions.Port = 443

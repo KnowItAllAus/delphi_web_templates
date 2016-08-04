@@ -366,7 +366,7 @@ object form_login: Tform_login
       end
       object IWButton4: TIWButton
         Left = 32
-        Top = 192
+        Top = 195
         Width = 75
         Height = 25
         Cursor = crAuto

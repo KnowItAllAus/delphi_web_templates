@@ -10,7 +10,7 @@ uses
 {$ENDIF}
   SysUtils, Classes, IBCustomDataSet, IBQuery, IBDatabase,
   Db, IBTable, IBUpdateSQL, IWMain, siComp, IWSiLink, IBSQL, DCPcrypt2,
-  DCPsha256;
+  DCPsha256, Pipes, Superobject;
 
 type
   TStringObj = class
@@ -184,6 +184,7 @@ type
     SQLEx2: TIBSQL;
     RequestUpdate: TIBQuery;
     POSTypeQuery: TIBQuery;
+    cfgquery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -191,6 +192,7 @@ type
     values : TStringList;
   public
     { Public declarations }
+    slavelog : TStringlist;
     function getHash(ss : string) : string;
     function nextID : integer;
     function nextVendorCode : integer;
@@ -210,7 +212,7 @@ function RcDatamodule : TRcDataMod;
 implementation
 
 uses
-  IWServer, IWInit, global, ServerController;
+  IWServer, IWInit, global, ServerController, slaveunit;
 
 const
   bools : array [boolean] of string = ('False','True');
@@ -311,6 +313,7 @@ begin
    RecastDb.Connected:=true;
    TranDb.Connected:=true;
    SiLangDispatcher1.LoadAllFromFile ('main.sil');
+   slavelog := TStringlist.Create;
 end;
 
 procedure TRcDataMod.SelectTransDB(new : boolean);

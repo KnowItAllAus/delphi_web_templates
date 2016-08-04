@@ -91,13 +91,13 @@ object FormExport: TFormExport
       1025
       302)
     object IWRegion2: TIWRegion
-      Left = 214
+      Left = 10
       Top = 32
-      Width = 593
+      Width = 999
       Height = 244
       Cursor = crAuto
       RenderInvisibleControls = False
-      Anchors = [akTop, akBottom]
+      Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOptions.NumericWidth = 0
       BorderOptions.BorderWidth = cbwNumeric
       BorderOptions.Style = cbsNone
@@ -108,7 +108,7 @@ object FormExport: TFormExport
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        593
+        999
         244)
       object GrpLabel: TIWLabel
         Left = 8
@@ -145,10 +145,10 @@ object FormExport: TFormExport
       object JobGrid: TIWGrid
         Left = 16
         Top = 40
-        Width = 561
+        Width = 967
         Height = 99
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akBottom]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -184,6 +184,7 @@ object FormExport: TFormExport
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitWidth = 561
       end
       object IWSiLink1: TIWSiLink
         Left = 508
@@ -245,11 +246,13 @@ object FormExport: TFormExport
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitLeft = 3
+        ExplicitTop = 9
       end
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 593
+        Width = 999
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -274,11 +277,12 @@ object FormExport: TFormExport
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 593
       end
       object JobCombo: TIWComboBox
         Left = 116
         Top = 150
-        Width = 215
+        Width = 381
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -396,7 +400,7 @@ object FormExport: TFormExport
       object CoCombo: TIWComboBox
         Left = 116
         Top = 180
-        Width = 215
+        Width = 381
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]

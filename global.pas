@@ -16,10 +16,13 @@ function GetTransBase: string;
 function GetPort: integer;
 function debug : boolean;
 function utcnow : TDatetime;
+function RecastDir : string;
+function logpath : string;
+function logenabled : boolean;
 
 implementation
 
-uses IniFiles,sysutils,scripting, dateutils;
+uses IniFiles,sysutils,scripting, dateutils, shlobj, windows, registry;
 
 var
   PrinterDirectory: string;
@@ -36,6 +39,19 @@ var
   CacheDir : string;
   appBase : string;
   TransBase : string;
+  maindir : string;
+  _logpath : string;
+  _log_enabled : boolean;
+
+function logpath : string;
+begin
+  result:=_logpath;
+end;
+
+function logenabled : boolean;
+begin
+  result:=_log_enabled;
+end;
 
 function utcnow : TDatetime;
 begin
@@ -107,6 +123,60 @@ begin
   result := SecureURL;
 end;
 
+function RecastDir : string;
+begin
+  result:=maindir;
+end;
+
+function RecastLogDir : string;
+begin
+  result:=maindir;
+end;
+
+function GetSpecialFolder(const CSIDL: integer) : string;
+var
+  RecPath : PWideChar;
+begin
+  RecPath := StrAlloc(MAX_PATH);
+    try
+    FillChar(RecPath^, MAX_PATH, 0);
+    if SHGetSpecialFolderPath(0, RecPath, CSIDL, false)
+      then result := RecPath
+      else result := '';
+    finally
+      StrDispose(RecPath);
+    end;
+end;
+
+procedure GetRecastDirs;
+begin
+  try
+    maindir:=GetSpecialFolder(CSIDL_COMMON_APPDATA)+'\Recast\';
+  except
+    maindir:=extractfilepath(paramstr(0));
+  end;
+end;
+
+function regreadstring (reg : TRegistry; key : string; default : string) : string;
+begin
+  if reg.ValueExists(key) then result:=reg.ReadString (key) else
+     result:=default;
+end;
+
+function regreadinteger (reg : TRegistry; key : string; default : integer) : integer;
+begin
+  if reg.ValueExists(key) then result:=reg.ReadInteger (key) else
+     result:=default;
+end;
+
+function regreadbool (reg : TRegistry; key : string; default : boolean) : boolean;
+begin
+  if reg.ValueExists(key) then begin
+     result:=reg.ReadBool (key);
+  end else
+     result:=default;
+end;
+
 function GetPort: integer;
 begin
   result := port;
@@ -116,6 +186,7 @@ var
   i: integer;
   ini: TInifile;
   basedirectory : string;
+  reg : TRegistry;
 begin
   try
     debugmode := false;
@@ -132,6 +203,7 @@ begin
     ini := TInifile.Create('Recast.Ini');
     PrinterDirectory := ini.ReadString('Printer', 'Dir', '');
     ini.free;
+    getrecastdirs;
     for i := 1 to ParamCount do begin
       if (copy(paramstr(i), 1, 3) = '-P=') then Port := strtoint(copy(paramstr(i), 4, length(paramstr(i)) - 3));
       if (copy(paramstr(i), 1, 3) = '-C=') then CacheDir := copy(paramstr(i), 4, length(paramstr(i)) - 3);
@@ -155,5 +227,18 @@ begin
     script_dll_load;
   except
   end;
+
+  reg:=TRegistry.create;
+  Reg.RootKey := HKEY_LOCAL_MACHINE;
+  if reg.OpenKey('\SOFTWARE\Recast',true) then begin
+    //POS_Id:=RegReadString(reg,'POSID','1');
+    _log_enabled:=RegReadBool(Reg,'Log',false);
+    _logpath:=RegReadString(Reg,'LogPath','');
+    if length(_logpath)>0 then begin
+       if _logpath[length(_logpath)]<>'\' then
+          _logpath:=_logpath+'\';
+    end;
+  end;
+  reg.Free;
 end.
 

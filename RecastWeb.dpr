@@ -68,7 +68,11 @@ uses
   textblockfrm in 'textblockfrm.pas' {formTextBlockEdit: TIWAppForm},
   credsForm in 'credsForm.pas' {formCreds: TIWAppForm},
   possform in 'possform.pas' {formPoss: TIWAppForm},
-  storeForm in 'storeForm.pas' {formStore: TIWAppForm};
+  storeForm in 'storeForm.pas' {formStore: TIWAppForm},
+  formint in 'formint.pas' {intform: TIWAppForm},
+  UThreadStringList in 'UThreadStringList.pas',
+  slaveunit in 'slaveunit.pas',
+  newpipeunit in 'newpipeunit.pas';
 
 {$R *.res}
 
@@ -79,6 +83,8 @@ begin
   shorttimeformat:='hh:mm';
   longdateformat:='dd/mm/yy';
   longtimeformat:='hh:mm';
+  slave:=Tslave.create;
   Application.CreateForm(TFormIWMain, FormIWMain);
   Application.Run;
+  slave.Free;
 end.

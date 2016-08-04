@@ -22,7 +22,7 @@ type
     DistribRegn: TIWRegion;
     IWImageFile2: TIWImageFile;
     InstallRegn: TIWRegion;
-    IWImageFile3: TIWImageFile;
+    TestImg: TIWImageFile;
     AdminRegn: TIWRegion;
     AdminImg: TIWImageFile;
     silink: TsiLangLinked;
@@ -42,7 +42,7 @@ type
     IWRegion5: TIWRegion;
     AdminLnk: TIWLink;
     IWRegion6: TIWRegion;
-    InstallLnk: TIWLink;
+    TestLnk: TIWLink;
     CoBox: TIWComboBox;
     CoLabel: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
@@ -54,6 +54,7 @@ type
     procedure StatLnkClick(Sender: TObject);
     procedure DistribLnkClick(Sender: TObject);
     procedure CoBoxChange(Sender: TObject);
+    procedure TestLnkClick(Sender: TObject);
   public
   end;
 
@@ -64,7 +65,7 @@ implementation
 uses IWInit,datamod,login, voucherForm, storesForm,
      sendForm, passwdForm, statform, possform, imagesForm, jnlForm,
      ServerController, grpForm, global, sysform, su_main,
-     cfgtypes, jobs, distrib, distribstatusform, overviewform;
+     cfgtypes, jobs, distrib, distribstatusform, overviewform, formint;
 
 {$R *.dfm}
 
@@ -85,7 +86,7 @@ begin
    AdminLnk.Color:=clNone;
    PromoLnk.Color:=clNone;
    StatLnk.Color:=clNone;
-   InstallLnk.Color:=clNone;
+   TestLnk.Color:=clNone;
    DistribLnk.Color:=clNone;
 
    CoLabel.Caption:=usersession.CompanyName;
@@ -102,7 +103,12 @@ begin
       disable(PromoLnk);
       //disable(DistribLnk);
    end;
-   disable (InstallLnk);
+   if (UserSession.privilege and PRIV_SUPER) = 0  then begin
+      testimg.Visible:=false;
+      testlnk.Visible:=false;
+   end;
+
+   //disable (InstallLnk);
    if UserSession.Company='0' then begin
       disable (DistribLnk);
       disable (PromoLnk);
@@ -146,6 +152,14 @@ end;
 procedure Tsu_FormRole.StatLnkClick(Sender: TObject);
 begin
   handle_nav (2);
+end;
+
+procedure Tsu_FormRole.TestLnkClick(Sender: TObject);
+begin
+  if (UserSession.UserCompany<>'0') and ((UserSession.privilege and PRIV_ADMIN) = 0)  then exit;
+  RcDataModule.Trans.Active:=false;
+  TIWAppForm(WebApplication.ActiveForm).Release;
+  Tintform.Create(WebApplication).show;
 end;
 
 procedure Tsu_FormRole.DistribLnkClick(Sender: TObject);

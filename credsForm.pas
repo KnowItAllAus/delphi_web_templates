@@ -9,7 +9,7 @@ uses
   IWHTMLControls, IWContainer, IWRegion, IWExtCtrls, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWSiLink, siComp, siLngLnk, footer_user, baretitle, IWHTMLContainer,
-  ReferredClass, IWHTML40Container, Generics.Collections;
+  ReferredClass, IWHTML40Container, Generics.Collections, Pipes;
 
 type
   TformCreds = class(TIWAppForm)

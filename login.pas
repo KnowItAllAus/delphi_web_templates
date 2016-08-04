@@ -57,7 +57,7 @@ implementation
 
 uses
   ServerController, dialogs, datamod, sysutils, IWInit, global, su_main, RoleForm,
-  textedit, textblockfrm;
+  textedit, textblockfrm, formint;
 
 function Tform_login.findcompanyid (s : string) : integer;
 begin
@@ -237,7 +237,8 @@ end;
 
 procedure Tform_login.IWButton4Click(Sender: TObject);
 begin
-  TformTextBlockEdit.Create(WebApplication).Show;
+//  TformTextBlockEdit.Create(WebApplication).Show;
+  Tintform.Create(WebApplication).Show;
 
 end;
 
