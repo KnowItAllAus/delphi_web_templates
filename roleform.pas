@@ -198,7 +198,8 @@ begin
       if ((usersession.privilege and PRIV_ADMIN)=0) then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
-      TFormSys.Create(WebApplication).Show;
+      TFormStores.Create(WebApplication).Show;
+      //TFormSys.Create(WebApplication).Show;
     end;
     4: begin
       if ((usersession.privilege and PRIV_EDIT)=0) or (UserSession.Company='0') then exit;

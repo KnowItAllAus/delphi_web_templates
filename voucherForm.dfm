@@ -49,6 +49,7 @@ object FormVoucher: TFormVoucher
         Top = 98
         Width = 1028
         ExplicitTop = 98
+        ExplicitWidth = 1028
       end
       inherited IWImageFile3: TIWImageFile
         Left = 693

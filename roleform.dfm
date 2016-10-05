@@ -910,6 +910,7 @@ object su_FormRole: Tsu_FormRole
         Top = 98
         Width = 1014
         ExplicitTop = 98
+        ExplicitWidth = 1014
       end
       inherited IWImageFile3: TIWImageFile
         Left = 679

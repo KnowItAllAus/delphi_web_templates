@@ -41,6 +41,7 @@ type
     procedure IWButton1Click(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure bcbuttonAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure userfooter1CancelClick(Sender: TObject);
   public
     procedure ShowLog;
     procedure ShowStatus;
@@ -50,7 +51,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, slaveunit, global, db, httputil, idstrings;
+uses datamod, slaveunit, global, db, httputil, idstrings, roleform;
 
 procedure Tintform.ShowLog;
 var
@@ -84,6 +85,12 @@ begin
   begin
     outmemo.Lines.Add(item.Name+'='+item.Value.AsString);
   end;
+end;
+
+procedure Tintform.userfooter1CancelClick(Sender: TObject);
+begin
+   TIWAppForm(WebApplication.ActiveForm).Release;
+   Tsu_formrole.Create(WebApplication).Show;
 end;
 
 procedure Tintform.AddCredBtnClick(Sender: TObject);

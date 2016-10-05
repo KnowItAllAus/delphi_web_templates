@@ -45,6 +45,7 @@ object intform: Tintform
       end
       inherited Cancel: TIWButton
         Left = 990
+        OnClick = userfooter1CancelClick
         ExplicitLeft = 990
       end
       inherited Extra1: TIWButton

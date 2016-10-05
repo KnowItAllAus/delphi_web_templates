@@ -8,13 +8,18 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWHTMLControls, IWSiLink, IWVCLBaseContainer, IWContainer,
   IWHTMLContainer, IWRegion, footer_user, Controls, Forms, promotitle,
-  IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox, IWHTML40Container;
-
-type tag_obj = class
-  s : string;
-end;
+  IWCompCheckbox, IWCompMemo, IWCompEdit, IWCompListbox, IWHTML40Container,
+  Generics.Collections;
 
 type
+  ParamRec = record
+    name : string;
+    constraint : string;
+    ftype : string;
+    note : string;
+    id : string;
+  end;
+
   TFormJobRev = class(TIWAppForm)
     userfooter1: Tuserfooter;
     IWRegion1: TIWRegion;
@@ -50,6 +55,8 @@ type
     ParamCancelBtn: TIWButton;
     paramnotelbl: TIWLabel;
     paramnoteedit: TIWEdit;
+    CleanBtn: TIWButton;
+    IWCheckBox1: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -66,10 +73,13 @@ type
     procedure IWAppFormDestroy(Sender: TObject);
     procedure ParamDelBtnClick(Sender: TObject);
     procedure ParamCancelBtnClick(Sender: TObject);
+    procedure CleanBtnClick(Sender: TObject);
   private
-    currentparam : tag_obj;
+    currentparamindex : integer;
+    prod,test,last : string;
+    paramlist : TList<paramrec>;
     procedure RefreshParamGrid;
-
+    procedure AuthClick(Sender: TObject);
   public
     procedure RefreshGrid;
   end;
@@ -81,6 +91,45 @@ implementation
 {$R *.dfm}
 
 uses Graphics, datamod, ServerController, voucherform, jobdtl, Jobs, CfgTypes, IWInit, dialogs;
+
+procedure TFormJobRev.AuthClick(Sender: TObject);
+begin
+  with RcDataModule.SQLEx do begin
+    Transaction.Active:=False;
+    Transaction.Active:=True;
+    Close;
+    SQL.Clear;
+    SQL.Add ('delete from JOBVERS where COMPANY=:COMPANY and JOBID=:JOBID and (ID<>:PROD) and (ID<>:TEST) and (ID<>:LAST)');
+    ParamByName('COMPANY').AsString:=UserSession.Company;
+    ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+    ParamByName('LAST').AsString:=last;
+    ParamByName('PROD').AsString:=prod;
+    ParamByName('TEST').AsString:=test;
+    ExecQuery;
+    Transaction.Commit;
+  end;
+  (*if (not AuthBox.Checked) and ProdBox.Checked then begin
+    with RcDataModule.JobProdNullQry do begin
+      Transaction.Active:=true;
+      ParamByName ('COMPANY').AsString:=UserSession.Company;
+      ParamByName ('ID').AsInteger:=UserSession.JobHdrID;
+      ParamByName ('LASTCHANGED').AsDateTime:=Now;
+      ExecSQL;
+      Transaction.commit;
+    end;
+  end;
+  with RcDataModule.AuthJobQuery do begin
+    Transaction.Active:=true;
+    ParamByName ('COMPANY').AsString:=TUserSession(WebApplication.Data).Company;
+    ParamByName ('ID').AsInteger:=UserSession.JobRevID;
+    ParamByName ('AUTH').AsInteger:=ord (AuthBox.Checked);
+    ParamByName ('AUTHBY').AsString:=UserSession.User;
+    ParamByName ('AUTHAT').AsDateTime:=Now;
+    ExecSQL;
+    Transaction.commit;
+  end;
+  RefreshPage;*)
+end;
 
 procedure TFormJobRev.JobGridRenderCell(ACell: TIWGridCell; const ARow,
   AColumn: Integer);
@@ -96,7 +145,7 @@ begin
       // Alternate Row Colors
       if (AColumn=7) and (ACell.text<>'') then begin
         BGColor := clWhite;
-      end else if JobGrid.Cell[ARow,1].text='*' then begin
+      end else if JobGrid.Cell[ARow,6].text<>'' then begin
         BGColor := TColor($60C060);
       end else if Odd(ARow) then begin
         BGColor := clLtGray;
@@ -111,7 +160,7 @@ procedure TFormJobRev.RefreshParamGrid;
 
 var
   i : integer;
-  t : tag_obj;
+  pr : paramrec;
 begin
   nameedit.text:='';
   typecombo.itemindex:=-1;
@@ -120,10 +169,11 @@ begin
   nameedit.enabled:=true;
   nameedit.color:=$ffffff;
   typecombo.enabled:=true;
-  currentparam:=nil;
+  currentparamindex:=-1;
   paramdelbtn.visible:=false;
   paramcancelbtn.visible:=false;
   paramsavebtn.caption:='Add';
+  paramlist.clear;
 
   with RcDataModule.SQLQry do begin
     Transaction.Active:=False;
@@ -148,25 +198,27 @@ begin
         RowCount:=RowCount+1;
         with Cell[i, 1] do begin
           Text := htmlquote(FieldByName('PARAMNAME').AsString);
-          t:=tag_obj.create;
-          t.s:=FieldByName('ID').AsString;
-          tag:=t;
+          pr.name:=FieldByName('PARAMNAME').AsString;
+          pr.id:=FieldByName('ID').AsString;
         end;
         with Cell[i, 2] do begin
           try
             Text:=TypeCombo.Items[ord(strtoparamtype(FieldByName('PARAMTYPE').AsString))];
+            pr.ftype:=FieldByName('PARAMTYPE').AsString;
           except
           end;
         end;
         with Cell[i, 3] do begin
           try
             Text := htmlquote(FieldByName('FIELDCONSTRAINT').AsString);
+            pr.constraint:=FieldByName('FIELDCONSTRAINT').AsString;
           except
           end;
         end;
         with Cell[i, 4] do begin
           try
             Text := htmlquote(FieldByName('NOTE').AsString);
+            pr.note:=FieldByName('NOTE').AsString;
           except
           end;
         end;
@@ -178,6 +230,7 @@ begin
         end;
         inc (i);
         Next;
+        paramlist.Add(pr);
       end;
     end;
     Close;
@@ -188,10 +241,9 @@ end;
 procedure TFormJobRev.RefreshGrid;
 var
   i : integer;
-  prod,test : string;
   r : integer;
-  t : tag_obj;
 begin
+  last:='';
   for r:=1 to Paramgrid.RowCount-1 do
     Paramgrid.Cell[r,0].Tag.Free;
 
@@ -212,7 +264,7 @@ begin
     with JobGrid do begin
       RowCount:=1;
       Cell[0, 0].Text := SiLink.GetTextOrDefault('Grid.ID');
-      Cell[0, 1].Text := SiLink.GetTextOrDefault('Grid.Auth');
+      Cell[0, 1].Text := ''; //SiLink.GetTextOrDefault('Grid.Auth');
       Cell[0, 2].Text := SiLink.GetTextOrDefault('Grid.Note');
       Cell[0, 3].Text := SiLink.GetTextOrDefault('Grid.CreatedBy');
       Cell[0, 4].Text := SiLink.GetTextOrDefault('Grid.CreatedAt');
@@ -226,12 +278,23 @@ begin
         with Cell[i, 0] do begin
           Text := FieldByName('ID').AsString;
           Clickable:=true;
+          self.last:=text;
         end;
         with Cell[i, 1] do begin
           try
             Text := '';
-            if FieldByName('AUTH').AsString='1' then
-                Text:='*';
+            if (Cell[i,0].text=test) or (Cell[i,0].Text=prod) or ((UserSession.privilege and PRIV_LIVE)=0) then begin
+              Text:=text+'---';
+            end else begin
+              control:=TIWCheckBox.create(self);
+              with TIWCheckBox(Control) do begin
+                checked:=false;
+                caption:='';
+                Width := 10;
+                //onclick:=self.authclick;
+                tag:=FieldByName('ID').asinteger;
+              end;
+            end;
           except
           end;
         end;
@@ -246,9 +309,11 @@ begin
         end;
         with Cell[i, 5] do begin
           Text := FieldByName('AUTHBY').AsString;
+          if FieldByName('AUTH').AsString<>'1' then text:='';
         end;
         with Cell[i, 6] do begin
           Text := FieldByName('AUTHAT').AsString;
+          if FieldByName('AUTH').AsString<>'1' then text:='';
         end;
         with Cell[i, 7] do begin
           Text:='';
@@ -276,6 +341,7 @@ procedure TFormJobRev.IWAppFormCreate(Sender: TObject);
 begin
    Self.langlink.InitForm;
    JobNameLbl.Caption:=JobNameLbl.Caption+' '+Usersession.JobName;
+   paramlist:=TList<paramrec>.create;
    RefreshGrid;
 
    with RcDataModule.CurrentJobQuery do begin
@@ -318,6 +384,7 @@ begin
       constraintlbl.visible:=false;
       paramnotelbl.visible:=false;
       EditJobBtn.Visible:=false;
+      Cleanbtn.Visible:=false;
    end;
 end;
 
@@ -364,6 +431,31 @@ begin
     TFormJobs.Create (WebApplication).show;
 end;
 
+procedure TFormJobRev.CleanBtnClick(Sender: TObject);
+var
+  i : integer;
+begin
+  for i:=1 to JobGrid.RowCount-1 do begin
+    if JobGrid.Cell[i,1].Control is TIWCheckBox then begin
+      if (JobGrid.Cell[i,1].Control as TIWCheckBox).checked then begin
+        with RcDataModule.SQLEx do begin
+          Transaction.Active:=False;
+          Transaction.Active:=True;
+          Close;
+          SQL.Clear;
+          SQL.Add ('delete from JOBVERS where COMPANY=:COMPANY and JOBID=:JOBID and (ID=:ID)');
+          ParamByName('COMPANY').AsString:=UserSession.Company;
+          ParamByName('JOBID').AsInteger:=UserSession.JobHdrID;
+          ParamByName('ID').AsInteger:=(JobGrid.Cell[i,1].Control as TIWCheckBox).Tag;
+          ExecQuery;
+          Transaction.Commit;
+        end;
+      end;
+    end;
+  end;
+  refreshgrid;
+end;
+
 procedure TFormJobRev.CreateBtnClick(Sender: TObject);
 begin
   with RcDataModule.AddJobRevQuery do begin
@@ -394,7 +486,7 @@ begin
       SQL.Clear;
       SQL.Add ('delete from JOBPARAMS where COMPANY=:COMPANY and ID=:ID');
       ParamByName('COMPANY').AsString:=UserSession.Company;
-      ParamByName('ID').AsString:=currentparam.s;
+      ParamByName('ID').AsString:=paramlist[currentparamindex].id;
       ExecSQL;
       Transaction.Commit;
     end;
@@ -409,7 +501,7 @@ var
   j : integer;
   co : string;
 begin
-  if currentparam<>nil then begin
+  if currentparamindex>=0 then begin
 
     if NameEdit.Text<>'' then try
       with RcDataModule.SQLQry do begin
@@ -423,7 +515,7 @@ begin
         ParamByName('COMPANY').AsString:=co;
         j:=UserSession.JobHdrID;
         ParamByName('JOBID').AsInteger:=j;
-        ParamByName('ID').AsString:=currentparam.s;
+        ParamByName('ID').AsString:=paramlist[currentparamindex].id;
         ParamByName('NOTE').AsString:=paramnoteedit.text;
         ParamByName('TYPE').AsString:=ParamNames[paramtypes(TypeCombo.ItemIndex)];
         ParamByName('FIELDCONSTRAINT').AsString:=ConstraintEdit.Text;
@@ -490,10 +582,10 @@ end;
 procedure TFormJobRev.ParamGridCellClick(ASender: TObject; const ARow,
   AColumn: Integer);
 begin
-  currentParam:=tag_obj(ParamGrid.Cell[ARow,1].tag);
-  constraintedit.text:=ParamGrid.Cell[ARow,3].Text;
-  nameedit.text:=ParamGrid.Cell[ARow,1].text;
-  typecombo.itemindex:=typecombo.Items.IndexOf(ParamGrid.Cell[ARow,2].text);
+  currentparamindex:=ARow-1;
+  constraintedit.text:=paramlist[currentparamindex].constraint; //  ParamGrid.Cell[ARow,3].Text;
+  nameedit.text:=paramlist[currentparamindex].name;
+  typecombo.itemindex:= ord(strtoparamtype(paramlist[currentparamindex].ftype));
   nameedit.enabled:=false;
   nameedit.color:=$d0d0d0;
   paramdelbtn.visible:=true;
@@ -505,6 +597,7 @@ procedure TFormJobRev.IWAppFormDestroy(Sender: TObject);
 var
   r : integer;
 begin
+  paramlist.free;
   for r:=1 to Paramgrid.RowCount-1 do
     Paramgrid.Cell[r,0].Tag.Free;
 end;

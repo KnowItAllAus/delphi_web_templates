@@ -171,7 +171,8 @@ procedure TformDistribStatus.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
-  advanced:=false;
+  advanced:=(UserSession.privilege and PRIV_ADMIN)<>0;
+  advancedbox.Checked:=advanced;
   RefreshGrid;
 end;
 
