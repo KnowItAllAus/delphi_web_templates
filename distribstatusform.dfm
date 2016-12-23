@@ -258,6 +258,7 @@ object formDistribStatus: TformDistribStatus
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
         TabOrder = 1
+        OnClick = RefreshBtnClick
         OnAsyncClick = RefreshBtnAsyncClick
       end
       object IWLabel1: TIWLabel

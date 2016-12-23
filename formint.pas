@@ -219,6 +219,7 @@ var
   t : textfile;
 begin
   try
+    rcdatamodule.cfgquery.Transaction.Active:=false;
     rcdatamodule.cfgquery.Close;
     rcdatamodule.cfgquery.ParamByName('name').AsString:=nameedit.Text;
     rcdatamodule.cfgquery.Open;
@@ -252,6 +253,7 @@ begin
     rcdatamodule.cfgquery.close;
   end;
   rcdatamodule.cfgquery.Close;
+  rcdatamodule.cfgquery.Transaction.Active:=false;
   slave.sitename:=nameedit.Text;
   slave.queueconnect;
 end;
