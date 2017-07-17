@@ -796,8 +796,8 @@ object formJnl: TformJnl
         FriendlyName = 'ExptCombo'
       end
       object utccombo: TIWComboBox
-        Left = 520
-        Top = 7
+        Left = 519
+        Top = 6
         Width = 101
         Height = 21
         Cursor = crAuto

@@ -45,6 +45,8 @@ type
     ChildCombo: TIWComboBox;
     IWLabel12: TIWLabel;
     GroupEdit: TIWEdit;
+    IWComboBox1: TIWComboBox;
+    IWButton1: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,

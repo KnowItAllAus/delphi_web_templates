@@ -57,7 +57,7 @@ implementation
 
 uses
   ServerController, dialogs, datamod, sysutils, IWInit, global, su_main, RoleForm,
-  textedit, textblockfrm, formint;
+  textedit, textblockfrm, formint, Bcrypt;
 
 function Tform_login.findcompanyid (s : string) : integer;
 begin
@@ -101,25 +101,49 @@ var
    adminpriv : integer;
    lastco : integer;
    passhash : string;
+   bhash : string;
+   bmatch : boolean;
+   oldmatch : boolean;
+   err : boolean;
 begin
    passhash:=RcDataModule.gethash(passedit.Text);
-   //showmessage ('hash='+s);
    try
       // Next form...
       with RCDataModule.SQLQry do begin
          SQL.Clear;
-         SQL.Add('Select * from users where userid=:userid and pass=:pass');
+         SQL.Add('Select * from users where userid=:userid');
          parambyname('userid').AsString:=UserEdit.text;
-         parambyname('pass').AsString:=passhash;
          Open;
          if eof then begin
             raise Exception.Create ('Invalid Login');
          end else begin
+           try
+             bmatch:=TBCrypt.CheckPassword(passedit.text,FieldByName('BPASS').AsString,err);
+           except
+             bmatch:=false;
+           end;
+           oldmatch:=(FieldByName('PASS').AsString=passhash) and (FieldByName('BPASS').AsString='');
+           if not oldmatch and not bmatch then
+              raise Exception.Create ('Invalid Login');
+
+           if not bmatch then begin
+              with RCDataModule.SQLEx do begin
+                 SQL.Clear;
+                 SQL.Add('update users set bpass=:bpass');
+                 SQL.Add('where userid=:userid');
+                 parambyname('userid').AsString:=UserEdit.text;
+                 parambyname('bpass').AsString:=TBCrypt.HashPassword(passedit.Text, 10);
+                 ExecQuery;
+              end;
+           end;
+
            usersession.User:=UserEdit.Text;
            user_id:=FieldByName('ID').AsInteger;
            lastco:=-1;
            if not FieldByName('LASTCO').IsNull then
               lastco:=FieldByName('LASTCO').AsInteger;
+
+           transaction.Commit;
            Close;
 
            SQL.Clear;

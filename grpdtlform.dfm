@@ -17,7 +17,7 @@ object FormGrpDtl: TFormGrpDtl
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -70
+  DesignTop = 8
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
@@ -1056,6 +1056,76 @@ object FormGrpDtl: TFormGrpDtl
         Enabled = False
         PasswordPrompt = False
         Text = 'GroupEdit'
+      end
+      object IWComboBox1: TIWComboBox
+        Left = 168
+        Top = 68
+        Width = 313
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FocusColor = clNone
+        AutoHideOnMenuActivation = False
+        ItemsHaveValues = False
+        NoSelectionText = '-- No Selection --'
+        Required = False
+        RequireSelection = True
+        ScriptEvents = <>
+        UseSize = False
+        Style = stNormal
+        ButtonColor = clBtnFace
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        SubmitOnAsyncEvent = True
+        TabOrder = 16
+        ItemIndex = -1
+        Sorted = False
+        FriendlyName = 'RegionCombo'
+      end
+      object IWButton1: TIWButton
+        Left = 87
+        Top = 65
+        Width = 75
+        Height = 24
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Copy To...'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton2'
+        ScriptEvents = <>
+        TabOrder = 17
+        OnClick = AddJobBtnClick
       end
     end
   end

@@ -399,7 +399,7 @@ begin
   StoreIDList.Add('0');
   StoreCombo.Items.Add (siLangLinked1.GetTextOrDefault('All Stores'));
   StoreCombo.ItemIndex:=0;
-  utccombo.itemindex:=trunc(usersession.timeoffset * 1440 / 60) + 12;
+  utccombo.itemindex:=round(usersession.timeoffset * 1440 / 60) + 12;
 
   RcDataModule.Trans2.Active:=False;
   with RcDataModule.StoreQuery do begin

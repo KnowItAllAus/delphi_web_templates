@@ -43,7 +43,7 @@ var
 implementation
 
 uses
-  ServerController, datamod, IWInit, IWTypes, roleForm;
+  ServerController, datamod, IWInit, IWTypes, roleForm, BCrypt;
 
 {$R *.DFM}
 
@@ -73,6 +73,7 @@ begin
     RcDataModule.Trans.StartTransaction;
     RcDataModule.ChangePasswd.ParamByName('ID').AsString:=UserSession.User;
     RcDataModule.ChangePasswd.ParamByName('PASS').AsString:=RcDataModule.gethash(PassEdit.Text);
+    RcDataModule.ChangePasswd.parambyname('bpass').AsString:=TBCrypt.HashPassword(passedit.Text, 10);
     RcDataModule.ChangePasswd.ExecSQL;
     RcDataModule.Trans.Commit;
     WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdatedText'), smAlert);
