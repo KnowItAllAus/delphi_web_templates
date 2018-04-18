@@ -43,24 +43,38 @@ var
 implementation
 
 uses
-  ServerController, datamod, IWInit, IWTypes, roleForm, BCrypt;
+  ServerController, datamod, IWInit, IWTypes, roleForm, BCrypt, IBQuery;
 
 {$R *.DFM}
 
 procedure TFormPasswd.UpdateBtnClick(Sender: TObject);
 var
   Records : integer;
+  bmatch : boolean;
+  err : boolean;
+  ib : TIBQuery;
+  pw : string;
 begin
-  RcDataModule.UserQuery.Transaction.Active:=false;
-  RcDataModule.UserQuery.Transaction.Active:=true;
-  RcDataModule.UserQuery.ParamByName ('USERID').AsString:= UserSession.User;
-  RcDataModule.UserQuery.ParamByName ('PASS').AsString:=RcDataModule.gethash(CurrentEdit.Text);
-  RcDataModule.UserQuery.Open;
+  ib:=RcDataModule.UserQuery;
+  ib.Transaction.Active:=false;
+  ib.Transaction.Active:=true;
+  ib.ParamByName ('USERID').AsString:= UserSession.User;
+  ib.Open;
   records:=RcDataModule.UserQuery.RecordCount;
-  RcDataModule.UserQuery.Transaction.Active:=false;
-  if Records<>1 then raise Exception.Create (SiLangLinked1.GetTextOrDefault('ErrorText'));
+  pw:=ib.fieldbyname ('bpass').asstring;
+  ib.Transaction.Active:=false;
 
-  if PassEdit.Text<>ConfEdit.Text then begin
+  if Records<>1 then
+     raise Exception.Create (SiLangLinked1.GetTextOrDefault('ErrorText'));
+  try
+    bmatch:=TBCrypt.CheckPassword(currentedit.text,pw,err);
+  except
+    bmatch:=false;
+  end;
+
+  if not bmatch then begin
+    raise Exception.Create (SiLangLinked1.GetTextOrDefault('ErrorText'));
+  end else if PassEdit.Text<>ConfEdit.Text then begin
     WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('ConfirmText'), smAlert);
     PassEdit.Text:='';
     ConfEdit.Text:='';

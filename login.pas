@@ -29,9 +29,6 @@ type
     IWRectangle4: TIWRectangle;
     langcombo: TIWComboBox;
     IWImage1: TIWImage;
-    IWButton1: TIWButton;
-    IWButton2: TIWButton;
-    IWButton3: TIWButton;
     IWRegion3: TIWRegion;
     IWRectangle5: TIWRectangle;
     IWRectangle6: TIWRectangle;

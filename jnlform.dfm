@@ -353,8 +353,8 @@ object formJnl: TformJnl
         LangControl = RcDataMod.LangEditControl1
       end
       object DisplayBtn: TIWButton
-        Left = 694
-        Top = 35
+        Left = 696
+        Top = 34
         Width = 75
         Height = 25
         Cursor = crAuto

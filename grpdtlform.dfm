@@ -1104,6 +1104,7 @@ object FormGrpDtl: TFormGrpDtl
         Width = 75
         Height = 24
         Cursor = crAuto
+        Visible = False
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True

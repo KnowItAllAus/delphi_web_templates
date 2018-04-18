@@ -145,7 +145,7 @@ object form_login: Tform_login
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 3
+        TabOrder = 0
         PasswordPrompt = False
       end
       object PassEdit: TIWEdit
@@ -181,7 +181,7 @@ object form_login: Tform_login
         Required = False
         ScriptEvents = <>
         SubmitOnAsyncEvent = True
-        TabOrder = 4
+        TabOrder = 1
         OnSubmit = LoginBtnClick
         PasswordPrompt = True
       end
@@ -271,96 +271,6 @@ object form_login: Tform_login
         Font.Style = []
         FriendlyName = 'LoginBtn'
         ScriptEvents = <>
-        TabOrder = 5
-        OnClick = LoginBtnClick
-      end
-      object IWButton1: TIWButton
-        Left = 24
-        Top = 144
-        Width = 75
-        Height = 25
-        Cursor = crAuto
-        Visible = False
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 1
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Caption = 'dummy'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'LoginBtn'
-        ScriptEvents = <>
-        TabOrder = 0
-        OnClick = LoginBtnClick
-      end
-      object IWButton2: TIWButton
-        Left = 32
-        Top = 152
-        Width = 75
-        Height = 25
-        Cursor = crAuto
-        Visible = False
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 1
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Caption = 'dummy'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'LoginBtn'
-        ScriptEvents = <>
-        TabOrder = 1
-        OnClick = LoginBtnClick
-      end
-      object IWButton3: TIWButton
-        Left = 40
-        Top = 160
-        Width = 75
-        Height = 25
-        Cursor = crAuto
-        Visible = False
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 1
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Caption = 'dummy'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'LoginBtn'
-        ScriptEvents = <>
         TabOrder = 2
         OnClick = LoginBtnClick
       end
@@ -391,7 +301,7 @@ object form_login: Tform_login
         Font.Style = []
         FriendlyName = 'LoginBtn'
         ScriptEvents = <>
-        TabOrder = 7
+        TabOrder = 4
         OnClick = IWButton4Click
       end
     end
@@ -513,7 +423,7 @@ object form_login: Tform_login
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 6
+        TabOrder = 3
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'langcombo'
