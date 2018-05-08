@@ -24,6 +24,7 @@ type
     DistribFrameTitle1: TDistribFrameTitle;
     storebtn: TIWRadioButton;
     jobbtn: TIWRadioButton;
+    storecombo: TIWComboBox;
     procedure OverGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -37,6 +38,7 @@ type
     procedure RefreshGrid;
     procedure RefreshStoreGrid;
     procedure RefreshJobGrid;
+    procedure setstorelist;
   end;
 
 implementation
@@ -62,6 +64,40 @@ begin
       Font.Style := [fsBold];
       Font.Color := clWhite;
     end;
+  end;
+end;
+
+procedure TFormOverview.setstorelist;
+var
+  ind : integer;
+begin
+  try
+    storecombo.Items.Clear;
+    storecombo.Items.AddObject('None',TObject(-1));
+    storecombo.Items.AddObject('All Enabled',TObject(-2));
+    storecombo.Items.AddObject('All Test',TObject(-3));
+    storecombo.Items.AddObject('All',TObject(-4));
+    try
+      ind:=strtoint(rcdatamodule.GetValue('overview_stores_opt','0'));
+    except
+      ind:=0;
+    end;
+
+    with rcdatamodule do begin
+        sqlqry.Transaction.Active:=false;
+        sqlqry.SQL.Clear;
+        sqlqry.SQL.Add('select name, id from storedata where company=:company order by name');
+        sqlqry.parambyname ('Company').asinteger:=strtoint(UserSession.Company);
+        sqlqry.Open;
+        while not sqlqry.eof do begin
+          storecombo.Items.AddObject(sqlqry.fieldbyname('Name').AsString,TObject(sqlqry.fieldbyname('Id').AsInteger));
+          sqlqry.Next;
+        end;
+    end;
+    if ind<storecombo.Items.Count then
+       storecombo.ItemIndex:=ind;
+  finally
+    rcdatamodule.sqlqry.Transaction.Active:=false;
   end;
 end;
 
@@ -219,8 +255,10 @@ var
 begin
   storeid:=0;
   groupid:=0;
+  if storecombo.itemindex=-1 then exit;
   RcDataModule.OverQuery.Transaction.Active:=true;
   RcDataModule.OverQuery.ParamByName('COMPANY').AsInteger:=strtoint(UserSession.Company);
+  RcDataModule.OverQuery.ParamByName('STOREOPT').AsInteger:=integer(storecombo.items.objects[storecombo.itemindex]);
   RcDataModule.OverQuery.Open;
   with OverGrid do begin
     Cell[0, 0].Text := htmlquote(SiLangLinked1.GetTextOrDefault('Grid.Store'));
@@ -354,7 +392,9 @@ begin
      Transaction.Active:=false;
   end;
 
-  if storebtn.checked then refreshstoregrid else refreshjobgrid;
+  //if storebtn.checked then
+  refreshstoregrid;
+  // else refreshjobgrid;
 end;
 
 procedure TFormOverview.IWAppFormCreate(Sender: TObject);
@@ -363,6 +403,7 @@ begin
    jobbtn.checked:=not storebtn.checked;
    Grouplist:=TStringlist.Create;
    Grouplist.sorted:=true;
+   setstorelist;
    RefreshGrid;
 end;
 
@@ -402,6 +443,7 @@ end;
 procedure TFormOverview.StoreComboChange(Sender: TObject);
 begin
    rcdatamodule.SaveValue('overview_stores',inttostr(ord(storebtn.checked)));
+   rcdatamodule.SaveValue('overview_stores_opt',inttostr(storecombo.itemindex));
    RefreshGrid;
 end;
 

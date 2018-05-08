@@ -16,8 +16,8 @@ object FormJobRev: TFormJobRev
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 8
-  DesignTop = -81
+  DesignLeft = -194
+  DesignTop = 8
   object IWCheckBox1: TIWCheckBox
     Left = 328
     Top = 288
@@ -812,7 +812,8 @@ object FormJobRev: TFormJobRev
           'Integer Field'
           'Printer Image'
           'Text Block'
-          'Raw Image')
+          'Raw Image'
+          'Colour')
         Sorted = False
         FriendlyName = 'TypeCombo'
       end

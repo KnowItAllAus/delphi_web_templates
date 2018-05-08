@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -117
+  DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -825,7 +825,7 @@ object formStore: TformStore
         RawText = False
       end
       object IWLabel6: TIWLabel
-        Left = 22
+        Left = 416
         Top = 392
         Width = 57
         Height = 16
@@ -834,8 +834,8 @@ object formStore: TformStore
         ParentShowHint = False
         ShowHint = True
         ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
         StyleRenderOptions.RenderPosition = True
         StyleRenderOptions.RenderFont = True
         StyleRenderOptions.RenderZIndex = True
@@ -850,16 +850,15 @@ object formStore: TformStore
         NoWrap = False
         ConvertSpaces = False
         HasTabOrder = False
-        AutoSize = False
         FriendlyName = 'IWLabel6'
         Caption = 'Printers'
         RawText = False
       end
       object PrinterGrid: TIWGrid
-        Left = 104
-        Top = 395
-        Width = 685
-        Height = 168
+        Left = 416
+        Top = 414
+        Width = 373
+        Height = 148
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -897,7 +896,6 @@ object formStore: TformStore
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
-        ExplicitWidth = 577
       end
       object setupcombo: TIWComboBox
         Left = 136
@@ -1350,11 +1348,13 @@ object formStore: TformStore
         Text = 'MacEdit'
       end
       object CleanBtn: TIWButton
-        Left = 11
-        Top = 414
+        Left = 699
+        Top = 383
         Width = 86
         Height = 25
         Cursor = crAuto
+        Visible = False
+        Anchors = [akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1896,6 +1896,71 @@ object formStore: TformStore
         TabOrder = 26
         PasswordPrompt = False
         ExplicitWidth = 177
+      end
+      object BuildLogMemo: TIWMemo
+        AlignWithMargins = True
+        Left = 22
+        Top = 414
+        Width = 378
+        Height = 141
+        Cursor = crAuto
+        Anchors = [akLeft, akTop, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clWebPALEGOLDENROD
+        Editable = False
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        InvisibleBorder = False
+        HorizScrollBar = False
+        VertScrollBar = True
+        Required = False
+        TabOrder = 27
+        SubmitOnAsyncEvent = True
+        FriendlyName = 'BuildLogMemo'
+        ExplicitHeight = 147
+      end
+      object IWLabel23: TIWLabel
+        Left = 22
+        Top = 392
+        Width = 111
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = False
+        StyleRenderOptions.RenderSize = False
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = [fsBold]
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel6'
+        Caption = 'Config Build Log'
+        RawText = False
       end
     end
   end

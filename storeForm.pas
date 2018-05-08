@@ -9,7 +9,7 @@ uses
   IWHTMLControls, IWContainer, IWRegion, IWExtCtrls, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWSiLink, siComp, siLngLnk, footer_user, baretitle, IWHTMLContainer,
-  ReferredClass, IWHTML40Container;
+  ReferredClass, IWHTML40Container, IWCompMemo;
 
 type
   PosObj = class
@@ -81,6 +81,8 @@ type
     SerialEdit: TIWEdit;
     IWLabel22: TIWLabel;
     PhoneEdit: TIWEdit;
+    BuildLogMemo: TIWMemo;
+    IWLabel23: TIWLabel;
     procedure CancelBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
@@ -123,6 +125,43 @@ uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse
 
 {$R *.DFM}
 
+function MemoryStreamToString(M: TMemoryStream): string;
+begin
+  SetString(Result, PChar(M.Memory), M.Size div SizeOf(Char));
+end;
+
+function getlog (id : string) : TString;
+var
+  ss : TStrings;
+  ms : TMemorystream;
+begin
+  result:='Log not available';
+(*  try
+    with rcdatamodule.SQLQry do begin
+      //transaction.active:=false;
+      ms:=tmemorystream.Create;
+      ss:=TStringlist.Create;
+      try
+        sql.Clear;
+        sql.Add('select Buildlog from stores where id=:id');
+        parambyname('id').asstring:=id;
+        open;
+        if not eof then begin
+           if not fieldbyname ('Buildlog').isnull then
+              TBlobfield(fieldbyname ('BuildLog')).SaveToStream(ms);
+           ms.position:=0;
+           result:=MemoryStreamToString(ms);
+        end;
+        close;
+      finally
+        //transaction.active:=false;
+        ms.Free;
+        ss.Free;
+      end;
+    end;
+  except
+  end; *)
+end;
 
 procedure GoReferer(referedby : referer_class);
 begin
@@ -518,6 +557,7 @@ begin
   GrpList:=TStringlist.create;
   GList:=TStringlist.create;
   DrawGroupGrid;
+  BuildLogMemo.Lines.Text:=getlog (RcDataModule.CurrentstoreQuery.fieldbyname ('ID').AsString);
 end;
 
 function LocalToUTC(LocalTime: TDateTime): TDateTime;

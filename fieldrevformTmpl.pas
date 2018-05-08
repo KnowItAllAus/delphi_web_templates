@@ -264,6 +264,39 @@ begin
   result:=false;
 end;
 
+function IsColour(s : string): boolean;
+var
+   res : TColor;
+begin
+   s:=uppercase(s);
+   res:=clDefault;
+   try
+     if s='BLACK' then res:=clBlack
+     else if s='NONE' then res:=clNone
+     else if s='MAROON' then res:=clMaroon
+     else if s='GREEN' then res:=clGreen
+     else if s='OLIVE' then res:=clOlive
+     else if s='NAVY' then res:=clNavy
+     else if s='PURPLE' then res:=clPurple
+     else if s='TEAL' then res:=clTeal
+     else if s='GRAY' then res:=clGray
+     else if s='SILVER' then res:=clSilver
+     else if s='RED' then res:=clRed
+     else if s='LIME' then res:=clLime
+     else if s='YELLOW' then res:=clYellow
+     else if s='BLUE' then res:=clBlue
+     else if s='FUCHSIA' then res:=clFuchsia
+     else if s='AQUA' then res:=clAqua
+     else if s='LTGRAY' then res:=clLtGray
+     else if s='DKGRAY' then res:=clDkGray
+     else if s='WHITE' then res:=clWhite
+     else res:=stringtocolor(s);
+     result:=res<>clDefault;
+   except
+     result:=false;
+   end;
+end;
+
 function checkconstraint (fieldtype : string; input : string; constraint : string) : boolean;
 var
   param : string;
@@ -338,6 +371,8 @@ begin
     except
       result:=false;
     end;
+  end else if (fieldType='COLOR') or (fieldType='COLOUR') then begin
+    result:=isColour (input);
   end else if fieldType='DATE' then begin
     regexpr := TRegEx.Create('(\d{4})-(\d{2})-(\d{2})',[roIgnoreCase]);
     match := regexpr.Match(dequotedstr(input));

@@ -141,7 +141,7 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
       334)
     object BodyRegion: TIWRegion
       Left = 227
-      Top = 18
+      Top = 22
       Width = 539
       Height = 306
       Cursor = crAuto
@@ -489,8 +489,8 @@ object formFieldVersionsTmpl: TformFieldVersionsTmpl
         RawText = False
       end
       object Options: TIWComboBox
-        Left = 126
-        Top = 56
+        Left = 128
+        Top = 57
         Width = 308
         Height = 21
         Cursor = crAuto
