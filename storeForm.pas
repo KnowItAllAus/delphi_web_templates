@@ -125,42 +125,43 @@ uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse
 
 {$R *.DFM}
 
-function MemoryStreamToString(M: TMemoryStream): string;
-begin
-  SetString(Result, PChar(M.Memory), M.Size div SizeOf(Char));
-end;
-
-function getlog (id : string) : TString;
+function MemoryStreamToStringList(M: TMemoryStream): tstrings;
 var
   ss : TStrings;
+  s : string;
+  c : char;
+begin
+  ss:=TStringlist.Create;
+  result:=ss;
+  m.Position:=0;
+  while m.Position<m.Size do begin
+     m.Read(c,sizeof(c));
+     if (c<>#13) and (c<>#10) then
+        s:=s+c
+     else begin
+        if c=#10 then begin
+           ss.Add(s);
+           s:='';
+        end;
+     end;
+  end;
+end;
+
+function getlog (id : string) : TStrings;
+var
   ms : TMemorystream;
 begin
-  result:='Log not available';
-(*  try
-    with rcdatamodule.SQLQry do begin
-      //transaction.active:=false;
+  with rcdatamodule.currentstorequery do begin
       ms:=tmemorystream.Create;
-      ss:=TStringlist.Create;
       try
-        sql.Clear;
-        sql.Add('select Buildlog from stores where id=:id');
-        parambyname('id').asstring:=id;
-        open;
-        if not eof then begin
-           if not fieldbyname ('Buildlog').isnull then
-              TBlobfield(fieldbyname ('BuildLog')).SaveToStream(ms);
-           ms.position:=0;
-           result:=MemoryStreamToString(ms);
-        end;
-        close;
+        if not fieldbyname ('Buildlog').isnull then
+           TBlobfield(fieldbyname ('BuildLog')).SaveToStream(ms);
+        ms.position:=0;
+        result:=MemoryStreamToStringList(ms);
       finally
-        //transaction.active:=false;
         ms.Free;
-        ss.Free;
       end;
-    end;
-  except
-  end; *)
+  end;
 end;
 
 procedure GoReferer(referedby : referer_class);
@@ -514,6 +515,7 @@ var
   i : integer;
   co : string;
   po : PosObj;
+  blog : TStrings;
 begin
   IWSilink1.InitForm;
 //  DelBtn.Confirmation:=SiLangLinked1.GetTextOrDefault ('DeleteConf');
@@ -557,7 +559,9 @@ begin
   GrpList:=TStringlist.create;
   GList:=TStringlist.create;
   DrawGroupGrid;
-  BuildLogMemo.Lines.Text:=getlog (RcDataModule.CurrentstoreQuery.fieldbyname ('ID').AsString);
+  blog:=getlog (RcDataModule.CurrentstoreQuery.fieldbyname ('ID').AsString);
+  BuildLogMemo.Lines.assign(blog);
+  blog.free;
 end;
 
 function LocalToUTC(LocalTime: TDateTime): TDateTime;

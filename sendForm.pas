@@ -43,9 +43,9 @@ type
     LList : TStringList;
     PList : TStringList;
     function current_offset (fn : string) : integer;
-    procedure PublishToGroup (g : string; silent : boolean; pos : string);
+    procedure PublishToGroup (g : string; silent : boolean; pos : string; priority : integer);
     procedure PublishToAll(pos : string);
-    procedure update_store (company : string; store : integer; publishat : TDateTime);
+    procedure update_store (company : string; store : integer; publishat : TDateTime; priority : integer);
     procedure PublishToGroupDeferred (groupid : string; targettime : integer; targetday : integer; pos : string);
   public
     { Public declarations }
@@ -61,7 +61,7 @@ uses
 
 {$R *.DFM}
 
-procedure TformSend.PublishToGroup (g : string; silent : boolean; pos : string);
+procedure TformSend.PublishToGroup (g : string; silent : boolean; pos : string; priority : integer);
 begin
     with RcDataModule.RequestUpdateGroupX do begin
       try
@@ -197,15 +197,16 @@ begin
    result := incminute(Localtime, Bias);
 end;
 
-procedure TFormSend.update_store (company : string; store : integer; publishat : TDateTime);
+procedure TFormSend.update_store (company : string; store : integer; publishat : TDateTime; priority : integer);
 begin
   with RcDataModule.SQLEx do begin
      SQL.Clear;
-     SQL.Add('update STORES set BUILDTIME=:BUILDTIME, CONFIGUPDATE=1');
+     SQL.Add('update STORES set BUILDTIME=:BUILDTIME, CONFIGUPDATE=:PRIORITY');
      SQL.Add('where COMPANY=:COMPANY and ID=:STOREID');
      ParamByName ('COMPANY').AsString:=UserSession.Company;
      ParamByName ('STOREID').AsInteger:=store;
      ParamByName ('BUILDTIME').AsDateTime:=publishat;
+     ParamByName ('PRIORITY').AsInteger:=priority;
      ExecQuery;
   end;
 end;
@@ -231,6 +232,7 @@ begin
         ParamByName('COMPANY').AsString:=UserSession.Company;
         ParamByName('POSID').AsString:=pos;
         ParamByName('POSIDX').AsString:=pos;
+        ParamByName('PRIORITY').AsInteger:=1;
         ExecSQL;
         Transaction.Commit;
         WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
@@ -289,7 +291,7 @@ begin
             publish_offset:=publish_offset + (daycombo.itemindex-1)*24*60;
          end;
          publishtime:=incminute(int(now_utc),publish_offset);
-         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
+         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime,1);
          next;
        end;
        RcDataModule.SQLQry.Transaction.Commit;
@@ -360,7 +362,7 @@ begin
             publish_offset:=publish_offset + (targetday-1)*24*60;
          end;
          publishtime:=incminute(int(now_utc),publish_offset);
-         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime);
+         update_store (usersession.company,FieldByName ('ID').AsInteger,publishtime,1);
          next;
        end;
        RcDataModule.SQLQry.Transaction.Commit;
@@ -380,7 +382,7 @@ begin
        else pos:=plist[postypes.itemindex];
     if LiveGroups.ItemIndex>0 then begin
       if (Whencombo.Itemindex=0) then begin
-         PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false,pos);
+         PublishToGroup (LList.Strings[LiveGroups.ItemIndex],false,pos,1);
       end else begin
          PublishToGroupDeferred (LList.Strings[LiveGroups.ItemIndex],Whencombo.Itemindex*60,daycombo.ItemIndex,pos);
       end;
@@ -394,10 +396,10 @@ var
     i : integer;
 begin
     if TestGroups.ItemIndex>0 then begin
-      PublishToGroup (TList.Strings[TestGroups.ItemIndex],false,'-1');
+      PublishToGroup (TList.Strings[TestGroups.ItemIndex],false,'-1',2);
     end else with RcDataModule.RequestTestUpdqry do begin
       for i:=0 to TList.count-1 do begin
-        PublishToGroup (TList.Strings[i],true,'-1');
+        PublishToGroup (TList.Strings[i],true,'-1',2);
       end;
       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
     end;

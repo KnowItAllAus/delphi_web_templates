@@ -8,7 +8,8 @@ uses
   IWCompRectangle, IWContainer, IWRegion, IWExtCtrls,
   IWBaseControl, IWVCLBaseControl, IWBaseHTMLControl, IWAppForm,
   IWCompListbox, siComp, siLngLnk, IWHTMLControls, IWSiLink, admintitle,
-  IWVCLBaseContainer, IWHTMLContainer, footer_user, IWHTML40Container;
+  IWVCLBaseContainer, IWHTMLContainer, footer_user, IWHTML40Container,
+  upipes, IWBaseComponent, IWBaseHTMLComponent, IWBaseHTML40Component, Pipes;
 
 type
   TformStores = class(TIWAppForm)
@@ -28,6 +29,8 @@ type
     IWRectangle2: TIWRectangle;
     IWSiLink1: TIWSiLink;
     AdminFrameTitle1: TAdminFrameTitle;
+    refreshtimer: TIWTimer;
+    VersionLbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -36,11 +39,15 @@ type
     procedure IWAppFormDestroy(Sender: TObject);
     procedure AdminFrameTitle1StoreLinkClick(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
-    procedure RefreshBtnAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure cfgpipePipeMessage(Sender: TObject; Pipe: HPIPE; Stream: TStream);
+    procedure refreshtimerAsyncTimer(Sender: TObject; EventParams: TStringList);
+    procedure RefreshBtnClick(Sender: TObject);
   private
     { Private declarations }
     IList : TList;
+    last_status : string;
     procedure PublishClick(Sender: TObject);
+    procedure check_co_status (first : boolean);
   public
     { Public declarations }
     procedure EditStore (ID : String; isnew : boolean);
@@ -54,7 +61,7 @@ var
 implementation
 
 uses datamod, db, servercontroller, IWInit, storeForm, credsForm, roleform,
-     cfgtypes, global, IWTypes;
+     cfgtypes, global, IWTypes, SuperObject;
 
 {$R *.DFM}
 
@@ -81,6 +88,27 @@ begin
     FS.AutoBox.Visible:=isnew;
     FS.AutoBox.Checked:=isnew;
     FS.show;
+  end;
+end;
+
+var
+  piperx : string;
+
+procedure TformStores.cfgpipePipeMessage(Sender: TObject; Pipe: HPIPE;
+  Stream: TStream);
+var
+  msg : string;
+  cmd : ISuperObject;
+  s : string;
+begin
+  try
+    SetLength(Msg, Stream.Size div SizeOf(Char));
+    Stream.Position := 0;
+    Stream.Read(Msg[1], Stream.Size);
+    piperx:=msg;
+    //cmd:=SO(msg);
+  except
+    piperx:='';
   end;
 end;
 
@@ -129,11 +157,11 @@ begin
       Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
       Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
-      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
-      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
-      Cell[0, 15].Text := SiLangLinked1.GetTextOrDefault ('');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+      Cell[0, 15].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
     end else begin
       ColumnCount:=15;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
@@ -146,11 +174,11 @@ begin
       Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
       Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
       Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
-      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
-      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
-      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
     end;
     RcDataModule.Log('Refresh iterate');
     while not RcDataModule.StoreQuery.Eof do begin
@@ -183,7 +211,7 @@ begin
           end;
           with Cell[i, 6] do begin
             Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
-            if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
+            if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString>='1' then
                Text:=Text+'*';
           end;
           with Cell[i, 7] do begin
@@ -201,19 +229,19 @@ begin
           with Cell[i, 10] do begin
             Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
           end;
-          with Cell[i, 11] do begin
+          with Cell[i, 12] do begin
             Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
           end;
-          with Cell[i, 12] do begin
+          with Cell[i, 13] do begin
             Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
           end;
-          with Cell[i, 13] do begin
+          with Cell[i, 14] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
           end;
-          with Cell[i, 14] do begin
+          with Cell[i, 15] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildMsg').AsString;
           end;
-          with Cell[i, 15] do begin
+          with Cell[i, 11] do begin
             Control := TIWButton.Create(Self);
             with TIWButton(Control) do begin
               Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
@@ -260,19 +288,19 @@ begin
           with Cell[i, 9] do begin
             Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
           end;
-          with Cell[i, 10] do begin
+          with Cell[i, 11] do begin
             Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
           end;
-          with Cell[i, 11] do begin
+          with Cell[i, 12] do begin
             Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
           end;
-          with Cell[i, 12] do begin
+          with Cell[i, 13] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
           end;
-          with Cell[i, 13] do begin
+          with Cell[i, 14] do begin
             Text := RcDataModule.StoreQuery.FieldByName('BuildMsg').AsString;
           end;
-          with Cell[i, 14] do begin
+          with Cell[i, 10] do begin
             Control := TIWButton.Create(Self);
             with TIWButton(Control) do begin
               Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
@@ -307,11 +335,45 @@ begin
   RcDataModule.Log('Refresh done');
 end;
 
+procedure TformStores.check_co_status (first : boolean);
+var
+  pc : TUPipeClient;
+  sobj : ISuperObject;
+  reply : string;
+begin
+  try
+    pc:=TUPipeClient.Create('','ConfigPipe');
+    try
+      sobj:=SO;
+      sobj.S['command']:='queryco';
+      sobj.S['co']:=UserSession.Company;
+      reply:=pc.SendString(sobj.AsJSon());
+      if first then begin
+         last_status:=reply;
+         exit;
+      end;
+      if reply<>last_status then
+         refreshbtn.Color:=clYellow;
+      last_status:=reply;
+    finally
+      pc.Free;
+    end;
+  except
+  end;
+end;
+
+procedure TformStores.refreshtimerAsyncTimer(Sender: TObject;
+  EventParams: TStringList);
+begin
+  check_co_status(false);
+end;
+
 procedure TformStores.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   RefreshGrid;
+  check_co_status(true);
 end;
 
 procedure TformStores.StoreGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -410,14 +472,51 @@ begin
     EditCreds (StoreGrid.Cell[ARow,0].Text,StoreGrid.Cell[ARow,1].Text);
 end;
 
-procedure TformStores.RefreshBtnAsyncClick(Sender: TObject;
-  EventParams: TStringList);
+procedure TformStores.RefreshBtnClick(Sender: TObject);
 begin
+  RefreshBtn.Color:=clBtnFace;
   RefreshGrid;
 end;
 
-procedure TformStores.PublishClick(Sender: TObject);
+var
+  cfgpipe: THandle;
+
+const
+  BufSize = 1024;
+
+function notifyconfigd (s : ansistring) : boolean;
+var
+  pc : TUPipeClient;
+  sobj : ISuperObject;
+  reply : string;
 begin
+  result:=false;
+  try
+    pc:=TUPipeClient.Create('','ConfigPipe');
+    try
+      reply:=pc.SendString(s);
+      result:=true;
+    finally
+      pc.Free;
+    end;
+  except
+  end;
+end;
+
+procedure TformStores.PublishClick(Sender: TObject);
+var
+  ss : ISuperObject;
+  s : string;
+begin
+    ss:=SO;
+    ss.S['command']:='buildconfig';
+    ss.I['siteid']:=(Sender as TIWButton).Tag;
+    ss.I['co']:=strtoint(UserSession.Company);
+    s:=ss.AsJSon();
+    if notifyconfigd (s) then begin
+       WebApplication.ShowMessage('Immediate Update Requested', smAlert);
+       exit;
+    end;
     with RcDataModule.RequestUpdateStore do begin
       try
         Transaction.Active:=False;

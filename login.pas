@@ -103,6 +103,7 @@ var
    oldmatch : boolean;
    err : boolean;
 begin
+   rcdatamodule.SaveValue('overview_stores_opt','0');
    passhash:=RcDataModule.gethash(passedit.Text);
    try
       // Next form...

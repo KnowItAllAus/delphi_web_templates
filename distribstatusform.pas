@@ -106,7 +106,7 @@ begin
       end;
       with Cell[i, 3] do begin
         Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
-        if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
+        if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString>='1' then
            Text:=Text+'*';
       end;
       with Cell[i, 4] do begin

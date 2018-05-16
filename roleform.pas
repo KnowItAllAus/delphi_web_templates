@@ -240,6 +240,7 @@ end;
 procedure Tsu_FormRole.CoBoxChange(Sender: TObject);
 begin
   if CoBox.ItemIndex>=0 then begin
+     rcdatamodule.SaveValue('overview_stores_opt','0');
      usersession.selectCoIndex (CoBox.ItemIndex);
      CoBox.ItemIndex:=-1;
      CoLabel.Text:=UserSession.CompanyName;

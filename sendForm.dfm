@@ -34,7 +34,7 @@ object formSend: TformSend
     inherited IWFrameRegion: TIWRegion
       Width = 1016
       Height = 114
-      TabOrder = 2
+      TabOrder = 1
       ExplicitWidth = 1016
       ExplicitHeight = 114
       inherited IWRectangle1: TIWRectangle
@@ -89,6 +89,7 @@ object formSend: TformSend
     inherited IWRegion1: TIWRegion
       Width = 1016
       Height = 29
+      TabOrder = 8
       ExplicitWidth = 1016
       ExplicitHeight = 29
       inherited Cancel: TIWButton
@@ -305,7 +306,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 3
+        TabOrder = 2
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'LiveGroups'
@@ -337,7 +338,7 @@ object formSend: TformSend
         Font.Style = []
         FriendlyName = 'PubBtn'
         ScriptEvents = <>
-        TabOrder = 4
+        TabOrder = 3
         OnClick = AllBtnClick
       end
       object IWSiLink1: TIWSiLink
@@ -366,7 +367,7 @@ object formSend: TformSend
         ScriptEvents = <>
         DoSubmitValidation = False
         FriendlyName = 'IWSiLink1'
-        TabOrder = 1
+        TabOrder = 0
         RawText = False
         SiLangLinked = siLangLinked1
         LangFile = 'publish.sil'
@@ -437,7 +438,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 8
+        TabOrder = 7
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'GroupItems'
@@ -478,7 +479,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 5
+        TabOrder = 4
         ItemIndex = 0
         Items.Strings = (
           'Now'
@@ -576,7 +577,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 6
+        TabOrder = 5
         ItemIndex = -1
         Items.Strings = (
           'As time allows'
@@ -653,7 +654,7 @@ object formSend: TformSend
         Editable = True
         NonEditableAsLabel = True
         SubmitOnAsyncEvent = True
-        TabOrder = 7
+        TabOrder = 6
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'LiveGroups'

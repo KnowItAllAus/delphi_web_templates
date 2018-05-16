@@ -72,7 +72,9 @@ uses
   formint in 'formint.pas' {intform: TIWAppForm},
   UThreadStringList in 'UThreadStringList.pas',
   slaveunit in 'slaveunit.pas',
-  newpipeunit in 'newpipeunit.pas';
+  newpipeunit in 'newpipeunit.pas',
+  simplepipeclient in 'simplepipeclient.pas',
+  upipes in '..\3rdParty\upipes\upipes.pas';
 
 {$R *.res}
 

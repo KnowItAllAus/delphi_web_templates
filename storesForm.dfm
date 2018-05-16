@@ -71,8 +71,8 @@ object formStores: TformStores
       LangControl = RcDataMod.LangEditControl1
     end
     object IWRegion2: TIWRegion
-      Left = 48
-      Top = 24
+      Left = 46
+      Top = 23
       Width = 953
       Height = 463
       Cursor = crAuto
@@ -223,7 +223,7 @@ object formStores: TformStores
         FriendlyName = 'RefreshBtn'
         ScriptEvents = <>
         TabOrder = 1
-        OnAsyncClick = RefreshBtnAsyncClick
+        OnClick = RefreshBtnClick
       end
       object IWLabel1: TIWLabel
         Left = 56
@@ -426,6 +426,36 @@ object formStores: TformStores
         Alignment = taLeftJustify
         VAlign = vaMiddle
       end
+      object VersionLbl: TIWLabel
+        Left = 72
+        Top = 3
+        Width = 64
+        Height = 16
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'VersionLbl'
+        Caption = 'VersionLbl'
+        RawText = False
+      end
     end
   end
   inline userfooter1: Tuserfooter
@@ -612,5 +642,12 @@ object formStores: TformStores
       6300740069006F006E0073005F0055006E00690063006F00640065000D000A00
       73007400430068006100720053006500740073005F0055006E00690063006F00
       640065000D000A00}
+  end
+  object refreshtimer: TIWTimer
+    Enabled = True
+    Interval = 5000
+    OnAsyncTimer = refreshtimerAsyncTimer
+    Left = 208
+    Top = 144
   end
 end
