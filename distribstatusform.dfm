@@ -17,6 +17,43 @@ object formDistribStatus: TformDistribStatus
   XPTheme = True
   DesignLeft = 8
   DesignTop = 8
+  object IWEdit1: TIWEdit
+    Left = 344
+    Top = 160
+    Width = 121
+    Height = 21
+    Cursor = crAuto
+    IW50Hint = False
+    ParentShowHint = False
+    ShowHint = True
+    ZIndex = 0
+    RenderSize = True
+    StyleRenderOptions.RenderSize = True
+    StyleRenderOptions.RenderPosition = True
+    StyleRenderOptions.RenderFont = True
+    StyleRenderOptions.RenderZIndex = True
+    StyleRenderOptions.RenderVisibility = True
+    StyleRenderOptions.RenderStatus = True
+    StyleRenderOptions.RenderAbsolute = True
+    Alignment = taLeftJustify
+    BGColor = clNone
+    FocusColor = clNone
+    DoSubmitValidation = True
+    Editable = True
+    NonEditableAsLabel = True
+    Font.Color = clNone
+    Font.Size = 10
+    Font.Style = []
+    FriendlyName = 'IWEdit1'
+    MaxLength = 0
+    ReadOnly = False
+    Required = False
+    ScriptEvents = <>
+    SubmitOnAsyncEvent = True
+    TabOrder = 6
+    PasswordPrompt = False
+    Text = 'IWEdit1'
+  end
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -169,7 +206,7 @@ object formDistribStatus: TformDistribStatus
       object StoreLabel: TIWLabel
         Left = 56
         Top = 24
-        Width = 217
+        Width = 198
         Height = 19
         Cursor = crAuto
         IW50Hint = False
@@ -536,6 +573,38 @@ object formDistribStatus: TformDistribStatus
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+      end
+      object EnableBox: TIWCheckBox
+        Left = 247
+        Top = 25
+        Width = 121
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Enabled Only'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        SubmitOnAsyncEvent = True
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 7
+        OnClick = EnableBoxClick
+        Checked = True
+        FriendlyName = 'EnableBox'
       end
     end
   end

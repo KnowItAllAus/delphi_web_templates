@@ -8,7 +8,7 @@ uses
   IWCompLabel, IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl,
   IWControl, IWGrids, IWVCLBaseContainer, IWContainer, IWHTMLContainer,
   IWRegion, footer_user, Controls, Forms, distribtitle, siComp, siLngLnk,
-  IWHTML40Container, IWCompCheckbox;
+  IWHTML40Container, IWCompCheckbox, IWCompEdit;
 
 type
   TformDistribStatus = class(TIWAppForm)
@@ -28,6 +28,8 @@ type
     siLangLinked1: TsiLangLinked;
     advancedbox: TIWCheckBox;
     storeGrid: TIWGrid;
+    IWEdit1: TIWEdit;
+    EnableBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure RefreshBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -36,9 +38,11 @@ type
     procedure advancedboxAsyncClick(Sender: TObject;
       EventParams: TStringList);
     procedure RefreshBtnAsyncClick(Sender: TObject; EventParams: TStringList);
+    procedure EnableBoxClick(Sender: TObject);
   private
     IList : TList;
     advanced : boolean;
+    started : boolean;
     procedure RefreshGrid;
   end;
 
@@ -61,12 +65,19 @@ var
   SRO : SRObj;
   commtime : tdatetime;
 begin
-  RcDataModule.StoreQuery.Transaction.Active:=False;
-  RcDataModule.StoreQuery.Transaction.StartTransaction;
-  RcDataModule.StoreQuery.Close;
-  RcDataModule.StoreQuery.ParamByName('COMPANY').AsString:=
-     UserSession.Company;
-  RcDataModule.StoreQuery.Open;
+  while (IList.Count>0) do begin
+     SRObj(IList.Items[0]).free;
+     IList.Delete(0);
+  end;
+  with RcDataModule.StoreEnQuery do begin
+    Transaction.Active:=False;
+    Transaction.StartTransaction;
+    Close;
+    ParamByName('COMPANY').AsString:=
+       UserSession.Company;
+    ParamByName('ENABLED').AsInteger:=ord(EnableBox.checked);
+    Open;
+  end;
   with StoreGrid do begin
     if advanced then
       columncount:=14
@@ -92,29 +103,29 @@ begin
     i:=1;
     RowCount:=1;
 
-    while not RcDataModule.StoreQuery.Eof do begin
+    while not RcDataModule.StoreEnQuery.Eof do begin
       RowCount:=RowCount+1;
       with Cell[i, 0] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Name').AsString);
+        Text := htmlquote(RcDataModule.StoreEnQuery.FieldByName('Name').AsString);
       end;
       with Cell[i, 1] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('POSName').AsString);
+        Text := htmlquote(RcDataModule.StoreEnQuery.FieldByName('POSName').AsString);
       end;
       with Cell[i, 2] do begin
-        if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+        if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
            Text:='No' else Text:='Yes';
       end;
       with Cell[i, 3] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
-        if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString>='1' then
+        Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
+        if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString>='1' then
            Text:=Text+'*';
       end;
       with Cell[i, 4] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
       end;
       with Cell[i, 5] do begin
-        if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then begin
-           commtime:=utcnow-RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime;
+        if not RcDataModule.StoreEnQuery.FieldByName('LastComms').IsNull then begin
+           commtime:=utcnow-RcDataModule.StoreEnQuery.FieldByName('LastComms').AsDateTime;
            end else
            commtime:=0;
         if commtime<=0 then
@@ -123,49 +134,54 @@ begin
             text := TimeToStr (commtime)
         else if commtime>1 then
             text:=floattostrf (commtime,fffixed,7,2)+' Days';
-        if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+        if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
            Text:='';
       end;
       with Cell[i, 6] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Phone').AsString);
+        Text := htmlquote(RcDataModule.StoreEnQuery.FieldByName('Phone').AsString);
       end;
       if advanced then with Cell[i, 7] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Serial').AsString);
+        Text := htmlquote(RcDataModule.StoreEnQuery.FieldByName('Serial').AsString);
       end;
       if advanced then with Cell[i, 8] do begin
-        Text := htmlquote(RcDataModule.StoreQuery.FieldByName('Printer').AsString);
+        Text := htmlquote(RcDataModule.StoreEnQuery.FieldByName('Printer').AsString);
       end;
       if advanced then with Cell[i, 9] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('ConfigSize').AsString;
         //if assigned(blob) then Text := Inttostr(blob.Blobsize) else Text:='<Null>';
       end;
       if advanced then with Cell[i, 10] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
       end;
       if advanced then with Cell[i, 11] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('MAC').AsString;
       end;
       if advanced then with Cell[i, 12] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('Location').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('Location').AsString;
       end;
       if advanced then with Cell[i, 13] do begin
-        Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
+        Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
       end;
       SRO:=SRObj.create;
-      if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
-         SRO.lastcomms:=RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
+      if not RcDataModule.StoreEnQuery.FieldByName('LastComms').IsNull then
+         SRO.lastcomms:=RcDataModule.StoreEnQuery.FieldByName('LastComms').AsDateTime
          else
          SRO.lastcomms:=0;
-      SRO.Enabled:=RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=1;
+      SRO.Enabled:=RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=1;
       ilist.Add (SRO);
       inc (i);
-      RcDataModule.StoreQuery.Next;
+      RcDataModule.StoreEnQuery.Next;
     end;
   end;
-  RcDataModule.StoreQuery.Close;
-  RcDataModule.StoreQuery.Transaction.commit;
+  RcDataModule.StoreEnQuery.Close;
+  RcDataModule.StoreEnQuery.Transaction.active:=false;
 end;
 
+
+procedure TformDistribStatus.EnableBoxClick(Sender: TObject);
+begin
+  if started then RefreshGrid;
+end;
 
 procedure TformDistribStatus.IWAppFormCreate(Sender: TObject);
 begin
@@ -174,6 +190,7 @@ begin
   advanced:=(UserSession.privilege and PRIV_ADMIN)<>0;
   advancedbox.Checked:=advanced;
   RefreshGrid;
+  started:=true;
 end;
 
 procedure TformDistribStatus.RefreshBtnAsyncClick(Sender: TObject;

@@ -9,7 +9,8 @@ uses
   IWBaseControl, IWVCLBaseControl, IWBaseHTMLControl, IWAppForm,
   IWCompListbox, siComp, siLngLnk, IWHTMLControls, IWSiLink, admintitle,
   IWVCLBaseContainer, IWHTMLContainer, footer_user, IWHTML40Container,
-  upipes, IWBaseComponent, IWBaseHTMLComponent, IWBaseHTML40Component, Pipes;
+  upipes, IWBaseComponent, IWBaseHTMLComponent, IWBaseHTML40Component, Pipes,
+  IWCompCheckbox;
 
 type
   TformStores = class(TIWAppForm)
@@ -31,6 +32,7 @@ type
     AdminFrameTitle1: TAdminFrameTitle;
     refreshtimer: TIWTimer;
     VersionLbl: TIWLabel;
+    EnableBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -42,10 +44,12 @@ type
     procedure cfgpipePipeMessage(Sender: TObject; Pipe: HPIPE; Stream: TStream);
     procedure refreshtimerAsyncTimer(Sender: TObject; EventParams: TStringList);
     procedure RefreshBtnClick(Sender: TObject);
+    procedure EnableBoxClick(Sender: TObject);
   private
     { Private declarations }
     IList : TList;
     last_status : string;
+    started : boolean;
     procedure PublishClick(Sender: TObject);
     procedure check_co_status (first : boolean);
   public
@@ -91,6 +95,11 @@ begin
   end;
 end;
 
+procedure TformStores.EnableBoxClick(Sender: TObject);
+begin
+  if started then refreshgrid;
+end;
+
 var
   piperx : string;
 
@@ -134,13 +143,19 @@ var
   SRO : SRObj;
 begin
   RcDataModule.Log('Refresh start');
-  RcDataModule.StoreQuery.Transaction.Active:=False;
-  RcDataModule.StoreQuery.Transaction.StartTransaction;
-  RcDataModule.StoreQuery.Close;
-  RcDataModule.StoreQuery.ParamByName('COMPANY').AsString:=
+  RcDataModule.StoreEnQuery.Transaction.Active:=False;
+  RcDataModule.StoreEnQuery.Transaction.StartTransaction;
+  RcDataModule.StoreEnQuery.Close;
+  RcDataModule.StoreEnQuery.ParamByName('COMPANY').AsString:=
      UserSession.Company;
+  RcDataModule.StoreEnQuery.ParamByName('ENABLED').AsInteger:=
+     ord(EnableBox.checked);
   RcDataModule.Log('Refresh open');
-  RcDataModule.StoreQuery.Open;
+  RcDataModule.StoreEnQuery.Open;
+  while (IList.Count>0) do begin
+     SRObj(IList.Items[0]).free;
+     IList.Delete(0);
+  end;
   with StoreGrid do begin
     i:=1;
     RowCount:=1;
@@ -181,65 +196,65 @@ begin
       Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
     end;
     RcDataModule.Log('Refresh iterate');
-    while not RcDataModule.StoreQuery.Eof do begin
+    while not RcDataModule.StoreEnQuery.Eof do begin
       RcDataModule.Log('Refresh Read');
       RowCount:=RowCount+1;
       if (UserSession.privilege and PRIV_SUPER)<>0 then begin
           with Cell[i, 0] do begin
             Clickable := True;
-            Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ID').AsString;
           end;
           with Cell[i, 1] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Name').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Name').AsString;
           end;
           with Cell[i, 2] do begin
             Text := SiLangLinked1.GetTextOrDefault ('Grid.Credentials');
             Clickable := true;
           end;
           with Cell[i, 3] do begin
-            if RcDataModule.StoreQuery.FieldByName('FromCo').IsNull then
-               Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString
+            if RcDataModule.StoreEnQuery.FieldByName('FromCo').IsNull then
+               Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString
             else
-               Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString+' ('+RcDataModule.StoreQuery.FieldByName('FromCo').AsString+')'
+               Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString+' ('+RcDataModule.StoreEnQuery.FieldByName('FromCo').AsString+')'
           end;
           with Cell[i, 4] do begin
-            if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+            if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
                Text:='No' else Text:='Yes';
           end;
           with Cell[i, 5] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Printer').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Printer').AsString;
           end;
           with Cell[i, 6] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
-            if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString>='1' then
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
+            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString>='1' then
                Text:=Text+'*';
           end;
           with Cell[i, 7] do begin
             text:='Ok';
-            if RcDataModule.StoreQuery.FieldByName('BuildError').AsString='Y' then
+            if RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString='Y' then
                text:='Error';
           end;
           with Cell[i, 8] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
           end;
           with Cell[i, 9] do begin
-            Text:=RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
-            if not RcDataModule.StoreQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreQuery.FieldByName('BuildMS').AsString+' ms)';
+            Text:=RcDataModule.StoreEnQuery.FieldByName('ConfigSize').AsString;
+            if not RcDataModule.StoreEnQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreEnQuery.FieldByName('BuildMS').AsString+' ms)';
           end;
           with Cell[i, 10] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
           end;
           with Cell[i, 12] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
           end;
           with Cell[i, 13] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('MAC').AsString;
           end;
           with Cell[i, 14] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildTime').AsString;
           end;
           with Cell[i, 15] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('BuildMsg').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
           end;
           with Cell[i, 11] do begin
             Control := TIWButton.Create(Self);
@@ -247,58 +262,58 @@ begin
               Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
               Width := 80;
               Height:= 20;
-              Confirmation:='Publish now to '+RcDataModule.StoreQuery.FieldByName('Name').AsString;;
+              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
               onClick:=PublishClick;
-              tag:=RcDataModule.StoreQuery.FieldByName('ID').AsInteger;
+              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
             end;
           end;
       end else begin
           with Cell[i, 0] do begin
             Clickable := True;
-            Text := RcDataModule.StoreQuery.FieldByName('ID').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ID').AsString;
           end;
           with Cell[i, 1] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Name').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Name').AsString;
           end;
           with Cell[i, 2] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('POSName').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString;
           end;
           with Cell[i, 3] do begin
-            if (RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=0) then
+            if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
                Text:='No' else Text:='Yes';
           end;
           with Cell[i, 4] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Printer').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Printer').AsString;
           end;
           with Cell[i, 5] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigId').AsString;
-            if RcDataModule.StoreQuery.FieldByName ('ConfigUpdate').AsString='1' then
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
+            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString='1' then
                Text:=Text+'*';
           end;
           with Cell[i, 6] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('BuildError').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString;
           end;
           with Cell[i, 7] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigIdTx').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
           end;
           with Cell[i, 8] do begin
-            Text:=RcDataModule.StoreQuery.FieldByName('ConfigSize').AsString;
-            if not RcDataModule.StoreQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreQuery.FieldByName('BuildMS').AsString+' ms)';
+            Text:=RcDataModule.StoreEnQuery.FieldByName('ConfigSize').AsString;
+            if not RcDataModule.StoreEnQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreEnQuery.FieldByName('BuildMS').AsString+' ms)';
           end;
           with Cell[i, 9] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('Ver').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
           end;
           with Cell[i, 11] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('ConfigDate').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
           end;
           with Cell[i, 12] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('MAC').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('MAC').AsString;
           end;
           with Cell[i, 13] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('BuildTime').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildTime').AsString;
           end;
           with Cell[i, 14] do begin
-            Text := RcDataModule.StoreQuery.FieldByName('BuildMsg').AsString;
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
           end;
           with Cell[i, 10] do begin
             Control := TIWButton.Create(Self);
@@ -306,32 +321,32 @@ begin
               Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
               Width := 80;
               Height:= 20;
-              Confirmation:='Publish now to '+RcDataModule.StoreQuery.FieldByName('Name').AsString;;
+              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
               onClick:=PublishClick;
-              tag:=RcDataModule.StoreQuery.FieldByName('ID').AsInteger;
+              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
             end;
           end;
       end;
 
       SRO:=SRObj.create;
-      if not RcDataModule.StoreQuery.FieldByName('LastComms').IsNull then
-         SRO.lastcomms:=RcDataModule.StoreQuery.FieldByName('LastComms').AsDateTime
+      if not RcDataModule.StoreEnQuery.FieldByName('LastComms').IsNull then
+         SRO.lastcomms:=RcDataModule.StoreEnQuery.FieldByName('LastComms').AsDateTime
          else
          SRO.lastcomms:=0;
-      if not RcDataModule.StoreQuery.FieldByName('Log').IsNull then
-         SRO.Log:=RcDataModule.StoreQuery.FieldByName('Log').AsInteger
+      if not RcDataModule.StoreEnQuery.FieldByName('Log').IsNull then
+         SRO.Log:=RcDataModule.StoreEnQuery.FieldByName('Log').AsInteger
          else
          SRO.Log:=0;
-      SRO.Enabled:=RcDataModule.StoreQuery.FieldByName('Enabled').AsInteger=1;
+      SRO.Enabled:=RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=1;
       ilist.Add (SRO);
       inc (i);
       RcDataModule.Log('Refresh Next');
-      RcDataModule.StoreQuery.Next;
+      RcDataModule.StoreEnQuery.Next;
     end;
   end;
   RcDataModule.Log('Refresh close');
-  RcDataModule.StoreQuery.Close;
-  RcDataModule.StoreQuery.Transaction.Active:=False;
+  RcDataModule.StoreEnQuery.Close;
+  RcDataModule.StoreEnQuery.Transaction.Active:=False;
   RcDataModule.Log('Refresh done');
 end;
 
@@ -374,6 +389,7 @@ begin
   IList:=TList.Create;
   RefreshGrid;
   check_co_status(true);
+  started:=true;
 end;
 
 procedure TformStores.StoreGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -399,6 +415,7 @@ begin
       namecol:=1;
       enabledcol:=3;
       if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+        enabledcol:=4;
         cfgcol:=8;
       end else begin
         cfgcol:=7;

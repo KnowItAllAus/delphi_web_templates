@@ -28,7 +28,7 @@ type
     VoucherQuery: TIBQuery;
     VoucherInsertQuery: TIBQuery;
     VoucherDeleteQuery: TIBQuery;
-    StoreQuery: TIBQuery;
+    StoreEnQuery: TIBQuery;
     CurrentStoreQuery: TIBQuery;
     StoreDeleteQuery: TIBQuery;
     StoreUpdateQuery: TIBQuery;
@@ -185,6 +185,7 @@ type
     RequestUpdate: TIBQuery;
     POSTypeQuery: TIBQuery;
     cfgquery: TIBQuery;
+    StoreQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

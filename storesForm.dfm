@@ -456,6 +456,38 @@ object formStores: TformStores
         Caption = 'VersionLbl'
         RawText = False
       end
+      object EnableBox: TIWCheckBox
+        Left = 208
+        Top = 22
+        Width = 121
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Enabled Only'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        SubmitOnAsyncEvent = True
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 6
+        OnClick = EnableBoxClick
+        Checked = True
+        FriendlyName = 'EnableBox'
+      end
     end
   end
   inline userfooter1: Tuserfooter
