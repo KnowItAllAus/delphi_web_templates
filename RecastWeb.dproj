@@ -351,7 +351,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Parameters>
-						<Parameters Name="RunParams">-L=c:\server_install\web\lang\ -P=801 -zD=firebird:/var/lib/firebird/2.5/data/recast-config.fdb  -D=e:\db\config.fdb -DT=firebird:/var/lib/firebird/2.5/data/recast-trans.fdb  -R=c:\server_install\web\printers\ -X=http://127.0.0.1:801 -S=https://configx.s4-technology.com</Parameters>
+						<Parameters Name="RunParams">-L=c:\server_install\web\lang\ -P=801 -D=firebird:/var/lib/firebird/2.5/data/recast-config.fdb  -zD=e:\db\config.fdb -DT=firebird:/var/lib/firebird/2.5/data/recast-trans.fdb  -R=c:\server_install\web\printers\ -X=http://127.0.0.1:801 -S=https://configx.s4-technology.com</Parameters>
 						<Parameters Name="DebugCWD">c:\server_install\web\</Parameters>
 					</Parameters>
 					<Excluded_Packages>

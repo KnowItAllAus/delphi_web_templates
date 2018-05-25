@@ -9,7 +9,7 @@ uses
   IWHTMLControls, IWContainer, IWRegion, IWExtCtrls, IWBaseControl,
   IWVCLBaseControl, IWVCLBaseContainer, IWBaseHTMLControl, IWAppForm,
   IWSiLink, siComp, siLngLnk, footer_user, baretitle, IWHTMLContainer,
-  ReferredClass, IWHTML40Container, IWCompMemo;
+  ReferredClass, IWHTML40Container, IWCompMemo, IBQuery, IBBlob, DB;
 
 type
   PosObj = class
@@ -113,7 +113,7 @@ type
     procedure loadZoneList (list : TStrings);
     procedure loadLangList (list : TStrings);
     procedure loadSetupList (list : TStrings);
-    { Private declarations }
+    function getlog (blob : TBlobfield) : TStrings;
   public
     { Public declarations }
     referedby : referer_class;
@@ -121,20 +121,21 @@ type
 
 implementation
 
-uses datamod, db, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse_utils, IWTypes, dateutils;
+uses datamod, servercontroller, IWInit, PrinterForm, cfgtypes, global, parse_utils, IWTypes, dateutils;
 
 {$R *.DFM}
 
-function MemoryStreamToStringList(M: TMemoryStream): tstrings;
+function MemoryStreamToStringList(M: TStream): tstrings;
 var
   ss : TStrings;
   s : string;
-  c : char;
+  c : ansichar;
+  i : integer;
 begin
   ss:=TStringlist.Create;
   result:=ss;
-  m.Position:=0;
-  while m.Position<m.Size do begin
+  m.Seek(0,soFromBeginning);
+  for i:=1 to m.Size div sizeof(c) do begin
      m.Read(c,sizeof(c));
      if (c<>#13) and (c<>#10) then
         s:=s+c
@@ -147,21 +148,16 @@ begin
   end;
 end;
 
-function getlog (id : string) : TStrings;
+function TFormStore.getlog (blob : TBlobField) : TStrings;
 var
-  ms : TMemorystream;
+  ms: tmemorystream;
 begin
-  with rcdatamodule.currentstorequery do begin
-      ms:=tmemorystream.Create;
-      try
-        if not fieldbyname ('Buildlog').isnull then
-           TBlobfield(fieldbyname ('BuildLog')).SaveToStream(ms);
-        ms.position:=0;
-        result:=MemoryStreamToStringList(ms);
-      finally
-        ms.Free;
-      end;
-  end;
+  ms := TMemoryStream.Create;
+  if not blob.IsNull then
+     blob.savetostream(ms);
+  ms.position := 0;
+  result:=MemoryStreamToStringList(ms);
+  ms.free;
 end;
 
 procedure GoReferer(referedby : referer_class);
@@ -535,6 +531,9 @@ begin
       po:=PosObj(PosList.Items[i]);
       PosCombo.Items.Add (IntToStr(po.id)+'  '+po.name);
   end;
+  blog:=getlog(TBlobField(RcDataModule.CurrentstoreQuery.FieldByName ('BUILDLOG')));
+  BuildLogMemo.Lines.assign(blog);
+  blog.free;
   NewNameEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('NAME').AsString;
   SerialEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('SERIAL').AsString;
   PhoneEdit.Text:=RcDataModule.CurrentstoreQuery.FieldByName ('PHONE').AsString;
@@ -559,9 +558,6 @@ begin
   GrpList:=TStringlist.create;
   GList:=TStringlist.create;
   DrawGroupGrid;
-  blog:=getlog (RcDataModule.CurrentstoreQuery.fieldbyname ('ID').AsString);
-  BuildLogMemo.Lines.assign(blog);
-  blog.free;
 end;
 
 function LocalToUTC(LocalTime: TDateTime): TDateTime;

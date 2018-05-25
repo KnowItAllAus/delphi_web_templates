@@ -291,7 +291,9 @@ begin
                Text:=Text+'*';
           end;
           with Cell[i, 6] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString;
+            text:='Ok';
+            if RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString='Y' then
+               text:='Error';
           end;
           with Cell[i, 7] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
@@ -302,6 +304,17 @@ begin
           end;
           with Cell[i, 9] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
+          end;
+          with Cell[i, 10] do begin
+            Control := TIWButton.Create(Self);
+            with TIWButton(Control) do begin
+              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
+              Width := 80;
+              Height:= 20;
+              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
+              onClick:=PublishClick;
+              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
+            end;
           end;
           with Cell[i, 11] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
@@ -314,17 +327,6 @@ begin
           end;
           with Cell[i, 14] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
-          end;
-          with Cell[i, 10] do begin
-            Control := TIWButton.Create(Self);
-            with TIWButton(Control) do begin
-              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
-              Width := 80;
-              Height:= 20;
-              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
-              onClick:=PublishClick;
-              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
-            end;
           end;
       end;
 
@@ -356,7 +358,6 @@ var
   sobj : ISuperObject;
   reply : string;
 begin
-  try
     pc:=TUPipeClient.Create('','ConfigPipe');
     try
       sobj:=SO;
@@ -373,14 +374,20 @@ begin
     finally
       pc.Free;
     end;
-  except
-  end;
 end;
 
 procedure TformStores.refreshtimerAsyncTimer(Sender: TObject;
   EventParams: TStringList);
 begin
-  check_co_status(false);
+  try
+    check_co_status(false);
+  except
+    sleep (50);
+    try
+      check_co_status(false);
+    except
+    end;
+  end;
 end;
 
 procedure TformStores.IWAppFormCreate(Sender: TObject);
