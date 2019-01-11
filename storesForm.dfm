@@ -16,7 +16,7 @@ object formStores: TformStores
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = 8
+  DesignLeft = -298
   DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
@@ -674,12 +674,5 @@ object formStores: TformStores
       6300740069006F006E0073005F0055006E00690063006F00640065000D000A00
       73007400430068006100720053006500740073005F0055006E00690063006F00
       640065000D000A00}
-  end
-  object refreshtimer: TIWTimer
-    Enabled = True
-    Interval = 5000
-    OnAsyncTimer = refreshtimerAsyncTimer
-    Left = 208
-    Top = 144
   end
 end

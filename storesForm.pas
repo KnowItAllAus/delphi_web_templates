@@ -30,7 +30,6 @@ type
     IWRectangle2: TIWRectangle;
     IWSiLink1: TIWSiLink;
     AdminFrameTitle1: TAdminFrameTitle;
-    refreshtimer: TIWTimer;
     VersionLbl: TIWLabel;
     EnableBox: TIWCheckBox;
     procedure IWAppFormCreate(Sender: TObject);
@@ -42,7 +41,6 @@ type
     procedure AdminFrameTitle1StoreLinkClick(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure cfgpipePipeMessage(Sender: TObject; Pipe: HPIPE; Stream: TStream);
-    procedure refreshtimerAsyncTimer(Sender: TObject; EventParams: TStringList);
     procedure RefreshBtnClick(Sender: TObject);
     procedure EnableBoxClick(Sender: TObject);
   private
@@ -374,20 +372,6 @@ begin
     finally
       pc.Free;
     end;
-end;
-
-procedure TformStores.refreshtimerAsyncTimer(Sender: TObject;
-  EventParams: TStringList);
-begin
-  try
-    check_co_status(false);
-  except
-    sleep (50);
-    try
-      check_co_status(false);
-    except
-    end;
-  end;
 end;
 
 procedure TformStores.IWAppFormCreate(Sender: TObject);
