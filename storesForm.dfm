@@ -16,7 +16,7 @@ object formStores: TformStores
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -298
+  DesignLeft = 8
   DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0

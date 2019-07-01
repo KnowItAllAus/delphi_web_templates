@@ -220,7 +220,7 @@ begin
             with Cell[i, 2] do begin
               s2:=TranItemQuery.FieldByName('DESCRIPTION').AsString;
               //s1:=System.Utf8ToUnicodeString(s2);
-              Text := htmlquoteutf8(s2);
+              Text := htmlquoteutf8(ansistring(s2));
               //Text := htmlquoteutf8(TranItemQuery.FieldByName('DESCRIPTION').AsString);
             end;
             with Cell[i, 3] do begin

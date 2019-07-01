@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -127
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -1961,6 +1961,37 @@ object formStore: TformStore
         FriendlyName = 'IWLabel6'
         Caption = 'Config Build Log'
         RawText = False
+      end
+      object CompressBox: TIWCheckBox
+        Left = 313
+        Top = 294
+        Width = 185
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Compress Images'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        SubmitOnAsyncEvent = True
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 28
+        Checked = False
+        FriendlyName = 'AutoBox'
       end
     end
   end

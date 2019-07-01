@@ -19,10 +19,11 @@ function utcnow : TDatetime;
 function RecastDir : string;
 function logpath : string;
 function logenabled : boolean;
+function notifyconfigd (s : ansistring) : boolean;
 
 implementation
 
-uses IniFiles,sysutils,scripting, dateutils, shlobj, windows, registry;
+uses IniFiles,sysutils,scripting, dateutils, shlobj, windows, registry, upipes, superobject;
 
 var
   PrinterDirectory: string;
@@ -42,6 +43,25 @@ var
   maindir : string;
   _logpath : string;
   _log_enabled : boolean;
+
+function notifyconfigd (s : ansistring) : boolean;
+var
+  pc : TUPipeClient;
+  sobj : ISuperObject;
+  reply : string;
+begin
+  result:=false;
+  try
+    pc:=TUPipeClient.Create('','ConfigPipe');
+    try
+      reply:=pc.SendString(s);
+      result:=true;
+    finally
+      pc.Free;
+    end;
+  except
+  end;
+end;
 
 function logpath : string;
 begin

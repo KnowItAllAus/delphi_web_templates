@@ -57,7 +57,7 @@ var
 implementation
 
 uses
-  ServerController, datamod, IWInit, IWTypes, RoleForm, cfgtypes, global, dateutils;
+  ServerController, datamod, IWInit, IWTypes, RoleForm, cfgtypes, global, dateutils, superobject;
 
 {$R *.DFM}
 
@@ -393,16 +393,24 @@ end;
 
 procedure TformSend.TestBtnClick(Sender: TObject);
 var
-    i : integer;
+  i : integer;
+  ss : ISuperObject;
+  s : string;
 begin
-    if TestGroups.ItemIndex>0 then begin
+  if TestGroups.ItemIndex>0 then begin
       PublishToGroup (TList.Strings[TestGroups.ItemIndex],false,'-1',2);
     end else with RcDataModule.RequestTestUpdqry do begin
       for i:=0 to TList.count-1 do begin
         PublishToGroup (TList.Strings[i],true,'-1',2);
       end;
       WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
-    end;
+  end;
+  ss:=SO;
+  ss.S['command']:='buildall';
+  ss.I['siteid']:=0;
+  ss.I['co']:=0;
+  s:=ss.AsJSon();
+  notifyconfigd(s);
 end;
 
 end.

@@ -49,7 +49,7 @@ type
     last_status : string;
     started : boolean;
     procedure PublishClick(Sender: TObject);
-    procedure check_co_status (first : boolean);
+    //procedure check_co_status (first : boolean);
   public
     { Public declarations }
     procedure EditStore (ID : String; isnew : boolean);
@@ -350,7 +350,7 @@ begin
   RcDataModule.Log('Refresh done');
 end;
 
-procedure TformStores.check_co_status (first : boolean);
+(*procedure TformStores.check_co_status (first : boolean);
 var
   pc : TUPipeClient;
   sobj : ISuperObject;
@@ -372,14 +372,14 @@ begin
     finally
       pc.Free;
     end;
-end;
+end;*)
 
 procedure TformStores.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   RefreshGrid;
-  check_co_status(true);
+  //check_co_status(true);
   started:=true;
 end;
 
@@ -492,38 +492,21 @@ var
 const
   BufSize = 1024;
 
-function notifyconfigd (s : ansistring) : boolean;
-var
-  pc : TUPipeClient;
-  sobj : ISuperObject;
-  reply : string;
-begin
-  result:=false;
-  try
-    pc:=TUPipeClient.Create('','ConfigPipe');
-    try
-      reply:=pc.SendString(s);
-      result:=true;
-    finally
-      pc.Free;
-    end;
-  except
-  end;
-end;
-
 procedure TformStores.PublishClick(Sender: TObject);
 var
   ss : ISuperObject;
   s : string;
+  immediate : boolean;
 begin
     ss:=SO;
     ss.S['command']:='buildconfig';
     ss.I['siteid']:=(Sender as TIWButton).Tag;
     ss.I['co']:=strtoint(UserSession.Company);
     s:=ss.AsJSon();
+    immediate:=false;
     if notifyconfigd (s) then begin
        WebApplication.ShowMessage('Immediate Update Requested', smAlert);
-       exit;
+       immediate:=true;
     end;
     with RcDataModule.RequestUpdateStore do begin
       try
@@ -534,11 +517,13 @@ begin
         ParamByName('STOREID').AsInteger:=(Sender as TIWButton).Tag;
         ExecSQL;
         Transaction.Commit;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
+        if not immediate then
+           WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRequested'), smAlert);
         RefreshGrid;
       except
         Transaction.Active:=False;
-        WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
+        if not immediate then
+           WebApplication.ShowMessage(SiLangLinked1.GetTextOrDefault('UpdateRejected'), smAlert);
       end;
     end;
 end;
