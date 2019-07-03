@@ -186,7 +186,7 @@ begin
             Text := FieldByName('LastContact').AsString;
           end;
           with Cell[Rowcount-1, 4] do begin
-            Text := FieldByName('Ver').AsString;
+            Text := FieldByName('if_Ver').AsString+'/'+FieldByName('Ver').AsString;
           end;
           with Cell[Rowcount-1, 5] do begin
             Text := FieldByName('Bypass').AsString;

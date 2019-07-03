@@ -350,36 +350,11 @@ begin
   RcDataModule.Log('Refresh done');
 end;
 
-(*procedure TformStores.check_co_status (first : boolean);
-var
-  pc : TUPipeClient;
-  sobj : ISuperObject;
-  reply : string;
-begin
-    pc:=TUPipeClient.Create('','ConfigPipe');
-    try
-      sobj:=SO;
-      sobj.S['command']:='queryco';
-      sobj.S['co']:=UserSession.Company;
-      reply:=pc.SendString(sobj.AsJSon());
-      if first then begin
-         last_status:=reply;
-         exit;
-      end;
-      if reply<>last_status then
-         refreshbtn.Color:=clYellow;
-      last_status:=reply;
-    finally
-      pc.Free;
-    end;
-end;*)
-
 procedure TformStores.IWAppFormCreate(Sender: TObject);
 begin
   IWSiLink1.InitForm;
   IList:=TList.Create;
   RefreshGrid;
-  //check_co_status(true);
   started:=true;
 end;
 

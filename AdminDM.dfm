@@ -201,9 +201,13 @@ object AdminData: TAdminData
     SQL.Strings = (
       
         'select company.name as companyname, printers.company, printers.a' +
-        'ddress, printers.lastcontact, printers.id, printers.pos,  printe' +
-        'rdata.name, printers.ver, printers.bypass, storedata.name as sto' +
-        'rename, stores.lastcomms  from storedata, printers, printerdata'
+        'ddress, printers.lastcontact, printers.id, printers.pos,  '
+      
+        'printerdata.name, printers.ver, printers.if_ver, printers.bypass' +
+        ', '
+      
+        'storedata.name as storename, stores.lastcomms  from storedata, p' +
+        'rinters, printerdata'
       ', stores, company '
       'where '
       'storedata.id=printers.store and '
@@ -232,11 +236,12 @@ object AdminData: TAdminData
     Database = RecastDB
     Transaction = Trans
     SQL.Strings = (
+      'select company.name as companyname, printers.company,'
+      ' printers.address, printers.lastcontact, printers.id, '
+      'printers.pos, printerdata.name, printers.ver, printers.if_ver,'
       
-        'select company.name as companyname, printers.company, printers.a' +
-        'ddress, printers.lastcontact, printers.id, printers.pos, printer' +
-        'data.name, printers.ver, printers.bypass, storedata.name as stor' +
-        'ename, stores.lastcomms  from storedata, printers, printerdata'
+        'printers.bypass, storedata.name as storename, stores.lastcomms  ' +
+        'from storedata, printers, printerdata'
       ', stores, company '
       'where '
       'storedata.id=printers.store and '
@@ -267,7 +272,9 @@ object AdminData: TAdminData
       'select company.name as companyname, printers.company,'
       
         'printers.address, printers.lastcontact, printers.id, printers.po' +
-        's, printerdata.name, printers.ver, printers.bypass,'
+        's, '
+      'printerdata.name, printers.ver, '
+      'printers.if_ver, printers.bypass,'
       
         'storedata.name as storename, stores.lastcomms  from storedata, p' +
         'rinters, printerdata, stores, company'
@@ -309,9 +316,10 @@ object AdminData: TAdminData
     SQL.Strings = (
       
         'SELECT company.name as companyname, printers.address, printers.l' +
-        'astcontact, printers.id, printers.pos, printerdata.name, printer' +
-        's.ver, printers.bypass, storedata.name as storename, stores.last' +
-        'comms  '
+        'astcontact, printers.id,'
+      
+        ' printers.pos, printerdata.name, printers.ver, printers.if_ver, ' +
+        'printers.bypass, storedata.name as storename, stores.lastcomms  '
       'FROM storedata, printers, printerdata, stores, company '
       'WHERE'
       'storedata.id=printers.store and '
@@ -355,9 +363,13 @@ object AdminData: TAdminData
     SQL.Strings = (
       
         'select company.name as companyname,printers.company, printers.ad' +
-        'dress, printers.lastcontact, printers.id, printers.pos, printerd' +
-        'ata.name, printers.ver, printers.bypass, storedata.name as store' +
-        'name, stores.lastcomms  from storedata, printers, printerdata'
+        'dress, printers.lastcontact, '
+      
+        'printers.id, printers.pos, printerdata.name, printers.ver, print' +
+        'ers.if_ver, printers.bypass,'
+      
+        ' storedata.name as storename, stores.lastcomms  from storedata, ' +
+        'printers, printerdata'
       ', stores, company '
       'where '
       'storedata.id=printers.store and '
@@ -386,11 +398,12 @@ object AdminData: TAdminData
     Database = RecastDB
     Transaction = Trans
     SQL.Strings = (
+      'select company.name as companyname, printers.company, '
+      'printers.address, printers.lastcontact, printers.id, '
+      'printers.pos, printers.ver, printers.if_ver, printers.bypass, '
       
-        'select company.name as companyname, printers.company, printers.a' +
-        'ddress, printers.lastcontact, printers.id, printers.pos, printer' +
-        's.ver, printers.bypass, printerdata.name, storedata.name as stor' +
-        'ename, stores.lastcomms  from storedata, printers, printerdata'
+        'printerdata.name, storedata.name as storename, stores.lastcomms ' +
+        ' from storedata, printers, printerdata'
       ', stores, company '
       'where '
       'storedata.id=printers.store and '
@@ -421,9 +434,11 @@ object AdminData: TAdminData
     SQL.Strings = (
       
         'SELECT company.name as companyname, printers.address, printers.l' +
-        'astcontact, printers.id, printers.pos, printerdata.name, printer' +
-        's.ver, printers.bypass, storedata.name as storename, stores.last' +
-        'comms  '
+        'astcontact, '
+      
+        'printers.id, printers.pos, printerdata.name, printers.ver, print' +
+        'ers.if_ver,'
+      'printers.bypass, storedata.name as storename, stores.lastcomms  '
       'FROM storedata, printers, printerdata, stores, company '
       'WHERE'
       'storedata.id=printers.store and '

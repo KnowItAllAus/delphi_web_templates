@@ -487,7 +487,7 @@ begin
       PRO.dt:=dt;
       PrnList.Add (PRO);
       with Cell[i, 5] do begin
-        Text := RcDataModule.CurrentPrinterCfgQuery.FieldByName('Ver').AsString;
+        Text := RcDataModule.CurrentPrinterCfgQuery.FieldByName('if_Ver').AsString + '/' + RcDataModule.CurrentPrinterCfgQuery.FieldByName('Ver').AsString;
       end;
       with Cell[i, 6] do begin
         Text := RcDataModule.CurrentPrinterCfgQuery.FieldByName('Switches').AsString;
