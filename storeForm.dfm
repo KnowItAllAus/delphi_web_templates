@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -272
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -1760,9 +1760,9 @@ object formStore: TformStore
         FriendlyName = 'AutoBox'
       end
       object IWLabel21: TIWLabel
-        Left = 416
-        Top = 293
-        Width = 82
+        Left = 591
+        Top = 264
+        Width = 60
         Height = 16
         Cursor = crAuto
         IW50Hint = False
@@ -1791,9 +1791,9 @@ object formStore: TformStore
         RawText = False
       end
       object SerialEdit: TIWEdit
-        Left = 504
-        Top = 290
-        Width = 285
+        Left = 657
+        Top = 264
+        Width = 132
         Height = 23
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight]
@@ -1826,11 +1826,10 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 13
         PasswordPrompt = False
-        ExplicitWidth = 177
       end
       object IWLabel22: TIWLabel
-        Left = 416
-        Top = 267
+        Left = 355
+        Top = 264
         Width = 82
         Height = 16
         Cursor = crAuto
@@ -1860,12 +1859,11 @@ object formStore: TformStore
         RawText = False
       end
       object PhoneEdit: TIWEdit
-        Left = 504
+        Left = 443
         Top = 264
-        Width = 285
+        Width = 142
         Height = 23
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -1895,7 +1893,6 @@ object formStore: TformStore
         SubmitOnAsyncEvent = True
         TabOrder = 26
         PasswordPrompt = False
-        ExplicitWidth = 177
       end
       object BuildLogMemo: TIWMemo
         AlignWithMargins = True
@@ -1963,9 +1960,9 @@ object formStore: TformStore
         RawText = False
       end
       object CompressBox: TIWCheckBox
-        Left = 313
+        Left = 326
         Top = 294
-        Width = 185
+        Width = 146
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -1990,6 +1987,37 @@ object formStore: TformStore
         DoSubmitValidation = True
         Style = stNormal
         TabOrder = 28
+        Checked = False
+        FriendlyName = 'AutoBox'
+      end
+      object rawbox: TIWCheckBox
+        Left = 478
+        Top = 293
+        Width = 146
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Use Raw Mode'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        SubmitOnAsyncEvent = True
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 29
         Checked = False
         FriendlyName = 'AutoBox'
       end

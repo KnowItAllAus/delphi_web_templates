@@ -84,6 +84,7 @@ type
     BuildLogMemo: TIWMemo;
     IWLabel23: TIWLabel;
     CompressBox: TIWCheckBox;
+    rawbox: TIWCheckBox;
     procedure CancelBtnClick(Sender: TObject);
     procedure DelBtnClick(Sender: TObject);
     procedure PostButtonClick(Sender: TObject);
@@ -265,6 +266,8 @@ begin
       ord(EnabledBox.Checked);
     RcDataModule.storeUpdateQuery.ParamByName('COMPRESS').AsInteger:=
       ord(CompressBox.Checked);
+    RcDataModule.storeUpdateQuery.ParamByName('NV_INHIBIT').AsInteger:=
+      ord(RawBox.Checked);
     RcDataModule.storeUpdateQuery.ParamByName('TEST').AsInteger:=
       ord(TestBox.Checked);
     RcDataModule.storeUpdateQuery.ParamByName('OLD_COMPANY').AsString:=
@@ -552,6 +555,7 @@ begin
   PosCombo.ItemIndex:=findPos(RcDataModule.CurrentstoreQuery.FieldByName ('POSID').AsString);
   EnabledBox.Checked:=RcDataModule.CurrentstoreQuery.FieldByName ('ENABLED').AsInteger<>0;
   CompressBox.Checked:=(RcDataModule.CurrentstoreQuery.FieldByName ('COMPRESS').IsNull=false) and (RcDataModule.CurrentstoreQuery.FieldByName ('COMPRESS').AsInteger<>0);
+  RawBox.Checked:=(RcDataModule.CurrentstoreQuery.FieldByName ('NV_INHIBIT').IsNull=false) and (RcDataModule.CurrentstoreQuery.FieldByName ('NV_INHIBIT').AsInteger<>0);
   TestBox.Checked:=RcDataModule.CurrentstoreQuery.FieldByName ('TEST').AsString='1';
   SetupCombo.ItemIndex:=SetupCombo.Items.IndexOf(RcDataModule.CurrentstoreQuery.FieldByName ('SETUPLANG').AsString);
   LangCombo.ItemIndex:=LangCombo.Items.IndexOf(RcDataModule.CurrentstoreQuery.FieldByName ('PRINTLANG').AsString);
