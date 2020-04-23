@@ -20,6 +20,7 @@ function RecastDir : string;
 function logpath : string;
 function logenabled : boolean;
 function notifyconfigd (s : ansistring) : boolean;
+function GetResidencyLabel (s : string) : string;
 
 implementation
 
@@ -43,6 +44,24 @@ var
   maindir : string;
   _logpath : string;
   _log_enabled : boolean;
+
+function GetResidencyLabel (s : string) : string;
+var
+  I : integer;
+begin
+  try
+    if s='' then i:=-1 else i:=strtoint (s);
+    case i of
+    -1 : result:='N/A';
+    0 : result:='Stream';
+    1 : result:='NV *';
+    else
+    result:='NV #'+inttostr(i-1)
+    end;
+  except
+    result:='?';
+  end;
+end;
 
 function notifyconfigd (s : ansistring) : boolean;
 var

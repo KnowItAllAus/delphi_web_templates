@@ -61,6 +61,10 @@ type tag_obj = class
   height : integer;
 end;
 
+type int_tag_obj = class
+  param : integer;
+end;
+
 procedure GoParent(referedby : referer_class);
 var
    FGD : TFormGrpDtl;
@@ -104,6 +108,7 @@ var
   refjobid : integer;
   ftype : string;
   typeerror : boolean;
+  //gpparamhdrid : integer;
 begin
   lasttmpl:='';
   for r:=0 to Tmplgrid.RowCount-1 do
@@ -131,22 +136,100 @@ begin
 
   TmplGrid.RowCount:=0;
   with RcDataModule do begin
-      SQLQry.SQL.Clear;
-      SQLQry.Transaction.Active:=false;
-      SQLQry.Transaction.Active:=true;
-      SQLQry.SQL.Add('select GROUPPARAMTMPL.*, GROUPOBJHDR.ID as OBJID, '+
+(*    SQLQry2.SQL.Clear;
+    SQLQry2.Transaction.Active:=false;
+    SQLQry2.Transaction.Active:=true;
+    SQLQry2.SQL.Add('select GROUPPARAMTMPL.* '+
+                    'from GROUPPARAMTMPL '+
+                    'where GROUPPARAMTMPL.COMPANY=:COMPANY and GROUPPARAMTMPL.ID=:TMPLID '+
+                    'order by GROUPPARAMTMPL.ID');
+    SQLQry2.ParamByName ('TMPLID').AsInteger:=tmplid;
+    SQLQry2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    //gpparamhdrid:=SQLQry.FieldByName ('PARAMTMPLID').AsInteger;
+    try
+      SQLQry2.Open;
+    except
+      on e : exception do begin
+       showmessage (e.message);
+       exit;
+      end;
+    end;
+
+    SQLQry.SQL.Clear;
+    SQLQry.Transaction.Active:=false;
+    SQLQry.Transaction.Active:=true;
+    SQLQry.SQL.Add('select GROUPOBJHDR.CURRENTID, '+
+                     //'GROUPPARAMOBJ.DATAFIELD as DATAFIELD, '+
+                     'GROUPOBJHDR.ID as OBJID, '+
+                     'GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PTYPE, '+
+                     'GROUPOBJHDR.NAME from GROUPOBJHDR '+
+                     //'left join GROUPPARAMOBJ on GROUPPARAMOBJ.COMPANY=:COMPANY and GROUPPARAMOBJ.ID=GROUPOBJHDR.CURRENTID ' +
+                     'where GROUPOBJHDR.COMPANY=:COMPANY and GROUPOBJHDR.GROUPPARAMTMPLID=:TMPLID '+
+                     'order by GROUPOBJHDR.ID');
+
+    SQLQry.ParamByName ('TMPLID').AsInteger:=tmplid;
+    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    try
+      SQLQry.Open;
+    except
+      on e : exception do begin
+       showmessage (e.message);
+       exit;
+      end;
+    end;
+
+    SQLQry.SQL.Clear;
+    SQLQry.Transaction.Active:=false;
+    SQLQry.Transaction.Active:=true;
+    SQLQry.SQL.Add('select GROUPOBJHDR.CURRENTID, '+
+                     'GROUPPARAMOBJ.DATAFIELD as DATAFIELD, '+
+                     'GROUPOBJHDR.ID as OBJID, '+
+                     'GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PTYPE, '+
+                     'GROUPOBJHDR.NAME, JOBPARAMS.* from GROUPOBJHDR '+
+                     'left join JOBPARAMS on JOBPARAMS.JOBID=:JOBID and JOBPARAMS.PARAMNAME=GROUPOBJHDR.NAME '+
+                     'left join GROUPPARAMOBJ on GROUPPARAMOBJ.COMPANY=:COMPANY and GROUPPARAMOBJ.ID=GROUPOBJHDR.CURRENTID ' +
+                     'where GROUPOBJHDR.COMPANY=:COMPANY and GROUPOBJHDR.GROUPPARAMTMPLID=:TMPLID '+
+                     'order by GROUPOBJHDR.ID');
+
+    SQLQry.ParamByName ('TMPLID').AsInteger:=tmplid;
+    SQLQry.ParamByName ('JOBID').AsInteger:=refjobid;
+    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    try
+      SQLQry.Open;
+    except
+      on e : exception do begin
+       showmessage (e.message);
+       exit;
+      end;
+    end;
+*)
+
+    SQLQry.SQL.Clear;
+    SQLQry.Transaction.Active:=false;
+    SQLQry.Transaction.Active:=true;
+    SQLQry.SQL.Add('select GROUPPARAMTMPL.*, GROUPOBJHDR.CURRENTID, '+
+                     'GROUPOBJHDR.ID as OBJID, '+
                      'GROUPOBJHDR.GUID as GUID, GROUPOBJHDR.PARAMTYPE as PTYPE, '+
                      'GROUPOBJHDR.NAME, JOBPARAMS.* from GROUPPARAMTMPL '+
                      'left join GROUPOBJHDR on GROUPOBJHDR.GROUPPARAMTMPLID=GROUPPARAMTMPL.ID '+
                      'left join JOBPARAMS on JOBPARAMS.JOBID=:JOBID and JOBPARAMS.PARAMNAME=GROUPOBJHDR.NAME '+
                      'where GROUPPARAMTMPL.COMPANY=:COMPANY and GROUPPARAMTMPL.ID=:TMPLID '+
                      'order by GROUPPARAMTMPL.ID');
-      SQLQry.ParamByName ('TMPLID').AsInteger:=tmplid;
-      SQLQry.ParamByName ('JOBID').AsInteger:=refjobid;
-      SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+
+    SQLQry.ParamByName ('TMPLID').AsInteger:=tmplid;
+    SQLQry.ParamByName ('JOBID').AsInteger:=refjobid;
+    SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
+    try
       SQLQry.Open;
-      with TmplGrid do begin
-        ColumnCount:=7;
+    except
+      on e : exception do begin
+       showmessage (e.message);
+       exit;
+      end;
+    end;
+
+    with TmplGrid do begin
+        ColumnCount:=8;
         RowCount:=1;
         Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
         Cell[0, 1].Text := '';
@@ -155,6 +238,7 @@ begin
         Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Guid');
         Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Constraint');
         Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Note');
+        Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Value');
         i:=1;
         while not SQLQry.Eof do begin
           if lasttmpl<>SQLQry.FieldByName('ID').AsString then begin
@@ -169,6 +253,7 @@ begin
               Cell[i, 4].text:='';
               Cell[i, 5].text:='';
               Cell[i, 6].text:=htmlquote(SQLQry.FieldByName('NOTE').AsString);
+              Cell[i, 7].text:='';
               celltag:=tag_obj.create;
               celltag.param:=false;
               celltag.paramtype:=SQLQry.FieldByName('PARAMTYPE').AsString;
@@ -193,6 +278,7 @@ begin
               Cell[i, 1].clickable:=true;
               Cell[i, 5].text:=htmlquote(SQLQry.FieldByName('FIELDCONSTRAINT').AsString);
               Cell[i, 6].text:='';
+              Cell[i, 7].text:='';
               Cell[i, 4].text:=SQLQry.FieldByName('GUID').AsString;
               ftype:=SQLQry.FieldByName('PARAMTYPE').AsString;
               typeerror:=false;
@@ -206,9 +292,12 @@ begin
 
               if ftype='' then
                  ftype:=SiLangLinked1.GetTextOrDefault ('Grid.unlinked');
-              if SQLQry.FieldByName('PTYPE').AsString='F' then
-                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')+' ('+ftype+')'
-                 else
+              if SQLQry.FieldByName('PTYPE').AsString='F' then begin
+                 Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Field')+' ('+ftype+')';
+                 if not SQLQry.FieldByName('CURRENTID').IsNull then begin
+                    Cell[i, 7].Tag:=TObject(SQLQry.FieldByName('CURRENTID').AsInteger);
+                 end;
+              end else
                  Cell[i, 3].text:=SiLangLinked1.GetTextOrDefault ('Grid.Object')+' ('+ftype+')';
 
               if typeerror then
@@ -229,6 +318,36 @@ begin
       end;
       SQLQry.Close;
     end;
+
+  with RcDataModule do begin
+    SQLQry2.SQL.Clear;
+    SQLQry2.Transaction.Active:=false;
+    SQLQry2.Transaction.Active:=true;
+                     //'left join GROUPPARAMOBJ on GROUPPARAMOBJ.COMPANY=:COMPANY and GROUPPARAMOBJ.ID=GROUPOBJHDR.CURRENTID ' +
+    SQLQry2.SQL.Add('select GROUPPARAMOBJ.* '+
+                    'from GROUPPARAMOBJ '+
+                    'where GROUPPARAMOBJ.COMPANY=:COMPANY and GROUPPARAMOBJ.ID=:ID '+
+                    'order by GROUPPARAMOBJ.ID');
+    for i:=1 to TmplGrid.RowCount-1 do begin
+      if integer(Tmplgrid.Cell[i,7].Tag)>0 then begin
+        SQLQry2.ParamByName ('ID').AsInteger:=integer(Tmplgrid.Cell[i,7].Tag);
+        SQLQry2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+        try
+          SQLQry2.Open;
+          Tmplgrid.Cell[i,7].text:=SQLQry2.FieldByName ('DATAFIELD').AsString;
+          Tmplgrid.Cell[i,7].Tag:=nil;
+          SQLQry2.Close;
+        except
+          on e : exception do begin
+           showmessage (e.message);
+           exit;
+          end;
+        end;
+      end;
+    end;
+    SQLQry2.Close;
+    SQLQry2.Transaction.Active:=false;
+  end;
 end;
 
 procedure TformEditTmpl.TmplGridCellClick(ASender: TObject; const ARow,

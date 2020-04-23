@@ -41,7 +41,6 @@ type
     IWRectangle1: TIWRectangle;
     PreferLabel: TIWLabel;
     FormatCombo: TIWComboBox;
-    MemBox: TIWCheckBox;
     Widthguide: TIWRectangle;
     Senselabel: TIWLabel;
     MinCombo: TIWComboBox;
@@ -56,6 +55,8 @@ type
     ColLabel: TIWLabel;
     ColCombo: TIWComboBox;
     SynBtn: TIWButton;
+    memcombo: TIWComboBox;
+    IWLabel1: TIWLabel;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -225,7 +226,7 @@ begin
       except
         FormatCombo.ItemIndex := 0;
       end;
-      MemBox.Checked:=FieldByName ('RESIDENT').AsString<>'0';
+      MemCombo.Itemindex:=FieldByName ('RESIDENT').AsInteger;
   end;
   ModeComboChange(nil);
 end;
@@ -360,7 +361,7 @@ procedure TFormImageUp.ModeComboChange(Sender: TObject);
 
 begin
   FormatCombo.Visible:=False;
-  MemBox.Visible:=False;
+  MemCombo.Visible:=False;
   ColCombo.Visible:=False;
   ColLabel.Visible:=false;
   PreferLabel.Visible:=false;
@@ -407,7 +408,7 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        MemBox.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
+        Memcombo.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
         ColLabel.Visible:=True;
         PreferLabel.Visible:=True;
         WidthGuide.Visible:=true;
@@ -496,7 +497,7 @@ begin
   RcDataModule.ImageUpdateQuery.ParamByName('FORMAT').AsInteger :=
     FormatCombo.ItemIndex;
   RcDataModule.ImageUpdateQuery.ParamByName('RESIDENT').AsInteger :=
-    Ord(MemBox.Checked);
+    MemCombo.itemindex;
   RcDataModule.ImageUpdateQuery.ParamByName('COLOUR').AsInteger :=
     ColCombo.ItemIndex;
   RcDataModule.ImageUpdateQuery.ParamByName('COMPANY').AsString :=

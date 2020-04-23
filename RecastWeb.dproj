@@ -186,7 +186,6 @@
 				<Form>FormJobDtl</Form>
 				<DesignClass>TIWAppForm</DesignClass>
 			</DCCReference>
-			<DCCReference Include="..\common\CfgTypes.pas"/>
 			<DCCReference Include="distribdtlForm.pas">
 				<Form>formdistribdtl</Form>
 				<DesignClass>TIWAppForm</DesignClass>

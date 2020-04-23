@@ -35,10 +35,12 @@ type
     TemplateBox: TIWCheckBox;
     IWLabel4: TIWLabel;
     DomainEdit: TIWEdit;
+    CopyBtn: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure userfooter1Extra2Click(Sender: TObject);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure DelJobRevBtnClick(Sender: TObject);
+    procedure CopyBtnClick(Sender: TObject);
   public
     old_status : integer;
     new_status : integer;
@@ -155,6 +157,21 @@ begin
       TFormEditTmpl.Create(WebApplication).Show
   else
       TFormJobRev.Create(WebApplication).Show;
+end;
+
+procedure TFormJobDtl.CopyBtnClick(Sender: TObject);
+begin
+  with RcDataModule.CopyJobQuery do begin
+    ParamByName ('COMPANY').AsString:=UserSession.Company;
+    ParamByName ('JOBID').AsInteger:=UserSession.JobHdrID;
+    ParamByName ('BY').AsString:=UserSession.User;
+    ParamByName ('WHEN').AsDateTime:=now;
+    ParamByName ('NEWNAME').AsString:=RcDataModule.CurrentJobQuery.FieldByName('name').AsString+' (copy)';
+    ExecSQL;
+    RcDataModule.Trans.Commit;
+    TIWAppForm(WebApplication.ActiveForm).Release;
+    TFormJobs.Create (WebApplication).show;
+  end;
 end;
 
 procedure TFormJobDtl.DelJobRevBtnClick(Sender: TObject);

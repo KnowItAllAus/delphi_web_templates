@@ -38,6 +38,7 @@ type
     ColourEdit: TIWEdit;
     Limitlabel: TIWLabel;
     Baselabel: TIWLabel;
+    flashlbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure ImageGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -52,6 +53,7 @@ type
     prod : string;
     test : string;
     datamode : datamodes;
+    resident : integer;
     format : formats;
     imgColour : integer;
     rendered : boolean;
@@ -69,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses datamod, graphics, serverController, jpeg, db, imagesform, imageupformtmpl, grptmplform,
-IBCustomDataSet, IBQuery, IBDatabase, IBTable, IBUpdateSQL, dialogs, editTmplForm;
+IBCustomDataSet, IBQuery, IBDatabase, IBTable, IBUpdateSQL, dialogs, editTmplForm, global;
 
 var
   t : TIBTransaction;
@@ -130,6 +132,7 @@ begin
   Memo.Visible:=False;
   ModeName.Caption:='- - - - - -';
   IDEdit.Text:='- - - - - -';
+  Flashlbl.Visible:=false;
   DelBtn.Visible:=false;
   ProdBtn.Visible:=false;
   CpyBtn.visible:=false;
@@ -257,6 +260,11 @@ begin
   ModeName.Text:=SiLangLinked1.GetTextOrDefault('Mode.'+DataModeNames[datamodes(datamode)]);
   ImageRegion.HorzScrollBar.Visible:=false;
   ImageRegion.VertScrollBar.Visible:=false;
+  try
+    resident:=RcDataModule.CurrentImageQueryTmpl.FieldByName('RESIDENT').AsInteger;
+  except
+    resident:=1;
+  end;
   case datamode of
     dmImage,
     dmRenderedImage:
@@ -272,6 +280,8 @@ begin
           ColourEdit.Visible:=false;
         end;
         Memo.Visible := False;
+        FlashLbl.Caption:=getresidencylabel(RcDataModule.CurrentImageQueryTmpl.FieldByName('RESIDENT').AsString);
+        FlashLbl.Visible:=true;
         ImageRegion.Visible := True;
         getimagefromdb;
       end;
@@ -444,6 +454,9 @@ begin
       UpFrm.workimg:=TBitmap.create;
       UpFrm.workimg.Assign(self.Image.Picture.Bitmap);
       UpFrm.ColCombo.ItemIndex:=ImgColour;
+    end;
+    if datamode=dmImage then begin
+      UpFrm.MemCombo.ItemIndex:=resident;
     end;
     UpFrm.ModeComboChange(nil);
     TIWAppForm(WebApplication.ActiveForm).Release;

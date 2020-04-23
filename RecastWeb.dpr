@@ -41,7 +41,6 @@ uses
   Distribtitle in 'Distribtitle.pas' {DistribFrameTitle: TFrame},
   ReferredClass in 'ReferredClass.pas',
   jobdtl in 'jobdtl.pas' {FormJobDtl: TIWAppForm},
-  CfgTypes in '..\common\CfgTypes.pas',
   distribdtlForm in 'distribdtlForm.pas' {formdistribdtl: TIWAppForm},
   fieldrevformTmpl in 'fieldrevformTmpl.pas' {formFieldVersionsTmpl: TIWAppForm},
   imghdrform in 'imghdrform.pas' {FormImgHdr: TIWAppForm},

@@ -40,7 +40,6 @@ type
     IWRectangle1: TIWRectangle;
     PreferLabel: TIWLabel;
     FormatCombo: TIWComboBox;
-    MemBox: TIWCheckBox;
     Widthguide: TIWRectangle;
     Widthguide2: TIWRectangle;
     Widthguide3: TIWRectangle;
@@ -86,6 +85,9 @@ type
     PageCombo: TIWComboBox;
     constraintlbl: TIWLabel;
     BorderBox: TIWCheckBox;
+    IWComboBox1: TIWComboBox;
+    memcombo: TIWComboBox;
+    IWLabel5: TIWLabel;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -511,7 +513,7 @@ begin
       except
         FormatCombo.ItemIndex := 0;
       end;
-      MemBox.Checked:=FieldByName ('RESIDENT').AsString<>'0';
+      Memcombo.itemindex:=FieldByName ('RESIDENT').AsInteger;
       constraintlbl.caption:='Constraints : '+RcDataModule.GetValue ('edittmplconstraint','???');
   end;
   ModeComboChange(nil);
@@ -664,7 +666,7 @@ begin
   SortBtn.Visible:=false;
   spacebtn.Visible:=false;
   FormatCombo.Visible:=False;
-  MemBox.Visible:=False;
+  Memcombo.Visible:=False;
   ColCombo.Visible:=False;
   ColLabel.Visible:=false;
   PreferLabel.Visible:=false;
@@ -711,7 +713,7 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        MemBox.Visible:=datamodes(ModeCombo.itemindex) in [dmImage,dmRenderedImage];
+        Memcombo.Visible:=datamodes(ModeCombo.itemindex) in [dmImage,dmRenderedImage];
         if mode=dmImage then begin
            ColCombo.Visible:=True;
            ColLabel.Visible:=True;
@@ -948,8 +950,7 @@ begin
       ModeCombo.ItemIndex;
     uq.ParamByName('FORMAT').AsInteger :=
       FormatCombo.ItemIndex;
-    uq.ParamByName('RESIDENT').AsInteger :=
-      Ord(MemBox.Checked);
+    uq.ParamByName('RESIDENT').AsInteger := Memcombo.itemindex;
     uq.ParamByName('COLOUR').AsInteger :=
       ColCombo.ItemIndex;
     uq.ParamByName('COMPANY').AsString := UserSession.Company;

@@ -9,7 +9,7 @@ uses
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl,
   IWCompLabel, Graphics, IWHTMLControls, IWSiLink, siComp, siLngLnk,
   footer_user, distribtitle, IWCompRectangle, ReferredClass,
-  IWHTML40Container;
+  IWHTML40Container, IWCompMemo;
 
 type
   TformGrp = class(TIWAppForm)
@@ -25,6 +25,14 @@ type
     PrinterLabel: TIWLabel;
     NewBtn: TIWButton;
     IWSiLink1: TIWSiLink;
+    credbtn: TIWButton;
+    vendorfield: TIWEdit;
+    credfield: TIWEdit;
+    IWLabel1: TIWLabel;
+    IWLabel2: TIWLabel;
+    idmemo: TIWMemo;
+    IWLabel3: TIWLabel;
+    IWLabel4: TIWLabel;
     procedure GroupGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -35,6 +43,7 @@ type
       AColumn: Integer);
     procedure userfooter1CancelClick(Sender: TObject);
     procedure DistribFrameTitle1statuslinkClick(Sender: TObject);
+    procedure credbtnClick(Sender: TObject);
   public
     IList : TStringlist;
   end;
@@ -167,6 +176,89 @@ procedure TformGrp.userfooter1CancelClick(Sender: TObject);
 begin
    TIWAppForm(WebApplication.ActiveForm).Release;
    Tsu_FormRole.Create(WebApplication).Show;
+end;
+
+procedure TformGrp.credbtnClick(Sender: TObject);
+var
+  GroupId, i : integer;
+  item : string;
+  vendor : integer;
+  field : string;
+  storeid : string;
+  errs : string;
+  errcount : integer;
+  credcount : integer;
+begin
+  if Vendorfield.text='' then begin
+     WebApplication.ShowMessage('No vendor field', smAlert);
+     exit;
+  end;
+
+  if Credfield.text='' then begin
+     WebApplication.ShowMessage('No credential name field', smAlert);
+     exit;
+  end;
+
+  credcount:=0;
+  for I := 0 to idmemo.Lines.Count-1 do begin
+    if idmemo.lines[i]<>'' then inc (credcount);
+  end;
+  if credcount=0 then begin
+     WebApplication.ShowMessage('No credentials specified', smAlert);
+     exit;
+  end;
+
+  GroupId:=RcDataModule.nextID;
+  with RcDataModule.GroupInsertQuery do begin
+     Transaction.Active:=True;
+     ParamByName('NAME').AsString:='NewCredGroup '+datetimetostr(now);
+     ParamByName('ID').AsInteger:=GroupId;
+     ParamByName('COMPANY').AsString:=UserSession.Company;
+     ExecSQL;
+  end;
+
+  with RcDataModule.SQLQry do begin
+     close;
+     SQL.Clear;
+     SQL.Add('select * from mapping_data_v2 join stores on stores.id=mapping_data_v2.store_Id'
+             +' where mapping_data_v2.vendor=:vendor and stores.company=:company and mapping_data_v2.name=:credfield'
+             +' and mapping_data_v2.DATA=:dataval');
+     ParamByName ('vendor').asString:=vendorfield.text;
+     ParamByName ('company').asString:=UserSession.Company;
+     ParamByName ('credfield').asString:=credfield.text;
+  end;
+
+  errs:='Errors : ';
+  errcount:=0;
+  for I := 0 to idmemo.Lines.Count-1 do begin
+     item:=idmemo.Lines[i];
+     with RcDataModule.SQLQry do begin
+        ParamByName ('dataval').asString:=item;
+        open;
+        storeid:='';
+        if not RcDataModule.SQLQry.eof then begin
+           storeid:=fieldbyname ('store_id').AsString;
+        end else begin
+           inc(errcount);
+           errs:=errs+item+' ';
+        end;
+        close;
+     end;
+
+     if storeid<>'' then
+     with RcDataModule.GrpAllocInsertQuery do begin
+       ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+       ParamByName ('GROUPID').AsInteger:=Groupid;
+       ParamByName ('ITEMID').AsString:=storeid;
+       ParamByName ('COMPANY').AsString:=UserSession.Company;
+       ParamByName ('ITEMKIND').AsInteger:=1;
+       ExecSQL;
+     end;
+
+  end;
+  RcDataModule.Trans.commit;
+  EditGroup (IntToStr(GroupID),nil);
+  if errcount>0 then WebApplication.ShowMessage(errs, smAlert);
 end;
 
 procedure TformGrp.DistribFrameTitle1statuslinkClick(Sender: TObject);

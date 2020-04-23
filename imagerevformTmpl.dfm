@@ -140,8 +140,8 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
       1024
       652)
     object BodyRegion: TIWRegion
-      Left = 6
-      Top = 13
+      Left = 3
+      Top = 6
       Width = 992
       Height = 624
       Cursor = crAuto
@@ -695,6 +695,38 @@ object formImageVersionsTmpl: TformImageVersionsTmpl
         Width = 234
         Height = 16
         Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'ModeLabel'
+        Caption = '??'
+        RawText = False
+      end
+      object flashlbl: TIWLabel
+        Left = 568
+        Top = 44
+        Width = 137
+        Height = 16
+        Cursor = crAuto
+        Visible = False
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True

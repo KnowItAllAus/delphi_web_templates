@@ -187,6 +187,7 @@ type
     cfgquery: TIBQuery;
     StoreQuery: TIBQuery;
     StorePubQuery: TIBQuery;
+    SQLQry2: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

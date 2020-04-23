@@ -17,7 +17,7 @@ object formGrp: TformGrp
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -47
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -293,8 +293,8 @@ object formGrp: TformGrp
         RawText = False
       end
       object NewBtn: TIWButton
-        Left = 544
-        Top = 8
+        Left = 444
+        Top = 9
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -321,9 +321,270 @@ object formGrp: TformGrp
         TabOrder = 0
         OnClick = NewBtnClick
       end
+      object credbtn: TIWButton
+        Left = 552
+        Top = 409
+        Width = 174
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akRight, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Make New Group'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'NewBtn'
+        ScriptEvents = <>
+        TabOrder = 4
+        OnClick = credbtnClick
+      end
+      object vendorfield: TIWEdit
+        Left = 624
+        Top = 13
+        Width = 97
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'vendorfield'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        SubmitOnAsyncEvent = True
+        TabOrder = 5
+        PasswordPrompt = False
+      end
+      object credfield: TIWEdit
+        Left = 624
+        Top = 46
+        Width = 97
+        Height = 21
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        FocusColor = clNone
+        DoSubmitValidation = True
+        Editable = True
+        NonEditableAsLabel = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'credfield'
+        MaxLength = 0
+        ReadOnly = False
+        Required = False
+        ScriptEvents = <>
+        SubmitOnAsyncEvent = True
+        TabOrder = 6
+        PasswordPrompt = False
+      end
+      object IWLabel1: TIWLabel
+        Left = 552
+        Top = 16
+        Width = 45
+        Height = 16
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel1'
+        Caption = 'Vendor'
+        RawText = False
+      end
+      object IWLabel2: TIWLabel
+        Left = 552
+        Top = 48
+        Width = 63
+        Height = 16
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel2'
+        Caption = 'Credential'
+        RawText = False
+      end
+      object idmemo: TIWMemo
+        Left = 552
+        Top = 120
+        Width = 174
+        Height = 283
+        Cursor = crAuto
+        Anchors = [akTop, akRight, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        InvisibleBorder = False
+        HorizScrollBar = False
+        VertScrollBar = True
+        Required = False
+        TabOrder = 7
+        SubmitOnAsyncEvent = True
+        FriendlyName = 'idmemo'
+      end
+      object IWLabel3: TIWLabel
+        Left = 552
+        Top = 79
+        Width = 147
+        Height = 16
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel2'
+        Caption = 'Create group for stores'
+        RawText = False
+      end
+      object IWLabel4: TIWLabel
+        Left = 552
+        Top = 96
+        Width = 154
+        Height = 16
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        FriendlyName = 'IWLabel2'
+        Caption = 'with matching credential'
+        RawText = False
+      end
       object IWRegion3: TIWRegion
-        Left = 120
-        Top = 40
+        Left = 20
+        Top = 41
         Width = 497
         Height = 393
         Cursor = crAuto
@@ -342,10 +603,10 @@ object formGrp: TformGrp
           497
           393)
         object GroupGrid: TIWGrid
-          Left = 8
-          Top = 9
-          Width = 481
-          Height = 376
+          Left = 3
+          Top = 3
+          Width = 491
+          Height = 387
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight, akBottom]
           IW50Hint = False
@@ -410,6 +671,7 @@ object formGrp: TformGrp
       'Summary'
       'LangFile'
       'HelpKeyword')
+    Left = 8
     Top = 144
     TranslationData = {
       73007400430061007000740069006F006E0073005F0055006E00690063006F00

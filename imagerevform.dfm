@@ -337,7 +337,7 @@ object formImageVersions: TformImageVersions
         LangControl = RcDataMod.LangEditControl1
       end
       object NewVendEdit: TIWEdit
-        Left = 616
+        Left = 720
         Top = 44
         Width = 57
         Height = 22
@@ -374,7 +374,7 @@ object formImageVersions: TformImageVersions
         Text = 'NewVendEdit'
       end
       object VLabel: TIWLabel
-        Left = 560
+        Left = 664
         Top = 46
         Width = 49
         Height = 16
@@ -405,7 +405,7 @@ object formImageVersions: TformImageVersions
         RawText = False
       end
       object PLabel: TIWLabel
-        Left = 687
+        Left = 791
         Top = 46
         Width = 42
         Height = 16
@@ -436,7 +436,7 @@ object formImageVersions: TformImageVersions
         RawText = False
       end
       object NewProdEdit: TIWEdit
-        Left = 735
+        Left = 839
         Top = 44
         Width = 50
         Height = 22
@@ -999,6 +999,38 @@ object formImageVersions: TformImageVersions
         HasTabOrder = False
         FriendlyName = 'Limitlabel'
         Caption = 'X'
+        RawText = False
+      end
+      object flashlbl: TIWLabel
+        Left = 543
+        Top = 44
+        Width = 101
+        Height = 16
+        Cursor = crAuto
+        Visible = False
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Alignment = taLeftJustify
+        BGColor = clNone
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        NoWrap = False
+        ConvertSpaces = False
+        HasTabOrder = False
+        AutoSize = False
+        FriendlyName = 'ModeLabel'
+        Caption = '??'
         RawText = False
       end
       object ImageRegion: TIWRegion

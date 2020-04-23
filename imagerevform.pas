@@ -46,6 +46,7 @@ type
     RevFileNameEdit: TIWEdit;
     ColourEdit: TIWEdit;
     Limitlabel: TIWLabel;
+    flashlbl: TIWLabel;
     procedure IWAppFormCreate(Sender: TObject);
     procedure ImageGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
@@ -64,6 +65,7 @@ type
     format : formats;
     imgColour : integer;
     rendered : boolean;
+    resident : integer;
     function showImage(ms: TStream; format : formats): boolean;
     procedure getimagefromdb;
     procedure gettextfromdb;
@@ -77,7 +79,7 @@ implementation
 
 {$R *.dfm}
 
-uses datamod, graphics, serverController, jpeg, db, imagesform, imageupform, voucherform;
+uses datamod, graphics, serverController, jpeg, db, imagesform, imageupform, voucherform, global;
 
 procedure TformImageVersions.RefreshGrid;
 var
@@ -168,6 +170,8 @@ begin
   revfilenameedit.text:='';
   ModeName.Caption:='- - - - - -';
   IDEdit.Text:='- - - - - -';
+  FlashLbl.caption:='';
+  Flashlbl.visible:=false;
   DelBtn.Visible:=false;
   TestBtn.Visible:=false;
   ProdBtn.Visible:=false;
@@ -271,6 +275,11 @@ begin
      if not isnull then TBlobField(RcDataModule.CurrentImageQuery.FieldByName('IMAGE')).savetostream(ms);
   end;
   try
+    resident:=RcDataModule.CurrentImageQuery.FieldByName('RESIDENT').AsInteger;
+  except
+    resident:=0;
+  end;
+  try
     format:=formats(RcDataModule.CurrentImageQuery.FieldByName('FORMAT').AsInteger);
   except
     format:=fcHiRes;
@@ -299,6 +308,7 @@ begin
   VLabel.Visible:=False;
   PLabel.Visible:=False;
   ColourEdit.Visible:=False;
+  FlashLbl.visible:=false;
   IDEdit.Text:=RcDataModule.CurrentImageQuery.FieldByName('ID').AsString;
   DelBtn.Visible:=true;
   datamode:=datamodes(RcDataModule.CurrentImageQuery.FieldByName('DATAMODE').AsInteger);
@@ -317,6 +327,10 @@ begin
           ColourEdit.Visible:=true;
           ColourEdit.Text:=SiLangLinked1.GetTextOrDefault('Colour.'+RcDataModule.CurrentImageQuery.FieldByName('COLOUR').AsString);
           ImgColour:=RcDataModule.CurrentImageQuery.FieldByName('COLOUR').AsInteger;
+          if datamode=dmImage then begin
+            FlashLbl.caption:=getResidencyLabel(RcDataModule.CurrentImageQuery.FieldByName('RESIDENT').AsString);
+            FlashLbl.visible:=true;
+          end;
         except
           ColourEdit.Visible:=false;
         end;
@@ -507,6 +521,8 @@ begin
       UpFrm.workimg:=TBitmap.create;
       UpFrm.workimg.Assign(self.Image.Picture.Bitmap);
       UpFrm.ColCombo.ItemIndex:=ImgColour;
+      if datamode=dmImage then
+         UpFrm.MemCombo.ItemIndex:=resident;
     end;
     UpFrm.ModeComboChange(nil);
     if (UpFrm.NewVendEdit.Visible) then begin
