@@ -135,6 +135,15 @@ begin
               end;
            end;
 
+           with RCDataModule.SQLEx do begin
+              SQL.Clear;
+              SQL.Add('update users set lastlogon=:lastlogon');
+              SQL.Add('where userid=:userid');
+              parambyname('userid').AsString:=UserEdit.text;
+              parambyname('lastlogon').AsDateTime:=now;
+              ExecQuery;
+           end;
+
            usersession.User:=UserEdit.Text;
            user_id:=FieldByName('ID').AsInteger;
            lastco:=-1;

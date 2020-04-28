@@ -56,7 +56,7 @@ type
     ColCombo: TIWComboBox;
     SynBtn: TIWButton;
     memcombo: TIWComboBox;
-    IWLabel1: TIWLabel;
+    storagelbl: TIWLabel;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -226,7 +226,10 @@ begin
       except
         FormatCombo.ItemIndex := 0;
       end;
-      MemCombo.Itemindex:=FieldByName ('RESIDENT').AsInteger;
+      if FieldByName ('RESIDENT').AsInteger>memcombo.Items.Count-1 then
+         memcombo.ItemIndex:=1 // To allow for changing job types
+      else
+         Memcombo.itemindex:=FieldByName ('RESIDENT').AsInteger;
   end;
   ModeComboChange(nil);
 end;
@@ -365,6 +368,7 @@ begin
   ColCombo.Visible:=False;
   ColLabel.Visible:=false;
   PreferLabel.Visible:=false;
+  StorageLbl.Visible:=false;
   EditLabel.Visible:=False;
   AdjBtn.Visible:=false;
   PcCombo.Visible:=false;
@@ -409,6 +413,7 @@ begin
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
         Memcombo.Visible:=datamodes(ModeCombo.itemindex)=dmImage;
+        storagelbl.Visible:=MemCombo.Visible;
         ColLabel.Visible:=True;
         PreferLabel.Visible:=True;
         WidthGuide.Visible:=true;

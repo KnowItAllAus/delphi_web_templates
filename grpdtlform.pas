@@ -45,8 +45,6 @@ type
     ChildCombo: TIWComboBox;
     IWLabel12: TIWLabel;
     GroupEdit: TIWEdit;
-    IWComboBox1: TIWComboBox;
-    IWButton1: TIWButton;
     procedure IWAppFormCreate(Sender: TObject);
     procedure CancelBtnClick(Sender: TObject);
     procedure StoreGridRenderCell(ACell: TIWGridCell; const ARow,
@@ -98,26 +96,13 @@ type tag_obj = class
   s : string;
 end;
 
-function trim40 (s : string) : string;
-begin
-  if (length (s)>40) then begin
-     s:=copy (s,1,40)+'...';
-  end;
-  result:=s;
-end;
+const
+  leftlen = 50;
 
-function trim30 (s : string) : string;
+function trimlen (s : string; len : integer) : string;
 begin
-  if (length (s)>30) then begin
-     s:=copy (s,1,30)+'...';
-  end;
-  result:=s;
-end;
-
-function trim45 (s : string) : string;
-begin
-  if (length (s)>45) then begin
-     s:=copy (s,1,45)+'...';
+  if (length (s)>len) then begin
+     s:=copy (s,1,len)+'...';
   end;
   result:=s;
 end;
@@ -356,7 +341,7 @@ begin
        live_store:=GrpStoreQuery.FieldByName('TEST').AsString<>'1';
        if (not live_store) or
           (not testbox.checked and ((UserSession.privilege and PRIV_LIVE)<>0)) then begin
-         StoreCombo.Items.Add((trim45(GrpStoreQuery.FieldByName('NAME').AsString)));
+         StoreCombo.Items.Add((trimlen(GrpStoreQuery.FieldByName('NAME').AsString,leftlen)));
          storeIdList.Add(GrpStoreQuery.FieldByName('ID').AsString);
        end;
        GrpStoreQuery.next;
@@ -372,7 +357,7 @@ begin
     promoIdList.Clear;
     while not GrpPromoQuery.Eof do begin
        if (GrpPromoQuery.FieldByName('Template').AsString<>'1') then begin
-          PromoCombo.Items.Add((trim45(GrpPromoQuery.FieldByName('NAME').AsString)));
+          PromoCombo.Items.Add((trimlen(GrpPromoQuery.FieldByName('NAME').AsString,leftlen)));
           promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
        end;
        GrpPromoQuery.next;
@@ -405,7 +390,7 @@ begin
     GroupCombo.Items.Clear;
     GroupIdList.Clear;
     while not GrpAvail.Eof do begin
-       GroupCombo.Items.Add(htmlquote(trim30 (GrpAvail.FieldByName('NAME').AsString)));
+       GroupCombo.Items.Add(htmlquote(trimlen (GrpAvail.FieldByName('NAME').AsString,30)));
        GroupIdList.Add(GrpAvail.FieldByName('AVAILABLE_GROUP').AsString);
        GrpAvail.next;
     end;
@@ -420,7 +405,7 @@ begin
     ChildCombo.Items.Clear;
     ChildIdList.Clear;
     while not GrpAvail.Eof do begin
-       ChildCombo.Items.Add(htmlquote(trim30 (GrpAvail.FieldByName('NAME').AsString)));
+       ChildCombo.Items.Add(htmlquote(trimlen (GrpAvail.FieldByName('NAME').AsString,30)));
        ChildIdList.Add(GrpAvail.FieldByName('AVAILABLE_GROUP').AsString);
        GrpAvail.next;
     end;
@@ -463,7 +448,7 @@ begin
      ParamByName ('COMPANY').AsString:=UserSession.Company;
      Transaction.Active:=true;
      Open;
-     NameEdit.Text:=trim45(FieldByName('NAME').AsString);
+     NameEdit.Text:=trimlen(FieldByName('NAME').AsString,leftlen);
      GroupEdit.Text:='Undefined'; // Should default to division  ('D')
      if FieldByName('GROUPKIND').AsString='S' then GroupEdit.Text:='Store';
      if FieldByName('GROUPKIND').AsString='D' then GroupEdit.Text:='Division';

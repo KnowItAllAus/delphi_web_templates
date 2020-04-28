@@ -87,7 +87,7 @@ type
     BorderBox: TIWCheckBox;
     IWComboBox1: TIWComboBox;
     memcombo: TIWComboBox;
-    IWLabel5: TIWLabel;
+    storagelbl: TIWLabel;
     procedure CancelBtnClick(Sender: TObject);
     procedure IWAppFormCreate(Sender: TObject);
     procedure ModeComboChange(Sender: TObject);
@@ -140,6 +140,7 @@ type
     procedure DrawPreviewGrid;
     function modifyTabRec (s : string; col : integer; line : integer; modfunc : TModfunc = nil) : string;
     function checkconstraints (s : TStream; b : TBitmap) : boolean;
+    procedure checksetupconstraints;
   public
     { Public declarations }
     workimg : TBitmap;
@@ -147,6 +148,7 @@ type
     filename : string;
     referedby : referer_class;
     old_format : integer;
+    fixednv : boolean;
     procedure display_work_image;
   end;
 
@@ -513,7 +515,11 @@ begin
       except
         FormatCombo.ItemIndex := 0;
       end;
-      Memcombo.itemindex:=FieldByName ('RESIDENT').AsInteger;
+      checksetupconstraints;
+      if FieldByName ('RESIDENT').AsInteger>memcombo.Items.Count-1 then
+         memcombo.ItemIndex:=1
+      else
+         Memcombo.itemindex:=FieldByName ('RESIDENT').AsInteger;
       constraintlbl.caption:='Constraints : '+RcDataModule.GetValue ('edittmplconstraint','???');
   end;
   ModeComboChange(nil);
@@ -658,6 +664,48 @@ begin
   ms.free;
 end;
 
+procedure TFormImageUpTmpl.checksetupconstraints;
+
+  procedure checksetupconstraint (constraint : string);
+  var
+    param : string;
+    value : string;
+  begin
+    param:=clipspaces(uppercase(copy (constraint,1,pos('=',constraint)-1)));
+    value:=clipspaces(copy (constraint,length(param)+2,999));
+    if param='ALLOWFIXEDNV' then begin
+       if value='Y' then begin
+          fixednv:=true;
+       end;
+    end;
+  end;
+
+var
+  pt : string;
+  constraint : string;
+  fieldtype : string;
+  sl : TStringlist;
+  i : integer;
+  val : string;
+begin
+  fixednv:=false;
+  fieldtype:=RcDataModule.GetValue ('edittmpltype','???');
+  constraint:=RcDataModule.GetValue ('edittmplconstraint','');
+  sl:=TStringlist.Create;
+  try
+    getcommafields(sl,constraint);
+    for I := 0 to sl.Count-1 do begin
+      checkSetupConstraint (sl[i]);
+    end;
+  finally
+    sl.Free;
+  end;
+  if not fixednv then begin
+     while memcombo.items.Count>2 do
+        memcombo.Items.Delete(2);
+  end;
+end;
+
 procedure TFormImageUpTmpl.ModeComboChange(Sender: TObject);
 var
   mode : datamodes;
@@ -670,6 +718,7 @@ begin
   ColCombo.Visible:=False;
   ColLabel.Visible:=false;
   PreferLabel.Visible:=false;
+  StorageLbl.Visible:=false;
   EditLabel.Visible:=False;
   AdjBtn.Visible:=false;
   PcCombo.Visible:=false;
@@ -713,7 +762,8 @@ begin
         UploadFileLabel.Visible := True;
         UploadBtn.Visible:=True;
         FormatCombo.Visible:=True;
-        Memcombo.Visible:=datamodes(ModeCombo.itemindex) in [dmImage,dmRenderedImage];
+        Memcombo.Visible:=datamodes(ModeCombo.itemindex) in [dmImage];
+        Storagelbl.Visible:=Memcombo.Visible;
         if mode=dmImage then begin
            ColCombo.Visible:=True;
            ColLabel.Visible:=True;

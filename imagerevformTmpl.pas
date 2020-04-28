@@ -376,12 +376,13 @@ begin
         SQLQry.Transaction.Active:=false;
         SQLQry.Transaction.Active:=true;
         SQLQry.SQL.Clear;
-        SQLQry.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME)');
+        SQLQry.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME,RESIDENT) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME,:RESIDENT)');
         SQLQry.ParamByName ('ID').AsString:=inttostr(ImageID);
         SQLQry.ParamByName ('HDR').AsString:=RcDataModule.GetValue ('editparam','');
         SQLQry.ParamByName ('COMPANY').AsString:=UserSession.Company;
         SQLQry.ParamByName ('CREATEDBY').AsString:=UserSession.User;
         SQLQry.ParamByName ('CREATEDTIME').AsDateTime:=now;
+        SQLQry.ParamByName ('RESIDENT').AsInteger :=1;
         SQLQry.ExecSQL;
       end;
     except

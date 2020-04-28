@@ -1,8 +1,8 @@
 object FormGrpDtl: TFormGrpDtl
   Left = 0
   Top = 0
-  Width = 1028
-  Height = 697
+  Width = 867
+  Height = 651
   RenderInvisibleControls = False
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -17,52 +17,52 @@ object FormGrpDtl: TFormGrpDtl
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -64
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0
-    Width = 1028
+    Width = 867
     Height = 118
     HorzScrollBar.Visible = False
     VertScrollBar.Visible = False
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1028
+    ExplicitWidth = 867
     ExplicitHeight = 118
     inherited IWFrameRegion: TIWRegion
-      Width = 1028
+      Width = 867
       Height = 118
       TabOrder = 14
-      ExplicitWidth = 1028
+      ExplicitWidth = 867
       ExplicitHeight = 118
       inherited IWRectangle1: TIWRectangle
         Top = 93
-        Width = 1028
+        Width = 867
         ExplicitTop = 93
         ExplicitWidth = 1028
       end
       inherited IWRectangle3: TIWRectangle
         Top = 98
-        Width = 1028
+        Width = 867
         ExplicitTop = 98
         ExplicitWidth = 1028
       end
       inherited IWImageFile3: TIWImageFile
-        Left = 693
+        Left = 532
         ExplicitLeft = 693
       end
       inherited langlink: TIWSiLink
-        Left = 629
+        Left = 468
         ExplicitLeft = 629
       end
       inherited Smalltitle: TIWLabel
-        Left = 908
+        Left = 747
         Top = 101
         ExplicitLeft = 908
         ExplicitTop = 101
       end
       inherited HideBox: TIWImageFile
-        Left = 1012
+        Left = 851
         Top = 100
         Width = 12
         Height = 14
@@ -81,8 +81,8 @@ object FormGrpDtl: TFormGrpDtl
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118
-    Width = 1028
-    Height = 550
+    Width = 867
+    Height = 504
     Cursor = crAuto
     RenderInvisibleControls = False
     Align = alClient
@@ -96,13 +96,13 @@ object FormGrpDtl: TFormGrpDtl
     ZIndex = 1000
     Splitter = False
     DesignSize = (
-      1028
-      550)
+      867
+      504)
     object IWRegion2: TIWRegion
       Left = 3
       Top = 6
-      Width = 1021
-      Height = 520
+      Width = 860
+      Height = 492
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akLeft, akTop, akRight, akBottom]
@@ -116,8 +116,8 @@ object FormGrpDtl: TFormGrpDtl
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        1021
-        520)
+        860
+        492)
       object GrpLabel: TIWLabel
         Left = 14
         Top = 10
@@ -253,8 +253,8 @@ object FormGrpDtl: TFormGrpDtl
       object StoreGrid: TIWGrid
         Left = 19
         Top = 275
-        Width = 462
-        Height = 207
+        Width = 466
+        Height = 179
         Cursor = crAuto
         Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
@@ -292,11 +292,12 @@ object FormGrpDtl: TFormGrpDtl
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitHeight = 207
       end
       object VoucherGrid: TIWGrid
         Left = 17
         Top = 95
-        Width = 464
+        Width = 468
         Height = 124
         Cursor = crAuto
         IW50Hint = False
@@ -432,7 +433,7 @@ object FormGrpDtl: TFormGrpDtl
         Left = 0
         Top = 3
         Width = 3
-        Height = 517
+        Height = 489
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -456,11 +457,12 @@ object FormGrpDtl: TFormGrpDtl
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitHeight = 517
       end
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 1021
+        Width = 860
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -522,8 +524,8 @@ object FormGrpDtl: TFormGrpDtl
       end
       object StoreCombo: TIWComboBox
         Left = 93
-        Top = 487
-        Width = 388
+        Top = 459
+        Width = 392
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akBottom]
@@ -561,10 +563,11 @@ object FormGrpDtl: TFormGrpDtl
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
+        ExplicitTop = 487
       end
       object AddStoreBtn: TIWButton
         Left = 21
-        Top = 486
+        Top = 458
         Width = 61
         Height = 25
         Cursor = crAuto
@@ -591,6 +594,7 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         TabOrder = 6
         OnClick = AddStoreBtnClick
+        ExplicitTop = 486
       end
       object AddJobBtn: TIWButton
         Left = 17
@@ -622,9 +626,9 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddJobBtnClick
       end
       object PromoCombo: TIWComboBox
-        Left = 88
+        Left = 84
         Top = 225
-        Width = 393
+        Width = 397
         Height = 21
         Cursor = crAuto
         IW50Hint = False
@@ -692,9 +696,9 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = EditBtnClick
       end
       object GroupGrid: TIWGrid
-        Left = 523
-        Top = 95
-        Width = 479
+        Left = 505
+        Top = 97
+        Width = 336
         Height = 124
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight]
@@ -733,10 +737,11 @@ object FormGrpDtl: TFormGrpDtl
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitWidth = 418
       end
       object AddGroupButton: TIWButton
-        Left = 523
-        Top = 225
+        Left = 503
+        Top = 227
         Width = 61
         Height = 23
         Cursor = crAuto
@@ -764,9 +769,9 @@ object FormGrpDtl: TFormGrpDtl
         OnClick = AddGroupButtonClick
       end
       object GroupCombo: TIWComboBox
-        Left = 590
-        Top = 225
-        Width = 412
+        Left = 577
+        Top = 227
+        Width = 264
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight]
@@ -804,12 +809,13 @@ object FormGrpDtl: TFormGrpDtl
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
+        ExplicitWidth = 346
       end
       object DepGrid: TIWGrid
-        Left = 525
-        Top = 315
-        Width = 477
-        Height = 166
+        Left = 505
+        Top = 333
+        Width = 336
+        Height = 120
         Cursor = crAuto
         Anchors = [akLeft, akTop, akRight, akBottom]
         IW50Hint = False
@@ -847,14 +853,15 @@ object FormGrpDtl: TFormGrpDtl
         ShowEmptyCells = True
         ShowInvisibleRows = True
         ScrollToCurrentRow = False
+        ExplicitWidth = 418
+        ExplicitHeight = 166
       end
       object IWLabel8: TIWLabel
-        Left = 521
-        Top = 46
-        Width = 481
+        Left = 501
+        Top = 48
+        Width = 346
         Height = 43
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -883,12 +890,11 @@ object FormGrpDtl: TFormGrpDtl
         RawText = False
       end
       object IWLabel10: TIWLabel
-        Left = 523
-        Top = 270
-        Width = 479
-        Height = 39
+        Left = 503
+        Top = 275
+        Width = 344
+        Height = 34
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akRight]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -913,12 +919,12 @@ object FormGrpDtl: TFormGrpDtl
         FriendlyName = 'IWLabel6'
         Caption = 
           'Child Groups - Stores in these groups will get jobs and updates ' +
-          'from both this group and any groups included above'
+          'from both this group  and any groups included above'
         RawText = False
       end
       object AddChildButton: TIWButton
-        Left = 523
-        Top = 487
+        Left = 505
+        Top = 459
         Width = 61
         Height = 23
         Cursor = crAuto
@@ -945,11 +951,12 @@ object FormGrpDtl: TFormGrpDtl
         ScriptEvents = <>
         TabOrder = 12
         OnClick = AddChildButtonClick
+        ExplicitTop = 487
       end
       object ChildCombo: TIWComboBox
-        Left = 590
-        Top = 487
-        Width = 412
+        Left = 577
+        Top = 459
+        Width = 264
         Height = 21
         Cursor = crAuto
         Anchors = [akLeft, akRight, akBottom]
@@ -987,6 +994,8 @@ object FormGrpDtl: TFormGrpDtl
         ItemIndex = -1
         Sorted = False
         FriendlyName = 'RegionCombo'
+        ExplicitTop = 487
+        ExplicitWidth = 346
       end
       object IWLabel12: TIWLabel
         Left = 88
@@ -1057,124 +1066,55 @@ object FormGrpDtl: TFormGrpDtl
         PasswordPrompt = False
         Text = 'GroupEdit'
       end
-      object IWComboBox1: TIWComboBox
-        Left = 168
-        Top = 68
-        Width = 313
-        Height = 21
-        Cursor = crAuto
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = False
-        StyleRenderOptions.RenderSize = False
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        BGColor = clNone
-        Font.Color = clNone
-        Font.Size = 10
-        Font.Style = []
-        FocusColor = clNone
-        AutoHideOnMenuActivation = False
-        ItemsHaveValues = False
-        NoSelectionText = '-- No Selection --'
-        Required = False
-        RequireSelection = True
-        ScriptEvents = <>
-        UseSize = False
-        Style = stNormal
-        ButtonColor = clBtnFace
-        DoSubmitValidation = True
-        Editable = True
-        NonEditableAsLabel = True
-        SubmitOnAsyncEvent = True
-        TabOrder = 16
-        ItemIndex = -1
-        Sorted = False
-        FriendlyName = 'RegionCombo'
-      end
-      object IWButton1: TIWButton
-        Left = 87
-        Top = 65
-        Width = 75
-        Height = 24
-        Cursor = crAuto
-        Visible = False
-        IW50Hint = False
-        ParentShowHint = False
-        ShowHint = True
-        ZIndex = 0
-        RenderSize = True
-        StyleRenderOptions.RenderSize = True
-        StyleRenderOptions.RenderPosition = True
-        StyleRenderOptions.RenderFont = True
-        StyleRenderOptions.RenderZIndex = True
-        StyleRenderOptions.RenderVisibility = True
-        StyleRenderOptions.RenderStatus = True
-        StyleRenderOptions.RenderAbsolute = True
-        Caption = 'Copy To...'
-        DoSubmitValidation = True
-        Color = clBtnFace
-        Font.Color = clWebBLUE
-        Font.Size = 10
-        Font.Style = []
-        FriendlyName = 'IWButton2'
-        ScriptEvents = <>
-        TabOrder = 17
-        OnClick = AddJobBtnClick
-      end
     end
   end
   inline userfooter1: Tuserfooter
     Left = 0
-    Top = 668
-    Width = 1028
+    Top = 622
+    Width = 867
     Height = 29
     HorzScrollBar.Visible = False
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 668
-    ExplicitWidth = 1028
+    ExplicitTop = 622
+    ExplicitWidth = 867
     ExplicitHeight = 29
     inherited IWRegion1: TIWRegion
-      Width = 1028
+      Width = 867
       Height = 29
       TabOrder = 3
-      ExplicitWidth = 1028
+      ExplicitWidth = 867
       ExplicitHeight = 29
       inherited IWRectangle1: TIWRectangle
-        Left = 652
-        ExplicitLeft = 652
+        Left = 491
+        Width = 376
+        ExplicitLeft = 573
+        ExplicitWidth = 376
       end
       inherited IWRectangle4: TIWRectangle
-        Width = 1644
+        Width = 1483
         ExplicitWidth = 1644
       end
       inherited IWRectangle6: TIWRectangle
-        Width = 610
+        Width = 449
         ExplicitWidth = 610
       end
       inherited Cancel: TIWButton
-        Left = 941
+        Left = 780
         Caption = 'Back'
         OnClick = CancelBtnClick
         ExplicitLeft = 941
       end
       inherited Extra1: TIWButton
-        Left = 855
+        Left = 694
         ExplicitLeft = 855
       end
       inherited Extra2: TIWButton
-        Left = 769
+        Left = 608
         ExplicitLeft = 769
       end
       inherited fiwSiLink1: TIWSiLink
-        Left = 700
+        Left = 539
         ExplicitLeft = 700
       end
       inherited navcombo: TIWComboBox

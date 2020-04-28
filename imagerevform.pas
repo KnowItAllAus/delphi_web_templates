@@ -455,6 +455,7 @@ begin
     ImageInsertQuery.ParamByName('COMPANY').AsString:=UserSession.Company;
     ImageInsertQuery.ParamByName('CREATEDBY').AsString:=UserSession.User;
     ImageInsertQuery.ParamByName('CREATEDTIME').AsDateTime :=now;
+    ImageInsertQuery.ParamByName('RESIDENT').AsInteger :=1;
     ImageInsertQuery.ExecSQL;
 
     with RcDataModule.CurrentImageQuery do begin

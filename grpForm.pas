@@ -208,15 +208,6 @@ begin
      exit;
   end;
 
-  GroupId:=RcDataModule.nextID;
-  with RcDataModule.GroupInsertQuery do begin
-     Transaction.Active:=True;
-     ParamByName('NAME').AsString:='NewCredGroup '+datetimetostr(now);
-     ParamByName('ID').AsInteger:=GroupId;
-     ParamByName('COMPANY').AsString:=UserSession.Company;
-     ExecSQL;
-  end;
-
   with RcDataModule.SQLQry do begin
      close;
      SQL.Clear;
@@ -232,32 +223,61 @@ begin
   errcount:=0;
   for I := 0 to idmemo.Lines.Count-1 do begin
      item:=idmemo.Lines[i];
-     with RcDataModule.SQLQry do begin
-        ParamByName ('dataval').asString:=item;
-        open;
-        storeid:='';
-        if not RcDataModule.SQLQry.eof then begin
-           storeid:=fieldbyname ('store_id').AsString;
-        end else begin
-           inc(errcount);
-           errs:=errs+item+' ';
-        end;
-        close;
+     if item<>'' then begin
+       with RcDataModule.SQLQry do begin
+          ParamByName ('dataval').asString:=item;
+          open;
+          storeid:='';
+          if not RcDataModule.SQLQry.eof then begin
+             storeid:=fieldbyname ('store_id').AsString;
+          end else begin
+             inc(errcount);
+             errs:=errs+item+' ';
+          end;
+          close;
+       end;
      end;
-
-     if storeid<>'' then
-     with RcDataModule.GrpAllocInsertQuery do begin
-       ParamByName ('ID').AsInteger:=RcDataModule.NextId;
-       ParamByName ('GROUPID').AsInteger:=Groupid;
-       ParamByName ('ITEMID').AsString:=storeid;
-       ParamByName ('COMPANY').AsString:=UserSession.Company;
-       ParamByName ('ITEMKIND').AsInteger:=1;
-       ExecSQL;
-     end;
-
   end;
-  RcDataModule.Trans.commit;
-  EditGroup (IntToStr(GroupID),nil);
+
+  if errcount=0 then begin
+    // If the creds all work, then do it for real
+    GroupId:=RcDataModule.nextID;
+    with RcDataModule.GroupInsertQuery do begin
+       Transaction.Active:=True;
+       ParamByName('NAME').AsString:='NewCredGroup '+datetimetostr(now);
+       ParamByName('ID').AsInteger:=GroupId;
+       ParamByName('COMPANY').AsString:=UserSession.Company;
+       ParamByName('TESTGROUP').AsString:='N';
+       ExecSQL;
+    end;
+
+    for I := 0 to idmemo.Lines.Count-1 do begin
+       item:=idmemo.Lines[i];
+       if item<>'' then begin
+         with RcDataModule.SQLQry do begin
+            ParamByName ('dataval').asString:=item;
+            open;
+            storeid:='';
+            if not RcDataModule.SQLQry.eof then begin
+               storeid:=fieldbyname ('store_id').AsString;
+            end;
+            close;
+         end;
+
+         if storeid<>'' then
+         with RcDataModule.GrpAllocInsertQuery do begin
+           ParamByName ('ID').AsInteger:=RcDataModule.NextId;
+           ParamByName ('GROUPID').AsInteger:=Groupid;
+           ParamByName ('ITEMID').AsString:=storeid;
+           ParamByName ('COMPANY').AsString:=UserSession.Company;
+           ParamByName ('ITEMKIND').AsInteger:=1;
+           ExecSQL;
+         end;
+       end;
+    end;
+    RcDataModule.Trans.commit;
+    EditGroup (IntToStr(GroupID),nil);
+  end;
   if errcount>0 then WebApplication.ShowMessage(errs, smAlert);
 end;
 
