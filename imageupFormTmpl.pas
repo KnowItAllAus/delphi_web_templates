@@ -139,7 +139,7 @@ type
     function convertSpace (s : string) : string;
     procedure DrawPreviewGrid;
     function modifyTabRec (s : string; col : integer; line : integer; modfunc : TModfunc = nil) : string;
-    function checkconstraints (s : TStream; b : TBitmap) : boolean;
+    function checkconstraints (s : TStream; b : TBitmap; var sortflag : boolean) : boolean;
     procedure checksetupconstraints;
   public
     { Public declarations }
@@ -900,7 +900,7 @@ begin
   drawgrid;
 end;
 
-function checkconstraint(constraint : string; s : TStream; b : TBitmap) : boolean;
+function checkconstraint(constraint : string; s : TStream; b : TBitmap; var sortflag : boolean) : boolean;
 var
   param : string;
   value : string;
@@ -921,6 +921,8 @@ begin
     end else if param='MAXHEIGHT' then begin
       if assigned(b) then
          result:=b.Height<=strtoint(value)
+    end else if param='SORT' then begin
+         sortflag:=(uppercase(value)='Y') or (uppercase(value)='YES') or (uppercase(value)='TRUE') or (uppercase(value)='1');
     end else if param='MAX' then begin
       if assigned(s) then
          result:=s.Size<=strtoint(value);
@@ -930,7 +932,7 @@ begin
   end;
 end;
 
-function TFormImageUpTmpl.checkconstraints (s : TStream; b : TBitmap) : boolean;
+function TFormImageUpTmpl.checkconstraints (s : TStream; b : TBitmap; var sortflag : boolean) : boolean;
 var
   pt : string;
   constraint : string;
@@ -940,13 +942,14 @@ var
   val : string;
 begin
   result:=false;
+  sortflag:=false;
   fieldtype:=RcDataModule.GetValue ('edittmpltype','???');
   constraint:=RcDataModule.GetValue ('edittmplconstraint','');
   sl:=TStringlist.Create;
   try
     getcommafields(sl,constraint);
     for I := 0 to sl.Count-1 do begin
-      if not checkConstraint (sl[i],s,b) then begin
+      if not checkConstraint (sl[i],s,b,sortflag) then begin
          WebApplication.ShowMessage('Error : Constraint '+sl[i], smAlert);
          exit;
       end;
@@ -962,8 +965,9 @@ var
    ms, textstream : TMemoryStream;
    i : integer;
    uq : TIBQuery;
+   sortflag : boolean;
 begin
-  textstream := nil;
+  textstream := TMemoryStream.Create;
   ms:=nil;
   try
     if (modecombo.itemindex=1) {text} and (view.ItemIndex=1) then begin
@@ -975,22 +979,36 @@ begin
          Memo.Lines.Strings[i]:=FixFormat(Memo.Lines.Strings[i]);
       end;
     end;
-    ms := TMemoryStream.Create;
     if not (modecombo.itemindex in [0,13]) {image, rendered image} then begin
+      ms := TMemoryStream.Create;
+      try
         Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
         ms.position := 3;  // Avoid BOM
-        textstream := TMemoryStream.Create;
         textstream.CopyFrom(ms,ms.size-3);
+      finally
         freeandnil(ms);
+      end;
     end;
 
     if (modecombo.itemindex in [0,13]) {image, rendered image} then begin
-       if not checkconstraints (nil,workimg) then
+       if not checkconstraints (nil,workimg,sortflag) then
          exit;
     end else begin
        // Some text blob
-       if not checkconstraints (textstream,nil) then
+       if not checkconstraints (textstream,nil,sortflag) then
          exit;
+       if sortflag then begin
+         memosort;
+         ms := TMemoryStream.Create;
+         try
+           Memo.Lines.SaveToStream(ms,TEncoding.UTF8);
+           ms.position := 3;  // Avoid BOM
+           textstream.Clear;
+           textstream.CopyFrom(ms,ms.size-3);
+         finally
+           freeandnil(ms);
+         end;
+       end;
     end;
 
     uq:=RcDataModule.ImageUpdateQueryTmpl;

@@ -158,10 +158,29 @@ begin
     i:=1;
     RowCount:=1;
     if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-      ColumnCount:=16;
+      ColumnCount:=17;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
       Cell[0, 2].Text := '';
+      Cell[0, 3].Text := 'KIA ID';
+      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
+      Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
+      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
+      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
+      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildError');
+      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
+      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
+      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
+      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('');
+      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
+      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
+      Cell[0, 15].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
+      Cell[0, 16].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
+    end else begin
+      ColumnCount:=16;
+      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
+      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
+      Cell[0, 2].Text := 'KIA ID';
       Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
       Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
       Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
@@ -175,29 +194,12 @@ begin
       Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
       Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
       Cell[0, 15].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
-    end else begin
-      ColumnCount:=15;
-      Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
-      Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
-      Cell[0, 2].Text := SiLangLinked1.GetTextOrDefault ('Grid.POS');
-      Cell[0, 3].Text := SiLangLinked1.GetTextOrDefault ('Grid.Enabled');
-      Cell[0, 4].Text := SiLangLinked1.GetTextOrDefault ('Grid.Printer');
-      Cell[0, 5].Text := SiLangLinked1.GetTextOrDefault ('Grid.Cfg');
-      Cell[0, 6].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildError');
-      Cell[0, 7].Text := SiLangLinked1.GetTextOrDefault ('Grid.Sent');
-      Cell[0, 8].Text := SiLangLinked1.GetTextOrDefault ('Grid.Size');
-      Cell[0, 9].Text := SiLangLinked1.GetTextOrDefault ('Grid.Ver');
-      Cell[0, 10].Text := SiLangLinked1.GetTextOrDefault ('');
-      Cell[0, 11].Text := SiLangLinked1.GetTextOrDefault ('Grid.Published');
-      Cell[0, 12].Text := SiLangLinked1.GetTextOrDefault ('Grid.MAC');
-      Cell[0, 13].Text := SiLangLinked1.GetTextOrDefault ('Grid.Publishat');
-      Cell[0, 14].Text := SiLangLinked1.GetTextOrDefault ('Grid.BuildMsg');
     end;
     RcDataModule.Log('Refresh iterate');
     while not RcDataModule.StoreEnQuery.Eof do begin
       RcDataModule.Log('Refresh Read');
       RowCount:=RowCount+1;
-      if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+      if (UserSession.privilege and PRIV_ADMIN)<>0 then begin
           with Cell[i, 0] do begin
             Clickable := True;
             Text := RcDataModule.StoreEnQuery.FieldByName('ID').AsString;
@@ -210,10 +212,77 @@ begin
             Clickable := true;
           end;
           with Cell[i, 3] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('KIAID').AsString;
+          end;
+          with Cell[i, 4] do begin
             if RcDataModule.StoreEnQuery.FieldByName('FromCo').IsNull then
                Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString
             else
                Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString+' ('+RcDataModule.StoreEnQuery.FieldByName('FromCo').AsString+')'
+          end;
+          with Cell[i, 5] do begin
+            if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
+               Text:='No' else Text:='Yes';
+          end;
+          with Cell[i, 6] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('Printer').AsString;
+          end;
+          with Cell[i, 7] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
+            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString>='1' then
+               Text:=Text+'*';
+          end;
+          with Cell[i, 8] do begin
+            text:='Ok';
+            if RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString='Y' then
+               text:='Error';
+          end;
+          with Cell[i, 9] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
+          end;
+          with Cell[i, 10] do begin
+            Text:=RcDataModule.StoreEnQuery.FieldByName('ConfigSize').AsString;
+            if not RcDataModule.StoreEnQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreEnQuery.FieldByName('BuildMS').AsString+' ms)';
+          end;
+          with Cell[i, 11] do begin
+            Control := TIWButton.Create(Self);
+            with TIWButton(Control) do begin
+              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
+              Width := 80;
+              Height:= 20;
+              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
+              onClick:=PublishClick;
+              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
+            end;
+          end;
+          with Cell[i, 12] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
+          end;
+          with Cell[i, 13] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
+          end;
+          with Cell[i, 14] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('MAC').AsString;
+          end;
+          with Cell[i, 15] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildTime').AsString;
+          end;
+          with Cell[i, 16] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
+          end;
+      end else begin
+          with Cell[i, 0] do begin
+            Clickable := True;
+            Text := RcDataModule.StoreEnQuery.FieldByName('ID').AsString;
+          end;
+          with Cell[i, 1] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('Name').AsString;
+          end;
+          with Cell[i, 2] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('KIAID').AsString;
+          end;
+          with Cell[i, 3] do begin
+            Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString;
           end;
           with Cell[i, 4] do begin
             if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
@@ -224,7 +293,7 @@ begin
           end;
           with Cell[i, 6] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
-            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString>='1' then
+            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString='1' then
                Text:=Text+'*';
           end;
           with Cell[i, 7] do begin
@@ -241,6 +310,17 @@ begin
           end;
           with Cell[i, 10] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
+          end;
+          with Cell[i, 11] do begin
+            Control := TIWButton.Create(Self);
+            with TIWButton(Control) do begin
+              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
+              Width := 80;
+              Height:= 20;
+              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
+              onClick:=PublishClick;
+              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
+            end;
           end;
           with Cell[i, 12] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
@@ -252,78 +332,6 @@ begin
             Text := RcDataModule.StoreEnQuery.FieldByName('BuildTime').AsString;
           end;
           with Cell[i, 15] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
-          end;
-          with Cell[i, 11] do begin
-            Control := TIWButton.Create(Self);
-            with TIWButton(Control) do begin
-              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
-              Width := 80;
-              Height:= 20;
-              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
-              onClick:=PublishClick;
-              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
-            end;
-          end;
-      end else begin
-          with Cell[i, 0] do begin
-            Clickable := True;
-            Text := RcDataModule.StoreEnQuery.FieldByName('ID').AsString;
-          end;
-          with Cell[i, 1] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('Name').AsString;
-          end;
-          with Cell[i, 2] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('POSName').AsString;
-          end;
-          with Cell[i, 3] do begin
-            if (RcDataModule.StoreEnQuery.FieldByName('Enabled').AsInteger=0) then
-               Text:='No' else Text:='Yes';
-          end;
-          with Cell[i, 4] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('Printer').AsString;
-          end;
-          with Cell[i, 5] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigId').AsString;
-            if RcDataModule.StoreEnQuery.FieldByName ('ConfigUpdate').AsString='1' then
-               Text:=Text+'*';
-          end;
-          with Cell[i, 6] do begin
-            text:='Ok';
-            if RcDataModule.StoreEnQuery.FieldByName('BuildError').AsString='Y' then
-               text:='Error';
-          end;
-          with Cell[i, 7] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigIdTx').AsString;
-          end;
-          with Cell[i, 8] do begin
-            Text:=RcDataModule.StoreEnQuery.FieldByName('ConfigSize').AsString;
-            if not RcDataModule.StoreEnQuery.FieldByName('BuildMS').isnull then text:=text+' ('+RcDataModule.StoreEnQuery.FieldByName('BuildMS').AsString+' ms)';
-          end;
-          with Cell[i, 9] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('Ver').AsString;
-          end;
-          with Cell[i, 10] do begin
-            Control := TIWButton.Create(Self);
-            with TIWButton(Control) do begin
-              Caption := SiLangLinked1.GetTextOrDefault ('Grid.Publishnow');
-              Width := 80;
-              Height:= 20;
-              Confirmation:='Publish now to '+RcDataModule.StoreEnQuery.FieldByName('Name').AsString;;
-              onClick:=PublishClick;
-              tag:=RcDataModule.StoreEnQuery.FieldByName('ID').AsInteger;
-            end;
-          end;
-          with Cell[i, 11] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('ConfigDate').AsString;
-          end;
-          with Cell[i, 12] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('MAC').AsString;
-          end;
-          with Cell[i, 13] do begin
-            Text := RcDataModule.StoreEnQuery.FieldByName('BuildTime').AsString;
-          end;
-          with Cell[i, 14] do begin
             Text := RcDataModule.StoreEnQuery.FieldByName('BuildMsg').AsString;
           end;
       end;

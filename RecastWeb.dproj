@@ -3,7 +3,7 @@
 			<ProjectGuid>{0491EE35-47DB-40C5-BB91-EB3DF1B08E54}</ProjectGuid>
 			<MainSource>RecastWeb.dpr</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
@@ -350,7 +350,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Parameters>
-						<Parameters Name="RunParams">-L=c:\server_install\web\lang\ -P=801 -D=firebird:/var/lib/firebird/2.5/data/recast-config.fdb  -zD=e:\db\config.fdb -DT=firebird:/var/lib/firebird/2.5/data/recast-trans.fdb  -R=c:\server_install\web\printers\ -X=http://127.0.0.1:801 -S=https://configx.s4-technology.com</Parameters>
+						<Parameters Name="RunParams">-D=firebird.au-cloud.s4-technology.com:recast-config.fdb -DT=firebird.au-cloud.s4-technology.com:recast-trans.fdb</Parameters>
 						<Parameters Name="DebugCWD">c:\server_install\web\</Parameters>
 					</Parameters>
 					<Excluded_Packages>

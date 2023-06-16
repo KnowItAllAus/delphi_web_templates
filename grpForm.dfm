@@ -17,7 +17,7 @@ object formGrp: TformGrp
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -47
+  DesignTop = 8
   inline DistribFrameTitle1: TDistribFrameTitle
     Left = 0
     Top = 0
@@ -183,9 +183,9 @@ object formGrp: TformGrp
       LangControl = RcDataMod.LangEditControl1
     end
     object IWRegion2: TIWRegion
-      Left = 159
+      Left = 126
       Top = 24
-      Width = 729
+      Width = 784
       Height = 447
       Cursor = crAuto
       RenderInvisibleControls = False
@@ -200,7 +200,7 @@ object formGrp: TformGrp
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        729
+        784
         447)
       object IWRectangle1: TIWRectangle
         Left = 0
@@ -234,7 +234,7 @@ object formGrp: TformGrp
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 729
+        Width = 784
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -259,6 +259,7 @@ object formGrp: TformGrp
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitWidth = 729
       end
       object PrinterLabel: TIWLabel
         Left = 16
@@ -293,8 +294,8 @@ object formGrp: TformGrp
         RawText = False
       end
       object NewBtn: TIWButton
-        Left = 444
-        Top = 9
+        Left = 494
+        Top = 13
         Width = 75
         Height = 25
         Cursor = crAuto
@@ -322,7 +323,7 @@ object formGrp: TformGrp
         OnClick = NewBtnClick
       end
       object credbtn: TIWButton
-        Left = 552
+        Left = 607
         Top = 409
         Width = 174
         Height = 25
@@ -350,9 +351,10 @@ object formGrp: TformGrp
         ScriptEvents = <>
         TabOrder = 4
         OnClick = credbtnClick
+        ExplicitLeft = 552
       end
       object vendorfield: TIWEdit
-        Left = 624
+        Left = 679
         Top = 13
         Width = 97
         Height = 21
@@ -387,9 +389,10 @@ object formGrp: TformGrp
         SubmitOnAsyncEvent = True
         TabOrder = 5
         PasswordPrompt = False
+        ExplicitLeft = 624
       end
       object credfield: TIWEdit
-        Left = 624
+        Left = 679
         Top = 46
         Width = 97
         Height = 21
@@ -424,9 +427,10 @@ object formGrp: TformGrp
         SubmitOnAsyncEvent = True
         TabOrder = 6
         PasswordPrompt = False
+        ExplicitLeft = 624
       end
       object IWLabel1: TIWLabel
-        Left = 552
+        Left = 607
         Top = 16
         Width = 45
         Height = 16
@@ -455,9 +459,10 @@ object formGrp: TformGrp
         FriendlyName = 'IWLabel1'
         Caption = 'Vendor'
         RawText = False
+        ExplicitLeft = 552
       end
       object IWLabel2: TIWLabel
-        Left = 552
+        Left = 607
         Top = 48
         Width = 63
         Height = 16
@@ -486,9 +491,10 @@ object formGrp: TformGrp
         FriendlyName = 'IWLabel2'
         Caption = 'Credential'
         RawText = False
+        ExplicitLeft = 552
       end
       object idmemo: TIWMemo
-        Left = 552
+        Left = 607
         Top = 120
         Width = 174
         Height = 283
@@ -519,9 +525,10 @@ object formGrp: TformGrp
         TabOrder = 7
         SubmitOnAsyncEvent = True
         FriendlyName = 'idmemo'
+        ExplicitLeft = 552
       end
       object IWLabel3: TIWLabel
-        Left = 552
+        Left = 607
         Top = 79
         Width = 147
         Height = 16
@@ -550,9 +557,10 @@ object formGrp: TformGrp
         FriendlyName = 'IWLabel2'
         Caption = 'Create group for stores'
         RawText = False
+        ExplicitLeft = 552
       end
       object IWLabel4: TIWLabel
-        Left = 552
+        Left = 607
         Top = 96
         Width = 154
         Height = 16
@@ -581,13 +589,16 @@ object formGrp: TformGrp
         FriendlyName = 'IWLabel2'
         Caption = 'with matching credential'
         RawText = False
+        ExplicitLeft = 552
       end
       object IWRegion3: TIWRegion
         Left = 20
         Top = 41
-        Width = 497
+        Width = 557
         Height = 393
         Cursor = crAuto
+        HorzScrollBar.Visible = False
+        VertScrollBar.Visible = False
         RenderInvisibleControls = False
         Anchors = [akLeft, akTop, akBottom]
         BorderOptions.NumericWidth = 0
@@ -600,12 +611,12 @@ object formGrp: TformGrp
         ZIndex = 1000
         Splitter = False
         DesignSize = (
-          497
+          557
           393)
         object GroupGrid: TIWGrid
           Left = 3
           Top = 3
-          Width = 491
+          Width = 551
           Height = 387
           Cursor = crAuto
           Anchors = [akLeft, akTop, akRight, akBottom]
@@ -644,6 +655,7 @@ object formGrp: TformGrp
           ShowEmptyCells = True
           ShowInvisibleRows = True
           ScrollToCurrentRow = False
+          ExplicitWidth = 543
         end
       end
     end

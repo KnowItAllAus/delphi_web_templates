@@ -272,10 +272,15 @@ begin
               with Cell[i, 0] do begin
                 Text := htmlquote(SQLQry.FieldByName('NAME').AsString);
               end;
-              Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
-              Cell[i, 2].clickable:=true;
-              Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
-              Cell[i, 1].clickable:=true;
+              if Cell[i, 0].text='Instance' then begin
+                Cell[i, 2].text:='';
+                Cell[i, 1].text:='';
+              end else begin
+                Cell[i, 2].text:=SiLangLinked1.GetTextOrDefault ('Grid.Properties');
+                Cell[i, 2].clickable:=true;
+                Cell[i, 1].text:=SiLangLinked1.GetTextOrDefault ('Grid.Edit');
+                Cell[i, 1].clickable:=true;
+              end;
               Cell[i, 5].text:=htmlquote(SQLQry.FieldByName('FIELDCONSTRAINT').AsString);
               Cell[i, 6].text:='';
               Cell[i, 7].text:='';

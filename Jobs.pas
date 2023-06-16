@@ -397,6 +397,7 @@ var
   valueid : integer;
   paramconstraints : string;
   headerid : string;
+  imageid : integer;
 begin
   tmplco:=usersession.company;
   tmplrealid:=tmplid;
@@ -505,6 +506,36 @@ begin
            end;
         end;
         SQLQry.Next;
+      end;
+
+      // Add an instance field automatically
+      SQLEx.SQL.Clear;
+      SQLEx.SQL.Add('insert into GROUPOBJHDR (ID,COMPANY,NAME,GUID,GROUPPARAMTMPLID,PARAMTYPE) VALUES (:ID,:COMPANY,:NAME,:GUID,:HDR,:PARAMTYPE)');
+      headerid:=inttostr(rcdatamodule.nextID);
+      SQLEx.ParamByName ('ID').AsString:=headerid;
+      SQLEx.ParamByName ('HDR').AsInteger:=newinstanceid;
+      SQLEx.ParamByName ('COMPANY').AsString:=UserSession.Company;
+      SQLEx.ParamByName ('NAME').AsString:='Instance';
+      SQLEx.ParamByName ('PARAMTYPE').AsString:='F';
+      SQLEx.ExecQuery;
+      defaultvalue:=inttostr(newjobid);
+      if defaultvalue<>'' then begin
+       valueId:=nextID;
+       SQLEx2.SQL.Clear;
+       SQLEx2.SQL.Add('insert into GROUPPARAMOBJ (ID,COMPANY,PARAMOBJID,CREATEDBY,CREATEDTIME,DATAFIELD) VALUES (:ID,:COMPANY,:HDR,:CREATEDBY,:CREATEDTIME,:DATAFIELD)');
+       SQLEx2.ParamByName ('ID').AsString:=inttostr(ValueID);
+       SQLEx2.ParamByName ('HDR').AsString:=headerid;
+       SQLEx2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+       SQLEx2.ParamByName ('CREATEDBY').AsString:=UserSession.User;
+       SQLEx2.ParamByName ('CREATEDTIME').AsDateTime:=now;
+       SQLEx2.ParamByName ('DATAFIELD').AsString:=defaultvalue;
+       SQLEx2.ExecQuery;
+       SQLEx2.SQL.Clear;
+       SQLEx2.SQL.Add('update GROUPOBJHDR set CURRENTID=:CURRENT where ID=:ID and COMPANY=:COMPANY');
+       SQLEx2.ParamByName ('CURRENT').AsString:=inttostr(ValueID);
+       SQLEx2.ParamByName ('ID').AsString:=headerid;
+       SQLEx2.ParamByName ('COMPANY').AsString:=UserSession.Company;
+       SQLEx2.ExecQuery;
       end;
       SQLEx.Transaction.Commit;
       SQLQry.Transaction.Active:=false;

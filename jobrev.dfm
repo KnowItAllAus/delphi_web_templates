@@ -16,7 +16,7 @@ object FormJobRev: TFormJobRev
   LockOnSubmit = True
   ShowHint = True
   XPTheme = True
-  DesignLeft = -194
+  DesignLeft = 8
   DesignTop = 8
   object IWCheckBox1: TIWCheckBox
     Left = 328
