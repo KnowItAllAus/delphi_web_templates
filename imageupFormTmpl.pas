@@ -1034,7 +1034,7 @@ begin
     end else begin
       uq.ParamByName('IMAGE').AsString := '';
     end;
-    if assigned(textstream) then
+    if assigned(textstream) and (textstream.Size>0) then
        uq.ParamByName('TEXT').loadfromStream(textstream,ftBlob);
     uq.ExecSQL;
     uq.Transaction.Commit;

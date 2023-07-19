@@ -157,7 +157,7 @@ begin
   with StoreGrid do begin
     i:=1;
     RowCount:=1;
-    if (UserSession.privilege and PRIV_SUPER)<>0 then begin
+    if (UserSession.privilege and PRIV_ADMIN)<>0 then begin
       ColumnCount:=17;
       Cell[0, 0].Text := SiLangLinked1.GetTextOrDefault ('Grid.Id');
       Cell[0, 1].Text := SiLangLinked1.GetTextOrDefault ('Grid.Name');
@@ -387,12 +387,12 @@ begin
       Font.Color := clWhite;
     end else begin
       namecol:=1;
-      enabledcol:=3;
-      if (UserSession.privilege and PRIV_SUPER)<>0 then begin
-        enabledcol:=4;
-        cfgcol:=8;
+      enabledcol:=4;
+      if (UserSession.privilege and PRIV_ADMIN)<>0 then begin
+        enabledcol:=5;
+        cfgcol:=9;
       end else begin
-        cfgcol:=7;
+        cfgcol:=8;
       end;
       if AColumn=cfgcol then begin
          if (StoreGrid.Cell[ARow,cfgcol-2].Text<>StoreGrid.Cell[ARow,cfgcol].Text) then begin
