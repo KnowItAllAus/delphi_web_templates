@@ -17,7 +17,7 @@ object formCreds: TformCreds
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -121
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114
@@ -39,10 +39,10 @@ object formCreds: TformCreds
       849
       601)
     object IWRegion2: TIWRegion
-      Left = 67
-      Top = 29
-      Width = 726
-      Height = 566
+      Left = 46
+      Top = 24
+      Width = 747
+      Height = 561
       Cursor = crAuto
       RenderInvisibleControls = False
       Anchors = [akTop, akBottom]
@@ -56,8 +56,8 @@ object formCreds: TformCreds
       ZIndex = 1000
       Splitter = False
       DesignSize = (
-        726
-        566)
+        747
+        561)
       object CredLabel: TIWLabel
         Left = 8
         Top = 8
@@ -230,9 +230,8 @@ object formCreds: TformCreds
         Left = 30
         Top = 119
         Width = 683
-        Height = 417
+        Height = 258
         Cursor = crAuto
-        Anchors = [akLeft, akTop, akBottom]
         IW50Hint = False
         ParentShowHint = False
         ShowHint = True
@@ -305,7 +304,7 @@ object formCreds: TformCreds
         Left = 0
         Top = 3
         Width = 3
-        Height = 563
+        Height = 558
         Cursor = crAuto
         Align = alLeft
         IW50Hint = False
@@ -329,11 +328,12 @@ object formCreds: TformCreds
         Color = 11100191
         Alignment = taLeftJustify
         VAlign = vaMiddle
+        ExplicitHeight = 563
       end
       object IWRectangle2: TIWRectangle
         Left = 0
         Top = 0
-        Width = 726
+        Width = 747
         Height = 3
         Cursor = crAuto
         Align = alTop
@@ -684,6 +684,131 @@ object formCreds: TformCreds
         ScriptEvents = <>
         TabOrder = 10
         OnClick = AddCredBtnClick
+      end
+      object json: TIWMemo
+        Left = 40
+        Top = 392
+        Width = 665
+        Height = 105
+        Cursor = crAuto
+        ExtraTagParams.Strings = (
+          'spellcheck="false"')
+        Anchors = [akLeft, akTop, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        BGColor = clNone
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        ScriptEvents = <>
+        InvisibleBorder = False
+        HorizScrollBar = False
+        VertScrollBar = True
+        Required = False
+        TabOrder = 11
+        SubmitOnAsyncEvent = True
+        FriendlyName = 'json'
+      end
+      object IWButton1: TIWButton
+        Left = 616
+        Top = 503
+        Width = 89
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Import'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton2'
+        ScriptEvents = <>
+        TabOrder = 12
+        OnClick = ImportClick
+      end
+      object clearbtn: TIWButton
+        Left = 40
+        Top = 503
+        Width = 89
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Clear'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'clearbtn'
+        ScriptEvents = <>
+        TabOrder = 13
+        OnClick = clearbtnClick
+      end
+      object defbtn: TIWButton
+        Left = 504
+        Top = 503
+        Width = 89
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akLeft, akBottom]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Default'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clWebBLUE
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'IWButton2'
+        ScriptEvents = <>
+        TabOrder = 14
+        OnClick = defbtnClick
       end
     end
   end

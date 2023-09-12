@@ -188,6 +188,7 @@ type
     StoreQuery: TIBQuery;
     StorePubQuery: TIBQuery;
     SQLQry2: TIBQuery;
+    CredDefQuery: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
