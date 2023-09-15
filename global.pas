@@ -7,6 +7,7 @@ function ZoneDir: string;
 function LangDir: string;
 function GetDBName: string;
 function GetTransDBName: string;
+function GetGWDBName: string;
 function GetPrefix: string;
 function GetExitURL: string;
 function GetSecureURL: string;
@@ -32,6 +33,7 @@ var
   LangDirectory: string;
   DBName: string;
   TransDBName: string;
+  GWDBName: string;
   Prefix: string;
   ExitURL : String;
   SecureURL : String;
@@ -147,6 +149,11 @@ begin
   result := TransDBName;
 end;
 
+function GetGWDBName: string;
+begin
+  result := GWDBName;
+end;
+
 function GetPrefix: string;
 begin
   result := Prefix;
@@ -252,6 +259,7 @@ begin
       if (copy(paramstr(i), 1, 3) = '-S=') then SecureURL := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-D=') then DBName := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 4) = '-DT=') then TransDBName := copy(paramstr(i), 5, length(paramstr(i)) - 4);
+      if (copy(paramstr(i), 1, 4) = '-GW=') then GWDBName := copy(paramstr(i), 5, length(paramstr(i)) - 4);
       if (copy(paramstr(i), 1, 3) = '-R=') then PrinterDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-Z=') then ZoneDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);
       if (copy(paramstr(i), 1, 3) = '-L=') then LangDirectory := copy(paramstr(i), 4, length(paramstr(i)) - 3);

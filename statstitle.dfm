@@ -388,7 +388,7 @@ object StatsFrameTitle: TStatsFrameTitle
         FriendlyName = 'HomeLink'
         TabOrder = 1
         RawText = False
-        Caption = 'ACTIVITY'
+        Caption = 'KIA ACTIVITY'
       end
     end
   end

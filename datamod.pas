@@ -212,6 +212,7 @@ type
     function GetValue (name : string; default : string) : string;
     function make_guid : string;
     procedure SelectTransDB(new : boolean);
+    procedure SelectGWDB;
   end;
 
 function RcDatamodule : TRcDataMod;
@@ -325,12 +326,27 @@ end;
 
 procedure TRcDataMod.SelectTransDB(new : boolean);
 begin
-   TranDb.Connected:=false;
-   if new then
-      TranDb.DatabaseName:=GetTransDBName
-   else
-      TranDb.DatabaseName:=GetDBName;
-   TranDb.Connected:=true;
+   try
+     TranDb.Connected:=false;
+     if new then
+        TranDb.DatabaseName:=GetTransDBName
+     else
+        TranDb.DatabaseName:=GetDBName;
+     TranDb.Connected:=true;
+   except
+     on e : exception do log (e.message);
+   end;
+end;
+
+procedure TRcDataMod.SelectGWDB;
+begin
+   try
+     GwDb.Connected:=false;
+     GwDb.DatabaseName:=GetGWDBName;
+     GwDb.Connected:=true;
+   except
+     on e : exception do log (e.message);
+   end;
 end;
 
 function TRcDataMod.nextID : integer;

@@ -3,7 +3,7 @@
 			<ProjectGuid>{0491EE35-47DB-40C5-BB91-EB3DF1B08E54}</ProjectGuid>
 			<MainSource>RecastWeb.dpr</MainSource>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Application</AppType>
 			<FrameworkType>VCL</FrameworkType>
@@ -354,7 +354,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Parameters>
-						<Parameters Name="RunParams">-D=firebird.au-cloud.s4-technology.com:recast-config.fdb -DT=firebird.au-cloud.s4-technology.com:recast-trans.fdb</Parameters>
+						<Parameters Name="RunParams">-D=firebird.au-cloud.s4-technology.com:recast-config.fdb -DT=firebird.au-cloud.s4-technology.com:recast-trans.fdb -GW=firebird.au-cloud.s4-technology.com:gatewayrequests.fdb</Parameters>
 						<Parameters Name="DebugCWD">c:\server_install\web\</Parameters>
 					</Parameters>
 					<Excluded_Packages>

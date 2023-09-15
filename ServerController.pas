@@ -212,6 +212,7 @@ begin
       UserCompany:=inttostr(cobj.co_id);
       Company:=inttostr(cobj.co_id);
       RcDataModule.SelectTransDB(cobj.new_journ);
+      RcDataModule.SelectGWDB;
       strictrules:=cobj.strictrules;
       SetPriv (cobj.priv);
       Timeoffset:=cobj.time_offset/1440;
