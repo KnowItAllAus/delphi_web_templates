@@ -72,7 +72,7 @@ var
 
 implementation
 
-uses DataMod, ServerController, IWInit, cfgTypes, statform, roleform, parse;
+uses DataMod, ServerController, IWInit, cfgTypes, gwform, roleform, parse;
 {$R *.DFM}
 
 const
@@ -83,11 +83,11 @@ function TformJnl.GetStoreName (Id : string) : string;
 var
   i : integer;
 begin
+  result:='';
   i:=storeidlist.IndexOf(Id);
   try
-    result:=StoreCombo.Items[i];
+    if i>=0 then result:=StoreCombo.Items[i];
   except
-    result:='';
   end;
 end;
 
@@ -648,7 +648,7 @@ end;
 procedure TformJnl.StatsFrameTitle1ActivityLinkClick(Sender: TObject);
 begin
   TIWAppForm(WebApplication.ActiveForm).Release;
-  TformStats.Create(WebApplication).show;
+  Tformgw.Create(WebApplication).show;
 end;
 
 procedure TformJnl.userfooter1CancelClick(Sender: TObject);

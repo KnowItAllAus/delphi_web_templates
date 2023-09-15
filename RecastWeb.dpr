@@ -20,7 +20,7 @@ uses
   global in 'global.pas',
   voucherEditForm2 in 'voucherEditForm2.pas' {FormVoucherEdit2: TIWAppForm},
   storesForm in 'storesForm.pas' {formStores: TIWAppForm},
-  jnlform in 'jnlform.pas' {formJnl: TIWAppForm},
+  gwform in 'gwform.pas' {formgw: TIWAppForm},
   imagesForm in 'imagesForm.pas' {formImages: TIWAppForm},
   grpForm in 'grpForm.pas' {formGrp: TIWAppForm},
   grpdtlform in 'grpdtlform.pas' {FormGrpDtl: TIWAppForm},
@@ -73,7 +73,8 @@ uses
   slaveunit in 'slaveunit.pas',
   newpipeunit in 'newpipeunit.pas',
   simplepipeclient in 'simplepipeclient.pas',
-  upipes in '..\3rdParty\upipes\upipes.pas';
+  upipes in '..\3rdParty\upipes\upipes.pas',
+  jnlform in 'jnlform.pas' {formJnl: TIWAppForm};
 
 {$R *.res}
 

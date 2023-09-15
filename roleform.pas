@@ -63,7 +63,7 @@ procedure handle_nav (pageindex : integer);
 implementation
 
 uses IWInit,datamod,login, voucherForm, storesForm,
-     sendForm, passwdForm, statform, possform, imagesForm, jnlForm,
+     sendForm, passwdForm, statform, possform, imagesForm, jnlForm, gwform,
      ServerController, grpForm, global, sysform, su_main,
      cfgtypes, jobs, distrib, distribstatusform, overviewform, formint;
 
@@ -195,41 +195,47 @@ begin
       TformJnl.Create(WebApplication).show;
     end;
     3: begin
+      if UserSession.Company='0' then exit;
+      RcDataModule.Trans.Active:=false;
+      TIWAppForm(WebApplication.ActiveForm).Release;
+      Tformgw.Create(WebApplication).show;
+    end;
+    4: begin
       if ((usersession.privilege and PRIV_ADMIN)=0) then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
       TFormStores.Create(WebApplication).Show;
       //TFormSys.Create(WebApplication).Show;
     end;
-    4: begin
+    5: begin
       if ((usersession.privilege and PRIV_EDIT)=0) or (UserSession.Company='0') then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
       TFormOverview.Create(WebApplication).Show;
     end;
-    5: begin
+    6: begin
       if (UserSession.Company='0') or ((usersession.privilege and PRIV_EDIT)=0) then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
       TFormSend.Create(WebApplication).Show;
     end;
-    6: begin
+    7: begin
       if (UserSession.Company='0') or ((usersession.privilege and PRIV_EDIT)=0) then exit;
       RcDataModule.Trans.Active:=false;
       TIWAppForm(WebApplication.ActiveForm).Release;
       TFormDistribStatus.Create(WebApplication).Show;
     end;
-    7 : begin
+    8 : begin
       TIWAppForm(WebApplication.ActiveForm).Release;
       Tsu_FormRole.Create(WebApplication).Show;
     end;
-    8 : begin
-    end;
     9 : begin
+    end;
+    10 : begin
       RcDataModule.Trans.Active:=false;
       WebApplication.TerminateAndRedirect (GetExitURL);
     end;
-    10 : begin
+    11 : begin
     end;
     else with UserSession.mru_list[pageindex-10] do begin
       gotoJob (id,name,rev,note);

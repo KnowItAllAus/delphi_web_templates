@@ -189,6 +189,9 @@ type
     StorePubQuery: TIBQuery;
     SQLQry2: TIBQuery;
     CredDefQuery: TIBQuery;
+    gwquery: TIBQuery;
+    gwdb: TIBDatabase;
+    gwtran: TIBTransaction;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
