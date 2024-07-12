@@ -16,7 +16,7 @@ object su_FormRole: Tsu_FormRole
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = 8
+  DesignTop = -61
   object IWRegion1: TIWRegion
     Left = 0
     Top = 118

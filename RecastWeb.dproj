@@ -354,7 +354,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Parameters>
-						<Parameters Name="RunParams">-D=firebird.au-cloud.s4-technology.com:recast-config.fdb -DT=firebird.au-cloud.s4-technology.com:recast-trans.fdb -GW=firebird.au-cloud.s4-technology.com:gatewayrequests.fdb</Parameters>
+						<Parameters Name="RunParams">-D=192.168.0.23:recast-config.fdb -DT=192.168.0.23:recast-trans.fdb -GW=192.168.0.23:gatewayrequests.fdb</Parameters>
 						<Parameters Name="DebugCWD">c:\server_install\web\</Parameters>
 					</Parameters>
 					<Excluded_Packages>

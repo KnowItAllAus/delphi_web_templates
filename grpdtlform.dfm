@@ -17,7 +17,7 @@ object FormGrpDtl: TFormGrpDtl
   ShowHint = True
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -64
+  DesignTop = 8
   inline FrameBareTitle1: TFrameBareTitle
     Left = 0
     Top = 0

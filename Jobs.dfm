@@ -318,7 +318,7 @@ object formJobs: TformJobs
         UseFrame = True
         UseSize = True
         FriendlyName = 'JobGrid'
-        ColumnCount = 7
+        ColumnCount = 9
         OnCellClick = JobGridCellClick
         RowCount = 1
         ShowEmptyCells = True
@@ -466,6 +466,98 @@ object formJobs: TformJobs
           'Prod')
         Sorted = False
         FriendlyName = 'test_prod_box'
+      end
+      object disabledbox: TIWCheckBox
+        Left = 10
+        Top = 11
+        Width = 121
+        Height = 21
+        Cursor = crAuto
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Show Disabled'
+        Editable = True
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        SubmitOnAsyncEvent = True
+        ScriptEvents = <>
+        DoSubmitValidation = True
+        Style = stNormal
+        TabOrder = 8
+        OnClick = disabledboxChange
+        Checked = False
+        FriendlyName = 'disabledbox'
+      end
+      object selall: TIWButton
+        Left = 768
+        Top = 7
+        Width = 73
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Select all'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'selun'
+        ScriptEvents = <>
+        TabOrder = 9
+        OnClick = selallClick
+      end
+      object disablebtn: TIWButton
+        Left = 856
+        Top = 7
+        Width = 113
+        Height = 25
+        Cursor = crAuto
+        Anchors = [akTop, akRight]
+        IW50Hint = False
+        ParentShowHint = False
+        ShowHint = True
+        ZIndex = 0
+        RenderSize = True
+        StyleRenderOptions.RenderSize = True
+        StyleRenderOptions.RenderPosition = True
+        StyleRenderOptions.RenderFont = True
+        StyleRenderOptions.RenderZIndex = True
+        StyleRenderOptions.RenderVisibility = True
+        StyleRenderOptions.RenderStatus = True
+        StyleRenderOptions.RenderAbsolute = True
+        Caption = 'Disable Selected'
+        DoSubmitValidation = True
+        Color = clBtnFace
+        Font.Color = clNone
+        Font.Size = 10
+        Font.Style = []
+        FriendlyName = 'dissel'
+        ScriptEvents = <>
+        TabOrder = 10
+        OnClick = disablebtnClick
       end
     end
   end

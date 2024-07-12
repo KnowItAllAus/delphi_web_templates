@@ -133,7 +133,7 @@ end;
 procedure Tsu_FormRole.IWAdminClick(Sender: TObject);
 begin
   if (UserSession.UserCompany<>'0') and ((UserSession.privilege and PRIV_ADMIN) = 0)  then exit;
-  handle_nav (3);
+  handle_nav (4);
 end;
 
 procedure Tsu_FormRole.PwdLinkClick(Sender: TObject);
@@ -237,7 +237,7 @@ begin
     end;
     11 : begin
     end;
-    else with UserSession.mru_list[pageindex-10] do begin
+    else with UserSession.mru_list[pageindex-11] do begin
       gotoJob (id,name,rev,note);
     end;
   end;

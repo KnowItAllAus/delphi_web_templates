@@ -14,7 +14,7 @@ uses
 type
   Tformgw = class(TIWAppForm)
     StatsFrameTitle1: TStatsFrameTitle;
-    IWRegion1: TIWRegion;
+    backregion: TIWRegion;
     IWRegion2: TIWRegion;
     VoucherLabel: TIWLabel;
     IWLabel1: TIWLabel;
@@ -44,6 +44,7 @@ type
     Redeem: TIWCheckBox;
     adjust: TIWCheckBox;
     IWLabel5: TIWLabel;
+    servicename: TIWComboBox;
     procedure TranGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -131,6 +132,7 @@ var
 begin
   recs:=0;
   timeoffset:=0; //(utccombo.itemindex-12)*60/1440;
+  trangrid.rowcount:=1;
   with TranGrid do begin
     Cell[0, 0].Text := 'Time';
     Cell[0, 1].Text := 'Request';
@@ -143,6 +145,7 @@ begin
     Cell[0, 8].Text := 'Rewards';
     Cell[0, 9].Text := 'Points';
   end;
+  if storecombo.itemindex=0 then exit;
 
   try
     RcDataModule.gwdb.Open;
@@ -166,7 +169,7 @@ begin
       Close;
       SQL.Clear;
       SQL.Add('SELECT first :maxrec skip :offset');
-      SQL.Add('p.* FROM Prime p');
+      SQL.Add('p.* FROM '+servicename.Text+' p');
       SQL.Add('WHERE p.SITENAME  = :STORE');
       SQL.Add('AND p.REQUESTDATE  >= :TIMESTART');
       SQL.Add('AND p.REQUESTDATE  <= :TIMEEND');
@@ -209,22 +212,34 @@ begin
             Text := gwQuery.FieldByName('ReturnMessage').AsString;
           end;
           with Cell[i, 4] do begin
-            Text := gwQuery.FieldByName('ServerStatus').AsString;;
+            if gwQuery.FieldList.IndexOf('ServerStatus')>=0 then begin
+              Text := gwQuery.FieldByName('ServerStatus').AsString;
+            end else Text:='N/A';
           end;
           with Cell[i, 5] do begin
-            Text := gwQuery.FieldByName('CUSTOMERID').AsString;
+            if gwQuery.FieldList.IndexOf('CUSTOMERID')>=0 then begin
+              Text := gwQuery.FieldByName('CUSTOMERID').AsString;
+            end else Text:='N/A';
           end;
           with Cell[i, 6] do begin
-            Text := gwQuery.FieldByName('NAME').AsString;
+            if gwQuery.FieldList.IndexOf('NAME')>=0 then begin
+              Text := gwQuery.FieldByName('NAME').AsString;
+            end else Text:='N/A';
           end;
           with Cell[i, 7] do begin
-            Text := gwQuery.FieldByName('TRANSACTIONID').AsString;
+            if gwQuery.FieldList.IndexOf('TRANSACTIONID')>=0 then begin
+              Text := gwQuery.FieldByName('TRANSACTIONID').AsString;
+            end else Text:='N/A';
           end;
           with Cell[i, 8] do begin
-            Text := gwQuery.FieldByName('REWARDS').AsString;
+            if gwQuery.FieldList.IndexOf('REWARDS')>=0 then begin
+              Text := gwQuery.FieldByName('REWARDS').AsString;
+            end else Text:='N/A';
           end;
           with Cell[i, 9] do begin
-            Text := gwQuery.FieldByName('POINTS').AsString;
+            if gwQuery.FieldList.IndexOf('POINTS')>=0 then begin
+              Text := gwQuery.FieldByName('POINTS').AsString;
+            end else Text:='N/A';
           end;
           inc(i);
       end; { if not TranItemQuery }

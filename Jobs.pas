@@ -7,8 +7,8 @@ uses
   IWCompEdit, IWHTMLControls, IWExtCtrls, IWCompLabel, IWCompRectangle,
   IWVCLBaseControl, IWBaseControl, IWBaseHTMLControl, IWControl, IWSiLink,
   IWVCLBaseContainer, IWContainer, IWHTMLContainer, IWRegion, footer_user,
-  Controls, Forms, promotitle, siComp, siLngLnk, IWCompButton,
-  IWHTML40Container, IWCompListbox;
+  Controls, Forms, promotitle, siComp, siLngLnk, IWCompButton, IWMain,
+  IWHTML40Container, IWCompListbox, IWCompCheckbox;
 
 type
   TformJobs = class(TIWAppForm)
@@ -27,6 +27,9 @@ type
     FindBtn: TIWButton;
     GuidEdit: TIWEdit;
     prodbox: TIWComboBox;
+    disabledbox: TIWCheckBox;
+    selall: TIWButton;
+    disablebtn: TIWButton;
     procedure JobGridRenderCell(ACell: TIWGridCell; const ARow,
       AColumn: Integer);
     procedure IWAppFormCreate(Sender: TObject);
@@ -35,9 +38,12 @@ type
     procedure JobGridCellClick(ASender: TObject; const ARow,
       AColumn: Integer);
     procedure FindBtnClick(Sender: TObject);
+    procedure selallClick(Sender: TObject);
+    procedure disabledboxChange(Sender: TObject);
+    procedure disablebtnClick(Sender: TObject);
   private
   public
-    procedure RefreshGrid;
+    procedure RefreshGrid (selectall : boolean);
     procedure EditJob (ID : String; name : string);
     procedure NewTmplInstance(tmplid : string; tmplname : string);
   end;
@@ -76,19 +82,27 @@ begin
   end;
 end;
 
-procedure TformJobs.RefreshGrid;
+procedure TformJobs.RefreshGrid (selectall : boolean);
 var
   i : integer;
   istemplate : boolean;
   iq : TIBQuery;
+  CheckBox: TIWCheckBox;
 begin
   iq:=RcDataModule.JobAllQuery;
+  disablebtn.caption:='Disable Selected';
+  if disabledbox.checked then begin
+     disablebtn.caption:='Enable Selected';
+  end;
+
   with RcDataModule.JobAllQuery do begin
     Transaction.Active:=False;
     Transaction.Active:=True;
     Close;
     ParamByName('COMPANY').AsString:=UserSession.Company;
     ParamByName('ALL').AsString:='1';
+    ParamByName('DISABLED').AsString:='0';
+    if disabledbox.Checked then ParamByName('DISABLED').AsString:='1';
     Open;
     with JobGrid do begin
       RowCount:=1;
@@ -99,6 +113,8 @@ begin
       Cell[0, 4].Text := SiLink.GetTextOrDefault('Grid.Status');
       Cell[0, 5].Text := '';
       Cell[0, 6].Text := SiLink.GetTextOrDefault('Grid.Source');
+      Cell[0, 7].Text := 'Selected';
+      Cell[0, 8].Text := 'Refs';
       i:=1;
       while not Eof do begin
         RowCount:=RowCount+1;
@@ -146,6 +162,9 @@ begin
         with Cell[i, 3] do begin
           Text := htmlquote(ansistring(FieldByName('DESCRIPTION').AsString));
         end;
+        with Cell[i, 8] do begin
+          Text := ' '+FieldByName('Refs').AsString;
+        end;
         with Cell[i, 4] do begin
           try
             Text := '';
@@ -158,6 +177,20 @@ begin
           except
           end;
         end;
+        with Cell[i, 7] do begin
+          if (FieldByName('Refs').asinteger=0) and not FieldByName('PARAMTMPLID').IsNull then
+          try
+              control:=TIWCheckBox.create(self);
+              with control as TIWCheckbox do begin
+                checked:=selectall;
+                caption:='';
+                Width := 10;
+                //onclick:=self.authclick;
+                tag:=FieldByName('ID').asinteger;
+              end;
+          except
+          end;
+        end;
         inc (i);
         Next;
       end;
@@ -167,10 +200,56 @@ begin
   end;
 end;
 
+procedure TformJobs.selallClick(Sender: TObject);
+begin
+  refreshgrid(true);
+end;
+
 procedure TformJobs.IWAppFormCreate(Sender: TObject);
 begin
    Self.langlink.InitForm;
-   RefreshGrid;
+   RefreshGrid(false);
+end;
+
+procedure TformJobs.disablebtnClick(Sender: TObject);
+var
+  i : integer;
+  found : boolean;
+begin
+  for i:=1 to JobGrid.RowCount-1 do begin
+    if JobGrid.Cell[i,7].Control is TIWCheckBox then begin
+      if (JobGrid.Cell[i,7].Control as TIWCheckBox).checked then begin
+        if not found then begin
+          with RcDataModule.SQLEx do begin
+            Transaction.Active:=False;
+            Transaction.Active:=True;
+            Close;
+            SQL.Clear;
+            SQL.Add ('update JOBS set DISABLEDAT=:da where (COMPANY=:COMPANY) and');
+            SQL.Add ('ID in ('+inttostr((JobGrid.Cell[i,7].Control as TIWCheckBox).Tag));
+          end;
+          found:=true;
+        end else begin
+          with RcDataModule.SQLEx do begin
+            SQL.Add(','+inttostr((JobGrid.Cell[i,7].Control as TIWCheckBox).Tag));
+          end;
+        end;
+      end;
+    end;
+  end;
+  if found then begin
+     with RcDataModule.SQLEx do begin
+       SQL.Add(')');
+       FormIWMain.Log (SQL.text);
+       ParamByName('COMPANY').AsString:=UserSession.Company;
+       ParamByName('da').AsDateTime:=now;
+       if disabledbox.checked then ParamByName('da').clear;
+
+       ExecQuery;
+       Transaction.Commit;
+     end;
+     refreshgrid(disabledbox.Checked);
+  end;
 end;
 
 procedure TformJobs.userfooter1CancelClick(Sender: TObject);
@@ -195,6 +274,11 @@ begin
     RcDataModule.VoucherQuery.ParamByName('JOBID').AsInteger:=nextID;
     EditJob (IntToStr(nextID),'');
   end;
+end;
+
+procedure TformJobs.disabledboxChange(Sender: TObject);
+begin
+  refreshgrid(false);
 end;
 
 procedure TformJobs.EditJob (ID : String; name : string);

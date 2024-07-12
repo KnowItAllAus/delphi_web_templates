@@ -356,7 +356,8 @@ begin
     PromoCombo.Items.Clear;
     promoIdList.Clear;
     while not GrpPromoQuery.Eof do begin
-       if (GrpPromoQuery.FieldByName('Template').AsString<>'1') then begin
+       if (GrpPromoQuery.FieldByName('Template').AsString<>'1') and
+          (GrpPromoQuery.FieldByName('DisabledAt').isnull) then begin
           PromoCombo.Items.Add((trimlen(GrpPromoQuery.FieldByName('NAME').AsString,leftlen)));
           promoIdList.Add(GrpPromoQuery.FieldByName('ID').AsString);
        end;

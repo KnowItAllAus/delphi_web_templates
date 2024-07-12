@@ -58,7 +58,7 @@ type
     keylist : TList<double>;
     edit_id : double;
     procedure drawCredGrid;
-    function isdefined (vendor : string; name : string) : boolean;
+    function isdefined (vendor : string; name : string; domain : string) : boolean;
     { Private declarations }
   public
     { Public declarations }
@@ -200,13 +200,13 @@ begin
   Keylist.Free;
 end;
 
-function TformCreds.isdefined (vendor : string; name : string) : boolean;
+function TformCreds.isdefined (vendor : string; name : string; domain : string) : boolean;
 var
   i : integer;
 begin
   result:=false;
   for i:=1 to credgrid.RowCount-1 do begin
-     if (credgrid.Cell[i,1].text=vendor) and (credgrid.Cell[i,3].text=name) then begin
+     if (credgrid.Cell[i,1].text=vendor) and (credgrid.Cell[i,3].text=name) and (credgrid.Cell[i,2].text=domain) then begin
        result:=true;
        exit;
      end;
@@ -230,7 +230,7 @@ begin
          data:=js.AsArray[i].S['Data'];
          lkup:=js.AsArray[i].S['Lookup'];
          mdomain:=js.AsArray[i].S['MDomain'];
-         if (vendor<>'') and (pname<>'') and not isdefined (vendor,pname) then begin
+         if (vendor<>'') and (pname<>'') and not isdefined (vendor,pname,mdomain) then begin
             with RcDataModule.CredAdd do begin
               ParamByName('VENDOR').AsString:=Vendor;
               ParamByName('STORE_ID').AsString:=RcDataModule.CredQuery.ParamByName('STORE_ID').AsString;
@@ -324,7 +324,9 @@ begin
       rcdatamodule.CredDefQuery.active:=true;
       while not rcdatamodule.CredDefQuery.eof do begin
         if not isdefined(rcdatamodule.CredDefQuery.FieldByName('Vendor').AsString,
-                         rcdatamodule.CredDefQuery.FieldByName('Name').AsString) then begin
+                         rcdatamodule.CredDefQuery.FieldByName('Name').AsString,
+                         rcdatamodule.CredDefQuery.FieldByName('MDomain').AsString
+                         ) then begin
           with RcDataModule.CredAdd do begin
               ParamByName('VENDOR').AsString:=rcdatamodule.CredDefQuery.FieldByName('Vendor').AsString;
               ParamByName('STORE_ID').AsString:=rcdatamodule.CredQuery.ParamByName('STORE_ID').AsString;
