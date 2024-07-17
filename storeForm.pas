@@ -282,7 +282,7 @@ begin
     RcDataModule.storeUpdateQuery.Transaction.CommitRetaining;
   except
     on e : exception do begin
-       showmessage (e.Message);
+       //showmessage (e.Message);
        WebApplication.ShowMessage(userfooter1.silink_footer.GetTextOrDefault('DBError'));
        exit;
     end;

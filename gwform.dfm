@@ -18,7 +18,7 @@ object formgw: Tformgw
   OnDefaultAction = DisplayBtnClick
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -65
+  DesignTop = 8
   inline StatsFrameTitle1: TStatsFrameTitle
     Left = 0
     Top = 0

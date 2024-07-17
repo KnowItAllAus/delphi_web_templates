@@ -189,7 +189,7 @@ begin
       Open;
     end;
   except
-  on e : exception do showmessage (e.message);
+  on e : exception do webapplication.showmessage (e.message);
   end;
 
   with TranGrid, rcDataModule do begin

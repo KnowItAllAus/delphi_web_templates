@@ -524,7 +524,7 @@ begin
       end;
     except
 {      on e : exception do
-        showmessage(e.message); }
+        webapplication.showmessage(e.message); }
     end;
 
   end else begin

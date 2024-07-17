@@ -18,7 +18,7 @@ object formStore: TformStore
   OnDefaultAction = IWAppFormDefaultAction
   XPTheme = True
   DesignLeft = 8
-  DesignTop = -272
+  DesignTop = 8
   object IWRegion1: TIWRegion
     Left = 0
     Top = 114

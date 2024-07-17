@@ -223,7 +223,7 @@ begin
       SQLQry.Open;
     except
       on e : exception do begin
-       showmessage (e.message);
+       webapplication.showmessage (e.message);
        exit;
       end;
     end;
@@ -344,7 +344,7 @@ begin
           SQLQry2.Close;
         except
           on e : exception do begin
-           showmessage (e.message);
+           webapplication.showmessage (e.message);
            exit;
           end;
         end;

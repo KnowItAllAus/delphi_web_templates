@@ -127,7 +127,7 @@ begin
       end;
       s := RcDataModule.GroupQuery.FieldByName('NAMEU').AsString;
       if s<>'' then
-         showmessage (utf8decode(s));
+         webapplication.showmessage (utf8decode(s));
 
 
       inc (i);
