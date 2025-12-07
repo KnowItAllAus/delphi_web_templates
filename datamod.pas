@@ -199,7 +199,6 @@ type
     values : TStringList;
   public
     { Public declarations }
-    slavelog : TStringlist;
     function getHash(ss : string) : string;
     function nextID : integer;
     function nextVendorCode : integer;
@@ -311,17 +310,30 @@ begin
 end;
 
 procedure TRcDataMod.DataModuleCreate(Sender: TObject);
+var
+  fs: TFileStream;
 begin
-   values:=tstringlist.create;
-   randomize;
-   if GetDBName<>'' then begin
-      RecastDb.DatabaseName:=GetDBName;
-      TranDb.DatabaseName:=GetDBName;
+   try
+     values:=tstringlist.create;
+     randomize;
+     if GetDBName<>'' then begin
+        RecastDb.DatabaseName:=GetDBName;
+        TranDb.DatabaseName:=GetDBName;
+     end;
+     RecastDb.Connected:=true;
+     TranDb.Connected:=true;
+     // Load with shared read access
+     fs := TFileStream.Create('main.sil', fmOpenRead or fmShareDenyNone);
+     try
+       SiLangDispatcher1.LoadAllFromStream (fs);
+     finally
+       fs.Free;
+     end;
+   except
+     on e : exception do begin
+       Log (e.Message);
+     end;
    end;
-   RecastDb.Connected:=true;
-   TranDb.Connected:=true;
-   SiLangDispatcher1.LoadAllFromFile ('main.sil');
-   slavelog := TStringlist.Create;
 end;
 
 procedure TRcDataMod.SelectTransDB(new : boolean);
